@@ -1,5 +1,4 @@
-﻿using AeroDynasty.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AeroDynasty
+namespace AeroDynasty.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for RoutesView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class RoutesView : UserControl
     {
-        public MainWindow()
+        public RoutesView()
         {
             InitializeComponent();
-            MainWindowViewModel mainWindowViewModel = new MainWindowViewModel();
-            this.DataContext = mainWindowViewModel;
         }
     }
 }

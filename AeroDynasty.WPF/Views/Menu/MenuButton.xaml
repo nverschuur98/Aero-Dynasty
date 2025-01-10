@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AeroDynasty.WPF.Views.Menu"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="100">
-    <Button Content="{Binding Label, RelativeSource={RelativeSource AncestorType=UserControl}}">
+    <Button Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}" Content="{Binding Label, RelativeSource={RelativeSource AncestorType=UserControl}}">
         <Button.Style>
             <Style TargetType="Button">
                 <Setter Property="BorderThickness" Value="0" />

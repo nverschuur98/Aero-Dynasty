@@ -25,15 +25,18 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-                <menu:MenuButton Label="Home" Command=""/>
-                <menu:MenuButton Label="Airliners" Command=""/>
-                <menu:MenuButton Label="Routes" Command=""/>
+                <menu:MenuButton Label="Home" Command="{Binding NavigateHomeCommand}"/>
+                <menu:MenuButton Label="Routes" Command="{Binding NavigateRoutesCommand}"/>
                 <menu:MenuButton Label="Airports" Command=""/>
+                <menu:MenuButton Label="Airliners" Command=""/>
+                <menu:MenuButton Label="Airlines" Command=""/>
+                <menu:MenuButton Label="Finances" Command=""/>
+                <menu:MenuButton Label="Settings" Command=""/>
             </StackPanel>
         </Grid>
         
         <!-- Content Control -->
-        <ContentControl Grid.Row="1"/>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentContent}"/>
         
         <!-- Footer Grid -->
         <Grid Grid.Row="2" Background="{StaticResource DarkTransparentBackgroundBrush}" Height="50">
