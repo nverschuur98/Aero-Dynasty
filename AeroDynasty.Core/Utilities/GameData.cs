@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AeroDynasty.Core.Enums;
+using AeroDynasty.Core.Models.AirlineModels;
 using AeroDynasty.Core.Models.Core;
 
 namespace AeroDynasty.Core.Utilities
@@ -21,7 +22,7 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<RegistrationTemplate> RegistrationTemplates { get; set; }
 
         ////Observable non-change Data
-        //public ObservableCollection<Airline> Airlines { get; private set; }
+        public ObservableCollection<Airline> Airlines { get; private set; }
         //public ObservableCollection<Airport> Airports { get; private set; }
         //public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
         //public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
@@ -53,10 +54,10 @@ namespace AeroDynasty.Core.Utilities
             //
             //Load Core first
             LoadCoreData();
-            //
-            ////Load non-change data
-            //LoadNonChangeData();
-            //
+            
+            //Load non-change data
+            LoadNonChangeData();
+            
             ////Load change data
             ////THIS NEEDS TO MOVE UNTILL AFTER THE CTOR IS FULLY INITIALIZED
             //LoadAirliners();
@@ -79,6 +80,59 @@ namespace AeroDynasty.Core.Utilities
         private void LoadCoreData()
         {
             LoadCountries();
+        }
+
+        private void LoadNonChangeData()
+        {
+            LoadAirlines();
+            //LoadAirports();
+            //LoadManufacturers();
+            //LoadAircrafts();
+        }
+
+        /// <summary>
+        /// Loading the airline data from the data files
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        private void LoadAirlines()
+        {
+            try
+            {
+                string JSONString = File.ReadAllText("Assets/AirlineData.json");
+                JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
+                JsonElement JSONRoot = JSONDoc.RootElement;
+
+                // Create a list to hold the airlines
+                var airlines = new List<Airline>();
+
+                foreach (JsonElement airlineData in JSONRoot.EnumerateArray())
+                {
+                    // Extract the data
+                    string name = airlineData.GetProperty("Name").ToString();
+                    double cashbalance = Convert.ToDouble(airlineData.GetProperty("Cash Balance").ToString());
+                    double reputation = Convert.ToDouble(airlineData.GetProperty("Reputation").ToString());
+                    string countrycode = airlineData.GetProperty("CountryCode").ToString();
+
+                    // Check if the country exists
+                    if (CountryMap.TryGetValue(countrycode, out var country))
+                    {
+                        // Create the airline instance
+                        Airline airline = new Airline(name, country, cashbalance, reputation);
+                        airlines.Add(airline);
+                    }
+                    else
+                    {
+                        throw new Exception($"No such country found while creating airline: {name}.");
+
+                    }
+                }
+
+                Airlines = new ObservableCollection<Airline>(airlines);
+            }
+            catch
+            {
+                throw new Exception("Error while creating airlines.");
+            }
         }
 
         /// <summary>

@@ -80,8 +80,11 @@
   <!-- Compile Files -->
   <ItemGroup>
     <Compile Include="Enums\Continents.cs" />
+    <Compile Include="Models\AirlineModels\Airline.cs" />
     <Compile Include="Models\Core\Country.cs" />
+    <Compile Include="Models\Core\Price.cs" />
     <Compile Include="Models\Core\Registration.cs" />
+    <Compile Include="Models\_BaseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\GameData.cs" />
     <Compile Include="Utilities\RelayCommand.cs" />
