@@ -5,8 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AeroDynasty"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Aero Dynasty" Height="450" Width="800" WindowStyle="SingleBorderWindow">
+    <Window.Background>
+        <!-- Use the Radial Gradient as Background -->
+        <StaticResource ResourceKey="BackgroundGradient"/>
+    </Window.Background>
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header Grid -->
+        <Grid Grid.Row="0" Background="{StaticResource DarkTransparentBackgroundBrush}" Height="75">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="1" Background="red" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="home"/>
+                <Button Content="Airlines"/>
+                <Button Content="Airports"/>
+                <Button Content="Manufacturers"/>
+            </StackPanel>
+        </Grid>
         
+        <!-- Content Control -->
+        <ContentControl Grid.Row="1"/>
+        
+        <!-- Footer Grid -->
+        <Grid Grid.Row="2" Background="{StaticResource DarkTransparentBackgroundBrush}" Height="50">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Label Height="50" Grid.Column="0" Foreground="{StaticResource LightAccentBrush}" Content="$5.000.000,00" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Height="50" Grid.Column="1" Foreground="{StaticResource LightAccentBrush}" Content="KLM Royal Dutch Airlines" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Height="50" Grid.Column="2" Foreground="{StaticResource LightAccentBrush}" Content="10-February-1967" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+        </Grid>
     </Grid>
 </Window>

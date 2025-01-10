@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.34301.259
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroDynasty", "AeroDynasty\AeroDynasty.csproj", "{6F35673A-FAD8-4D9B-A84E-CD149F5BBDFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroDynasty.Core", "AeroDynasty.Core\AeroDynasty.Core.csproj", "{1B889B76-6F45-496F-BBDF-36FA86331234}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AeroDynasty.WPF", "AeroDynasty.WPF\AeroDynasty.WPF.csproj", "{364B5E60-6231-4B63-83D9-063447292B25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{6F35673A-FAD8-4D9B-A84E-CD149F5BBDFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F35673A-FAD8-4D9B-A84E-CD149F5BBDFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F35673A-FAD8-4D9B-A84E-CD149F5BBDFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B889B76-6F45-496F-BBDF-36FA86331234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B889B76-6F45-496F-BBDF-36FA86331234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B889B76-6F45-496F-BBDF-36FA86331234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B889B76-6F45-496F-BBDF-36FA86331234}.Release|Any CPU.Build.0 = Release|Any CPU
+		{364B5E60-6231-4B63-83D9-063447292B25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{364B5E60-6231-4B63-83D9-063447292B25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{364B5E60-6231-4B63-83D9-063447292B25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{364B5E60-6231-4B63-83D9-063447292B25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
