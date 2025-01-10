@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AeroDynasty"
+        xmlns:menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
         mc:Ignorable="d"
         Title="Aero Dynasty" Height="450" Width="800" WindowStyle="SingleBorderWindow">
     <Window.Background>
@@ -23,11 +24,11 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="1" Background="red" Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Content="home"/>
-                <Button Content="Airlines"/>
-                <Button Content="Airports"/>
-                <Button Content="Manufacturers"/>
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <menu:MenuButton Label="Home" Command=""/>
+                <menu:MenuButton Label="Airliners" Command=""/>
+                <menu:MenuButton Label="Routes" Command=""/>
+                <menu:MenuButton Label="Airports" Command=""/>
             </StackPanel>
         </Grid>
         
