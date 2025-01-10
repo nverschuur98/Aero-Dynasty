@@ -7,6 +7,24 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
         <TextBlock Text="This is the Home View" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+        <ListView ItemsSource="{Binding Registrations}" Grid.Row="1" Background="{StaticResource DarkTransparentBackgroundBrush}" Foreground="{StaticResource LightAccentBrush}" BorderThickness="0">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <!-- Display Country Name -->
+                        <TextBlock Text="{Binding Country.Name}" Margin="5,0,10,0" />
+
+                        <!-- Display Format -->
+                        <TextBlock Text="{Binding CountryID}"  Margin="5,0,10,0" />
+                        <TextBlock Text="{Binding Format}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </UserControl>

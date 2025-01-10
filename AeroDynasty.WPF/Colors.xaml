@@ -50,8 +50,8 @@
 
     <Color x:Key="DarkTransparentBackground">#80292632</Color>
     <SolidColorBrush x:Key="DarkTransparentBackgroundBrush" Color="{StaticResource DarkTransparentBackground}" />
-    <Color x:Key="LightTransparantBackground">#20E0E1DD</Color>
-    <SolidColorBrush x:Key="LightTransparantBackgroundBrush" Color="{StaticResource LightTransparantBackground}" />
+    <Color x:Key="LightTransparentBackground">#20E0E1DD</Color>
+    <SolidColorBrush x:Key="LightTransparentBackgroundBrush" Color="{StaticResource LightTransparentBackground}" />
 
     <!-- Radial Gradient Background using Primary and Secondary Colors -->
     <RadialGradientBrush x:Key="BackgroundGradient" Center="0.5,0.5" RadiusX="0.5" RadiusY="0.5">
