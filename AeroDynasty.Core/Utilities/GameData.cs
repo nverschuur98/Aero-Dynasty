@@ -38,10 +38,10 @@ namespace AeroDynasty.Core.Utilities
         public Dictionary<Country, RegistrationTemplate> RegistrationTemplateMap { get; set; }
         //public Dictionary<int, double> Inflations { get; private set; }
         //
-        ////Game Time and state
-        //private UserData _userData { get; set; }
-        //private DateTime _currentDate;
-        //private bool _isPaused;
+        //Game Time and state
+        private UserData _userData { get; set; }
+        private DateTime _currentDate;
+        private bool _isPaused;
         //
         ////Commands
         //public ICommand PlayCommand { get; set; }
@@ -51,9 +51,9 @@ namespace AeroDynasty.Core.Utilities
         //Private Constructor
         private GameData()
         {
-            ////Set start date
-            //CurrentDate = new DateTime(1946, 1, 1);
-            //
+            //Set start date
+            CurrentDate = new DateTime(1946, 1, 1);
+            
             //Load Core first
             LoadCoreData();
             
@@ -65,10 +65,10 @@ namespace AeroDynasty.Core.Utilities
             //LoadAirliners();
             //LoadRoutes();
             //
-            ////Init start date
-            //Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
-            //
-            //UserData = new UserData(arl);
+            //Init start date
+            Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
+            
+            UserData = new UserData(arl);
             //
             //IsPaused = true;
             //
@@ -320,9 +320,8 @@ namespace AeroDynasty.Core.Utilities
                 {
                     foreach (JsonElement aircraft in aircraftsElement.EnumerateArray())
                     {
-                        //CHANGE THE CURRENT DATE BACK
 
-                        if (Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()) <= /*CurrentDate*/ DateTime.Now)
+                        if (Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()) <= CurrentDate)
                         {
                             AircraftModel aircraftModel = LoadAircraftFromJson(aircraft, Manufacturer);
 
@@ -339,5 +338,91 @@ namespace AeroDynasty.Core.Utilities
             AircraftModels = new ObservableCollection<AircraftModel>(aircrafts);
 
         }
+
+        #region Game functions
+
+        public string FormattedCurrentDate => CurrentDate.ToString("dd-MMM-yyyy");
+
+        public DateTime CurrentDate
+        {
+            get => _currentDate;
+            set
+            {
+                _currentDate = value;
+                OnPropertyChanged(nameof(CurrentDate));
+            }
+        }
+
+        public UserData UserData
+        {
+            get => _userData;
+            set
+            {
+                _userData = value;
+                OnPropertyChanged(nameof(UserData));
+            }
+        }
+
+        public bool IsPaused
+        {
+            get { return _isPaused; }
+            set
+            {
+                _isPaused = value;
+                OnPropertyChanged(nameof(IsPaused));
+            }
+        }
+        /*
+        private void PlayGame()
+        {
+            IsPaused = false;
+            StartGameTimer();
+        }
+
+        private void PauseGame()
+        {
+            IsPaused = true;
+        }
+
+        private async void StartGameTimer()
+        {
+            while (!IsPaused)
+            {
+                // Start the delay and calculations in parallel
+                await Task.WhenAll(Task.Delay(1000), PerformDailyCalculations());
+
+                // After the delay and calculations are complete, advance the date
+                CurrentDate = CurrentDate.AddDays(1);
+            }
+        }
+
+        public void SaveGame(string filePath)
+        {
+            bool wasPlaying = !IsPaused;
+
+            if (wasPlaying)
+            {
+                PauseCommand.Execute(null);
+            }
+
+            // Use GameStateManager to save the game
+            GameStateManager.SaveGame(this, filePath);
+
+            if (wasPlaying)
+            {
+                PlayCommand.Execute(null);
+            }
+        }
+
+        public void LoadGame(string filePath)
+        {
+            //Reset the game data
+            ResetInstance();
+
+            // Use GameStateManager to load the game
+            GameStateManager.LoadGame(this, filePath);
+        }*/
+
+        #endregion
     }
 }

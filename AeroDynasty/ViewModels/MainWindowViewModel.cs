@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using AeroDynasty.Core.Models.Core;
 using AeroDynasty.Core.Utilities;
 
 namespace AeroDynasty.ViewModels
@@ -14,10 +15,7 @@ namespace AeroDynasty.ViewModels
 
         public _BaseViewModel CurrentContent
         {
-            get
-            {
-                return _currentContent;
-            }
+            get => _currentContent;
             set
             {
                 _currentContent = value;
@@ -25,11 +23,22 @@ namespace AeroDynasty.ViewModels
             }
         }
 
+        public string FormattedCurrentDate
+        {
+            get => GameData.Instance.FormattedCurrentDate;
+        }
+        public UserData UserData { get; set; }
+
         public ICommand NavigateHomeCommand { get; }
         public ICommand NavigateRoutesCommand { get; }
 
         public MainWindowViewModel()
         {
+            UserData = GameData.Instance.UserData;
+
+            // Subscribe to PropertyChanged event of GameData
+            //GameData.Instance.PropertyChanged += GameData_PropertyChanged;
+
             NavigateHomeCommand = new RelayCommand(NavigateHome);
             NavigateRoutesCommand = new RelayCommand(NavigateRoutes);
         }

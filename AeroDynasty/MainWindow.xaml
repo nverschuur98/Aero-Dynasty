@@ -45,9 +45,9 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Label Height="50" Grid.Column="0" Foreground="{StaticResource LightAccentBrush}" Content="$5.000.000,00" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Height="50" Grid.Column="1" Foreground="{StaticResource LightAccentBrush}" Content="KLM Royal Dutch Airlines" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Height="50" Grid.Column="2" Foreground="{StaticResource LightAccentBrush}" Content="10-February-1967" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Height="50" Grid.Column="0" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.CashBalance}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Height="50" Grid.Column="1" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.Name}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Height="50" Grid.Column="2" Foreground="{StaticResource LightAccentBrush}" Content="{Binding FormattedCurrentDate}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
     </Grid>
 </Window>
