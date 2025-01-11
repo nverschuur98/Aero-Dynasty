@@ -80,8 +80,9 @@
   <!-- Compile Files -->
   <ItemGroup>
     <Compile Include="Enums\Continents.cs" />
+    <Compile Include="Models\AircraftModels\Manufacturer.cs" />
     <Compile Include="Models\AirlineModels\Airline.cs" />
-    <Compile Include="Models\AirportModels\AirportModels.cs" />
+    <Compile Include="Models\AirportModels\Airport.cs" />
     <Compile Include="Models\Core\Coordinates.cs" />
     <Compile Include="Models\Core\Country.cs" />
     <Compile Include="Models\Core\Price.cs" />

@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Models.AirlineModels;
 using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
@@ -17,6 +18,7 @@ namespace AeroDynasty.ViewModels
         public ObservableCollection<RegistrationTemplate> Registrations { get; set; }
         public ObservableCollection<Airline> Airlines { get; set; }
         public ObservableCollection<Airport> Airports { get; set; }
+        public ObservableCollection<Manufacturer> Manufacturers { get; set; }
 
         public HomeViewModel()
         {
@@ -24,11 +26,13 @@ namespace AeroDynasty.ViewModels
             Registrations = new ObservableCollection<RegistrationTemplate>();
             Airlines = new ObservableCollection<Airline>();
             Airports = new ObservableCollection<Airport>();
+            Manufacturers = new ObservableCollection<Manufacturer>();
 
             Countries = GameData.Instance.Countries;
             Registrations = GameData.Instance.RegistrationTemplates;
             Airlines = GameData.Instance.Airlines;
             Airports = GameData.Instance.Airports;
+            Manufacturers = GameData.Instance.Manufacturers;
         }
     }
 }

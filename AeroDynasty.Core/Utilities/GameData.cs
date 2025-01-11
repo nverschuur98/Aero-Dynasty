@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AeroDynasty.Core.Enums;
+using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Models.AirlineModels;
 using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
@@ -25,7 +26,7 @@ namespace AeroDynasty.Core.Utilities
         //Observable non-change Data
         public ObservableCollection<Airline> Airlines { get; private set; }
         public ObservableCollection<Airport> Airports { get; private set; }
-        //public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
+        public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
         //public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
         //
         ////Observable change Data
@@ -87,7 +88,7 @@ namespace AeroDynasty.Core.Utilities
         {
             LoadAirlines();
             LoadAirports();
-            //LoadManufacturers();
+            LoadManufacturers();
             //LoadAircrafts();
         }
 
@@ -187,6 +188,47 @@ namespace AeroDynasty.Core.Utilities
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        /// <summary>
+        /// Loading the manufacturer data from the data files
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        private void LoadManufacturers()
+        {
+            string JSONString = File.ReadAllText("Assets/ManufacturerData.json");
+            JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
+            JsonElement JSONRoot = JSONDoc.RootElement;
+
+            //Create a list to hold the manufacturers
+            var manufacturers = new List<Manufacturer>();
+
+            foreach (JsonElement manufacturer in JSONRoot.EnumerateArray())
+            {
+                //Extract data
+                string Name = manufacturer.GetProperty("Name").ToString();
+                string Description = manufacturer.GetProperty("Description").ToString();
+                string CountryCode = manufacturer.GetProperty("Country").ToString();
+                DateTime FoundingDate;
+                Country Country;
+
+                if (!manufacturer.GetProperty("FoundingDate").TryGetDateTime(out FoundingDate))
+                {
+                    throw new Exception($"Failed to convert {manufacturer.GetProperty("FoundingDate").ToString()} into DateTime");
+                }
+
+                if (!CountryMap.TryGetValue(CountryCode, out Country))
+                {
+                    throw new Exception($"Failed to convert {CountryCode} into a country");
+                }
+
+                //Add to local list
+                manufacturers.Add(new Manufacturer(Name, Description, Country, FoundingDate));
+
+            }
+
+            //Create the observable collection
+            Manufacturers = new ObservableCollection<Manufacturer>(manufacturers);
         }
 
         /// <summary>
