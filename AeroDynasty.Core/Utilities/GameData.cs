@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using AeroDynasty.Core.Enums;
 using AeroDynasty.Core.Models.AirlineModels;
+using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
 
 namespace AeroDynasty.Core.Utilities
@@ -21,9 +22,9 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<Country> Countries { get; private set; }
         public ObservableCollection<RegistrationTemplate> RegistrationTemplates { get; set; }
 
-        ////Observable non-change Data
+        //Observable non-change Data
         public ObservableCollection<Airline> Airlines { get; private set; }
-        //public ObservableCollection<Airport> Airports { get; private set; }
+        public ObservableCollection<Airport> Airports { get; private set; }
         //public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
         //public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
         //
@@ -85,7 +86,7 @@ namespace AeroDynasty.Core.Utilities
         private void LoadNonChangeData()
         {
             LoadAirlines();
-            //LoadAirports();
+            LoadAirports();
             //LoadManufacturers();
             //LoadAircrafts();
         }
@@ -132,6 +133,59 @@ namespace AeroDynasty.Core.Utilities
             catch
             {
                 throw new Exception("Error while creating airlines.");
+            }
+        }
+
+        /// <summary>
+        /// Loading the airport data from the data files
+        /// </summary>
+        /// <exception cref="Exception"></exception>
+        private void LoadAirports()
+        {
+            try
+            {
+                string JSONString = File.ReadAllText("Assets/AirportData.json");
+                JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
+                JsonElement JSONRoot = JSONDoc.RootElement;
+
+                // Create a list to hold the airports
+                var airports = new List<Airport>();
+
+                foreach (JsonElement airportData in JSONRoot.EnumerateArray())
+                {
+                    // Extract the data
+                    string airportName = airportData.GetProperty("Name").ToString();
+                    string countryCode = airportData.GetProperty("CountryCode").ToString();
+                    string iata = airportData.GetProperty("IATA").ToString();
+                    string icao = airportData.GetProperty("ICAO").ToString();
+                    double demandFactor = Convert.ToDouble(airportData.GetProperty("demandFactor").ToString());
+
+                    // Extract the coordinates
+                    JsonElement _coordinates = airportData.GetProperty("Coordinates");
+                    double latitude = Convert.ToDouble(_coordinates.GetProperty("Latitude").ToString());
+                    double longitude = Convert.ToDouble(_coordinates.GetProperty("Longitude").ToString());
+                    Coordinates coordinates = new Coordinates(latitude, longitude);
+
+                    // Check if the country exists in the map
+                    if (CountryMap.TryGetValue(countryCode, out var country))
+                    {
+                        // Create the Airport instance with the Country reference
+                        var airport = new Airport(airportName, iata, icao, country, coordinates, demandFactor);
+                        airports.Add(airport);
+                    }
+                    else
+                    {
+                        // Handle cases where the country is not found if necessary
+                        // For example, you can log a warning or create a default Country instance
+                        throw new Exception($"No such country found while creating airport: {airportName}.");
+                    }
+                }
+                // Assign the populated list to the ObservableCollection
+                Airports = new ObservableCollection<Airport>(airports);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 

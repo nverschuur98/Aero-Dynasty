@@ -12,13 +12,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="This is the Home View" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-        <ListView ItemsSource="{Binding Airlines}" Grid.Row="1" Background="{StaticResource DarkTransparentBackgroundBrush}" Foreground="{StaticResource LightAccentBrush}" BorderThickness="0">
+        <ListView ItemsSource="{Binding Airports}" Grid.Row="1" Background="{StaticResource DarkTransparentBackgroundBrush}" Foreground="{StaticResource LightAccentBrush}" BorderThickness="0">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Name}" Margin="5,0,10,0" />
                         <TextBlock Text="{Binding Country.Name}" Margin="5,0,10,0" />
-                        <TextBlock Text="{Binding CashBalance}"  Margin="5,0,10,0" />
+                        <TextBlock Text="{Binding IATA}"  Margin="5,0,10,0" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
