@@ -13,7 +13,7 @@
                 <Setter Property="Background" Value="{StaticResource DarkTransparentBackgroundBrush}" />
                 <Setter Property="Foreground" Value="{StaticResource LightAccentBrush}" />
                 <Setter Property="FontFamily" Value="Montserrat" />
-                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="FontWeight" Value="SemiBold" />
                 <Setter Property="Padding" Value="10,5" />
                 <Setter Property="Template">
                     <Setter.Value>

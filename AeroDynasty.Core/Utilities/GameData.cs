@@ -27,8 +27,8 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<Airline> Airlines { get; private set; }
         public ObservableCollection<Airport> Airports { get; private set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
-        //public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
-        //
+        public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
+        
         ////Observable change Data
         //public ObservableCollection<Route> Routes { get; set; }
         //public ObservableCollection<Airliner> Airliners { get; set; }
@@ -89,7 +89,7 @@ namespace AeroDynasty.Core.Utilities
             LoadAirlines();
             LoadAirports();
             LoadManufacturers();
-            //LoadAircrafts();
+            LoadAircrafts();
         }
 
         /// <summary>
@@ -274,6 +274,70 @@ namespace AeroDynasty.Core.Utilities
 
             //Create a mapping of Country to Template
             RegistrationTemplateMap = RegistrationTemplates.ToDictionary(t => t.Country, t => t);
+        }
+
+        private AircraftModel LoadAircraftFromJson(JsonElement aircraft, Manufacturer manufacturer)
+        {
+            //Create a new aircraftModel and set the correct properties
+            AircraftModel aircraftModel = new AircraftModel(
+                aircraft.GetProperty("Name").ToString(),
+                aircraft.GetProperty("Family").ToString(),
+                new Price(Convert.ToDouble(aircraft.GetProperty("Price").ToString())),
+                (AircraftType)Enum.Parse(typeof(AircraftType), aircraft.GetProperty("AircraftType").ToString()),
+                (EngineType)Enum.Parse(typeof(EngineType), aircraft.GetProperty("EngineType").ToString()),
+                Convert.ToInt32(aircraft.GetProperty("CruisingSpeed").ToString()),
+                Convert.ToInt32(aircraft.GetProperty("maxPax").ToString()),
+                Convert.ToInt32(aircraft.GetProperty("maxCargo").ToString()),
+                Convert.ToInt32(aircraft.GetProperty("maxRange").ToString()),
+                Convert.ToInt32(aircraft.GetProperty("minRunwayLength").ToString()),
+                manufacturer,
+                Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()),
+                Convert.ToDateTime(aircraft.GetProperty("RetirementDate").ToString()));
+
+            return aircraftModel;
+        }
+
+        /// <summary>
+        /// Loading the aircraft data from the data files
+        /// </summary>
+        private void LoadAircrafts()
+        {
+            string JSONString = File.ReadAllText("Assets/ManufacturerData.json");
+            JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
+            JsonElement JSONRoot = JSONDoc.RootElement;
+
+            //Create a list to hold the aircrafts
+            var aircrafts = new List<AircraftModel>();
+
+            //Loop trough all the manufacturers and process the aircrafts
+            foreach (JsonElement manufacturer in JSONRoot.EnumerateArray())
+            {
+                // Use LINQ to find the manufacturer by name
+                Manufacturer Manufacturer = Manufacturers.FirstOrDefault(m => m.Name.Equals(manufacturer.GetProperty("Name").ToString(), StringComparison.OrdinalIgnoreCase));
+
+                // Check if the Aircrafts property exists and is an array
+                if (manufacturer.TryGetProperty("Aircrafts", out JsonElement aircraftsElement) && aircraftsElement.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (JsonElement aircraft in aircraftsElement.EnumerateArray())
+                    {
+                        //CHANGE THE CURRENT DATE BACK
+
+                        if (Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()) <= /*CurrentDate*/ DateTime.Now)
+                        {
+                            AircraftModel aircraftModel = LoadAircraftFromJson(aircraft, Manufacturer);
+
+                            //Add the model to the aircrafts list
+                            aircrafts.Add(aircraftModel);
+                        }
+                    }
+                }
+
+                //End of the manufacturer
+            }
+
+            //Create the observable collection
+            AircraftModels = new ObservableCollection<AircraftModel>(aircrafts);
+
         }
     }
 }

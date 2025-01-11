@@ -19,6 +19,7 @@ namespace AeroDynasty.ViewModels
         public ObservableCollection<Airline> Airlines { get; set; }
         public ObservableCollection<Airport> Airports { get; set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; set; }
+        public ObservableCollection<AircraftModel> AircraftModels { get; set; }
 
         public HomeViewModel()
         {
@@ -27,12 +28,14 @@ namespace AeroDynasty.ViewModels
             Airlines = new ObservableCollection<Airline>();
             Airports = new ObservableCollection<Airport>();
             Manufacturers = new ObservableCollection<Manufacturer>();
+            AircraftModels = new ObservableCollection<AircraftModel>();
 
             Countries = GameData.Instance.Countries;
             Registrations = GameData.Instance.RegistrationTemplates;
             Airlines = GameData.Instance.Airlines;
             Airports = GameData.Instance.Airports;
             Manufacturers = GameData.Instance.Manufacturers;
+            AircraftModels = GameData.Instance.AircraftModels;
         }
     }
 }
