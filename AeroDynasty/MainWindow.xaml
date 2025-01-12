@@ -27,7 +27,7 @@
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
                 <menu:MenuButton Label="Home" Command="{Binding NavigateHomeCommand}"/>
                 <menu:MenuButton Label="Routes" Command="{Binding NavigateRoutesCommand}"/>
-                <menu:MenuButton Label="Airports" Command=""/>
+                <menu:MenuButton Label="Airports" Command="{Binding NavigateAirportsCommand}"/>
                 <menu:MenuButton Label="Airliners" Command=""/>
                 <menu:MenuButton Label="Airlines" Command=""/>
                 <menu:MenuButton Label="Finances" Command=""/>

@@ -11,8 +11,10 @@ namespace AeroDynasty.ViewModels
 {
     public class MainWindowViewModel : _BaseViewModel
     {
+        //Private Vars
         private _BaseViewModel _currentContent;
 
+        //Public Vars
         public _BaseViewModel CurrentContent
         {
             get => _currentContent;
@@ -23,14 +25,13 @@ namespace AeroDynasty.ViewModels
             }
         }
 
-        public string FormattedCurrentDate
-        {
-            get => GameData.Instance.FormattedCurrentDate;
-        }
+        public string FormattedCurrentDate{ get => GameData.Instance.FormattedCurrentDate; }
         public UserData UserData { get; set; }
 
+        //Commands
         public ICommand NavigateHomeCommand { get; }
         public ICommand NavigateRoutesCommand { get; }
+        public ICommand NavigateAirportsCommand { get; }
 
         public MainWindowViewModel()
         {
@@ -39,10 +40,13 @@ namespace AeroDynasty.ViewModels
             // Subscribe to PropertyChanged event of GameData
             //GameData.Instance.PropertyChanged += GameData_PropertyChanged;
 
+            //Bind commands to actions
             NavigateHomeCommand = new RelayCommand(NavigateHome);
             NavigateRoutesCommand = new RelayCommand(NavigateRoutes);
+            NavigateAirportsCommand = new RelayCommand(NavigateAirports);
         }
 
+        //Command Handling
         private void NavigateHome()
         {
             CurrentContent = new HomeViewModel();
@@ -52,5 +56,10 @@ namespace AeroDynasty.ViewModels
         {
             CurrentContent = new RoutesViewModel();
         }
+        private void NavigateAirports()
+        {
+            CurrentContent = new AirportsViewModel();
+        }
+
     }
 }
