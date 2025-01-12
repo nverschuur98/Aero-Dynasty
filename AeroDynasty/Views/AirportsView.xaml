@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AeroDynasty.Views"
              xmlns:Page="clr-namespace:AeroDynasty.WPF.Views.Page;assembly=AeroDynasty.WPF"
+             xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -17,19 +18,47 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Airport List" Grid.Row="0" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1"/>
-                <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Airports}" DisplayMemberPath="Name" Padding="0" Margin="0" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}" />
+                <TextBlock Text="Airport List" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <Form:TextInput Grid.Row="1" Label="Search Airport" Value="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+                <Separator Grid.Row="2" Background="{StaticResource AccentBrush}"/>
+
+                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Airports}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="Airport Name" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="IATA" DisplayMemberBinding="{Binding IATA}" />
+                            <GridViewColumn Header="ICAO" DisplayMemberBinding="{Binding ICAO}" />
+                            <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Country.Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </Page:Wrapper>
         <Page:Wrapper Grid.Column="1">
-            <StackPanel>
-                <TextBlock Text="Airport List" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator/>
-                <ListView Background="Transparent" BorderThickness="0" ItemsSource="{Binding Airports}" DisplayMemberPath="Name" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}" />
-            </StackPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Domestic Airport List" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <Form:TextInput Grid.Row="1" Label="Search Airport" Value="{Binding SearchStringDomestic, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+                <Separator Grid.Row="2" Background="{StaticResource AccentBrush}"/>
+                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding AirportsDomestic}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="Airport Name" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="IATA" DisplayMemberBinding="{Binding IATA}" />
+                            <GridViewColumn Header="ICAO" DisplayMemberBinding="{Binding ICAO}" />
+                            <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Country.Name}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
         </Page:Wrapper>
     </Grid>
 </UserControl>

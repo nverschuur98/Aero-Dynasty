@@ -8,6 +8,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Views/ViewModelBindings.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/AeroDynasty.WPF;component/Colors.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/AeroDynasty.WPF;component/Style.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
