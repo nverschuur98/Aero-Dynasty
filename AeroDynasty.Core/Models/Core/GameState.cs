@@ -11,12 +11,15 @@ namespace AeroDynasty.Core.Models.Core
 {
     public class GameState : _BaseModel
     {
+        //Singleton Instance
+        private static GameState _instance;
+        public static GameState Instance => _instance ?? (_instance = new GameState());
+
         //Private vars
         private DateTime _currentDate;
         private bool _isPaused;
         private CancellationTokenSource _pauseTokenSource;
         private List<Task> _dailyTasks;
-        private Task _dayTimer;
 
         //Public vars
         public DateTime CurrentDate
@@ -43,14 +46,13 @@ namespace AeroDynasty.Core.Models.Core
         public ICommand PlayCommand { get; set; }
         public ICommand PauseCommand { get; set; }
 
-        public GameState()
+        private GameState()
         {
-            //Init day timer
-            _dayTimer = Task.Delay(1000);
-
             //Init lists
             _dailyTasks = new List<Task>();
-            _dailyTasks.Add(_dayTimer);
+
+            //Set startdate
+            CurrentDate = new DateTime(1946, 1, 1);
 
             //Setup commands
             PlayCommand = new RelayCommand(PlayGame);
@@ -60,22 +62,28 @@ namespace AeroDynasty.Core.Models.Core
         //Private funcs
         private async void StartGameTimer(CancellationToken cancelToken)
         {
-            while (!IsPaused)
+            while (true) // Use CancellationToken to break the loop
             {
                 try
                 {
-                    // Start the delay and calculations in parallel
-                    await Task.WhenAll(_dailyTasks);
+                    // Create a new delay task for each iteration (1 second)
+                    var tasksToWait = new List<Task> { Task.Delay(1000, cancelToken) };
+
+                    // Add any additional tasks (daily calculations) to the list
+                    tasksToWait.AddRange(_dailyTasks); // Tasks registered via RegisterDailyTask
+
+                    // Wait for all tasks to complete
+                    await Task.WhenAll(tasksToWait);
+
+                    // Advance the game date after waiting for all tasks
+                    CurrentDate = CurrentDate.AddDays(1);
+                    Console.WriteLine(CurrentDate);
                 }
                 catch (TaskCanceledException)
                 {
-                    // The task was cancelled by pausing the game, proceed as normal.
+                    // Exit the loop gracefully when cancellation is requested
                     break;
                 }
-
-                // After delay and calculations, proceed the game timer
-                CurrentDate.AddDays(1);
-                Console.WriteLine(CurrentDate);
             }
         }
 

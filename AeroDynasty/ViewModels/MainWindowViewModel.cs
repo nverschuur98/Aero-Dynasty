@@ -26,7 +26,7 @@ namespace AeroDynasty.ViewModels
             }
         }
 
-        public string FormattedCurrentDate{ get => GameData.Instance.FormattedCurrentDate; }
+        public string FormattedCurrentDate{ get => GameState.Instance.FormattedCurrentDate; }
         public UserData UserData { get; set; }
 
         //Commands
@@ -42,6 +42,9 @@ namespace AeroDynasty.ViewModels
 
             // Subscribe to PropertyChanged event of GameData
             GameData.Instance.PropertyChanged += GameData_PropertyChanged;
+
+            // Subscribe to PropertyChanged event of GameData
+            GameState.Instance.PropertyChanged += GameState_PropertyChanged;
 
             //Bind commands to actions
             NavigateHomeCommand = new RelayCommand(NavigateHome);
@@ -68,25 +71,29 @@ namespace AeroDynasty.ViewModels
 
         private void Play()
         {
-            GameData.Instance.PlayCommand.Execute(null);
+            GameState.Instance.PlayCommand.Execute(null);
         }
 
         private void Pause()
         {
-            GameData.Instance.PauseCommand.Execute(null);
+            GameState.Instance.PauseCommand.Execute(null);
         }
 
         // Event handler for when properties change in GameData
         private void GameData_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(GameData.CurrentDate))
-            {
-                OnPropertyChanged(nameof(FormattedCurrentDate)); // Notify that FormattedCurrentDate has changed
-            }
-
             if (e.PropertyName == nameof(GameData.UserData))
             {
                 OnPropertyChanged(nameof(UserData)); // Notify that FormattedCurrentDate has changed
+            }
+        }
+
+        // Event handler for when properties change in GameState
+        private void GameState_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(GameState.CurrentDate))
+            {
+                OnPropertyChanged(nameof(FormattedCurrentDate)); // Notify that FormattedCurrentDate has changed
             }
         }
 

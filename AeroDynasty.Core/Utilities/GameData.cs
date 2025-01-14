@@ -40,23 +40,15 @@ namespace AeroDynasty.Core.Utilities
         public Dictionary<Country, RegistrationTemplate> RegistrationTemplateMap { get; set; }
         //public Dictionary<int, double> Inflations { get; private set; }
         
-        //Game Time and state
+        // Userdata
         private UserData _userData { get; set; }
-        private DateTime _currentDate;
-        private bool _isPaused;
-        private CancellationTokenSource _pauseToken;
         
         //Commands
-        public ICommand PlayCommand { get; set; }
-        public ICommand PauseCommand { get; set; }
-        public ICommand TestCommand { get; set; }
+        //public ICommand TestCommand { get; set; }
 
         //Private Constructor
         private GameData()
-        {
-            //Set start date
-            CurrentDate = new DateTime(1946, 1, 1);
-            
+        {           
             //Load Core first
             LoadCoreData();
             
@@ -73,25 +65,40 @@ namespace AeroDynasty.Core.Utilities
             
             UserData = new UserData(arl);
             
-            IsPaused = true;
-            
             //Bind commands
-            PlayCommand = new RelayCommand(PlayGame);
-            PauseCommand = new RelayCommand(PauseGame);
             //TestCommand = new RelayCommand(LoadTestData);
         }
 
+        //Private funcs
+
+        /// <summary>
+        /// Load all core data
+        /// Core data will never change during any game
+        /// </summary>
         private void LoadCoreData()
         {
             LoadCountries();
         }
 
+        /// <summary>
+        /// Load non change data
+        /// Non change data will not be edited by the user, but can be edited by the game
+        /// </summary>
         private void LoadNonChangeData()
         {
             LoadAirlines();
             LoadAirports();
             LoadManufacturers();
             LoadAircrafts();
+        }
+
+        /// <summary>
+        /// Load change data
+        /// This is data that will be edited by the user
+        /// </summary>
+        private void LoadChangedata()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -323,7 +330,7 @@ namespace AeroDynasty.Core.Utilities
                     foreach (JsonElement aircraft in aircraftsElement.EnumerateArray())
                     {
 
-                        if (Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()) <= CurrentDate)
+                        if (Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()) <= GameState.Instance.CurrentDate)
                         {
                             AircraftModel aircraftModel = LoadAircraftFromJson(aircraft, Manufacturer);
 
@@ -343,18 +350,6 @@ namespace AeroDynasty.Core.Utilities
 
         #region Game functions
 
-        public string FormattedCurrentDate => CurrentDate.ToString("dd-MMM-yyyy");
-
-        public DateTime CurrentDate
-        {
-            get => _currentDate;
-            set
-            {
-                _currentDate = value;
-                OnPropertyChanged(nameof(CurrentDate));
-            }
-        }
-
         public UserData UserData
         {
             get => _userData;
@@ -365,52 +360,6 @@ namespace AeroDynasty.Core.Utilities
             }
         }
 
-        public bool IsPaused
-        {
-            get { return _isPaused; }
-            set
-            {
-                _isPaused = value;
-                OnPropertyChanged(nameof(IsPaused));
-            }
-        }
-        
-        private void PlayGame()
-        {
-            IsPaused = false;
-            _pauseToken = new CancellationTokenSource();
-            StartGameTimer(_pauseToken.Token);
-        }
-
-        private void PauseGame()
-        {
-            IsPaused = true;
-            _pauseToken?.Cancel();
-        }
-
-        private async void StartGameTimer(CancellationToken cancelToken)
-        {
-            while (!IsPaused)
-            {
-                try
-                {
-                    // Wait for 1 second before proceeding to the next iteration
-                    await Task.Delay(1000, cancelToken);
-
-                    // Start the delay and calculations in parallel
-                    await Task.WhenAll(Task.Delay(1000,cancelToken), PerformDailyCalculations());
-                }
-                catch (TaskCanceledException)
-                {
-                    // Task.Delay was canceled; no action needed in this case
-                    break;
-                }
-
-                // After the delay and calculations are complete, advance the date
-                CurrentDate = CurrentDate.AddDays(1);
-                Console.WriteLine(CurrentDate);
-            }
-        }
         /*
         public void SaveGame(string filePath)
         {
