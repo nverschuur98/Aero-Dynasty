@@ -88,6 +88,7 @@
     <Compile Include="Models\AirportModels\Airport.cs" />
     <Compile Include="Models\Core\Coordinates.cs" />
     <Compile Include="Models\Core\Country.cs" />
+    <Compile Include="Models\Core\GameState.cs" />
     <Compile Include="Models\Core\Price.cs" />
     <Compile Include="Models\Core\Registration.cs" />
     <Compile Include="Models\Core\UserData.cs" />

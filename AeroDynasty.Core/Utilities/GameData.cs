@@ -398,7 +398,7 @@ namespace AeroDynasty.Core.Utilities
                     await Task.Delay(1000, cancelToken);
 
                     // Start the delay and calculations in parallel
-                    //await Task.WhenAll(Task.Delay(1000,cancelToken), PerformDailyCalculations());
+                    await Task.WhenAll(Task.Delay(1000,cancelToken), PerformDailyCalculations());
                 }
                 catch (TaskCanceledException)
                 {
