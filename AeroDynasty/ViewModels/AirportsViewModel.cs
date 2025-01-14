@@ -55,7 +55,7 @@ namespace AeroDynasty.ViewModels
             {
                 _searchStringDomestic = value;
                 OnPropertyChanged(nameof(SearchStringDomestic));
-                Airports.Refresh();
+                AirportsDomestic.Refresh();
             }
         }
 
@@ -70,7 +70,7 @@ namespace AeroDynasty.ViewModels
 
             //Get all domestic airports
             AirportsDomestic = CollectionViewSource.GetDefaultView(GameData.Instance.Airports.Where(a => a.Country == GameData.Instance.UserData.Airline.Country).ToList());
-            Airports.Filter = FilterAirports;
+            AirportsDomestic.Filter = FilterAirportsDomestic;
 
             // Apply sorting by Name (ascending)
             Airports.SortDescriptions.Add(new SortDescription(nameof(Airport.Name), ListSortDirection.Ascending));
@@ -94,6 +94,23 @@ namespace AeroDynasty.ViewModels
                    airport.IATA?.IndexOf(SearchString, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                    airport.ICAO?.IndexOf(SearchString, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
                    airport.Country?.Name?.IndexOf(SearchString, StringComparison.InvariantCultureIgnoreCase) >= 0;
+        }
+
+        private bool FilterAirportsDomestic(object item)
+        {
+            if (!(item is Airport airport))
+            {
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(SearchStringDomestic))
+            {
+                return true;
+            }
+
+            return airport.Name?.IndexOf(SearchStringDomestic, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                   airport.IATA?.IndexOf(SearchStringDomestic, StringComparison.InvariantCultureIgnoreCase) >= 0 ||
+                   airport.ICAO?.IndexOf(SearchStringDomestic, StringComparison.InvariantCultureIgnoreCase) >= 0;
         }
     }
 }
