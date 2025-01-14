@@ -76,7 +76,7 @@ namespace AeroDynasty.Core.Utilities
         private async Task TestTask()
         {
             Console.WriteLine("Entering Test Task");
-            await Task.Delay(5000);
+            await Task.Delay(900);
             Console.WriteLine("Finished Test Task");
         }
 

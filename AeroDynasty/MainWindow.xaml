@@ -33,8 +33,8 @@
                 <menu:MenuButton Label="Home" Command="{Binding NavigateHomeCommand}"/>
                 <menu:MenuButton Label="Routes" Command="{Binding NavigateRoutesCommand}"/>
                 <menu:MenuButton Label="Airports" Command="{Binding NavigateAirportsCommand}"/>
-                <menu:MenuButton Label="Airliners" Command=""/>
-                <menu:MenuButton Label="Airlines" Command=""/>
+                <menu:MenuButton Label="Airliners" Command="{Binding NavigateAirlinersCommand}"/>
+                <menu:MenuButton Label="Airlines" Command="{Binding NavigateAirlinesCommand}"/>
                 <menu:MenuButton Label="Finances" Command=""/>
                 <menu:MenuButton Label="Settings" Command=""/>
             </StackPanel>
@@ -50,8 +50,8 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Label Height="50" Grid.Column="0" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.CashBalance}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Height="50" Grid.Column="1" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.Name}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Height="50" Grid.Column="0" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.CashBalance}" ContentStringFormat="{}{0:C2}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            <Label Height="50" Grid.Column="1" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.Name}" FontFamily="Montserrat" FontWeight="Bold" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Height="50" Grid.Column="2" Foreground="{StaticResource LightAccentBrush}" Content="{Binding FormattedCurrentDate}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
         </Grid>
     </Grid>

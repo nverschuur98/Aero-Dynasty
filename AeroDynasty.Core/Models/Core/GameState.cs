@@ -78,7 +78,7 @@ namespace AeroDynasty.Core.Models.Core
 
                     // Advance the game date after waiting for all tasks
                     CurrentDate = CurrentDate.AddDays(1);
-                    Console.WriteLine(CurrentDate);
+                    Console.WriteLine(DateTime.Now + ": " + CurrentDate);
                 }
                 catch (TaskCanceledException)
                 {

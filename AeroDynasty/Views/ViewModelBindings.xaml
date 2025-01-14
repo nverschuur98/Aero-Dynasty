@@ -15,4 +15,10 @@
     <DataTemplate DataType="{x:Type vm:AirportsViewModel}">
         <v:AirportsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AirlinesViewModel}">
+        <v:AirlinesView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vm:AirlinersViewModel}">
+        <v:AirlinersView/>
+    </DataTemplate>
 </ResourceDictionary>
