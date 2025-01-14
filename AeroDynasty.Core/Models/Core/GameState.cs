@@ -19,7 +19,7 @@ namespace AeroDynasty.Core.Models.Core
         private DateTime _currentDate;
         private bool _isPaused;
         private CancellationTokenSource _pauseTokenSource;
-        private List<Task> _dailyTasks;
+        private List<Func<Task>> _dailyTasks;
 
         //Public vars
         public DateTime CurrentDate
@@ -49,10 +49,11 @@ namespace AeroDynasty.Core.Models.Core
         private GameState()
         {
             //Init lists
-            _dailyTasks = new List<Task>();
+            _dailyTasks = new List<Func<Task>>();
 
             //Set startdate
             CurrentDate = new DateTime(1946, 1, 1);
+            IsPaused = true;
 
             //Setup commands
             PlayCommand = new RelayCommand(PlayGame);
@@ -70,7 +71,7 @@ namespace AeroDynasty.Core.Models.Core
                     var tasksToWait = new List<Task> { Task.Delay(1000, cancelToken) };
 
                     // Add any additional tasks (daily calculations) to the list
-                    tasksToWait.AddRange(_dailyTasks); // Tasks registered via RegisterDailyTask
+                    tasksToWait.AddRange(_dailyTasks.Select(task => task())); // Tasks registered via RegisterDailyTask
 
                     // Wait for all tasks to complete
                     await Task.WhenAll(tasksToWait);
@@ -88,7 +89,7 @@ namespace AeroDynasty.Core.Models.Core
         }
 
         //Public funcs
-        public void RegisterDailyTask(Task task)
+        public void RegisterDailyTask(Func<Task> task)
         {
             _dailyTasks.Add(task);
         }
@@ -96,10 +97,12 @@ namespace AeroDynasty.Core.Models.Core
         //Command handling
         private void PlayGame()
         {
-            IsPaused = false;
-            _pauseTokenSource = new CancellationTokenSource();
-            StartGameTimer(_pauseTokenSource.Token);
-
+            if (IsPaused)
+            {
+                IsPaused = false;
+                _pauseTokenSource = new CancellationTokenSource();
+                StartGameTimer(_pauseTokenSource.Token);
+            }
         }
 
         private void PauseGame()

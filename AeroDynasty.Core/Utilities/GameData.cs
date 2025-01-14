@@ -64,12 +64,21 @@ namespace AeroDynasty.Core.Utilities
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             
             UserData = new UserData(arl);
-            
+
             //Bind commands
             //TestCommand = new RelayCommand(LoadTestData);
+
+            GameState.Instance.RegisterDailyTask(TestTask);
         }
 
         //Private funcs
+
+        private async Task TestTask()
+        {
+            Console.WriteLine("Entering Test Task");
+            await Task.Delay(5000);
+            Console.WriteLine("Finished Test Task");
+        }
 
         /// <summary>
         /// Load all core data
