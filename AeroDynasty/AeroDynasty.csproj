@@ -68,6 +68,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Airliners\ManufacturersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AirlinesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -92,6 +96,7 @@
   <!-- ViewModel and Code Files -->
   <ItemGroup>
     <Compile Include="ViewModels\AirlinersViewModel.cs" />
+    <Compile Include="ViewModels\Airliners\ManufacturersViewModel.cs" />
     <Compile Include="ViewModels\AirlinesViewModel.cs" />
     <Compile Include="ViewModels\AirportsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -99,6 +104,9 @@
     <Compile Include="ViewModels\RoutesViewModel.cs" />
     <Compile Include="Views\AirlinersView.xaml.cs">
       <DependentUpon>AirlinersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Airliners\ManufacturersView.xaml.cs">
+      <DependentUpon>ManufacturersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AirlinesView.xaml.cs">
       <DependentUpon>AirlinesView.xaml</DependentUpon>
@@ -160,6 +168,7 @@
       <Name>AeroDynasty.WPF</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <!-- Final Import -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="AeroDynasty.Views.Airliners.ManufacturersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AeroDynasty.Views.Airliners"
+             xmlns:Page="clr-namespace:AeroDynasty.WPF.Views.Page;assembly=AeroDynasty.WPF"
+             xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Page:Wrapper>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Manufacturers" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <Form:TextInput Grid.Row="1" Label="Search Manufacturer" Value="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+                <Separator Grid.Row="2" Background="{StaticResource AccentBrush}"/>
+
+                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Manufacturers}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Founding Date" DisplayMemberBinding="{Binding FormattedFoundingDate}" />
+                            <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Country.Name}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Page:Wrapper>
+    </Grid>
+</UserControl>

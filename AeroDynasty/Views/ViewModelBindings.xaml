@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:AeroDynasty.ViewModels"
                     xmlns:v="clr-namespace:AeroDynasty.Views"
+                    xmlns:vmAirliners="clr-namespace:AeroDynasty.ViewModels.Airliners"
+                    xmlns:vAirliners="clr-namespace:AeroDynasty.Views.Airliners"
                     xmlns:local="clr-namespace:AeroDynasty">
     <DataTemplate DataType="{x:Type vm:MainWindowViewModel}">
         <local:MainWindow/>
@@ -20,5 +22,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vm:AirlinersViewModel}">
         <v:AirlinersView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmAirliners:ManufacturersViewModel}">
+        <vAirliners:ManufacturersView/>
     </DataTemplate>
 </ResourceDictionary>
