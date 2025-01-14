@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,18 +33,22 @@ namespace AeroDynasty.ViewModels
         public ICommand NavigateHomeCommand { get; }
         public ICommand NavigateRoutesCommand { get; }
         public ICommand NavigateAirportsCommand { get; }
+        public ICommand PlayCommand { get; }
+        public ICommand PauseCommand { get; }
 
         public MainWindowViewModel()
         {
             UserData = GameData.Instance.UserData;
 
             // Subscribe to PropertyChanged event of GameData
-            //GameData.Instance.PropertyChanged += GameData_PropertyChanged;
+            GameData.Instance.PropertyChanged += GameData_PropertyChanged;
 
             //Bind commands to actions
             NavigateHomeCommand = new RelayCommand(NavigateHome);
             NavigateRoutesCommand = new RelayCommand(NavigateRoutes);
             NavigateAirportsCommand = new RelayCommand(NavigateAirports);
+            PlayCommand = new RelayCommand(Play);
+            PauseCommand = new RelayCommand(Pause);
         }
 
         //Command Handling
@@ -59,6 +64,30 @@ namespace AeroDynasty.ViewModels
         private void NavigateAirports()
         {
             CurrentContent = new AirportsViewModel();
+        }
+
+        private void Play()
+        {
+            GameData.Instance.PlayCommand.Execute(null);
+        }
+
+        private void Pause()
+        {
+            GameData.Instance.PauseCommand.Execute(null);
+        }
+
+        // Event handler for when properties change in GameData
+        private void GameData_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(GameData.CurrentDate))
+            {
+                OnPropertyChanged(nameof(FormattedCurrentDate)); // Notify that FormattedCurrentDate has changed
+            }
+
+            if (e.PropertyName == nameof(GameData.UserData))
+            {
+                OnPropertyChanged(nameof(UserData)); // Notify that FormattedCurrentDate has changed
+            }
         }
 
     }

@@ -67,6 +67,9 @@
     <Compile Include="Views\Form\TextInput.xaml.cs">
       <DependentUpon>TextInput.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Menu\PlayButton.xaml.cs">
+      <DependentUpon>PlayButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Menu\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
     <Page Include="Views\Form\TextInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu\PlayButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Menu\MenuButton.xaml">
       <SubType>Designer</SubType>

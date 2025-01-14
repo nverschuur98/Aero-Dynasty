@@ -21,10 +21,15 @@
         <!-- Header Grid -->
         <Grid Grid.Row="0" Background="{StaticResource DarkTransparentBackgroundBrush}" Height="75">
             <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                <menu:PlayButton Label="Pause" Command="{Binding PauseCommand}"/>
+                <menu:PlayButton Label="Play" Command="{Binding PlayCommand}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
                 <menu:MenuButton Label="Home" Command="{Binding NavigateHomeCommand}"/>
                 <menu:MenuButton Label="Routes" Command="{Binding NavigateRoutesCommand}"/>
                 <menu:MenuButton Label="Airports" Command="{Binding NavigateAirportsCommand}"/>

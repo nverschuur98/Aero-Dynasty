@@ -4,7 +4,9 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using AeroDynasty.Core.Enums;
 using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Models.AirlineModels;
@@ -37,16 +39,17 @@ namespace AeroDynasty.Core.Utilities
         public Dictionary<string, Country> CountryMap { get; private set; }
         public Dictionary<Country, RegistrationTemplate> RegistrationTemplateMap { get; set; }
         //public Dictionary<int, double> Inflations { get; private set; }
-        //
+        
         //Game Time and state
         private UserData _userData { get; set; }
         private DateTime _currentDate;
         private bool _isPaused;
-        //
-        ////Commands
-        //public ICommand PlayCommand { get; set; }
-        //public ICommand PauseCommand { get; set; }
-        //public ICommand TestCommand { get; set; }
+        private CancellationTokenSource _pauseToken;
+        
+        //Commands
+        public ICommand PlayCommand { get; set; }
+        public ICommand PauseCommand { get; set; }
+        public ICommand TestCommand { get; set; }
 
         //Private Constructor
         private GameData()
@@ -69,13 +72,12 @@ namespace AeroDynasty.Core.Utilities
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             
             UserData = new UserData(arl);
-            //
-            //IsPaused = true;
-            //
-            //
-            ////Bind commands
-            //PlayCommand = new RelayCommand(PlayGame);
-            //PauseCommand = new RelayCommand(PauseGame);
+            
+            IsPaused = true;
+            
+            //Bind commands
+            PlayCommand = new RelayCommand(PlayGame);
+            PauseCommand = new RelayCommand(PauseGame);
             //TestCommand = new RelayCommand(LoadTestData);
         }
 
@@ -372,30 +374,44 @@ namespace AeroDynasty.Core.Utilities
                 OnPropertyChanged(nameof(IsPaused));
             }
         }
-        /*
+        
         private void PlayGame()
         {
             IsPaused = false;
-            StartGameTimer();
+            _pauseToken = new CancellationTokenSource();
+            StartGameTimer(_pauseToken.Token);
         }
 
         private void PauseGame()
         {
             IsPaused = true;
+            _pauseToken?.Cancel();
         }
 
-        private async void StartGameTimer()
+        private async void StartGameTimer(CancellationToken cancelToken)
         {
             while (!IsPaused)
             {
-                // Start the delay and calculations in parallel
-                await Task.WhenAll(Task.Delay(1000), PerformDailyCalculations());
+                try
+                {
+                    // Wait for 1 second before proceeding to the next iteration
+                    await Task.Delay(1000, cancelToken);
+
+                    // Start the delay and calculations in parallel
+                    //await Task.WhenAll(Task.Delay(1000,cancelToken), PerformDailyCalculations());
+                }
+                catch (TaskCanceledException)
+                {
+                    // Task.Delay was canceled; no action needed in this case
+                    break;
+                }
 
                 // After the delay and calculations are complete, advance the date
                 CurrentDate = CurrentDate.AddDays(1);
+                Console.WriteLine(CurrentDate);
             }
         }
-
+        /*
         public void SaveGame(string filePath)
         {
             bool wasPlaying = !IsPaused;

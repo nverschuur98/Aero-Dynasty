@@ -25,7 +25,7 @@
                 <Form:TextInput Grid.Row="1" Label="Search Airport" Value="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                 <Separator Grid.Row="2" Background="{StaticResource AccentBrush}"/>
 
-                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Airports}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Airports}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Airport Name" DisplayMemberBinding="{Binding Name}" />
@@ -48,7 +48,7 @@
                 <TextBlock Text="Domestic Airport List" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
                 <Form:TextInput Grid.Row="1" Label="Search Airport" Value="{Binding SearchStringDomestic, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                 <Separator Grid.Row="2" Background="{StaticResource AccentBrush}"/>
-                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding AirportsDomestic}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding AirportsDomestic}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Airport Name" DisplayMemberBinding="{Binding Name}" />
