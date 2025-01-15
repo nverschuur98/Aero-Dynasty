@@ -73,6 +73,9 @@
     <Compile Include="Views\Menu\MenuButton.xaml.cs">
       <DependentUpon>MenuButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Page\Popup.xaml.cs">
+      <DependentUpon>Popup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Page\Wrapper.xaml.cs">
       <DependentUpon>Wrapper.xaml</DependentUpon>
     </Compile>
@@ -109,6 +112,10 @@
     <Page Include="Views\Menu\MenuButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Page\Popup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Page\Wrapper.xaml">
       <SubType>Designer</SubType>

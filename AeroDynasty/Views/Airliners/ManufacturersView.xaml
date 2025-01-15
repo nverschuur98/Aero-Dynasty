@@ -30,7 +30,7 @@
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Name}" Style="{StaticResource TextBlockButton}">
                                             <TextBlock.InputBindings>
-                                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataContext.OpenManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                                <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OpenManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
                                             </TextBlock.InputBindings>
                                         </TextBlock>
                                     </DataTemplate>

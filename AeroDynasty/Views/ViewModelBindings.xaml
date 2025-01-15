@@ -4,6 +4,8 @@
                     xmlns:v="clr-namespace:AeroDynasty.Views"
                     xmlns:vmAirliners="clr-namespace:AeroDynasty.ViewModels.Airliners"
                     xmlns:vAirliners="clr-namespace:AeroDynasty.Views.Airliners"
+                    xmlns:vmAirlinersPopup="clr-namespace:AeroDynasty.ViewModels.Airliners.Popup"
+                    xmlns:vAirlinersPopup="clr-namespace:AeroDynasty.Views.Airliners.Popup"
                     xmlns:local="clr-namespace:AeroDynasty">
     <DataTemplate DataType="{x:Type vm:MainWindowViewModel}">
         <local:MainWindow/>
@@ -28,5 +30,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmAirliners:ManufacturerViewModel}">
         <vAirliners:ManufacturerView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type vmAirlinersPopup:AddAircraftToCartPopupViewModel}">
+        <vAirlinersPopup:AddAircraftToCartPopupView/>
     </DataTemplate>
 </ResourceDictionary>

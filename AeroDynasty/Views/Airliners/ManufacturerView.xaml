@@ -8,39 +8,91 @@
              xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Page:Wrapper>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-
-                <TextBlock Text="{Binding Manufacturer.Name}" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
-                <Grid Grid.Row="2">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <Page:Wrapper Grid.Row="0">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="{Binding Manufacturer.Description}" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,2" TextWrapping="Wrap" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                    <TextBlock Text="{Binding Manufacturer.Name}" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                    <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <TextBlock Text="Founding Date" Grid.Row="1" Grid.Column="0" Margin="0,2" FontFamily="Montserrat" FontWeight="SemiBold" Foreground="{StaticResource LightAccentBrush}"/>
-                    <TextBlock Text="Country" Grid.Row="1" Grid.Column="1" FontFamily="Montserrat" FontWeight="SemiBold" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Text="{Binding Manufacturer.Description}" Grid.Row="0" Grid.ColumnSpan="2" Margin="0,2" TextWrapping="Wrap" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
 
-                    <TextBlock Text="{Binding Manufacturer.FormattedFoundingDate}" Grid.Row="2" Grid.Column="0" Margin="0,2" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                    <TextBlock Text="{Binding Manufacturer.Country.Name}" Grid.Row="2" Grid.Column="1" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Text="Founding Date" Grid.Row="1" Grid.Column="0" Margin="0,2" FontFamily="Montserrat" FontWeight="SemiBold" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Text="Country" Grid.Row="1" Grid.Column="1" FontFamily="Montserrat" FontWeight="SemiBold" Foreground="{StaticResource LightAccentBrush}"/>
+
+                        <TextBlock Text="{Binding Manufacturer.FormattedFoundingDate}" Grid.Row="2" Grid.Column="0" Margin="0,2" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Text="{Binding Manufacturer.Country.Name}" Grid.Row="2" Grid.Column="1" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                    </Grid>
+
                 </Grid>
+            </Page:Wrapper>
 
-            </Grid>
-        </Page:Wrapper>
-    </Grid>
+            <Page:Wrapper Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <ListView Background="Transparent" Grid.Row="0" BorderThickness="0" ItemsSource="{Binding AircraftModels}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}" Style="{StaticResource TextBlockButton}">
+                                                <TextBlock.InputBindings>
+                                                    <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OpenAddAircraftToCartCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                                </TextBlock.InputBindings>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Family" DisplayMemberBinding="{Binding Family}" />
+                                <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
+                                <GridViewColumn Header="Engine Type" DisplayMemberBinding="{Binding EngineType}" />
+                                <GridViewColumn Header="Cruise Speed" DisplayMemberBinding="{Binding CruisingSpeed}" />
+                                <GridViewColumn Header="Max Pax" DisplayMemberBinding="{Binding maxPax}" />
+                                <GridViewColumn Header="Max Cargo" DisplayMemberBinding="{Binding maxCargo}" />
+                                <GridViewColumn Header="Max Range" DisplayMemberBinding="{Binding maxRange}" />
+                                <GridViewColumn Header="Min Runway" DisplayMemberBinding="{Binding minRunwayLength}" />
+                                <GridViewColumn Header="Introduced" DisplayMemberBinding="{Binding FormattedIntroductionDate}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <TextBlock Text="Shopping Cart" Grid.Row="1" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}" Margin="0,5,0,0"/>
+                    <Separator Grid.Row="2" Background="{StaticResource AccentBrush}" Height="2"/>
+                    <TextBlock Grid.Row="3" Text="Shopping details" Height="50" TextWrapping="Wrap" Margin="0,2,0,0" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}" />
+                </Grid>
+            </Page:Wrapper>
+            <Page:Popup Grid.Row="0" Grid.RowSpan="2" Title="{Binding PopupTitle}" Visible="{Binding PopupVisible}">
+                <ContentControl Content="{Binding PopupContent}" />
+            </Page:Popup>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

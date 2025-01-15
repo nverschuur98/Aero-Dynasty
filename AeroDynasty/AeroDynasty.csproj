@@ -76,6 +76,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Airliners\Popup\AddAircraftToCartPopupView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AirlinesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -102,6 +106,7 @@
     <Compile Include="ViewModels\AirlinersViewModel.cs" />
     <Compile Include="ViewModels\Airliners\ManufacturersViewModel.cs" />
     <Compile Include="ViewModels\Airliners\ManufacturerViewModel.cs" />
+    <Compile Include="ViewModels\Airliners\Popup\AddAircraftToCartPopupViewModel.cs" />
     <Compile Include="ViewModels\AirlinesViewModel.cs" />
     <Compile Include="ViewModels\AirportsViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
@@ -115,6 +120,9 @@
     </Compile>
     <Compile Include="Views\Airliners\ManufacturerView.xaml.cs">
       <DependentUpon>ManufacturerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Airliners\Popup\AddAircraftToCartPopupView.xaml.cs">
+      <DependentUpon>AddAircraftToCartPopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AirlinesView.xaml.cs">
       <DependentUpon>AirlinesView.xaml</DependentUpon>
