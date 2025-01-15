@@ -7,14 +7,36 @@
              xmlns:Menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
              xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="100" d:DesignWidth="200">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="75" />
+            <RowDefinition MinHeight="75" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Do you want to this makes it a very long text add this aircraft to your cart?" TextWrapping="Wrap" Foreground="{StaticResource LightAccentBrush}" FontFamily="Montserrat" Margin="5" />
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Grid.Row="0" Text="{Binding AircraftModel.Name, StringFormat=Do you want to add the aircraft model {0} to your cart?}" TextWrapping="Wrap" Foreground="{StaticResource LightAccentBrush}" FontFamily="Montserrat" Margin="5" />
+
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Amount of aircrafts" Grid.Row="0" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,0,0,3" Padding="0"/>
+                <ComboBox ItemsSource="{Binding Amounts}" SelectedItem="{Binding SelectedAmount}" BorderThickness="0" Grid.Row="1" Margin="0" Padding="3,2" FontFamily="Montserrat" FontSize="11"/>
+
+                <Label Content="Total Amount" Grid.Row="2" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,8,0,3" Padding="0"/>
+                <TextBlock Text="{Binding TotalAmount.Amount, StringFormat=C, Mode=OneWay}" Grid.Row="3" FontFamily="Montserrat" FontSize="11" FontWeight="Regular" Background="Transparent" Foreground="{StaticResource LightAccentBrush}"/>
+            </Grid>
+
+        </Grid>
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,0">
             <Menu:MenuButton Label="Add" Command="{Binding AddCommand}" />

@@ -82,6 +82,7 @@
     <Compile Include="Enums\AircraftType.cs" />
     <Compile Include="Enums\Continents.cs" />
     <Compile Include="Enums\EngineType.cs" />
+    <Compile Include="Models\AircraftModels\AircraftCartItem.cs" />
     <Compile Include="Models\AircraftModels\AircraftModel.cs" />
     <Compile Include="Models\AircraftModels\Manufacturer.cs" />
     <Compile Include="Models\AirlineModels\Airline.cs" />
