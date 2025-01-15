@@ -25,7 +25,17 @@
                 <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Manufacturers}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
-                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Name">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource TextBlockButton}">
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataContext.OpenManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Founding Date" DisplayMemberBinding="{Binding FormattedFoundingDate}" />
                             <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Country.Name}" />
                         </GridView>

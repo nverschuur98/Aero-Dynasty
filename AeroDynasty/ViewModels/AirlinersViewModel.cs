@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Utilities;
 using AeroDynasty.ViewModels.Airliners;
 
@@ -43,7 +44,15 @@ namespace AeroDynasty.ViewModels
         // Command handling
         private void NavigateManufacturers()
         {
-            CurrentDetailContent = new ManufacturersViewModel();
+            var manufacturersView = new ManufacturersViewModel();
+            manufacturersView.ManufacturerOpenRequest += OpenManufacturer;
+            CurrentDetailContent = manufacturersView;
+        }
+
+        private void OpenManufacturer(Manufacturer manufacturer)
+        {
+            //Open the manufacturer view
+            CurrentDetailContent = new ManufacturerViewModel(manufacturer);
         }
     }
 }

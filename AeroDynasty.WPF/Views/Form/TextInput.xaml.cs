@@ -34,8 +34,7 @@ namespace AeroDynasty.WPF.Views.Form
                 typeof(TextInput),
                 new FrameworkPropertyMetadata(
                     null,
-                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault)
-                );
+                    FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string Label
         {

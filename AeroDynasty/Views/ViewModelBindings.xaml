@@ -26,4 +26,7 @@
     <DataTemplate DataType="{x:Type vmAirliners:ManufacturersViewModel}">
         <vAirliners:ManufacturersView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmAirliners:ManufacturerViewModel}">
+        <vAirliners:ManufacturerView/>
+    </DataTemplate>
 </ResourceDictionary>

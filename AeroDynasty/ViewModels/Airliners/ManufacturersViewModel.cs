@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Input;
 using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Utilities;
 
@@ -37,7 +38,9 @@ namespace AeroDynasty.ViewModels.Airliners
             }
         }
 
-        // Commands
+        // Commands and Events
+        public ICommand OpenManufacturerCommand { get; }
+        public event Action<Manufacturer> ManufacturerOpenRequest;
 
         // Constructor
         public ManufacturersViewModel()
@@ -50,7 +53,7 @@ namespace AeroDynasty.ViewModels.Airliners
             Manufacturers.SortDescriptions.Add(new SortDescription(nameof(Manufacturer.Name), ListSortDirection.Ascending));
 
             // Command binding
-
+            OpenManufacturerCommand = new RelayCommand(OpenManufacturer);
         }
 
         // Private funcs
@@ -77,5 +80,13 @@ namespace AeroDynasty.ViewModels.Airliners
         // Public funcs
 
         // Commando handling
+        private void OpenManufacturer(object parameter)
+        {
+            if(parameter is Manufacturer selectedManufacturer)
+            {
+                //Raise the event that a manufacturer must be opened
+                ManufacturerOpenRequest?.Invoke(selectedManufacturer);
+            }
+        }
     }
 }
