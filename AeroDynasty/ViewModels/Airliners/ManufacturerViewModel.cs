@@ -148,7 +148,18 @@ namespace AeroDynasty.ViewModels.Airliners
 
         private void OrderCart()
         {
-            // TODO: Add order logic
+            // Check if the airline has sufficient money
+            if(ShoppingCartTotalPrice.Amount <= GameData.Instance.UserData.Airline.CashBalance)
+            {
+                foreach(AircraftCartItem row in ShoppingCart)
+                {
+                    row.BuyAircraftsCommand.Execute(null);
+                }
+
+                // TODO: Handle if not sufficient money
+            }
+
+            CancelCart();
         }
 
         private void CancelCart()

@@ -86,6 +86,7 @@
     <Compile Include="Models\AircraftModels\AircraftModel.cs" />
     <Compile Include="Models\AircraftModels\Manufacturer.cs" />
     <Compile Include="Models\AirlineModels\Airline.cs" />
+    <Compile Include="Models\AirlinerModels\Airliner.cs" />
     <Compile Include="Models\AirportModels\Airport.cs" />
     <Compile Include="Models\Core\Coordinates.cs" />
     <Compile Include="Models\Core\Country.cs" />

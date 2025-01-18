@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AeroDynasty.Core.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AeroDynasty.Core.Models.Core
 {
-    /*public class Registration
+    public class Registration
     {
         public int Number { get; private set; }
         private RegistrationTemplate _template { get; set; }
@@ -177,7 +178,7 @@ namespace AeroDynasty.Core.Models.Core
                 return $"{_template.CountryID}-{NumberToString(Number)}";
             }
         }
-    }*/
+    }
 
     public class RegistrationTemplate
     {

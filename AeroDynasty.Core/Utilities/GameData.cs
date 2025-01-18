@@ -10,6 +10,7 @@ using System.Windows.Input;
 using AeroDynasty.Core.Enums;
 using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Models.AirlineModels;
+using AeroDynasty.Core.Models.AirlinerModels;
 using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
 
@@ -33,7 +34,7 @@ namespace AeroDynasty.Core.Utilities
         
         ////Observable change Data
         //public ObservableCollection<Route> Routes { get; set; }
-        //public ObservableCollection<Airliner> Airliners { get; set; }
+        public ObservableCollection<Airliner> Airliners { get; set; }
         
         //Maps
         public Dictionary<string, Country> CountryMap { get; private set; }
@@ -54,12 +55,10 @@ namespace AeroDynasty.Core.Utilities
             
             //Load non-change data
             LoadNonChangeData();
+
+            //Load change data
+            LoadChangedata();
             
-            ////Load change data
-            ////THIS NEEDS TO MOVE UNTILL AFTER THE CTOR IS FULLY INITIALIZED
-            //LoadAirliners();
-            //LoadRoutes();
-            //
             //Init start date
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             
@@ -107,7 +106,8 @@ namespace AeroDynasty.Core.Utilities
         /// </summary>
         private void LoadChangedata()
         {
-            throw new NotImplementedException();
+            LoadAirliners();
+            //LoadRoutes();
         }
 
         /// <summary>
@@ -355,6 +355,11 @@ namespace AeroDynasty.Core.Utilities
             //Create the observable collection
             AircraftModels = new ObservableCollection<AircraftModel>(aircrafts);
 
+        }
+
+        private void LoadAirliners()
+        {
+            Airliners = new ObservableCollection<Airliner>();
         }
 
         #region Game functions
