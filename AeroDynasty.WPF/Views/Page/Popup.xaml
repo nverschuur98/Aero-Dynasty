@@ -9,7 +9,7 @@
     <Border BorderThickness="0" Background="{StaticResource DarkTransparentBackgroundBrush}" Padding="5" Margin="5">
         <!-- Set Grid height to Auto so it resizes based on content -->
         <StackPanel Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Border Width="300" BorderBrush="{StaticResource AccentBrush}" BorderThickness="1" Background="{StaticResource BackgroundGradient}">
+            <Border MinWidth="300" BorderBrush="{StaticResource AccentBrush}" BorderThickness="1" Background="{StaticResource BackgroundGradient}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />

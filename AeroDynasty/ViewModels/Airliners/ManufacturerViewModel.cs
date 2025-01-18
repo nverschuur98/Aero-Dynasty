@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using AeroDynasty.ViewModels.Airliners.Popup;
 using System.Collections.ObjectModel;
+using AeroDynasty.Core.Models.Core;
 
 namespace AeroDynasty.ViewModels.Airliners
 {
@@ -50,8 +51,10 @@ namespace AeroDynasty.ViewModels.Airliners
             {
                 _shoppingCart = value;
                 OnPropertyChanged(nameof(ShoppingCart));
+                OnPropertyChanged(nameof(ShoppingCartTotalPrice));
             }
         }
+        public Price ShoppingCartTotalPrice { get { return new Price(ShoppingCart.Sum(i => i.TotalPrice.Amount)); } }
         public string PopupTitle
         {
             get => _popupTitle;
@@ -84,6 +87,7 @@ namespace AeroDynasty.ViewModels.Airliners
 
         // Commands
         public ICommand OpenAddAircraftToCartCommand { get; }
+        public ICommand OpenShoppingCartCommand { get; }
 
         // Constructor
         public ManufacturerViewModel(Manufacturer manufacturer)
@@ -103,20 +107,11 @@ namespace AeroDynasty.ViewModels.Airliners
 
             // Bind commands to actions
             OpenAddAircraftToCartCommand = new RelayCommand(OpenAddAircraftToCart);
-        }
-
-        private void AddCartItem(AircraftCartItem item)
-        {
-            ShoppingCart.Add(item);
+            OpenShoppingCartCommand = new RelayCommand(OpenShoppingCart);
         }
 
         // Private funcs
-        private void ClosePopup()
-        {
-            PopupTitle = "";
-            PopupContent = null;
-        }
-
+        
         // Public funcs
 
         // Command handling
@@ -131,6 +126,41 @@ namespace AeroDynasty.ViewModels.Airliners
                 PopupContent = popupContent;
             }
             
+        }
+
+        private void OpenShoppingCart()
+        {
+            PopupTitle = "Shopping Cart";
+            var popupContent = new ShoppingCartPopupViewModel(_shoppingCart);
+            popupContent.OrderCartRequest += OrderCart;
+            popupContent.CancelCartRequest += CancelCart;
+            popupContent.CloseRequest += ClosePopup;
+            PopupContent = popupContent;
+
+        }
+
+        // Event Handling
+        private void AddCartItem(AircraftCartItem item)
+        {
+            ShoppingCart.Add(item);
+            OnPropertyChanged(nameof(ShoppingCartTotalPrice));
+        }
+
+        private void OrderCart()
+        {
+            // TODO: Add order logic
+        }
+
+        private void CancelCart()
+        {
+            ShoppingCart.Clear();
+            OnPropertyChanged(nameof(ShoppingCartTotalPrice));
+        }
+
+        private void ClosePopup()
+        {
+            PopupTitle = "";
+            PopupContent = null;
         }
     }
 }

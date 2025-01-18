@@ -1,4 +1,5 @@
 ﻿using AeroDynasty.Core.Models.AirlineModels;
+using AeroDynasty.Core.Models.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace AeroDynasty.Core.Models.AircraftModels
         private int _amount;
 
         // Public vars
-        public AircraftModel AircraftModel;
+        public AircraftModel AircraftModel { get; set; }
         public Airline Buyer;
         public int Amount
         {
@@ -22,6 +23,15 @@ namespace AeroDynasty.Core.Models.AircraftModels
             {
                 _amount = value;
                 OnPropertyChanged(nameof(Amount));
+                OnPropertyChanged(nameof(TotalPrice));
+            }
+        }
+
+        public Price TotalPrice
+        {
+            get
+            {
+                return new Price(Amount * AircraftModel.Price.Amount);
             }
         }
 

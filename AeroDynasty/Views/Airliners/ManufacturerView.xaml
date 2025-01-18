@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AeroDynasty.Views.Airliners"
              xmlns:Page="clr-namespace:AeroDynasty.WPF.Views.Page;assembly=AeroDynasty.WPF"
-             xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
+             xmlns:Menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -92,7 +92,19 @@
 
                     <TextBlock Text="Shopping Cart" Grid.Row="1" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}" Margin="0,5,0,0"/>
                     <Separator Grid.Row="2" Background="{StaticResource AccentBrush}" Height="2"/>
-                    <TextBlock Grid.Row="3" Text="Shopping details" Height="50" TextWrapping="Wrap" Margin="0,2,0,0" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}" />
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" TextWrapping="Wrap" Foreground="{StaticResource LightAccentBrush}" FontFamily="Montserrat" Margin="5">
+                            <Run Text="Total order:" />
+                            <Run Text="{Binding ShoppingCartTotalPrice.Amount, Mode=OneWay, StringFormat={}{0:C2}}" />
+                            <Run Text="" />
+                        </TextBlock>
+                        <Menu:MenuButton Grid.Column="1" Label="Show Cart" Command="{Binding OpenShoppingCartCommand}" />
+                    </Grid>
+                    
                 </Grid>
             </Page:Wrapper>
             <Page:Popup Grid.Row="0" Grid.RowSpan="2" Title="{Binding PopupTitle}" Visible="{Binding PopupVisible}">

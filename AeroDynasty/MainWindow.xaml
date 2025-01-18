@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:AeroDynasty"
         xmlns:menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
         mc:Ignorable="d"
-        Title="Aero Dynasty" Height="450" Width="800" WindowStyle="SingleBorderWindow">
+        Title="Aero Dynasty" Height="800" Width="1400" WindowStyle="SingleBorderWindow">
     <Window.Background>
         <!-- Use the Radial Gradient as Background -->
         <StaticResource ResourceKey="BackgroundGradient"/>

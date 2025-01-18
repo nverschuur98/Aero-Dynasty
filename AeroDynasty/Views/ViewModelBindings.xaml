@@ -34,4 +34,7 @@
     <DataTemplate DataType="{x:Type vmAirlinersPopup:AddAircraftToCartPopupViewModel}">
         <vAirlinersPopup:AddAircraftToCartPopupView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type vmAirlinersPopup:ShoppingCartPopupViewModel}">
+        <vAirlinersPopup:ShoppingCartPopupView/>
+    </DataTemplate>
 </ResourceDictionary>
