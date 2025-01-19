@@ -47,7 +47,7 @@ namespace AeroDynasty.Core.Models.RouteModels
                 OnPropertyChanged(nameof(TicketPrice));
             }
         }
-        //public double Distance { GeoUtilities.CalculateDistance(Origin.Coordinates, Destination.Coordinates);}
+        public double Distance { get => GeoUtilities.CalculateDistance(Origin.Coordinates, Destination.Coordinates);}
 
     // Constructor
     public Route(Airport origin, Airport destination, Airline owner, Price ticketPrice)

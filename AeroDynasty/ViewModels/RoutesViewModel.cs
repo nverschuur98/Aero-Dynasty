@@ -49,7 +49,8 @@ namespace AeroDynasty.ViewModels
         // Command and event handling
         private void NavigateRoutes()
         {
-
+            var content = new Routes.RoutesViewModel();
+            CurrentDetailContent = content;
         }
 
         private void NavigateNewRoute()

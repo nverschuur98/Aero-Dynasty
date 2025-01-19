@@ -21,7 +21,11 @@
     <DataTemplate DataType="{x:Type vm:RoutesViewModel}">
         <v:RoutesView/>
     </DataTemplate>
-    
+
+    <DataTemplate DataType="{x:Type vmRoutes:RoutesViewModel}">
+        <vRoutes:RoutesView/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vmRoutes:EditRouteViewModel}">
         <vRoutes:EditRouteView/>
     </DataTemplate>
