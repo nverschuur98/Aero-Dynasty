@@ -40,17 +40,7 @@
                 <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding ShoppingCart}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
-                            <GridViewColumn Header="Model">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding AircraftModel.Name}" Style="{StaticResource TextBlockButton}">
-                                            <TextBlock.InputBindings>
-                                                <MouseBinding Gesture="LeftClick" Command="" CommandParameter="{Binding}" />
-                                            </TextBlock.InputBindings>
-                                        </TextBlock>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            <GridViewColumn Header="Model" DisplayMemberBinding="{Binding AircraftModel.Name}" />
                             <GridViewColumn Header="Unit Price">
                                 <GridViewColumn.DisplayMemberBinding>
                                     <Binding Path="AircraftModel.Price.Amount" StringFormat="{}{0:C2}" />

@@ -14,13 +14,7 @@ namespace AeroDynasty.Core.Models.AircraftModels
         public Country Country { get; set; }
         public DateTime FoundingDate { get; set; }
 
-        public string FormattedFoundingDate
-        {
-            get
-            {
-                return FoundingDate.ToString("dd-MMM-yyyy");
-            }
-        }
+        public string FormattedFoundingDate { get => FoundingDate.ToString("dd-MMM-yyyy"); }
 
         public Manufacturer(string name, string description, Country country, DateTime foundingDate)
         {

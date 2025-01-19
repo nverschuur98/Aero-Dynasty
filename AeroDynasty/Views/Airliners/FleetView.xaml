@@ -17,7 +17,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Manufacturers" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <TextBlock Text="Fleet" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
                 <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
 
                 <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Fleet}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
@@ -28,7 +28,7 @@
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Registration.ReturnValue}" Style="{StaticResource TextBlockButton}">
                                             <TextBlock.InputBindings>
-                                                <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OpenManufacturerCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                                <MouseBinding Gesture="LeftClick" Command="" CommandParameter="{Binding}" />
                                             </TextBlock.InputBindings>
                                         </TextBlock>
                                     </DataTemplate>
@@ -39,7 +39,7 @@
                             <GridViewColumn Header="Max Pax" DisplayMemberBinding="{Binding Model.maxPax}" />
                             <GridViewColumn Header="Max Cargo" DisplayMemberBinding="{Binding Model.maxCargo}" />
                             <GridViewColumn Header="Engine Type" DisplayMemberBinding="{Binding Model.EngineType}" />
-                            <GridViewColumn Header="Owner" DisplayMemberBinding="{Binding Owner.Name}" />
+                            <GridViewColumn Header="Production Date" DisplayMemberBinding="{Binding FormattedProductionDate}" />
                         </GridView>
                     </ListView.View>
                 </ListView>

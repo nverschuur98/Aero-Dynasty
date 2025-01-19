@@ -68,10 +68,7 @@ namespace AeroDynasty.Core.Models.AircraftModels
 
             for(int i = 0; i < Amount; i++)
             {
-                Airliner a = new Airliner();
-                a.Model = AircraftModel;
-                a.Owner = Buyer;
-                a.Registration = new Registration(Buyer.Country);
+                Airliner a = new Airliner(new Registration(Buyer.Country), AircraftModel, Buyer, GameState.Instance.CurrentDate);
 
                 // Check if sufficient money is available
                 if (Buyer.SufficientCash(a.Model.Price))
