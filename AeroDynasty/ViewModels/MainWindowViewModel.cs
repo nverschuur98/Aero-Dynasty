@@ -35,6 +35,7 @@ namespace AeroDynasty.ViewModels
         public ICommand NavigateAirportsCommand { get; }
         public ICommand NavigateAirlinersCommand { get; }
         public ICommand NavigateAirlinesCommand { get; }
+        public ICommand NavigateSettingsCommand { get; }
         public ICommand PlayCommand { get; }
         public ICommand PauseCommand { get; }
 
@@ -54,6 +55,7 @@ namespace AeroDynasty.ViewModels
             NavigateAirportsCommand = new RelayCommand(NavigateAirports);
             NavigateAirlinersCommand = new RelayCommand(NavigateAirliners);
             NavigateAirlinesCommand = new RelayCommand(NavigateAirlines);
+            NavigateSettingsCommand = new RelayCommand(NavigateSettings);
             PlayCommand = new RelayCommand(Play);
             PauseCommand = new RelayCommand(Pause);
         }
@@ -79,6 +81,11 @@ namespace AeroDynasty.ViewModels
         private void NavigateAirlines()
         {
             CurrentContent = new AirlinesViewModel();
+        }
+
+        private void NavigateSettings()
+        {
+            CurrentContent = new SettingsViewModel();
         }
 
         private void Play()

@@ -14,6 +14,7 @@ using AeroDynasty.Core.Models.AirlinerModels;
 using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
 using AeroDynasty.Core.Models.RouteModels;
+using static AeroDynasty.Core.Utilities.SaveGameManager;
 
 namespace AeroDynasty.Core.Utilities
 {
@@ -50,15 +51,8 @@ namespace AeroDynasty.Core.Utilities
 
         //Private Constructor
         private GameData()
-        {           
-            //Load Core first
-            LoadCoreData();
-            
-            //Load non-change data
-            LoadNonChangeData();
-
-            //Load change data
-            LoadChangedata();
+        {
+            SetupGameData();
             
             //Init start date
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
@@ -375,6 +369,27 @@ namespace AeroDynasty.Core.Utilities
             Routes = new ObservableCollection<Route>();
         }
 
+        // Public funcs
+        public void SetupGameData()
+        {
+            //Load Core first
+            LoadCoreData();
+
+            //Load non-change data
+            LoadNonChangeData();
+
+            //Load change data
+            LoadChangedata();
+        }
+
+        public void LoadToGame(GameDataHolder data)
+        {
+            Instance.UserData = data.UserData;
+            Instance.Airlines = new ObservableCollection<Airline>(data.Airlines);
+            Instance.Airliners = new ObservableCollection<Airliner>(data.Airliners);
+            Instance.Routes = new ObservableCollection<Route>(data.Routes);
+        }
+
         #region Game functions
 
         public UserData UserData
@@ -386,34 +401,6 @@ namespace AeroDynasty.Core.Utilities
                 OnPropertyChanged(nameof(UserData));
             }
         }
-
-        /*
-        public void SaveGame(string filePath)
-        {
-            bool wasPlaying = !IsPaused;
-
-            if (wasPlaying)
-            {
-                PauseCommand.Execute(null);
-            }
-
-            // Use GameStateManager to save the game
-            GameStateManager.SaveGame(this, filePath);
-
-            if (wasPlaying)
-            {
-                PlayCommand.Execute(null);
-            }
-        }
-
-        public void LoadGame(string filePath)
-        {
-            //Reset the game data
-            ResetInstance();
-
-            // Use GameStateManager to load the game
-            GameStateManager.LoadGame(this, filePath);
-        }*/
 
         #endregion
     }

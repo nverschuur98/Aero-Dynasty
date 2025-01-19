@@ -69,4 +69,10 @@
     </DataTemplate>
     <!--#endregion-->
     <!--#endregion-->
+
+    <!--#region SETTINGS-->
+    <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+        <v:SettingsView/>
+    </DataTemplate>
+    <!--#endregion-->
 </ResourceDictionary>

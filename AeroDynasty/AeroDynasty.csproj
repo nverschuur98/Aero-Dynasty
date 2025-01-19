@@ -112,6 +112,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ViewModelBindings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +136,7 @@
     <Compile Include="ViewModels\RoutesViewModel.cs" />
     <Compile Include="ViewModels\Routes\EditRouteViewModel.cs" />
     <Compile Include="ViewModels\Routes\RoutesViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="Views\AirlinersView.xaml.cs">
       <DependentUpon>AirlinersView.xaml</DependentUpon>
     </Compile>
@@ -175,6 +180,9 @@
     </Compile>
     <Compile Include="Views\Routes\RoutesView.xaml.cs">
       <DependentUpon>RoutesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <!-- Properties and Resources -->
