@@ -1,4 +1,4 @@
-﻿using AeroDynasty.Core.Utilities;
+﻿using AeroDynasty.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace AeroDynasty.Core.Models.Core
+namespace AeroDynasty.Core.Utilities
 {
     public class GameState : _BaseModel
     {
