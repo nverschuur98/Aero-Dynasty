@@ -26,7 +26,7 @@
                 <TextBlock Text="Airliners" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
                 <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
                 <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,3">
-                    <Menu:MenuButton Label="Fleet" Command="" Margin="0,1" />
+                    <Menu:MenuButton Label="Fleet" Command="{Binding NavigateFleetCommand}" Margin="0,1" />
                     <Menu:MenuButton Label="Manufacturers" Command="{Binding NavigateManufacturersCommand}" Margin="0,1" />
                     <Menu:MenuButton Label="Used Aircrafts" Command="" Margin="0,1" />
                 </StackPanel>

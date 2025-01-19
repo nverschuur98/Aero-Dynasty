@@ -27,12 +27,14 @@ namespace AeroDynasty.ViewModels
         }
 
         // Commands
+        public ICommand NavigateFleetCommand { get; }
         public ICommand NavigateManufacturersCommand { get; }
 
         // Constructor
         public AirlinersViewModel()
         {
             // Bind commands
+            NavigateFleetCommand = new RelayCommand(NavigateFleet);
             NavigateManufacturersCommand = new RelayCommand(NavigateManufacturers);
         }
 
@@ -41,12 +43,18 @@ namespace AeroDynasty.ViewModels
 
         // Public funcs
 
-        // Command handling
+        // Command and event handling
+        private void NavigateFleet()
+        {
+            var content = new FleetViewModel();
+            CurrentDetailContent = content;
+        }
+
         private void NavigateManufacturers()
         {
-            var manufacturersView = new ManufacturersViewModel();
-            manufacturersView.ManufacturerOpenRequest += OpenManufacturer;
-            CurrentDetailContent = manufacturersView;
+            var content = new ManufacturersViewModel();
+            content.ManufacturerOpenRequest += OpenManufacturer;
+            CurrentDetailContent = content;
         }
 
         private void OpenManufacturer(Manufacturer manufacturer)
