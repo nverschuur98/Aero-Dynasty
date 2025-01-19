@@ -104,6 +104,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Routes\EditRouteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ViewModelBindings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +126,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RoutesViewModel.cs" />
+    <Compile Include="ViewModels\Routes\EditRouteViewModel.cs" />
     <Compile Include="Views\AirlinersView.xaml.cs">
       <DependentUpon>AirlinersView.xaml</DependentUpon>
     </Compile>
@@ -159,6 +164,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Routes\EditRouteView.xaml.cs">
+      <DependentUpon>EditRouteView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <!-- Properties and Resources -->
@@ -200,10 +208,7 @@
       <Name>AeroDynasty.WPF</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\Routes\" />
-    <Folder Include="Views\Routes\" />
-  </ItemGroup>
+  <ItemGroup />
   <!-- Final Import -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

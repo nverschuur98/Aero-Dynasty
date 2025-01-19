@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="AeroDynasty.WPF.Views.Form.ComboInput"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AeroDynasty.WPF.Views.Form"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="{Binding Label, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+               Grid.Row="0" 
+               FontFamily="Montserrat" 
+               FontSize="12" 
+               FontWeight="SemiBold" 
+               Foreground="{StaticResource AccentBrush}" 
+               Margin="0,0,0,3" Padding="0"/>
+
+        <Border Grid.Row="1" 
+                BorderBrush="{StaticResource LightAccentBrush}" 
+                BorderThickness="0" 
+                Background="{StaticResource LightTransparentBackgroundBrush}">
+            <ComboBox ItemsSource="{Binding ItemSource, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedValue="{Binding SelectedValue, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" 
+                      SelectedItem="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}"
+                      DisplayMemberPath="{Binding DisplayMemberPath, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" 
+                      BorderThickness="0" 
+                      Grid.Row="1" 
+                      Margin="0" 
+                      Padding="3,2" 
+                      FontFamily="Montserrat" 
+                      FontSize="11" 
+                      FontWeight="Regular" 
+                      Foreground="{StaticResource LightAccentBrush}"
+                      Background="Transparent">
+
+                <!-- Customizing the Popup -->
+                <ComboBox.Template>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <TextBlock Text="{TemplateBinding Property=Text}" 
+                                Margin="0" 
+                                Padding="3,2" 
+                                FontFamily="Montserrat" 
+                                FontSize="11" 
+                                FontWeight="Regular" 
+                                Foreground="{StaticResource LightAccentBrush}"/>
+                            <!-- ToggleButton for the ComboBox -->
+                            <ToggleButton x:Name="ToggleButton"
+                                          Focusable="false"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Background="Transparent"
+                                          ClickMode="Press">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Grid.Column="0" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0">
+                                        </Border>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                                <ToggleButton.Content>
+                                    <!-- Displaying the selected item -->
+                                    <ContentPresenter Content="{TemplateBinding SelectionBoxItem}" 
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                                                      Margin="3,2" />
+                                </ToggleButton.Content>
+                            </ToggleButton>
+
+                            <!-- Popup containing the items -->
+                            <Popup x:Name="Popup" 
+                                   IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   Placement="Bottom" 
+                                   StaysOpen="False" 
+                                   AllowsTransparency="true">
+                                <Grid Background="{StaticResource DarkTransparentBackgroundBrush}">
+                                    <Border Background="{StaticResource DarkTransparentBackgroundBrush}" 
+                                            BorderBrush="{StaticResource AccentBrush}" 
+                                            BorderThickness="1"
+                                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ComboBox}}">
+                                        <ScrollViewer MaxHeight="300">
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </ComboBox.Template>
+            </ComboBox>
+        </Border>
+    </Grid>
+</UserControl>

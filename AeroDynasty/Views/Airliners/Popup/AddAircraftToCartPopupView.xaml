@@ -30,7 +30,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Label Content="Amount of aircrafts" Grid.Row="0" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,0,0,3" Padding="0"/>
-                <ComboBox ItemsSource="{Binding Amounts}" SelectedItem="{Binding SelectedAmount}" BorderThickness="0" Grid.Row="1" Margin="0" Padding="3,2" FontFamily="Montserrat" FontSize="11"/>
+                <Form:ComboInput Grid.Row="1" ItemSource="{Binding Amounts}" SelectedItem="{Binding SelectedAmount}" />
 
                 <Label Content="Total Amount" Grid.Row="2" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,8,0,3" Padding="0"/>
                 <TextBlock Text="{Binding TotalAmount.Amount, StringFormat=C, Mode=OneWay}" Grid.Row="3" FontFamily="Montserrat" FontSize="11" FontWeight="Regular" Background="Transparent" Foreground="{StaticResource LightAccentBrush}"/>

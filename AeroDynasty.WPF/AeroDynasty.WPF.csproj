@@ -64,6 +64,12 @@
     <Compile Include="Views\Airport\AirportListViewItem.xaml.cs">
       <DependentUpon>AirportListViewItem.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Form\ComboInput.xaml.cs">
+      <DependentUpon>ComboInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Form\PriceInput.xaml.cs">
+      <DependentUpon>PriceInput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Form\TextInput.xaml.cs">
       <DependentUpon>TextInput.xaml</DependentUpon>
     </Compile>
@@ -98,6 +104,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Airport\AirportListViewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Form\ComboInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Form\PriceInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

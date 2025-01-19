@@ -39,16 +39,25 @@ namespace AeroDynasty.Core.Models.Core
             double lonDesRad = DegreesToRadians(destination.Longitude);
             double latDesRad = DegreesToRadians(destination.Latitude);
 
+            Console.WriteLine($"Origin (radians): lat={latOrgRad}, lon={lonOrgRad}");
+            Console.WriteLine($"Destination (radians): lat={latDesRad}, lon={lonDesRad}");
+
             double deltaLon = lonDesRad - lonOrgRad;
             double deltaLat = latDesRad - latOrgRad;
+
+            Console.WriteLine($"Delta: lat={deltaLat}, lon={deltaLon}");
 
             double a = Math.Sin(deltaLat / 2) * Math.Sin(deltaLat / 2) +
                        Math.Cos(latOrgRad) * Math.Cos(latDesRad) *
                        Math.Sin(deltaLon / 2) * Math.Sin(deltaLon / 2);
 
             double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+            double distance = _earthRadius * c;
 
-            return _earthRadius * c;
+            Console.WriteLine($"Intermediate values: a={a}, c={c}");
+            Console.WriteLine($"Calculated distance: {distance} km");
+
+            return distance;
         }
     }
 }

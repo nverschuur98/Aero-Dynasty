@@ -182,8 +182,9 @@ namespace AeroDynasty.Core.Utilities
 
                     // Extract the coordinates
                     JsonElement _coordinates = airportData.GetProperty("Coordinates");
-                    double latitude = Convert.ToDouble(_coordinates.GetProperty("Latitude").ToString());
-                    double longitude = Convert.ToDouble(_coordinates.GetProperty("Longitude").ToString());
+                    double latitude = _coordinates.GetProperty("Latitude").GetDouble();  // Correctly get double value
+                    double longitude = _coordinates.GetProperty("Longitude").GetDouble();  // Correctly get double value
+
                     Coordinates coordinates = new Coordinates(latitude, longitude);
 
                     // Check if the country exists in the map

@@ -25,8 +25,8 @@
                 <TextBlock Text="Routes" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
                 <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
                 <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,3">
-                    <Menu:MenuButton Label="Routes" Command="" Margin="0,1"/>
-                    <Menu:MenuButton Label="Create Route" Command="" Margin="0,1" />
+                    <Menu:MenuButton Label="Routes" Command="{Binding NavigateRoutesCommand}" Margin="0,1"/>
+                    <Menu:MenuButton Label="Create Route" Command="{Binding NavigateNewRouteCommand}" Margin="0,1" />
                     <Menu:MenuButton Label="Route Statistics" Command="" Margin="0,1" IsEnabled="False"/>
                 </StackPanel>
             </Grid>

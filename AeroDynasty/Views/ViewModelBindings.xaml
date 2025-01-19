@@ -2,6 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:AeroDynasty.ViewModels"
                     xmlns:v="clr-namespace:AeroDynasty.Views"
+                    xmlns:vmRoutes="clr-namespace:AeroDynasty.ViewModels.Routes"
+                    xmlns:vRoutes="clr-namespace:AeroDynasty.Views.Routes"
                     xmlns:vmAirliners="clr-namespace:AeroDynasty.ViewModels.Airliners"
                     xmlns:vAirliners="clr-namespace:AeroDynasty.Views.Airliners"
                     xmlns:vmAirlinersPopup="clr-namespace:AeroDynasty.ViewModels.Airliners.Popup"
@@ -13,31 +15,54 @@
     <DataTemplate DataType="{x:Type vm:HomeViewModel}">
         <v:HomeView/>
     </DataTemplate>
+    
+     
+    <!--#region ROUTES-->
     <DataTemplate DataType="{x:Type vm:RoutesViewModel}">
         <v:RoutesView/>
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vmRoutes:EditRouteViewModel}">
+        <vRoutes:EditRouteView/>
+    </DataTemplate>
+    <!--#endregion-->
+    
+    <!--#region AIRPORTS-->
     <DataTemplate DataType="{x:Type vm:AirportsViewModel}">
         <v:AirportsView/>
     </DataTemplate>
+    <!--#endregion-->
+    
+    <!--#region AIRLINES-->
     <DataTemplate DataType="{x:Type vm:AirlinesViewModel}">
         <v:AirlinesView/>
     </DataTemplate>
+    <!--#endregion-->
+    
+    <!--#region AIRLINERS-->
     <DataTemplate DataType="{x:Type vm:AirlinersViewModel}">
         <v:AirlinersView/>
     </DataTemplate>
+    
     <DataTemplate DataType="{x:Type vmAirliners:FleetViewModel}">
         <vAirliners:FleetView/>
     </DataTemplate>
+    
     <DataTemplate DataType="{x:Type vmAirliners:ManufacturersViewModel}">
         <vAirliners:ManufacturersView/>
     </DataTemplate>
+    
     <DataTemplate DataType="{x:Type vmAirliners:ManufacturerViewModel}">
         <vAirliners:ManufacturerView/>
     </DataTemplate>
+    
+    <!--#region POPUPS-->
     <DataTemplate DataType="{x:Type vmAirlinersPopup:AddAircraftToCartPopupViewModel}">
         <vAirlinersPopup:AddAircraftToCartPopupView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type vmAirlinersPopup:ShoppingCartPopupViewModel}">
         <vAirlinersPopup:ShoppingCartPopupView/>
     </DataTemplate>
+    <!--#endregion-->
+    <!--#endregion-->
 </ResourceDictionary>
