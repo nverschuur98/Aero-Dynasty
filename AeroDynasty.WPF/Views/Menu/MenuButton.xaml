@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:AeroDynasty.WPF.Views.Menu"
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="100">
-    <Button Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}" Content="{Binding Label, RelativeSource={RelativeSource AncestorType=UserControl}}">
+    <Button Command="{Binding Command, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+            Content="{Binding Label, RelativeSource={RelativeSource AncestorType=UserControl}}"
+            IsEnabled="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=UserControl}, FallbackValue=True}">
         <Button.Style>
             <Style TargetType="Button">
                 <Setter Property="BorderThickness" Value="0" />
@@ -25,6 +27,12 @@
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="Background" Value="{StaticResource AccentBrush}" />
                                     <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                                <!-- IsDisabled Trigger -->
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Background" Value="{StaticResource LightTransparentBackgroundBrush}" />
+                                    <Setter Property="Foreground" Value="{StaticResource LightAccentBrush}" />
+                                    <Setter Property="Cursor" Value="Wait" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

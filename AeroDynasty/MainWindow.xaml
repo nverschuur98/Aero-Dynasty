@@ -35,8 +35,8 @@
                 <menu:MenuButton Label="Airports" Command="{Binding NavigateAirportsCommand}"/>
                 <menu:MenuButton Label="Airliners" Command="{Binding NavigateAirlinersCommand}"/>
                 <menu:MenuButton Label="Airlines" Command="{Binding NavigateAirlinesCommand}"/>
-                <menu:MenuButton Label="Finances" Command=""/>
-                <menu:MenuButton Label="Settings" Command=""/>
+                <menu:MenuButton Label="Finances" Command="" IsEnabled="False"/>
+                <menu:MenuButton Label="Settings" Command="" IsEnabled="False"/>
             </StackPanel>
         </Grid>
         

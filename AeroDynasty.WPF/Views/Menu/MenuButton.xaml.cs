@@ -20,8 +20,26 @@ namespace AeroDynasty.WPF.Views.Menu
     /// </summary>
     public partial class MenuButton : UserControl
     {
-        public static readonly DependencyProperty CommandProperty = DependencyProperty.Register("Command", typeof(ICommand), typeof(MenuButton), new PropertyMetadata(null));
-        public static readonly DependencyProperty LabelProperty = DependencyProperty.Register("Label", typeof(string), typeof(MenuButton), new PropertyMetadata(null));
+        public static readonly DependencyProperty CommandProperty = 
+            DependencyProperty.Register(
+                "Command", 
+                typeof(ICommand), 
+                typeof(MenuButton), 
+                new PropertyMetadata(null));
+
+        public static readonly DependencyProperty LabelProperty = 
+            DependencyProperty.Register(
+                "Label", 
+                typeof(string), 
+                typeof(MenuButton), 
+                new PropertyMetadata(null));
+
+        public static readonly DependencyProperty IsEnabledProperty =
+            DependencyProperty.Register(
+                "IsEnabled", 
+                typeof(bool), 
+                typeof(MenuButton), 
+                new PropertyMetadata(true));
 
         public ICommand Command
         {
@@ -33,6 +51,12 @@ namespace AeroDynasty.WPF.Views.Menu
         {
             get { return (string)GetValue(LabelProperty); }
             set { SetValue(LabelProperty, value); }
+        }
+
+        public bool IsEnabled
+        {
+            get => (bool)GetValue(IsEnabledProperty);
+            set => SetValue(IsEnabledProperty, value);
         }
 
         public MenuButton()
