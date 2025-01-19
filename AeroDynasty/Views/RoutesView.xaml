@@ -4,10 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AeroDynasty.Views"
+             xmlns:Menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
              xmlns:Page="clr-namespace:AeroDynasty.WPF.Views.Page;assembly=AeroDynasty.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="5">
-        <TextBlock Text="This is the Routes View" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="200" MaxWidth="300" Width="1*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+
+        <Page:Wrapper Grid.Column="0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Routes" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,3">
+                    <Menu:MenuButton Label="Routes" Command="" Margin="0,1" />
+                    <Menu:MenuButton Label="Create Route" Command="" Margin="0,1" />
+                    <Menu:MenuButton Label="Route Statistics" Command="" Margin="0,1" />
+                </StackPanel>
+            </Grid>
+        </Page:Wrapper>
+
+        <ContentControl Grid.Column="1" Content="{Binding CurrentDetailContent}" />
     </Grid>
 </UserControl>

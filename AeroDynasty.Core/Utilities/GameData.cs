@@ -13,6 +13,7 @@ using AeroDynasty.Core.Models.AirlineModels;
 using AeroDynasty.Core.Models.AirlinerModels;
 using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
+using AeroDynasty.Core.Models.RouteModels;
 
 namespace AeroDynasty.Core.Utilities
 {
@@ -32,8 +33,8 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
         public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
         
-        ////Observable change Data
-        //public ObservableCollection<Route> Routes { get; set; }
+        //Observable change Data
+        public ObservableCollection<Route> Routes { get; set; }
         public ObservableCollection<Airliner> Airliners { get; set; }
         
         //Maps
@@ -107,7 +108,7 @@ namespace AeroDynasty.Core.Utilities
         private void LoadChangedata()
         {
             LoadAirliners();
-            //LoadRoutes();
+            LoadRoutes();
         }
 
         /// <summary>
@@ -357,9 +358,20 @@ namespace AeroDynasty.Core.Utilities
 
         }
 
+        /// <summary>
+        /// Loading the airliner data
+        /// </summary>
         private void LoadAirliners()
         {
             Airliners = new ObservableCollection<Airliner>();
+        }
+
+        /// <summary>
+        /// Loading the route data
+        /// </summary>
+        private void LoadRoutes()
+        {
+            Routes = new ObservableCollection<Route>();
         }
 
         #region Game functions

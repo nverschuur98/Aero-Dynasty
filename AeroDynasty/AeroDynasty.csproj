@@ -200,7 +200,10 @@
       <Name>AeroDynasty.WPF</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="ViewModels\Routes\" />
+    <Folder Include="Views\Routes\" />
+  </ItemGroup>
   <!-- Final Import -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
