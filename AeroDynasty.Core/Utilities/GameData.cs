@@ -45,7 +45,16 @@ namespace AeroDynasty.Core.Utilities
         
         // Userdata
         private UserData _userData { get; set; }
-        
+        public UserData UserData
+        {
+            get => _userData;
+            set
+            {
+                _userData = value;
+                OnPropertyChanged(nameof(UserData));
+            }
+        }
+
         //Commands
         //public ICommand TestCommand { get; set; }
 
@@ -382,26 +391,5 @@ namespace AeroDynasty.Core.Utilities
             LoadChangedata();
         }
 
-        public void LoadToGame(GameDataHolder data)
-        {
-            Instance.UserData = data.UserData;
-            Instance.Airlines = new ObservableCollection<Airline>(data.Airlines);
-            Instance.Airliners = new ObservableCollection<Airliner>(data.Airliners);
-            Instance.Routes = new ObservableCollection<Route>(data.Routes);
-        }
-
-        #region Game functions
-
-        public UserData UserData
-        {
-            get => _userData;
-            set
-            {
-                _userData = value;
-                OnPropertyChanged(nameof(UserData));
-            }
-        }
-
-        #endregion
     }
 }

@@ -21,11 +21,12 @@ namespace AeroDynasty.Core.Utilities
 
         public class GameDataHolder
         {
+            //Game Data 
             public UserData UserData { get; set; }
             public List<Airline> Airlines { get; set; }
             public List<Airliner> Airliners { get; set; }
             public List<Route> Routes { get; set; }
-            
+
             public void LoadFromGame()
             {
                 UserData = GameData.Instance.UserData;
@@ -34,10 +35,18 @@ namespace AeroDynasty.Core.Utilities
                 Routes = GameData.Instance.Routes.ToList();
             }
 
-            public void LoadToGame()
+        }
+
+        public class GameStateHolder
+        {
+            //Game Data 
+            public GameState State { get; set; }
+
+            public void LoadFromGame()
             {
-                //GameData.Instance.LoadToGame(this);
+                State = GameState.Instance;
             }
+
         }
 
         /// <summary>
@@ -59,6 +68,8 @@ namespace AeroDynasty.Core.Utilities
             // Save the game data
             GameDataHolder data = new GameDataHolder();
             data.LoadFromGame();
+            GameStateHolder state = new GameStateHolder();
+            state.LoadFromGame();
 
             string json;
 
@@ -73,13 +84,32 @@ namespace AeroDynasty.Core.Utilities
                     new AirportConverter(),
                     new RouteConverter(),
                     new AirlineConverter(),
-                    new UserDataConverter()
+                    new UserDataConverter(),
+                    new GameStateConverter()
                 }
             };
 
             try
             {
-                json = JsonSerializer.Serialize(data, options);
+
+                // Combine state and data into a single wrapper object
+                var saveData = new
+                {
+                    GameState = state,
+                    GameData = data
+                };
+
+                // Serialize the wrapper object
+                json = JsonSerializer.Serialize(saveData, options);
+
+                // Ensure the directory for the file exists
+                string directoryPath = Path.GetDirectoryName(filePath);
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                // Write the JSON content to the file
                 File.WriteAllText(filePath, json);
             }
             catch (Exception ex)
@@ -130,20 +160,23 @@ namespace AeroDynasty.Core.Utilities
                             //new AirportConverter(),
                             new RouteConverter(),
                             new AirlineConverter(),
-                            new UserDataConverter()
+                            new UserDataConverter(),
+                            new GameStateConverter()
                         }
                 };
 
                 // Parse the JSON document
                 JsonDocument doc = JsonDocument.Parse(json);
                 JsonElement root = doc.RootElement;
+                JsonElement state = root.GetProperty("GameState");
+                JsonElement data = root.GetProperty("GameData");
 
                 // Deserialize each JSON element separately using the corresponding converter
-                var airlines = JsonSerializer.Deserialize<List<Airline>>(root.GetProperty("Airlines").GetRawText(), options);
-                var airliners = JsonSerializer.Deserialize<List<Airliner>>(root.GetProperty("Airliners").GetRawText(), options);
-                var routes = JsonSerializer.Deserialize<List<Route>>(root.GetProperty("Routes").GetRawText(), options);
-
-                var userData = JsonSerializer.Deserialize<UserData>(root.GetProperty("UserData").GetRawText(), options);
+                var gameState = JsonSerializer.Deserialize<GameState>(state.GetProperty("State").GetRawText(), options);
+                var airlines = JsonSerializer.Deserialize<List<Airline>>(data.GetProperty("Airlines").GetRawText(), options);
+                var airliners = JsonSerializer.Deserialize<List<Airliner>>(data.GetProperty("Airliners").GetRawText(), options);
+                var routes = JsonSerializer.Deserialize<List<Route>>(data.GetProperty("Routes").GetRawText(), options);
+                var userData = JsonSerializer.Deserialize<UserData>(data.GetProperty("UserData").GetRawText(), options);
 
                 // Create and populate the GameDataHolder
                 var dataHolder = new GameDataHolder
@@ -155,7 +188,7 @@ namespace AeroDynasty.Core.Utilities
                 };
 
                 // Load the data back into the game state
-                dataHolder.LoadToGame();
+                // As the data is directly injected in the GameDataInstance, no loading is needed
             }
             catch (Exception ex)
             {
@@ -166,6 +199,31 @@ namespace AeroDynasty.Core.Utilities
     }
 
     #region Custom Serializers
+    public class GameStateConverter : JsonConverter<GameState>
+    {
+        public override GameState Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
+            {
+                var root = doc.RootElement;
+
+                var currentDate = Convert.ToDateTime(root.GetProperty("CurrentDate").GetString());
+
+                // Assign value to GameState singleton
+                GameState.Instance.CurrentDate = currentDate;
+
+                // Return dummy value
+                return GameState.Instance;
+            }
+        }
+
+        public override void Write(Utf8JsonWriter writer, GameState value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+            writer.WriteString("CurrentDate", value.CurrentDate);
+            writer.WriteEndObject();
+        }
+    }
 
     public class AirlineConverter : JsonConverter<Airline>
     {
@@ -346,7 +404,6 @@ namespace AeroDynasty.Core.Utilities
             writer.WriteEndObject();
         }
     }
-
 
     public class UserDataConverter : JsonConverter<UserData>
     {
