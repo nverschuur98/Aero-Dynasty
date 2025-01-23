@@ -25,7 +25,17 @@
                 <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Routes}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
-                            <GridViewColumn Header="Route Name" DisplayMemberBinding="{Binding Name}" />
+                            <GridViewColumn Header="Route Name">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" Style="{StaticResource TextBlockButton}">
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OpenRouteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" />
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             <GridViewColumn Header="Origin" DisplayMemberBinding="{Binding Origin.Name}" />
                             <GridViewColumn Header="Origin ICAO" DisplayMemberBinding="{Binding Origin.ICAO}" />
                             <GridViewColumn Header="Destination" DisplayMemberBinding="{Binding Destination.Name}" />

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using AeroDynasty.Core.Models.RouteModels;
 using AeroDynasty.Core.Utilities;
 using AeroDynasty.ViewModels.Routes;
 
@@ -38,18 +39,25 @@ namespace AeroDynasty.ViewModels
             NavigateNewRouteCommand = new RelayCommand(NavigateNewRoute);
         }
 
-        // Private vars
+        // Private funcs
         private void closeCurrentDetailContent()
         {
             CurrentDetailContent = null;
         }
 
-        // Public vars
+        // Public funcs
 
         // Command and event handling
         private void NavigateRoutes()
         {
             var content = new Routes.RoutesViewModel();
+            content.RouteOpenRequest += NavigateRoute;
+            CurrentDetailContent = content;
+        }
+
+        private void NavigateRoute(Route route)
+        {
+            var content = new Routes.RouteViewModel(route);
             CurrentDetailContent = content;
         }
 

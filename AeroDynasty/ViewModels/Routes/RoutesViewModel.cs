@@ -31,6 +31,8 @@ namespace AeroDynasty.ViewModels.Routes
         }
 
         // Commands and events
+        public ICommand OpenRouteCommand { get; }
+        public event Action<Route> RouteOpenRequest;
 
         // Constructor
         public RoutesViewModel()
@@ -38,6 +40,9 @@ namespace AeroDynasty.ViewModels.Routes
             Routes = CollectionViewSource.GetDefaultView(GameData.Instance.Routes.Where(r => r.Owner == GameData.Instance.UserData.Airline));
             Routes.SortDescriptions.Add(new SortDescription(nameof(Route.Origin.Name), ListSortDirection.Ascending));
             Routes.Filter = FilterRoutes;
+
+            // Bind command
+            OpenRouteCommand = new RelayCommand(OpenRoute);
         }
 
         // Private funcs
@@ -66,6 +71,13 @@ namespace AeroDynasty.ViewModels.Routes
         // Public funcs
 
         // Command and event handling
-
+        private void OpenRoute(object parameter)
+        {
+            if(parameter is Route selectedRoute)
+            {
+                //Raise the event that a route must be opened
+                RouteOpenRequest?.Invoke(selectedRoute);
+            }
+        }
     }
 }

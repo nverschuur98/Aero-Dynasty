@@ -23,6 +23,8 @@
     <Color x:Key="SecondaryColorD30">#285D68</Color>
     <Color x:Key="SecondaryColorD40">#235059</Color>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
+    <Color x:Key="SecondaryTransparentBackground">#80378495</Color>
+    <SolidColorBrush x:Key="SecondaryTransparentBackgroundBrush" Color="{StaticResource SecondaryTransparentBackground}" />
 
     <!-- Accent Color -->
     <Color x:Key="AccentColor">#ED6A5A</Color>
@@ -35,6 +37,8 @@
     <Color x:Key="AccentColorD30">#A84C3F</Color>
     <Color x:Key="AccentColorD40">#924336</Color>
     <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+    <Color x:Key="RedTransparentBackground">#80924336</Color>
+    <SolidColorBrush x:Key="RedTransparentBackgroundBrush" Color="{StaticResource RedTransparentBackground}" />
 
     <!-- Light Accent Color -->
     <Color x:Key="LightAccentColor">#E0E1DD</Color>

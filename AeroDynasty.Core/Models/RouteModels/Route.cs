@@ -3,6 +3,8 @@ using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +18,12 @@ namespace AeroDynasty.Core.Models.RouteModels
         private Airport _destination;
         private Airline _owner;
         private Price _ticketPrice;
+        private ObservableCollection<RouteSchedule> _scheduledFlights;
 
         // Public vars
+        public double Distance { get => GeoUtilities.CalculateDistance(Origin.Coordinates, Destination.Coordinates); }
+        public string Name { get => (Origin?.ICAO ?? string.Empty) + " - " + (Destination?.ICAO ?? string.Empty); }
+        public Airline Owner { get => _owner; }
         public Airport Origin
         {
             get => _origin;
@@ -36,8 +42,6 @@ namespace AeroDynasty.Core.Models.RouteModels
                 OnPropertyChanged(nameof(Destination));
             }
         }
-        public string Name { get => (Origin?.ICAO ?? string.Empty) + " - " + (Destination?.ICAO ?? string.Empty); }
-        public Airline Owner { get => _owner; }
         public Price TicketPrice
         {
             get => _ticketPrice;
@@ -47,15 +51,24 @@ namespace AeroDynasty.Core.Models.RouteModels
                 OnPropertyChanged(nameof(TicketPrice));
             }
         }
-        public double Distance { get => GeoUtilities.CalculateDistance(Origin.Coordinates, Destination.Coordinates);}
+        public ObservableCollection<RouteSchedule> ScheduledFlights
+        {
+            get => _scheduledFlights;
+            set
+            {
+                _scheduledFlights = value;
+                OnPropertyChanged(nameof(ScheduledFlights));
+            }
+        }
 
-    // Constructor
-    public Route(Airport origin, Airport destination, Airline owner, Price ticketPrice)
+        // Constructor
+        public Route(Airport origin, Airport destination, Airline owner, Price ticketPrice)
         {
             Origin = origin;
             Destination = destination;
             _owner = owner;
             TicketPrice = ticketPrice;
+            ScheduledFlights = new ObservableCollection<RouteSchedule>();
         }
 
         // Private funcs
