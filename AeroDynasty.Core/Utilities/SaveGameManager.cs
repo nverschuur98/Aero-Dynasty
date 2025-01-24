@@ -50,6 +50,13 @@ namespace AeroDynasty.Core.Utilities
 
         }
 
+        public static void NewGame()
+        {
+            GameData.Instance.SetupGameData();
+            GameState.Instance.SetupGameState();
+            GameState.Instance.PauseCommand.Execute(null);
+        }
+
         /// <summary>
         /// Save the current game state to a JSON file
         /// </summary>

@@ -51,9 +51,7 @@ namespace AeroDynasty.Core.Utilities
             //Init lists
             _dailyTasks = new List<Func<Task>>();
 
-            //Set startdate
-            CurrentDate = new DateTime(1946, 1, 1);
-            IsPaused = true;
+            SetupGameState();
 
             //Setup commands
             PlayCommand = new RelayCommand(PlayGame);
@@ -61,6 +59,13 @@ namespace AeroDynasty.Core.Utilities
         }
 
         //Private funcs
+        public void SetupGameState()
+        {
+            //Set startdate
+            CurrentDate = new DateTime(1946, 1, 1);
+            IsPaused = true;
+        }
+
         private async void StartGameTimer(CancellationToken cancelToken)
         {
             while (true) // Use CancellationToken to break the loop

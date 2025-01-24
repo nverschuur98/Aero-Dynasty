@@ -15,12 +15,14 @@ namespace AeroDynasty.ViewModels
         // Public vars
 
         // Commands
+        public ICommand NewCommand { get; }
         public ICommand SaveCommand { get; }
         public ICommand LoadCommand { get; }
 
         // Constructor
         public SettingsViewModel()
         {
+            NewCommand = new RelayCommand(New);
             SaveCommand = new RelayCommand(Save);
             LoadCommand = new RelayCommand(Load);
         }
@@ -30,6 +32,10 @@ namespace AeroDynasty.ViewModels
         // Public vars
 
         // Command and event handling
+        private void New()
+        {
+            SaveGameManager.NewGame();
+        }
         private void Save()
         {
             SaveGameManager.SaveGame("Save/savegame.json");
