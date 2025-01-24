@@ -6,6 +6,7 @@ using AeroDynasty.Core.Models.Core;
 using AeroDynasty.Core.Models.RouteModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -83,6 +84,8 @@ namespace AeroDynasty.Core.Utilities
                     new CountryConverter(),
                     new AirportConverter(),
                     new RouteConverter(),
+                    new RouteScheduleConverter(),
+                    new RouteLegConverter(),
                     new AirlineConverter(),
                     new UserDataConverter(),
                     new GameStateConverter()
@@ -159,6 +162,7 @@ namespace AeroDynasty.Core.Utilities
                             //new CountryConverter(),
                             //new AirportConverter(),
                             new RouteConverter(),
+                            new RouteLegConverter(),
                             new AirlineConverter(),
                             new UserDataConverter(),
                             new GameStateConverter()
@@ -372,6 +376,7 @@ namespace AeroDynasty.Core.Utilities
                 var destinationICAO = root.GetProperty("Destination_ICAO").GetString();
                 var ownerName = root.GetProperty("Owner").GetString();
                 var ticketPrice = Convert.ToDouble(root.GetProperty("TicketPrice").GetString());
+                var scheduledFlights = root.GetProperty("ScheduledFlights");
 
                 // Ensure the referenced objects exist in GameData
                 Airport origin = GameData.Instance.Airports.FirstOrDefault(a => a.ICAO == originICAO);
@@ -383,8 +388,15 @@ namespace AeroDynasty.Core.Utilities
                     throw new InvalidOperationException("Referenced objects not found in GameData.");
                 }
 
+                // Create a new JsonSerializerOptions with the RouteScheduleConverter that uses the context
+                var scheduleOptions = new JsonSerializerOptions(options);
+                scheduleOptions.Converters.Add(new RouteScheduleConverter(owner));
+
+                var flights = JsonSerializer.Deserialize<ObservableCollection<RouteSchedule>>(scheduledFlights.GetRawText(), scheduleOptions);
+
                 // Create the route object
                 var route = new Route(origin, destination, owner, new Price(ticketPrice));
+                route.ScheduledFlights = flights;
 
                 // Add the route to the GameData singleton
                 GameData.Instance.Routes.Add(route);
@@ -401,6 +413,87 @@ namespace AeroDynasty.Core.Utilities
             writer.WriteString("Destination_ICAO", value.Destination.ICAO);
             writer.WriteString("Owner", value.Owner.Name);
             writer.WriteString("TicketPrice", value.TicketPrice.Amount.ToString());
+            // Serialize ScheduledFlights using the RouteScheduleConverter
+            writer.WritePropertyName("ScheduledFlights");
+            JsonSerializer.Serialize(writer, value.ScheduledFlights, options);
+            writer.WriteEndObject();
+        }
+    }
+
+    public class RouteScheduleConverter : JsonConverter<RouteSchedule>
+    {
+        private readonly Airline _owner;
+
+        public RouteScheduleConverter() { }
+        public RouteScheduleConverter(Airline owner)
+        {
+            _owner = owner;
+        }
+
+        public override RouteSchedule Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
+            {
+                // Create a new JsonSerializerOptions with the RouteScheduleConverter that uses the context
+                var legOptions = new JsonSerializerOptions(options);
+                legOptions.Converters.Add(new RouteLegConverter(_owner));
+
+                var root = doc.RootElement;
+
+                var outbound = JsonSerializer.Deserialize<RouteLeg>(root.GetProperty("Outbound").GetRawText(), legOptions);
+                var turnaroundTime = TimeSpan.Parse(root.GetProperty("TurnaroundTime").GetString());
+
+                return new RouteSchedule(outbound.Origin, outbound.Destination, outbound.DepartureDay, outbound.DepartureTime, outbound.AssignedAirliner);
+            }
+        }
+
+        public override void Write(Utf8JsonWriter writer, RouteSchedule value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+            // Serialize RouteLegs using the RouteLegConverter
+            writer.WritePropertyName("Outbound");
+            JsonSerializer.Serialize(writer, value.Outbound, options);
+            writer.WriteString("TurnaroundTime", value.TurnaroundTime.ToString());
+            writer.WriteEndObject();
+        }
+    }
+
+    public class RouteLegConverter : JsonConverter<RouteLeg>
+    {
+        private readonly Airline _owner;
+
+        public RouteLegConverter() { }
+        public RouteLegConverter(Airline owner)
+        {
+            _owner = owner;
+        }
+
+        public override RouteLeg Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
+            {
+                var root = doc.RootElement;
+
+                Airport origin = GameData.Instance.Airports.First(a => a.ICAO == root.GetProperty("Origin_ICAO").ToString());
+                Airport destination = GameData.Instance.Airports.First(a => a.ICAO == root.GetProperty("Destination_ICAO").ToString());
+
+                int num = Convert.ToInt32(root.GetProperty("Assigned_Airliner").ToString());
+                Airliner airliner = GameData.Instance.Airliners.First(air => (/*air.Owner == _owner && */air.Registration.Number == num));
+                DayOfWeek departureDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), root.GetProperty("Departure_Day").GetString());
+                var departureTime = TimeSpan.Parse(root.GetProperty("Departure_Time").GetString());
+
+                return new RouteLeg(departureTime, departureDay, airliner, origin, destination);
+            }
+        }
+
+        public override void Write(Utf8JsonWriter writer, RouteLeg value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject();
+            writer.WriteString("Origin_ICAO", value.Origin.ICAO);
+            writer.WriteString("Destination_ICAO", value.Destination.ICAO);
+            writer.WriteString("Departure_Day", value.DepartureDay.ToString());
+            writer.WriteString("Departure_Time", value.DepartureTime.ToString());
+            writer.WriteString("Assigned_Airliner", value.AssignedAirliner.Registration.Number.ToString());
             writer.WriteEndObject();
         }
     }

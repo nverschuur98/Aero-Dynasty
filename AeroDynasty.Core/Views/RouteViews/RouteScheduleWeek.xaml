@@ -197,7 +197,7 @@
                 </ItemsControl>
             </Canvas>
 
-            <TextBlock Text="Saterday" HorizontalAlignment="Right" Margin="5" FontWeight="Bold" Grid.Column="0" Grid.Row="6" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+            <TextBlock Text="Saturday" HorizontalAlignment="Right" Margin="5" FontWeight="Bold" Grid.Column="0" Grid.Row="6" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
             <Canvas Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="24">
                 <ItemsControl ItemsSource="{Binding SaturdaySchedule, RelativeSource={RelativeSource AncestorType=UserControl}}">
                     <ItemsControl.ItemsPanel>
