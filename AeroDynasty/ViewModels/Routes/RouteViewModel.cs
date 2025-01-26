@@ -108,7 +108,6 @@ namespace AeroDynasty.ViewModels.Routes
         }
 
         // Command and event binding
-        public ICommand TestCommand { get; }
         public ICommand AddRouteScheduleCommand { get; }
         public ICommand OpenAddAirlinerCommand { get; }
         public ICommand ClearScheduleCommand { get; }
@@ -118,25 +117,14 @@ namespace AeroDynasty.ViewModels.Routes
         {
             Route = route;
 
-            TestCommand = new RelayCommand(testData);
-
             // Bind commands
             OpenAddAirlinerCommand = new RelayCommand(OpenAddAirliner);
             AddRouteScheduleCommand = new RelayCommand(AddRouteSchedule);
+            ClearScheduleCommand = new RelayCommand(ClearSchedule);
 
         }
 
         // Private funcs
-        private void testData()
-        {
-            Route.ScheduledFlights.Add(new RouteSchedule(Route.Origin, Route.Destination, DayOfWeek.Monday, TimeSpan.FromHours(9), GameData.Instance.Airliners.First(a => a.Owner == GameData.Instance.UserData.Airline)));
-            Route.ScheduledFlights.Add(new RouteSchedule(Route.Origin, Route.Destination, DayOfWeek.Tuesday, TimeSpan.FromHours(12), GameData.Instance.Airliners.First(a => a.Owner == GameData.Instance.UserData.Airline)));
-            Route.ScheduledFlights.Add(new RouteSchedule(Route.Origin, Route.Destination, DayOfWeek.Wednesday, TimeSpan.FromHours(8), GameData.Instance.Airliners.First(a => a.Owner == GameData.Instance.UserData.Airline)));
-            Route.ScheduledFlights.Add(new RouteSchedule(Route.Origin, Route.Destination, DayOfWeek.Thursday, TimeSpan.FromHours(7), GameData.Instance.Airliners.First(a => a.Owner == GameData.Instance.UserData.Airline)));
-            Route.ScheduledFlights.Add(new RouteSchedule(Route.Origin, Route.Destination, DayOfWeek.Friday, TimeSpan.FromHours(20), GameData.Instance.Airliners.First(a => a.Owner == GameData.Instance.UserData.Airline)));
-            OnPropertyChanged(nameof(Route));
-            OnPropertyChanged(nameof(Route.ScheduledFlights));
-        }
 
         // Public funcs
 
@@ -153,6 +141,16 @@ namespace AeroDynasty.ViewModels.Routes
         private void AddRouteSchedule()
         {
             Route.AddSchedule(SelectedDepartureDay, SelectedDepartureTime, SelectedAirliner);
+        }
+
+        private void ClearSchedule()
+        {
+            var assignedAirlinersCopy = Route.AssignedAirliners.ToList();
+
+            foreach (Airliner airliner in assignedAirlinersCopy)
+            {
+                Route.RemoveAirliner(airliner);
+            }
         }
 
         // Event handling

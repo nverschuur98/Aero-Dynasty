@@ -114,8 +114,14 @@ namespace AeroDynasty.Core.Models.RouteModels
 
         public void RemoveAirliner(Airliner airliner)
         {
-            // Remove all associated flight schedules
-            // TODO
+            // Create a list of flights associated with the airliner to remove
+            var flightsToRemove = ScheduledFlights.Where(schedule => schedule.AssignedAirliner == airliner).ToList();
+
+            // Remove those flights from the collection
+            foreach (var flight in flightsToRemove)
+            {
+                ScheduledFlights.Remove(flight);
+            }
 
             // Remove the airliner from assigned airliners list
             AssignedAirliners.Remove(airliner);

@@ -96,8 +96,6 @@
                             <Binding Path="Route.ScheduledFlights.Count" StringFormat="{}{0:0}" />
                         </TextBlock.Text>
                     </TextBlock>
-
-                    <Menu:MenuButton Grid.Column="1" Command="{Binding TestCommand}" Label="Test"/>
                 </Grid>
 
                 <!--<Route:RouteScheduleWeek RouteSchedules="{Binding Route.ScheduledFlights}" />-->
@@ -116,7 +114,7 @@
                 <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
                 <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,2">
                     <Menu:MenuButton Label="Add Airliner" Command="{Binding OpenAddAirlinerCommand}" Margin="-1,0,0,0"/>
-                    <Menu:MenuButton Label="Clear Schedule" Command="" IsEnabled="False"/>
+                    <Menu:MenuButton Label="Clear Schedule" Command="{Binding ClearScheduleCommand}" />
                 </StackPanel>
 
                 <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Route.AssignedAirliners}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">

@@ -36,10 +36,6 @@
         <vRoutes:EditRouteView/>
     </DataTemplate>
 
-    <DataTemplate DataType="{x:Type vmRoutes:EditAirlinerRouteScheduleViewModel}">
-        <vRoutes:EditAirlinerRouteScheduleView/>
-    </DataTemplate>
-
     <!--#region POPUPS-->
     <DataTemplate DataType="{x:Type vmRoutesPopup:AddAirlinerToRoutePopupViewModel}">
         <vRoutesPopup:AddAirlinerToRoutePopupView/>
