@@ -17,7 +17,9 @@
         "IntroductionDate": "1947-07-08",
         "RetirementDate": "1963-01-01",
         "minRunwayLength": "2300",
-        "Price": "1200000"
+        "Price": "1200000",
+        "FuelConsumptionRate": 2.77,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 377-10",
@@ -31,7 +33,9 @@
         "IntroductionDate": "1949-01-01",
         "RetirementDate": "1965-01-01",
         "minRunwayLength": "2300",
-        "Price": "1200000"
+        "Price": "1200000",
+        "FuelConsumptionRate": 2.77,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 377-18",
@@ -45,7 +49,9 @@
         "IntroductionDate": "1950-01-01",
         "RetirementDate": "1966-01-01",
         "minRunwayLength": "2300",
-        "Price": "1200000"
+        "Price": "1200000",
+        "FuelConsumptionRate": 2.77,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 314 Clipper",
@@ -59,7 +65,9 @@
         "IntroductionDate": "1939-03-20",
         "RetirementDate": "1951-01-01",
         "minRunwayLength": "2000",
-        "Price": "500000"
+        "Price": "500000",
+        "FuelConsumptionRate": 1.26,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 314A Clipper",
@@ -73,7 +81,9 @@
         "IntroductionDate": "1941-01-01",
         "RetirementDate": "1950-01-01",
         "minRunwayLength": "2000",
-        "Price": "500000"
+        "Price": "500000",
+        "FuelConsumptionRate": 1.26,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 307 Stratoliner",
@@ -87,7 +97,9 @@
         "IntroductionDate": "1938-12-31",
         "RetirementDate": "1975-01-01",
         "minRunwayLength": "1800",
-        "Price": "315000"
+        "Price": "315000",
+        "FuelConsumptionRate": 2.13,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 307B Stratoliner",
@@ -101,7 +113,9 @@
         "IntroductionDate": "1945-01-01",
         "RetirementDate": "1960-01-01",
         "minRunwayLength": "1800",
-        "Price": "315000"
+        "Price": "315000",
+        "FuelConsumptionRate": 2.13,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 247",
@@ -115,7 +129,9 @@
         "IntroductionDate": "1933-02-08",
         "RetirementDate": "1952-01-01",
         "minRunwayLength": "1500",
-        "Price": "62500"
+        "Price": "62500",
+        "FuelConsumptionRate": 0.72,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Boeing 247D",
@@ -129,7 +145,9 @@
         "IntroductionDate": "1934-01-01",
         "RetirementDate": "1950-01-01",
         "minRunwayLength": "1500",
-        "Price": "62500"
+        "Price": "62500",
+        "FuelConsumptionRate": 0.72,
+        "OperatingCostRate": 0
       }
     ]
   },
@@ -144,14 +162,16 @@
         "Family": "DC-3",
         "AircraftType": "Passenger",
         "EngineType": "Prop",
-        "CruisingSpeed": "207",
-        "maxPax": "21",
+        "CruisingSpeed": "333",
+        "maxPax": "32",
         "maxCargo": "0",
-        "maxRange": "2000",
+        "maxRange": "3421",
         "IntroductionDate": "1936-06-17",
         "RetirementDate": "1960-01-01",
         "minRunwayLength": "1500",
-        "Price": "100000"
+        "Price": "100000",
+        "FuelConsumptionRate": 1.07,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-3C",
@@ -159,13 +179,15 @@
         "AircraftType": "Passenger",
         "EngineType": "Prop",
         "CruisingSpeed": "207",
-        "maxPax": "30",
+        "maxPax": "32",
         "maxCargo": "0",
         "maxRange": "2000",
         "IntroductionDate": "1941-01-01",
         "RetirementDate": "1965-01-01",
         "minRunwayLength": "1500",
-        "Price": "100000"
+        "Price": "100000",
+        "FuelConsumptionRate": 1.07,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-3T",
@@ -174,110 +196,110 @@
         "EngineType": "Prop",
         "CruisingSpeed": "200",
         "maxPax": "0",
-        "maxCargo": "10000",
-        "maxRange": "1500",
+        "maxCargo": "4536",
+        "maxRange": "3421",
         "IntroductionDate": "1945-01-01",
         "RetirementDate": "1975-01-01",
         "minRunwayLength": "1500",
-        "Price": "100000"
+        "Price": "100000",
+        "FuelConsumptionRate": 1.07,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-4",
         "Family": "DC-4",
         "AircraftType": "Passenger",
         "EngineType": "Prop",
-        "CruisingSpeed": "205",
-        "maxPax": "44",
+        "CruisingSpeed": "452",
+        "maxPax": "50",
         "maxCargo": "0",
-        "maxRange": "3800",
+        "maxRange": "3500",
         "IntroductionDate": "1942-01-01",
         "RetirementDate": "1958-01-01",
         "minRunwayLength": "1800",
-        "Price": "1000000"
+        "Price": "1000000",
+        "FuelConsumptionRate": 1.68,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-4E",
         "Family": "DC-4",
         "AircraftType": "Passenger",
         "EngineType": "Prop",
-        "CruisingSpeed": "210",
-        "maxPax": "40",
+        "CruisingSpeed": "322",
+        "maxPax": "42",
         "maxCargo": "0",
-        "maxRange": "4500",
+        "maxRange": "3500",
         "IntroductionDate": "1939-01-01",
         "RetirementDate": "1955-01-01",
         "minRunwayLength": "1800",
-        "Price": "1000000"
+        "Price": "1000000",
+        "FuelConsumptionRate": 1.68,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-4-1009",
         "Family": "DC-4",
         "AircraftType": "Passenger",
         "EngineType": "Prop",
-        "CruisingSpeed": "205",
-        "maxPax": "44",
+        "CruisingSpeed": "452",
+        "maxPax": "50",
         "maxCargo": "0",
-        "maxRange": "3800",
+        "maxRange": "3500",
         "IntroductionDate": "1946-01-03",
         "RetirementDate": "1958-01-01",
         "minRunwayLength": "1800",
-        "Price": "1000000"
-      },
-      {
-        "Name": "Douglas DC-6",
-        "Family": "DC-6",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "265",
-        "maxPax": "54",
-        "maxCargo": "0",
-        "maxRange": "4000",
-        "IntroductionDate": "1946-01-01",
-        "RetirementDate": "1988-01-01",
-        "minRunwayLength": "1100",
-        "Price": "1200000"
+        "Price": "1000000",
+        "FuelConsumptionRate": 1.68,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-6A",
         "Family": "DC-6",
         "AircraftType": "Passenger",
         "EngineType": "Prop",
-        "CruisingSpeed": "265",
+        "CruisingSpeed": "507",
         "maxPax": "80",
         "maxCargo": "8500",
-        "maxRange": "4200",
+        "maxRange": "4815",
         "IntroductionDate": "1947-01-01",
         "RetirementDate": "1970-01-01",
-        "minRunwayLength": "1100",
-        "Price": "1200000"
+        "minRunwayLength": "1800",
+        "Price": "1200000",
+        "FuelConsumptionRate": 1.49,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-6B",
         "Family": "DC-6",
         "AircraftType": "Passenger",
         "EngineType": "Prop",
-        "CruisingSpeed": "270",
+        "CruisingSpeed": "507",
         "maxPax": "102",
         "maxCargo": "0",
-        "maxRange": "4400",
+        "maxRange": "4815",
         "IntroductionDate": "1947-01-01",
         "RetirementDate": "1970-01-01",
-        "minRunwayLength": "1100",
-        "Price": "1200000"
+        "minRunwayLength": "1800",
+        "Price": "1200000",
+        "FuelConsumptionRate": 1.49,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Douglas DC-6C",
         "Family": "DC-6",
         "AircraftType": "Passenger",
         "EngineType": "Prop",
-        "CruisingSpeed": "265",
-        "maxPax": "100",
+        "CruisingSpeed": "507",
+        "maxPax": "102",
         "maxCargo": "15000",
-        "maxRange": "4500",
+        "maxRange": "4815",
         "IntroductionDate": "1951-01-01",
         "RetirementDate": "1980-01-01",
-        "minRunwayLength": "1100",
-        "Price": "1200000"
+        "minRunwayLength": "1800",
+        "Price": "1200000",
+        "FuelConsumptionRate": 1.49,
+        "OperatingCostRate": 0
       }
     ]
   },
@@ -299,7 +321,9 @@
         "IntroductionDate": "1934-01-01",
         "RetirementDate": "1947-01-01",
         "minRunwayLength": "1500",
-        "Price": "150000"
+        "Price": "150000",
+        "FuelConsumptionRate": 0.72,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Lockheed L-12 Electra Junior",
@@ -313,7 +337,9 @@
         "IntroductionDate": "1936-01-01",
         "RetirementDate": "1950-01-01",
         "minRunwayLength": "1500",
-        "Price": "150000"
+        "Price": "150000",
+        "FuelConsumptionRate": 0.72,
+        "OperatingCostRate": 0
       },
       {
         "Name": "Lockheed Constellation",
@@ -327,7 +353,9 @@
         "IntroductionDate": "1943-01-01",
         "RetirementDate": "1961-01-01",
         "minRunwayLength": "2500",
-        "Price": "750000"
+        "Price": "750000",
+        "FuelConsumptionRate": 0.72,
+        "OperatingCostRate": 0
       }
     ]
   },
@@ -415,7 +443,9 @@
         "IntroductionDate": "1931-01-01",
         "RetirementDate": "1947-01-01",
         "minRunwayLength": "457",
-        "Price":  "40000"
+        "Price": "40000",
+        "FuelConsumptionRate": 0.72,
+        "OperatingCostRate": 0
       }
     ]
   },

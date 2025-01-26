@@ -19,6 +19,8 @@ namespace AeroDynasty.Core.Utilities
         internal static async Task CalculateRouteExecutions()
         {
             DayOfWeek currentDay = GameState.Instance.CurrentDate.DayOfWeek;
+            double currentFuelPrice = 0.05;
+
             Console.WriteLine("Start calculating the route executions");
             Console.WriteLine($"Current day of the week: {currentDay}");
 
@@ -68,7 +70,7 @@ namespace AeroDynasty.Core.Utilities
 
                         // Add airliner costs to daily costs
                         // Fixed value; awaiting implementation of costs
-                        totalDailyCost += 1000;
+                        totalDailyCost += 1000 + (route.Distance * leg.AssignedAirliner.Model.FuelConsumptionRate * currentFuelPrice);
                     }
 
                     // Check if outbound flight is today

@@ -303,6 +303,8 @@ namespace AeroDynasty.Core.Utilities
                 Convert.ToInt32(aircraft.GetProperty("maxCargo").ToString()),
                 Convert.ToInt32(aircraft.GetProperty("maxRange").ToString()),
                 Convert.ToInt32(aircraft.GetProperty("minRunwayLength").ToString()),
+                aircraft.GetProperty("FuelConsumptionRate").GetDouble(),
+                aircraft.GetProperty("OperatingCostRate").GetDouble(),
                 manufacturer,
                 Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()),
                 Convert.ToDateTime(aircraft.GetProperty("RetirementDate").ToString()));

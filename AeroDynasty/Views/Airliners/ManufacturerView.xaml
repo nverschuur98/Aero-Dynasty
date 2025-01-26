@@ -83,6 +83,11 @@
                             <GridViewColumn Header="Max Pax" DisplayMemberBinding="{Binding maxPax}" />
                             <GridViewColumn Header="Max Cargo" DisplayMemberBinding="{Binding maxCargo}" />
                             <GridViewColumn Header="Max Range" DisplayMemberBinding="{Binding maxRange}" />
+                            <GridViewColumn Header="Fuel Consumption">
+                                <GridViewColumn.DisplayMemberBinding>
+                                    <Binding Path="FuelConsumptionRate" StringFormat="{}{0:F1} L/km" />
+                                </GridViewColumn.DisplayMemberBinding>
+                            </GridViewColumn>
                             <GridViewColumn Header="Min Runway" DisplayMemberBinding="{Binding minRunwayLength}" />
                             <GridViewColumn Header="Introduced" DisplayMemberBinding="{Binding FormattedIntroductionDate}" />
                         </GridView>

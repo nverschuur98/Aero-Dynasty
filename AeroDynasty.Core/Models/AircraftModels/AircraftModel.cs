@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace AeroDynasty.Core.Models.AircraftModels
 {
+    
+        /*"FuelConsumptionPerKm": "21.80",
+        "OperatingCostPerKm": "1.90"*/
+
     public class AircraftModel
     {
         public string Name { get; private set; }
@@ -20,6 +24,8 @@ namespace AeroDynasty.Core.Models.AircraftModels
         public int maxCargo { get; private set; } //in kilogram
         public double maxRange { get; private set; } //in kilometer
         public int minRunwayLength { get; private set; } //in meter
+        public double FuelConsumptionRate { get; private set; } // in L/km
+        public double OperatingCostRate { get; private set; } // in dollar/km
         public Manufacturer Manufacturer { get; private set; }
         public DateTime IntroductionDate { get; private set; }
         public string FormattedIntroductionDate => IntroductionDate.ToString("dd-MMM-yyyy");
@@ -37,6 +43,8 @@ namespace AeroDynasty.Core.Models.AircraftModels
             int maxCargo,
             double maxRange,
             int minRunwayLength,
+            double fuelConsumptionRate,
+            double operatingCostRate,
             Manufacturer manufacturer,
             DateTime introductionDate,
             DateTime retirementDate)
@@ -51,6 +59,8 @@ namespace AeroDynasty.Core.Models.AircraftModels
             this.maxCargo = maxCargo; // Use "this." to avoid shadowing.
             this.maxRange = maxRange; // Use "this." to avoid shadowing.
             this.minRunwayLength = minRunwayLength; // Use "this." to avoid shadowing.
+            FuelConsumptionRate = fuelConsumptionRate;
+            OperatingCostRate = operatingCostRate;
             Manufacturer = manufacturer;
             IntroductionDate = introductionDate;
             RetirementDate = retirementDate;
