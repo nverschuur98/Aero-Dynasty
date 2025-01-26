@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AeroDynasty.Core.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace AeroDynasty.Core.Models.Core
         // Constructor
         public GlobalModifiers()
         {
-            CurrentFuelPrice = new Price(0.7);
+            
         }
 
         // Private funcs

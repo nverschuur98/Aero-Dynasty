@@ -27,6 +27,8 @@ namespace AeroDynasty.ViewModels
         }
 
         public string FormattedCurrentDate{ get => GameState.Instance.FormattedCurrentDate; }
+        public string CurrentDayOfWeek { get => GameState.Instance.CurrentDate.DayOfWeek.ToString(); }
+        public Price CurrentFuelPrice { get => GameData.Instance.GlobalModifiers.CurrentFuelPrice; }
         public UserData UserData { get; set; }
 
         //Commands
@@ -113,6 +115,8 @@ namespace AeroDynasty.ViewModels
             if (e.PropertyName == nameof(GameState.CurrentDate))
             {
                 OnPropertyChanged(nameof(FormattedCurrentDate)); // Notify that FormattedCurrentDate has changed
+                OnPropertyChanged(nameof(CurrentDayOfWeek));
+                OnPropertyChanged(nameof(CurrentFuelPrice)); // We know this changes daily, so we can request an update daily
             }
         }
 

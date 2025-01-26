@@ -50,9 +50,36 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Label Height="50" Grid.Column="0" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.CashBalance}" ContentStringFormat="{}{0:C2}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="1" Foreground="{StaticResource LightAccentBrush}" Text="{Binding UserData.Airline.CashBalance}" FontFamily="Montserrat" HorizontalAlignment="Center" />
+                <TextBlock Grid.Row="2" Foreground="{StaticResource LightAccentBrush}" FontFamily="Montserrat" FontSize="11" HorizontalAlignment="Center">
+                    <Run Text="{Binding CurrentFuelPrice, Mode=OneWay}" />
+                    <Run Text="/L" />
+                </TextBlock>
+            </Grid>
+            
             <Label Height="50" Grid.Column="1" Foreground="{StaticResource LightAccentBrush}" Content="{Binding UserData.Airline.Name}" FontFamily="Montserrat" FontWeight="Bold" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
-            <Label Height="50" Grid.Column="2" Foreground="{StaticResource LightAccentBrush}" Content="{Binding FormattedCurrentDate}" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalContentAlignment="Center"/>
+            
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="1" Foreground="{StaticResource LightAccentBrush}" Text="{Binding FormattedCurrentDate}" FontFamily="Montserrat" HorizontalAlignment="Center" />
+                <TextBlock Grid.Row="2" Foreground="{StaticResource LightAccentBrush}" Text="{Binding CurrentDayOfWeek}" FontFamily="Montserrat" FontSize="11" HorizontalAlignment="Center" />
+                
+            </Grid>
         </Grid>
     </Grid>
 </Window>

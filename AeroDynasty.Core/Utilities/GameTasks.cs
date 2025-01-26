@@ -88,5 +88,48 @@ namespace AeroDynasty.Core.Utilities
                 route.Owner.addCash(totalDailyProfit);
             }
         }
+
+        internal static async Task CalculateFuelPrice()
+        {
+            // Cache year and price map to avoid repeated lookups
+            int year = GameState.Instance.CurrentDate.Year;
+            var fuelPriceMap = GameData.Instance.FuelPriceMap;
+
+            // Cache current price
+            double currentFuelPrice = GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount;
+
+            // Retrieve relevant price boundaries
+            double currentYearPrice = fuelPriceMap.TryGetValue(year, out var cyp) ? cyp : 0.0;
+            double lastYearPrice = fuelPriceMap.TryGetValue(year - 1, out var lyp) ? lyp : currentYearPrice;
+            double nextYearPrice = fuelPriceMap.TryGetValue(year + 1, out var nyp) ? nyp : currentYearPrice;
+
+            // Precompute min and max boundaries
+            double min = Math.Min(lastYearPrice, nextYearPrice);
+            double max = Math.Max(lastYearPrice, nextYearPrice);
+
+            // Add overshoot if difference is small
+            double difference = max - min;
+            if (difference < 0.1)
+            {
+                min = Math.Max(0, min - 0.05); // Ensure min >= 0
+                max += 0.05;
+            }
+
+            // Apply a smoothing factor
+            const double smoothingFactor = 0.15; // Adjust to control changes
+
+            // Use a static Random instance to reduce overhead
+            double randomPrice = min + (SharedRandom.Instance.NextDouble() * (max - min)); // Generate random value
+            double newFuelPrice = currentFuelPrice + (randomPrice - currentFuelPrice) * smoothingFactor;
+
+            // Round only once before updating
+            GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount = Math.Round(newFuelPrice, 4);
+        }
+
+        // Shared static Random instance
+        private static class SharedRandom
+        {
+            public static readonly Random Instance = new Random();
+        }
     }
 }

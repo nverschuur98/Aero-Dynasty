@@ -148,6 +148,9 @@
   <!-- Other Files -->
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="Assets\GlobalData.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -86,7 +86,7 @@
                     <TextBlock Text="Ticket Price" Grid.Row="8" Grid.Column="0" Margin="0,5,0,0" FontFamily="Montserrat" FontWeight="SemiBold" Foreground="{StaticResource LightAccentBrush}"/>
                     <TextBlock Grid.Row="9" Grid.Column="0" Margin="0,2,0,0" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}">
                         <TextBlock.Text>
-                            <Binding Path="Route.TicketPrice.Amount" StringFormat="{}{0:C2}" />
+                            <Binding Path="Route.TicketPrice"/>
                         </TextBlock.Text>
                     </TextBlock>
 

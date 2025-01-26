@@ -24,6 +24,7 @@ namespace AeroDynasty.Core.Utilities
         {
             //Game Data 
             public UserData UserData { get; set; }
+            public GlobalModifiers GlobalModifiers { get; set; }
             public List<Airline> Airlines { get; set; }
             public List<Airliner> Airliners { get; set; }
             public List<Route> Routes { get; set; }
@@ -31,6 +32,7 @@ namespace AeroDynasty.Core.Utilities
             public void LoadFromGame()
             {
                 UserData = GameData.Instance.UserData;
+                GlobalModifiers = GameData.Instance.GlobalModifiers;
                 Airlines = GameData.Instance.Airlines.ToList();
                 Airliners = GameData.Instance.Airliners.ToList();
                 Routes = GameData.Instance.Routes.ToList();
@@ -97,6 +99,7 @@ namespace AeroDynasty.Core.Utilities
                     new RouteLegConverter(),
                     new AirlineConverter(),
                     new UserDataConverter(),
+                    new GlobalModifiersConverter(),
                     new GameStateConverter()
                 }
             };
@@ -175,6 +178,7 @@ namespace AeroDynasty.Core.Utilities
                             new RouteLegConverter(),
                             new AirlineConverter(),
                             new UserDataConverter(),
+                            new GlobalModifiersConverter(),
                             new GameStateConverter()
                         }
                 };
@@ -191,15 +195,7 @@ namespace AeroDynasty.Core.Utilities
                 var airliners = JsonSerializer.Deserialize<List<Airliner>>(data.GetProperty("Airliners").GetRawText(), options);
                 var routes = JsonSerializer.Deserialize<List<Route>>(data.GetProperty("Routes").GetRawText(), options);
                 var userData = JsonSerializer.Deserialize<UserData>(data.GetProperty("UserData").GetRawText(), options);
-
-                // Create and populate the GameDataHolder
-                var dataHolder = new GameDataHolder
-                {
-                    UserData = userData,
-                    Airlines = airlines,
-                    Airliners = airliners,
-                    Routes = routes
-                };
+                var globalModifiers = JsonSerializer.Deserialize<GlobalModifiers>(data.GetProperty("GlobalModifiers").GetRawText(), options);
 
                 // Load the data back into the game state
                 // As the data is directly injected in the GameDataInstance, no loading is needed
@@ -249,7 +245,7 @@ namespace AeroDynasty.Core.Utilities
 
                 var name = root.GetProperty("Name").GetString();
                 var reputation = Convert.ToDouble(root.GetProperty("Reputation").GetString());
-                var cashBalance = Convert.ToDouble(root.GetProperty("CashBalance").GetString());
+                var cashBalance = root.GetProperty("CashBalance").GetDouble();
 
                 // Get the airline reference from the GameData singleton
                 Airline airline = GameData.Instance.Airlines.FirstOrDefault(a => a.Name == name);
@@ -276,7 +272,7 @@ namespace AeroDynasty.Core.Utilities
             writer.WriteStartObject();
             writer.WriteString("Name", value.Name);
             writer.WriteString("Reputation", value.Reputation.ToString());
-            writer.WriteString("CashBalance", value.CashBalance.ToString());
+            writer.WriteNumber("CashBalance", value.CashBalance.Amount);
             writer.WriteEndObject();
         }
     }
@@ -551,6 +547,32 @@ namespace AeroDynasty.Core.Utilities
         {
             writer.WriteStartObject();
             writer.WriteString("Airline", value.Airline.Name);
+            writer.WriteEndObject();
+        }
+    }
+
+    public class GlobalModifiersConverter : JsonConverter<GlobalModifiers>
+    {
+        public override GlobalModifiers Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            using (JsonDocument doc = JsonDocument.ParseValue(ref reader))
+            {
+                var root = doc.RootElement;
+
+                var currentFuelPrice = root.GetProperty("CurrentFuelPrice").GetDouble();
+
+                // Set the currentfuelPrice
+                GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount = currentFuelPrice;
+
+                // Return the deserialized UserData object (as required by the JsonConverter signature)
+                return GameData.Instance.GlobalModifiers;
+            }
+        }
+
+        public override void Write(Utf8JsonWriter writer, GlobalModifiers value, JsonSerializerOptions options)
+        {
+            writer.WriteStartObject(); 
+            writer.WriteNumber("CurrentFuelPrice", Math.Round(value.CurrentFuelPrice.Amount, 3));
             writer.WriteEndObject();
         }
     }
