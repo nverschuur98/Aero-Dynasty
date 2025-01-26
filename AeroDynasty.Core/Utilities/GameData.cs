@@ -29,6 +29,7 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<RegistrationTemplate> RegistrationTemplates { get; set; }
 
         //Observable non-change Data
+        public GlobalModifiers GlobalModifiers { get; private set; }
         public ObservableCollection<Airline> Airlines { get; private set; }
         public ObservableCollection<Airport> Airports { get; private set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
@@ -66,6 +67,7 @@ namespace AeroDynasty.Core.Utilities
             // Init airline
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             UserData = new UserData(arl);
+            GlobalModifiers = new GlobalModifiers();
 
             // Register all game tasks
             RegisterGameTasks();
@@ -131,7 +133,7 @@ namespace AeroDynasty.Core.Utilities
                     if (CountryMap.TryGetValue(countrycode, out var country))
                     {
                         // Create the airline instance
-                        Airline airline = new Airline(name, country, cashbalance, reputation);
+                        Airline airline = new Airline(name, country, new Price(cashbalance), reputation);
                         airlines.Add(airline);
                     }
                     else

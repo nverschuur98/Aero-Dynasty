@@ -262,7 +262,7 @@ namespace AeroDynasty.Core.Utilities
 
                 // Update the airline properties
                 airline.Reputation = reputation;
-                airline.CashBalance = cashBalance;
+                airline.CashBalance = new Price(cashBalance);
 
                 // Ensure that this airline is added to the GameData singleton
                 //GameData.Instance.Airlines.Add(airline);

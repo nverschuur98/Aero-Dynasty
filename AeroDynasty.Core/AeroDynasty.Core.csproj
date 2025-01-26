@@ -94,6 +94,7 @@
     <Compile Include="Models\AirportModels\Airport.cs" />
     <Compile Include="Models\Core\Coordinates.cs" />
     <Compile Include="Models\Core\Country.cs" />
+    <Compile Include="Models\Core\GlobalModifiers.cs" />
     <Compile Include="Models\RouteModels\RouteLeg.cs" />
     <Compile Include="Models\RouteModels\RouteSchedule.cs" />
     <Compile Include="Utilities\GameState.cs" />

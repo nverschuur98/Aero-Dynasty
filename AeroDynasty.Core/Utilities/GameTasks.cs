@@ -1,4 +1,5 @@
-﻿using AeroDynasty.Core.Models.RouteModels;
+﻿using AeroDynasty.Core.Models.Core;
+using AeroDynasty.Core.Models.RouteModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,12 @@ namespace AeroDynasty.Core.Utilities
 
         internal static async Task CalculateRouteExecutions()
         {
+            // Get the current fuel price and day of the week
+            double currentFuelPrice = GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount;
             DayOfWeek currentDay = GameState.Instance.CurrentDate.DayOfWeek;
-            double currentFuelPrice = 0.05;
-
-            Console.WriteLine("Start calculating the route executions");
-            Console.WriteLine($"Current day of the week: {currentDay}");
 
             // Loop through all routes in the game
-            foreach(Route route in GameData.Instance.Routes)
+            foreach (Route route in GameData.Instance.Routes)
             {
                 // Check if there are any assigned airliners and schedules flights
                 if(route.ScheduledFlights.Count <= 0 || route.AssignedAirliners.Count <= 0)
@@ -46,8 +45,8 @@ namespace AeroDynasty.Core.Utilities
                     { DayOfWeek.Friday, 160 },
                     { DayOfWeek.Saturday, 180 }
                 };
-                double totalDailyRevenue = 0;
-                double totalDailyCost = 0;
+                Price totalDailyRevenue = new Price(0);
+                Price totalDailyCost = new Price(0);
 
                 // Loop through all the schedules 
                 foreach(RouteSchedule schedule in route.ScheduledFlights)
@@ -65,7 +64,7 @@ namespace AeroDynasty.Core.Utilities
                             dailyDemand[currentDay] -= legPassengers;
 
                             // Add ticket sales to daily revenue
-                            totalDailyRevenue += legPassengers * route.TicketPrice.Amount;
+                            totalDailyRevenue += legPassengers * route.TicketPrice;
                         }
 
                         // Add airliner costs to daily costs
@@ -83,11 +82,10 @@ namespace AeroDynasty.Core.Utilities
                 }
 
                 // Calculate daily profit
-                double totalDailyProfit = totalDailyRevenue - totalDailyCost;
+                Price totalDailyProfit = totalDailyRevenue - totalDailyCost;
 
                 // Set new balance of route owner
                 route.Owner.addCash(totalDailyProfit);
-                Console.WriteLine($"Added a total of {totalDailyProfit} to {route.Owner.Name} for route {route.Name}");
             }
         }
     }

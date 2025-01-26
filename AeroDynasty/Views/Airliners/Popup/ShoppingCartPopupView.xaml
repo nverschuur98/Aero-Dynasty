@@ -41,17 +41,9 @@
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Model" DisplayMemberBinding="{Binding AircraftModel.Name}" />
-                            <GridViewColumn Header="Unit Price">
-                                <GridViewColumn.DisplayMemberBinding>
-                                    <Binding Path="AircraftModel.Price.Amount" StringFormat="{}{0:C2}" />
-                                </GridViewColumn.DisplayMemberBinding>
-                            </GridViewColumn>
+                            <GridViewColumn Header="Unit Price" DisplayMemberBinding="{Binding AircraftModel.Price}" />
                             <GridViewColumn Header="Amount" DisplayMemberBinding="{Binding Amount}" />
-                            <GridViewColumn Header="Total Price">
-                                <GridViewColumn.DisplayMemberBinding>
-                                    <Binding Path="TotalPrice.Amount" StringFormat="{}{0:C2}" />
-                                </GridViewColumn.DisplayMemberBinding>
-                            </GridViewColumn>
+                            <GridViewColumn Header="Total Price" DisplayMemberBinding="{Binding TotalPrice}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
@@ -59,7 +51,7 @@
             
             <TextBlock Grid.Row="3" TextWrapping="Wrap" Foreground="{StaticResource LightAccentBrush}" FontFamily="Montserrat" Margin="5">
                 <Run Text="Do you want to order for a total of:" />
-                <Run Text="{Binding ShoppingCartTotalPrice.Amount, Mode=OneWay, StringFormat={}{0:C2}}" />
+                <Run Text="{Binding ShoppingCartTotalPrice, Mode=OneWay}" />
                 <Run Text="" />
             </TextBlock>
 

@@ -149,7 +149,7 @@ namespace AeroDynasty.ViewModels.Airliners
         private void OrderCart()
         {
             // Check if the airline has sufficient money
-            if(ShoppingCartTotalPrice.Amount <= GameData.Instance.UserData.Airline.CashBalance)
+            if(ShoppingCartTotalPrice <= GameData.Instance.UserData.Airline.CashBalance)
             {
                 foreach(AircraftCartItem row in ShoppingCart)
                 {

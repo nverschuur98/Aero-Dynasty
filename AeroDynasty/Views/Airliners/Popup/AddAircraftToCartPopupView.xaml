@@ -33,7 +33,7 @@
                 <Form:ComboInput Grid.Row="1" ItemSource="{Binding Amounts}" SelectedItem="{Binding SelectedAmount}" />
 
                 <Label Content="Total Amount" Grid.Row="2" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,8,0,3" Padding="0"/>
-                <TextBlock Text="{Binding TotalAmount.Amount, StringFormat=C, Mode=OneWay}" Grid.Row="3" FontFamily="Montserrat" FontSize="11" FontWeight="Regular" Background="Transparent" Foreground="{StaticResource LightAccentBrush}"/>
+                <TextBlock Text="{Binding TotalAmount, Mode=OneWay}" Grid.Row="3" FontFamily="Montserrat" FontSize="11" FontWeight="Regular" Background="Transparent" Foreground="{StaticResource LightAccentBrush}"/>
             </Grid>
 
         </Grid>

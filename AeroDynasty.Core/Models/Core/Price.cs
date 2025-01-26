@@ -31,5 +31,69 @@ namespace AeroDynasty.Core.Models.Core
         {
             Amount = Amount * ((100 + percentage) / 100.0);
         }
+
+        #region operator overloads
+        public static Price operator +(Price p1, Price p2)
+        {
+            return new Price(p1.Amount + p2.Amount);
+        }
+        public static Price operator +(Price p, double d)
+        {
+            return new Price(p.Amount + d);
+        }
+        public static Price operator +(double d, Price p)
+        {
+            return new Price(p.Amount + d);
+        }
+        public static Price operator -(Price p1, Price p2)
+        {
+            return new Price(p1.Amount - p2.Amount);
+        }
+        public static Price operator *(Price p1, Price p2)
+        {
+            return new Price(p1.Amount * p2.Amount);
+        }
+        public static Price operator *(Price p, double d)
+        {
+            return new Price(p.Amount * d);
+        }
+        public static Price operator *(double d, Price p)
+        {
+            return new Price(p.Amount * d);
+        }
+        public static Price operator *(Price p, int i)
+        {
+            return new Price(p.Amount * i);
+        }
+        public static Price operator *(int i, Price p)
+        {
+            return new Price(p.Amount * i);
+        }
+        public static bool operator <=(Price p1, Price p2)
+        {
+            return p1.Amount <= p2.Amount;
+        }
+        public static bool operator >=(Price p1, Price p2)
+        {
+            return p1.Amount >= p2.Amount;
+        }
+        public static bool operator ==(Price p1, Price p2)
+        {
+            if (p1 is null && p2 is null) return true;
+            if (p1 is null || p2 is null) return false;
+            return p1.Amount == p2.Amount;
+        }
+        public static bool operator !=(Price p1, Price p2)
+        {
+            return !(p1 == p2);
+        }
+
+        // ToString override for printing
+        public override string ToString()
+        {
+            return Amount.ToString("C2"); // Currency formatting
+        }
+
+        #endregion
     }
 }

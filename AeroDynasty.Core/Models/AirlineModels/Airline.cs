@@ -9,7 +9,7 @@ namespace AeroDynasty.Core.Models.AirlineModels
 {
     public class Airline : _BaseModel
     {
-        private double _cashBalance { get; set; }
+        private Price _cashBalance { get; set; }
         private string _name { get; set; }
         public string Name
         {
@@ -25,7 +25,7 @@ namespace AeroDynasty.Core.Models.AirlineModels
         }
         public Country Country { get; set; }
         public double Reputation { get; set; }
-        public double CashBalance
+        public Price CashBalance
         {
             get
             {
@@ -38,32 +38,7 @@ namespace AeroDynasty.Core.Models.AirlineModels
             }
         }
 
-        /*public List<Airliner> Fleet
-        {
-            get
-            {
-                if (GameData.Instance.Airliners != null)
-                {
-                    return new List<Airliner>(GameData.Instance.Airliners.Where(air => air.Owner == this));
-                }
-
-                return new List<Airliner>();
-            }
-        }
-        public List<Route> Routes
-        {
-            get
-            {
-                if (GameData.Instance.Routes != null)
-                {
-                    return new List<Route>(GameData.Instance.Routes.Where(route => route.routeOwner == this));
-                }
-
-                return new List<Route>();
-            }
-        }*/
-
-        public Airline(string name, Country country, double cashbalance, double reputation)
+        public Airline(string name, Country country, Price cashbalance, double reputation)
         {
             Name = name;
             Country = country;
@@ -89,13 +64,27 @@ namespace AeroDynasty.Core.Models.AirlineModels
         }
 
         /// <summary>
+        /// Add an amount to the cash balance
+        /// </summary>
+        /// <param name="amount"></param>
+        public void addCash(Price amount)
+        {
+            if (amount.Amount < 0)
+            {
+                throw new Exception("Huh why subtract when you want to add");
+            }
+
+            CashBalance += amount.Amount;
+        }
+
+        /// <summary>
         /// Returns if there is sufficient cash
         /// </summary>
         /// <param name="amount">the amount to pay</param>
         /// <returns></returns>
         private bool _sufficientCash(double amount)
         {
-            if (amount < CashBalance)
+            if (amount < CashBalance.Amount)
             {
                 return true;
             }
@@ -131,7 +120,7 @@ namespace AeroDynasty.Core.Models.AirlineModels
         {
             if (SufficientCash(amount))
             {
-                CashBalance -= amount;
+                CashBalance.Amount -= amount;
             }
             else
             {

@@ -72,11 +72,7 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             <GridViewColumn Header="Family" DisplayMemberBinding="{Binding Family}" />
-                            <GridViewColumn Header="Price">
-                                <GridViewColumn.DisplayMemberBinding>
-                                    <Binding Path="Price.Amount" StringFormat="{}{0:C2}" />
-                                </GridViewColumn.DisplayMemberBinding>
-                            </GridViewColumn>
+                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" />
                             <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
                             <GridViewColumn Header="Engine Type" DisplayMemberBinding="{Binding EngineType}" />
                             <GridViewColumn Header="Cruise Speed" DisplayMemberBinding="{Binding CruisingSpeed}" />
@@ -103,7 +99,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" TextWrapping="Wrap" Foreground="{StaticResource LightAccentBrush}" FontFamily="Montserrat" Margin="5">
                         <Run Text="Total order:" />
-                        <Run Text="{Binding ShoppingCartTotalPrice.Amount, Mode=OneWay, StringFormat={}{0:C2}}" />
+                        <Run Text="{Binding ShoppingCartTotalPrice, Mode=OneWay}" />
                         <Run Text="" />
                     </TextBlock>
                     <Menu:MenuButton Grid.Column="1" Label="Show Cart" Command="{Binding OpenShoppingCartCommand}" />
