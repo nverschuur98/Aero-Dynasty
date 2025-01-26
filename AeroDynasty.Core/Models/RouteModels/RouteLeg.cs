@@ -102,6 +102,5 @@ namespace AeroDynasty.Core.Models.RouteModels
         }
 
         // Public funcs
-
     }
 }

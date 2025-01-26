@@ -46,6 +46,7 @@ namespace AeroDynasty.Core.Utilities
         public ICommand PlayCommand { get; set; }
         public ICommand PauseCommand { get; set; }
 
+        // Constructor
         private GameState()
         {
             //Init lists

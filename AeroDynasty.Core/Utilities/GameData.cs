@@ -56,32 +56,22 @@ namespace AeroDynasty.Core.Utilities
         }
 
         //Commands
-        //public ICommand TestCommand { get; set; }
 
         //Private Constructor
         private GameData()
         {
+            // Setup the game data
             SetupGameData();
             
-            //Init airline
+            // Init airline
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
-            
             UserData = new UserData(arl);
 
-            //Bind commands
-            //TestCommand = new RelayCommand(LoadTestData);
-
-            GameState.Instance.RegisterDailyTask(TestTask);
+            // Register all game tasks
+            RegisterGameTasks();
         }
 
         //Private funcs
-
-        private async Task TestTask()
-        {
-            Console.WriteLine("Entering Test Task");
-            await Task.Delay(900);
-            Console.WriteLine("Finished Test Task");
-        }
 
         /// <summary>
         /// Load all core data
@@ -376,6 +366,15 @@ namespace AeroDynasty.Core.Utilities
         private void LoadRoutes()
         {
             Routes = new ObservableCollection<Route>();
+        }
+
+        /// <summary>
+        /// Register all the game tasks that need to be execuded
+        /// </summary>
+        private void RegisterGameTasks()
+        {
+            //GameState.Instance.RegisterDailyTask(GameTasks.TestTask);
+            GameState.Instance.RegisterDailyTask(GameTasks.CalculateRouteExecutions);
         }
 
         // Public funcs
