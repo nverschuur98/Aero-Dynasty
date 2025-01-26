@@ -53,6 +53,8 @@ namespace AeroDynasty.Core.Utilities
         public static void NewGame()
         {
             GameData.Instance.SetupGameData();
+            GameData.Instance.UserData.Airline = GameData.Instance.Airlines.First(air => air.Name.Contains("KLM"));
+
             GameState.Instance.SetupGameState();
             GameState.Instance.PauseCommand.Execute(null);
         }
@@ -153,6 +155,7 @@ namespace AeroDynasty.Core.Utilities
 
             // Before loading all the gamedata, reset all the Game to the initial state
             GameData.Instance.SetupGameData();
+            GameState.Instance.SetupGameState();
 
             // Load the game data
             try
@@ -383,6 +386,7 @@ namespace AeroDynasty.Core.Utilities
                 var destinationICAO = root.GetProperty("Destination_ICAO").GetString();
                 var ownerName = root.GetProperty("Owner").GetString();
                 var ticketPrice = Convert.ToDouble(root.GetProperty("TicketPrice").GetString());
+                var assignedAirliners = root.GetProperty("AssignedAirliners").EnumerateArray();
                 var scheduledFlights = root.GetProperty("ScheduledFlights");
 
                 // Ensure the referenced objects exist in GameData
@@ -403,7 +407,18 @@ namespace AeroDynasty.Core.Utilities
 
                 // Create the route object
                 var route = new Route(origin, destination, owner, new Price(ticketPrice));
-                route.ScheduledFlights = flights;
+
+                // Add assigned airliners to route
+                foreach(var value in assignedAirliners)
+                {
+                    route.AssignAirliner(GameData.Instance.Airliners.First(air => air.Registration.Number == value.GetInt32()));
+                }
+
+                // Add schedules to route
+                foreach(RouteSchedule flight in flights)
+                {
+                    route.AddSchedule(flight);
+                }
 
                 // Add the route to the GameData singleton
                 GameData.Instance.Routes.Add(route);
@@ -420,6 +435,15 @@ namespace AeroDynasty.Core.Utilities
             writer.WriteString("Destination_ICAO", value.Destination.ICAO);
             writer.WriteString("Owner", value.Owner.Name);
             writer.WriteString("TicketPrice", value.TicketPrice.Amount.ToString());
+
+            // Write all assigned airliners
+            writer.WriteStartArray("AssignedAirliners");
+            foreach(Airliner airliner in value.AssignedAirliners)
+            {
+                writer.WriteNumberValue(airliner.Registration.Number);
+            }
+            writer.WriteEndArray();
+
             // Serialize ScheduledFlights using the RouteScheduleConverter
             writer.WritePropertyName("ScheduledFlights");
             JsonSerializer.Serialize(writer, value.ScheduledFlights, options);

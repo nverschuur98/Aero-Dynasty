@@ -63,7 +63,7 @@ namespace AeroDynasty.Core.Utilities
         {
             SetupGameData();
             
-            //Init start date
+            //Init airline
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             
             UserData = new UserData(arl);

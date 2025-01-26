@@ -15,12 +15,14 @@ namespace AeroDynasty.Core.Models.RouteModels
         // Public vars
         public RouteLeg Outbound { get; }
         public RouteLeg Inbound { get; }
+        public Airliner AssignedAirliner { get; }
         public TimeSpan TurnaroundTime { get; set; }
         public bool NextDayArrival { get => (Outbound.IsNextDay || Inbound.IsNextDay) ? true : false; }
 
-        public RouteSchedule(Airport Origin, Airport Destination, DayOfWeek DayOfWeek, TimeSpan DepartureTime, Airliner AssignedAirliner)
+        public RouteSchedule(Airport Origin, Airport Destination, DayOfWeek DayOfWeek, TimeSpan DepartureTime, Airliner assignedAirliner)
         {
             TurnaroundTime = TimeSpan.FromMinutes(30);
+            AssignedAirliner = assignedAirliner;
 
             RouteLeg _out = new RouteLeg(DepartureTime, DayOfWeek, AssignedAirliner, Origin, Destination);
             RouteLeg _in = new RouteLeg(_out.ArrivalTime + TurnaroundTime, _out.ArrivalDay, AssignedAirliner, Destination, Origin);

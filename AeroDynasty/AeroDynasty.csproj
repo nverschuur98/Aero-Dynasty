@@ -104,7 +104,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Routes\EditAirlinerRouteScheduleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Routes\EditRouteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Routes\Popup\AddAirlinerToRoutePopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -138,7 +146,9 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\RoutesViewModel.cs" />
+    <Compile Include="ViewModels\Routes\EditAirlinerRouteScheduleViewModel.cs" />
     <Compile Include="ViewModels\Routes\EditRouteViewModel.cs" />
+    <Compile Include="ViewModels\Routes\Popup\AddAirlinerToRoutePopupViewModel.cs" />
     <Compile Include="ViewModels\Routes\RoutesViewModel.cs" />
     <Compile Include="ViewModels\Routes\RouteViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
@@ -180,8 +190,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Routes\EditAirlinerRouteScheduleView.xaml.cs">
+      <DependentUpon>EditAirlinerRouteScheduleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Routes\EditRouteView.xaml.cs">
       <DependentUpon>EditRouteView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Routes\Popup\AddAirlinerToRoutePopupView.xaml.cs">
+      <DependentUpon>AddAirlinerToRoutePopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Routes\RoutesView.xaml.cs">
       <DependentUpon>RoutesView.xaml</DependentUpon>

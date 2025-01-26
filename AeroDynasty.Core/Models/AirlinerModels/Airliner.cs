@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Models.AirlineModels;
 using AeroDynasty.Core.Models.Core;
+using AeroDynasty.Core.Models.RouteModels;
 
 namespace AeroDynasty.Core.Models.AirlinerModels
 {
@@ -39,5 +40,18 @@ namespace AeroDynasty.Core.Models.AirlinerModels
             _productionDate = productionDate;
         }
 
+        // Public funcs 
+        public bool CanExecuteRoute(Route route)
+        {
+            // Check if distance is not beyond reach
+            if (route.Distance > this.Model.maxRange)
+                return false;
+
+            // Check if runway length is minimum requirement
+            // TO DO, implement runway length at airport model.
+
+            // All conditions are met
+            return true;
+        }
     }
 }

@@ -4,6 +4,8 @@
                     xmlns:v="clr-namespace:AeroDynasty.Views"
                     xmlns:vmRoutes="clr-namespace:AeroDynasty.ViewModels.Routes"
                     xmlns:vRoutes="clr-namespace:AeroDynasty.Views.Routes"
+                    xmlns:vmRoutesPopup="clr-namespace:AeroDynasty.ViewModels.Routes.Popup"
+                    xmlns:vRoutesPopup="clr-namespace:AeroDynasty.Views.Routes.Popup"
                     xmlns:vmAirliners="clr-namespace:AeroDynasty.ViewModels.Airliners"
                     xmlns:vAirliners="clr-namespace:AeroDynasty.Views.Airliners"
                     xmlns:vmAirlinersPopup="clr-namespace:AeroDynasty.ViewModels.Airliners.Popup"
@@ -33,6 +35,16 @@
     <DataTemplate DataType="{x:Type vmRoutes:EditRouteViewModel}">
         <vRoutes:EditRouteView/>
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vmRoutes:EditAirlinerRouteScheduleViewModel}">
+        <vRoutes:EditAirlinerRouteScheduleView/>
+    </DataTemplate>
+
+    <!--#region POPUPS-->
+    <DataTemplate DataType="{x:Type vmRoutesPopup:AddAirlinerToRoutePopupViewModel}">
+        <vRoutesPopup:AddAirlinerToRoutePopupView/>
+    </DataTemplate>
+    <!--#endregion-->
     <!--#endregion-->
     
     <!--#region AIRPORTS-->

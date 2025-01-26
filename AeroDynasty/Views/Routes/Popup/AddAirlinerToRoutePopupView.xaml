@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="AeroDynasty.Views.Routes.Popup.AddAirlinerToRoutePopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AeroDynasty.Views.Routes.Popup"
+             xmlns:Menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
+             xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
+             mc:Ignorable="d" 
+             d:DesignHeight="100" d:DesignWidth="200">
+    <Grid MaxWidth="300" >
+        <Grid.RowDefinitions>
+            <RowDefinition MinHeight="75" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="{Binding Route.Name, StringFormat=Please select an airliner to assign it to route {0}.}" TextWrapping="Wrap" Foreground="{StaticResource LightAccentBrush}" FontFamily="Montserrat" Margin="5" />
+
+            <Grid Grid.Row="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                
+                <Label Content="Select Airliner" Grid.Row="0" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,0,0,3" Padding="0"/>
+                <Form:ComboInput Grid.Row="1" ItemSource="{Binding Airliners}" SelectedItem="{Binding SelectedAirliner}" DisplayMemberPath="Registration.ReturnValue"/>
+
+            </Grid>
+
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5,0">
+            <Menu:MenuButton Label="Add" Command="{Binding AddCommand}" />
+            <Menu:MenuButton Label="Cancel" Command="{Binding CancelCommand}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

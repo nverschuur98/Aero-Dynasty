@@ -5,18 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AeroDynasty.Views.Routes"
              xmlns:Page="clr-namespace:AeroDynasty.WPF.Views.Page;assembly=AeroDynasty.WPF"
+             xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
              xmlns:Menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
              xmlns:Route="clr-namespace:AeroDynasty.Core.Views.RouteViews;assembly=AeroDynasty.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
-        <Page:Wrapper>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Page:Wrapper Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="{Binding Route.Name}" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
@@ -47,7 +55,7 @@
                             <MouseBinding Gesture="LeftClick" Command="" CommandParameter="{Binding}" />
                         </TextBlock.InputBindings>
                     </TextBlock>
-                    
+
                     <TextBlock Grid.Row="2" Grid.Column="0" Margin="0,2,0,0" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}">
                         <Run Text="{Binding Route.Origin.ICAO}" />
                         <Run Text="/" />
@@ -92,8 +100,89 @@
                     <Menu:MenuButton Grid.Column="1" Command="{Binding TestCommand}" Label="Test"/>
                 </Grid>
 
-                <Route:RouteScheduleWeek Grid.Row="3" Grid.ColumnSpan="2"  RouteSchedules="{Binding Route.ScheduledFlights}" />
+                <!--<Route:RouteScheduleWeek RouteSchedules="{Binding Route.ScheduledFlights}" />-->
             </Grid>
         </Page:Wrapper>
+        <Page:Wrapper Grid.Row="1">
+            <Grid Grid.Row="3" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Assigned Airliners" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,2">
+                    <Menu:MenuButton Label="Add Airliner" Command="{Binding OpenAddAirlinerCommand}" Margin="-1,0,0,0"/>
+                    <Menu:MenuButton Label="Clear Schedule" Command="" IsEnabled="False"/>
+                </StackPanel>
+
+                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Route.AssignedAirliners}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                            <GridViewColumn Header="Registration">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Registration.ReturnValue}" Style="{StaticResource TextBlockButton}">
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding Gesture="LeftClick" Command="" CommandParameter="{Binding}" />
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Model" DisplayMemberBinding="{Binding Model.Name}" />
+                            <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Model.Type}" />
+                            <GridViewColumn Header="Manufacturer" DisplayMemberBinding="{Binding Model.Manufacturer.Name}" />
+                            <GridViewColumn Header="Max Pax" DisplayMemberBinding="{Binding Model.maxPax}" />
+                            <GridViewColumn Header="Max Cargo" DisplayMemberBinding="{Binding Model.maxCargo}" />
+                            <GridViewColumn Header="Engine Type" DisplayMemberBinding="{Binding Model.EngineType}" />
+                            <GridViewColumn Header="Cruise Speed" DisplayMemberBinding="{Binding Model.CruisingSpeed}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Page:Wrapper>
+        <Page:Wrapper Grid.Row="2">
+            <Grid Grid.Row="3" Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Route Schedule" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                
+                <Grid Grid.Row="2" Margin="0,2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Form:ComboInput Grid.Column="0" Grid.RowSpan="2" Label="Select Airliner" ItemSource="{Binding Route.AssignedAirliners}" SelectedItem="{Binding SelectedAirliner}" DisplayMemberPath="Registration.ReturnValue" Margin="0,0,5,0"/>
+                    <Form:ComboInput Grid.Column="1" Grid.RowSpan="2" Label="Departure Day" ItemSource="{Binding DepartureDays}" SelectedItem="{Binding SelectedDepartureDay}" Margin="0,0,5,0"/>
+                    <Form:ComboInput Grid.Column="2" Grid.RowSpan="2" Label="Departure Time" ItemSource="{Binding DepartureTimes}" SelectedItem="{Binding SelectedDepartureTime}" Margin="0,0,5,0"/>
+                    <Menu:MenuButton Grid.Column="3" Grid.Row="1"  Label="Add Route Schedule" Command="{Binding AddRouteScheduleCommand}" />
+
+                </Grid>
+
+                <Route:RouteScheduleWeek Grid.Row="3" RouteSchedules="{Binding Route.ScheduledFlights}" Margin="0,5,0,0" />
+            </Grid>
+        </Page:Wrapper>
+
+        <Page:Popup Grid.Row="0" Grid.RowSpan="4" Title="{Binding PopupTitle}" Visible="{Binding PopupVisible}">
+            <ContentControl Content="{Binding PopupContent}" />
+        </Page:Popup>
     </Grid>
 </UserControl>

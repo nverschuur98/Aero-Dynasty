@@ -11,7 +11,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Label Content="{Binding Label, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Row="0" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}" Margin="0,0,0,3" Padding="0"/>
+        <Label Content="{Binding Label, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Row="0" FontFamily="Montserrat" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource LightAccentBrush}" Margin="0,0,0,3" Padding="0"/>
         <Border Grid.Row="1" BorderBrush="{StaticResource LightAccentBrush}" BorderThickness="0" Background="{StaticResource LightTransparentBackgroundBrush}">
             <TextBox Text="{Binding Value, RelativeSource={RelativeSource AncestorType=UserControl}, UpdateSourceTrigger=PropertyChanged}" BorderThickness="0" Grid.Row="1" Margin="0" Padding="3,2" FontFamily="Montserrat" FontSize="11" FontWeight="Regular" Background="Transparent" Foreground="{StaticResource LightAccentBrush}" />
         </Border>
