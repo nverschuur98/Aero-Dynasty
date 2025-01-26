@@ -28,10 +28,10 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    
-                    <Form:ComboInput Grid.Row="0" Label="Origin Airport" ItemSource="{Binding OriginAirports}" SelectedItem="{Binding SelectedOrigin}" DisplayMemberPath="ICAO_Name" />
-                    
-                    <Form:ComboInput Grid.Row="1" Label="Destination Airport" ItemSource="{Binding DestinationAirports}" SelectedItem="{Binding SelectedDestination}" DisplayMemberPath="ICAO_Name" Margin="0,5,0,0" />
+
+                    <Form:ComboInput Grid.Row="0" Label="Origin Airport" ItemSource="{Binding OriginAirports}" SelectedItem="{Binding SelectedOrigin}" DisplayMemberPath="ICAO_Name" IsEnabled="{Binding enableAirportSelection}" />
+
+                    <Form:ComboInput Grid.Row="1" Label="Destination Airport" ItemSource="{Binding DestinationAirports}" SelectedItem="{Binding SelectedDestination}" DisplayMemberPath="ICAO_Name" Margin="0,5,0,0" IsEnabled="{Binding enableAirportSelection}" />
                     
                     <Form:PriceInput Grid.Row="2" Label="Ticket Price" Value="{Binding TicketPrice.Amount}" Margin="0,5,0,0" />
 

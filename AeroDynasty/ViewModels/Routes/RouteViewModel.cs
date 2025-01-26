@@ -108,9 +108,11 @@ namespace AeroDynasty.ViewModels.Routes
         }
 
         // Command and event binding
+        public ICommand EditRouteCommand { get; }
         public ICommand AddRouteScheduleCommand { get; }
         public ICommand OpenAddAirlinerCommand { get; }
         public ICommand ClearScheduleCommand { get; }
+        public event Action<Route> EditRouteRequest;
 
         // Constructor
         public RouteViewModel(Route route)
@@ -118,6 +120,7 @@ namespace AeroDynasty.ViewModels.Routes
             Route = route;
 
             // Bind commands
+            EditRouteCommand = new RelayCommand(EditRoute);
             OpenAddAirlinerCommand = new RelayCommand(OpenAddAirliner);
             AddRouteScheduleCommand = new RelayCommand(AddRouteSchedule);
             ClearScheduleCommand = new RelayCommand(ClearSchedule);
@@ -129,6 +132,12 @@ namespace AeroDynasty.ViewModels.Routes
         // Public funcs
 
         // Command handling
+        private void EditRoute()
+        {
+            //Raise the event that this route must be edited
+            EditRouteRequest?.Invoke(Route);
+        }
+
         private void OpenAddAirliner()
         {
             PopupTitle = "Asign airliner to route " + Route.Name;

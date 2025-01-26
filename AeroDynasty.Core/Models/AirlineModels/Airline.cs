@@ -55,11 +55,6 @@ namespace AeroDynasty.Core.Models.AirlineModels
         /// <exception cref="Exception"></exception>
         public void addCash(double amount)
         {
-            if (amount < 0)
-            {
-                throw new Exception("Huh why subtract when you want to add");
-            }
-
             CashBalance += amount;
         }
 
@@ -69,11 +64,6 @@ namespace AeroDynasty.Core.Models.AirlineModels
         /// <param name="amount"></param>
         public void addCash(Price amount)
         {
-            if (amount.Amount < 0)
-            {
-                throw new Exception("Huh why subtract when you want to add");
-            }
-
             CashBalance += amount.Amount;
         }
 

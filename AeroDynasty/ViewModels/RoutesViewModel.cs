@@ -58,12 +58,20 @@ namespace AeroDynasty.ViewModels
         private void NavigateRoute(Route route)
         {
             var content = new Routes.RouteViewModel(route);
+            content.EditRouteRequest += NavigateEditRoute;
             CurrentDetailContent = content;
         }
 
         private void NavigateNewRoute()
         {
             var content = new EditRouteViewModel();
+            content.CloseRequest += closeCurrentDetailContent;
+            CurrentDetailContent = content;
+        }
+
+        private void NavigateEditRoute(Route route)
+        {
+            var content = new EditRouteViewModel(route);
             content.CloseRequest += closeCurrentDetailContent;
             CurrentDetailContent = content;
         }

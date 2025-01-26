@@ -27,6 +27,7 @@ namespace AeroDynasty.ViewModels.Routes
         // Public vars
         public ICollectionView OriginAirports { get; set; }
         public ICollectionView DestinationAirports { get; set; }
+        public bool enableAirportSelection { get => _isNewRoute; }
 
         public Airport SelectedOrigin
         {
@@ -107,14 +108,15 @@ namespace AeroDynasty.ViewModels.Routes
         public EditRouteViewModel(Route route)
         {
             Route = route ?? throw new ArgumentNullException(nameof(route), "Route cannot be null");
+
             RouteName = Route.Name;
+            
+            loadData();
+            setupCommands();
 
             SelectedOrigin = Route.Origin;
             SelectedDestination = Route.Destination;
             TicketPrice = Route.TicketPrice;
-
-            loadData();
-            setupCommands();
         }
 
         // Private funcs
@@ -143,10 +145,19 @@ namespace AeroDynasty.ViewModels.Routes
         private void FilterDestinationAirports()
         {
             // If SelectedOrigin is null, reset DestinationAirports to all airports
-            if (SelectedOrigin != null)
+            if (SelectedOrigin != null && _isNewRoute)
             {
-                // Create a filtered list by excluding the selected origin from the destinations
-                var filteredAirports = _airports.Cast<Airport>().Where(a => a != SelectedOrigin).ToList();
+                // Get all destination airports the route owner already flies to (in both directions)
+                var existingDestinations = GameData.Instance.Routes
+                    .Where(r => r.Owner == GameData.Instance.UserData.Airline &&
+                                (r.Origin == SelectedOrigin || r.Destination == SelectedOrigin)) // Check both directions
+                    .Select(r => r.Origin == SelectedOrigin ? r.Destination : r.Origin) // Extract the other endpoint of the route
+                    .ToList();
+
+                // Create a filtered list by excluding the selected origin and existing destinations (both directions)
+                var filteredAirports = _airports.Cast<Airport>()
+                    .Where(a => a != SelectedOrigin && !existingDestinations.Contains(a)) // Exclude both directions
+                    .ToList();
 
                 // Convert filtered list back to an ICollectionView
                 DestinationAirports = CollectionViewSource.GetDefaultView(filteredAirports);
@@ -169,7 +180,6 @@ namespace AeroDynasty.ViewModels.Routes
 
             OnPropertyChanged(nameof(DestinationAirports));
         }
-
 
         // Public funcs
 

@@ -25,11 +25,17 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Text="{Binding Route.Name}" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
                 <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
-                <Grid Grid.Row="2">
+
+                <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,2">
+                    <Menu:MenuButton Label="Edit Route" Command="{Binding EditRouteCommand}" Margin="-1,0,0,0"/>
+                </StackPanel>
+                
+                <Grid Grid.Row="3">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
