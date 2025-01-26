@@ -411,7 +411,7 @@ namespace AeroDynasty.Core.Utilities
                 // Add assigned airliners to route
                 foreach(var value in assignedAirliners)
                 {
-                    route.AssignAirliner(GameData.Instance.Airliners.First(air => air.Registration.Number == value.GetInt32()));
+                    route.AssignAirliner(GameData.Instance.Airliners.First(air => air.Registration.ReturnValue == value.GetString()));
                 }
 
                 // Add schedules to route
@@ -440,7 +440,7 @@ namespace AeroDynasty.Core.Utilities
             writer.WriteStartArray("AssignedAirliners");
             foreach(Airliner airliner in value.AssignedAirliners)
             {
-                writer.WriteNumberValue(airliner.Registration.Number);
+                writer.WriteStringValue(airliner.Registration.ReturnValue);
             }
             writer.WriteEndArray();
 
@@ -508,8 +508,7 @@ namespace AeroDynasty.Core.Utilities
                 Airport origin = GameData.Instance.Airports.First(a => a.ICAO == root.GetProperty("Origin_ICAO").ToString());
                 Airport destination = GameData.Instance.Airports.First(a => a.ICAO == root.GetProperty("Destination_ICAO").ToString());
 
-                int num = Convert.ToInt32(root.GetProperty("Assigned_Airliner").ToString());
-                Airliner airliner = GameData.Instance.Airliners.First(air => (/*air.Owner == _owner && */air.Registration.Number == num));
+                Airliner airliner = GameData.Instance.Airliners.First(air => air.Registration.ReturnValue == root.GetProperty("Assigned_Airliner").ToString());
                 DayOfWeek departureDay = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), root.GetProperty("Departure_Day").GetString());
                 var departureTime = TimeSpan.Parse(root.GetProperty("Departure_Time").GetString());
 
@@ -524,7 +523,7 @@ namespace AeroDynasty.Core.Utilities
             writer.WriteString("Destination_ICAO", value.Destination.ICAO);
             writer.WriteString("Departure_Day", value.DepartureDay.ToString());
             writer.WriteString("Departure_Time", value.DepartureTime.ToString());
-            writer.WriteString("Assigned_Airliner", value.AssignedAirliner.Registration.Number.ToString());
+            writer.WriteString("Assigned_Airliner", value.AssignedAirliner.Registration.ReturnValue);
             writer.WriteEndObject();
         }
     }
