@@ -199,6 +199,9 @@ namespace AeroDynasty.Core.Utilities
 
                 // Load the data back into the game state
                 // As the data is directly injected in the GameDataInstance, no loading is needed
+
+                // Check all the objects with an assigned period on their status
+                GameData.Instance.FirstTimeIsActiveCheck();
             }
             catch (Exception ex)
             {
@@ -355,7 +358,7 @@ namespace AeroDynasty.Core.Utilities
         //public string ICAO { get; set; }
         //public Country Country { get; set; }
         //public Coordinates Coordinates { get; set; }
-        //public double demandFactor { get; set; }
+        //public double DemandFactor { get; set; }
 
         public override Airport Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

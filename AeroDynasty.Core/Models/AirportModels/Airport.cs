@@ -1,4 +1,5 @@
-﻿using AeroDynasty.Core.Models.Core;
+﻿using AeroDynasty.Core.Enums;
+using AeroDynasty.Core.Models.Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,23 +9,27 @@ using System.Threading.Tasks;
 
 namespace AeroDynasty.Core.Models.AirportModels
 {
-    public class Airport
+    public class Airport : _PeriodModel
     {
         public string Name { get; set; }
         public string IATA { get; set; }
         public string ICAO { get; set; }
+        public AirportType Type { get; set; }
+        public AirportSeason Season { get; set; }
         public Country Country { get; set; }
         public Coordinates Coordinates { get; set; }
-        public double demandFactor { get; set; }
+        public double DemandFactor { get; set; }
 
-        public Airport(string name, string iata, string icao, Country country, Coordinates coordinates, double demandfactor)
+        public Airport(string name, string iata, string icao, AirportType type, AirportSeason season , Country country, Coordinates coordinates, double demandfactor)
         {
             Name = name;
             IATA = iata;
             ICAO = icao;
+            Type = type;
+            Season = season;
             Country = country;
             Coordinates = coordinates;
-            demandFactor = demandfactor;
+            DemandFactor = demandfactor;
         }
 
         // Assuming images are stored in the Assets folder

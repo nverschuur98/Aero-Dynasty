@@ -1,4 +1,5 @@
-﻿using AeroDynasty.Core.Models.Core;
+﻿using AeroDynasty.Core.Models;
+using AeroDynasty.Core.Models.Core;
 using AeroDynasty.Core.Models.RouteModels;
 using System;
 using System.Collections.Generic;
@@ -124,6 +125,11 @@ namespace AeroDynasty.Core.Utilities
 
             // Round only once before updating
             GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount = Math.Round(newFuelPrice, 4);
+        }
+
+        internal static async Task CheckIsActive()
+        {
+            await GameData.Instance.Airports.CheckIsActiveForAllAsync(GameState.Instance.CurrentDate);
         }
 
         // Shared static Random instance

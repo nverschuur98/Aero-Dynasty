@@ -69,6 +69,9 @@ namespace AeroDynasty.Core.Utilities
             Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             UserData = new UserData(arl);
 
+            // Check all the objects with an assigned period on their status
+            FirstTimeIsActiveCheck();
+
             // Register all game tasks
             RegisterGameTasks();
         }
@@ -174,7 +177,32 @@ namespace AeroDynasty.Core.Utilities
                     string countryCode = airportData.GetProperty("CountryCode").ToString();
                     string iata = airportData.GetProperty("IATA").ToString();
                     string icao = airportData.GetProperty("ICAO").ToString();
-                    double demandFactor = Convert.ToDouble(airportData.GetProperty("demandFactor").ToString());
+                    AirportType airportType = (AirportType)Enum.Parse(typeof(AirportType), airportData.GetProperty("Type").ToString());
+                    AirportSeason airportSeason = (AirportSeason)Enum.Parse(typeof(AirportSeason), airportData.GetProperty("Season").ToString());
+                    double demandFactor = Convert.ToDouble(airportData.GetProperty("DemandFactor").ToString());
+
+                    DateTime startDate;
+                    DateTime endDate;
+
+                    // Extract the period if it exists
+                    if (airportData.TryGetProperty("Period", out JsonElement period))
+                    {
+                        // Parse the "From" and "To" dates
+                        startDate = period.TryGetProperty("From", out var fromProperty) && DateTime.TryParseExact(fromProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var sdate)
+                            ? sdate
+                            : new DateTime(1900, 01, 01);
+
+                        endDate = period.TryGetProperty("To", out var toProperty) && DateTime.TryParseExact(toProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var edate)
+                            ? edate
+                            : new DateTime(2199, 12, 31);
+                    }
+                    else
+                    {
+                        // If "Period" does not exist, use default dates
+                        startDate = new DateTime(1900, 01, 01);
+                        endDate = new DateTime(2199, 12, 31);
+                    }
+
 
                     // Extract the coordinates
                     JsonElement _coordinates = airportData.GetProperty("Coordinates");
@@ -187,7 +215,11 @@ namespace AeroDynasty.Core.Utilities
                     if (CountryMap.TryGetValue(countryCode, out var country))
                     {
                         // Create the Airport instance with the Country reference
-                        var airport = new Airport(airportName, iata, icao, country, coordinates, demandFactor);
+                        var airport = new Airport(airportName, iata, icao, airportType, airportSeason, country, coordinates, demandFactor);
+
+                        // Set the period for the airport
+                        airport.SetPeriod(startDate, endDate);
+
                         airports.Add(airport);
                     }
                     else
@@ -416,6 +448,7 @@ namespace AeroDynasty.Core.Utilities
             //GameState.Instance.RegisterDailyTask(GameTasks.TestTask);
             GameState.Instance.RegisterDailyTask(GameTasks.CalculateRouteExecutions);
             GameState.Instance.RegisterDailyTask(GameTasks.CalculateFuelPrice);
+            GameState.Instance.RegisterDailyTask(GameTasks.CheckIsActive);
         }
 
         // Public funcs
@@ -431,5 +464,13 @@ namespace AeroDynasty.Core.Utilities
             LoadChangedata();
         }
 
+
+        public void FirstTimeIsActiveCheck()
+        {
+            foreach(Airport airport in Airports)
+            {
+                airport.CheckIsActive(GameState.Instance.CurrentDate);
+            }
+        }
     }
 }
