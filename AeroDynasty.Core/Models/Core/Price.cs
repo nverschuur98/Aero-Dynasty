@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace AeroDynasty.Core.Models.Core
 {
-    public class Price
+    public class Price : _BaseModel
     {
-        private double _amount { get; set; }
+        private double _amount;
         public double Amount
         {
             get => _amount;
             set
             {
-                _amount = Math.Round(value, 2);
+                if (_amount != value)
+                {
+                    _amount = Math.Round(value, 2);
+                    OnPropertyChanged(nameof(Amount));
+                }
             }
         }
 
@@ -23,16 +24,12 @@ namespace AeroDynasty.Core.Models.Core
             Amount = amount;
         }
 
-        /// <summary>
-        /// Calculate the inflation on the price
-        /// </summary>
-        /// <param name="percentage">Enter the percentage as 5.0%</param>
         public void calcInflation(double percentage)
         {
             Amount = Amount * ((100 + percentage) / 100.0);
         }
 
-        #region operator overloads
+        #region Operator Overloads
         public static Price operator +(Price p1, Price p2)
         {
             return new Price(p1.Amount + p2.Amount);
@@ -88,12 +85,10 @@ namespace AeroDynasty.Core.Models.Core
             return !(p1 == p2);
         }
 
-        // ToString override for printing
         public override string ToString()
         {
-            return Amount.ToString("C2"); // Currency formatting
+            return Amount.ToString("C2");
         }
-
         #endregion
     }
 }

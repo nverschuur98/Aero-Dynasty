@@ -56,6 +56,7 @@ namespace AeroDynasty.Core.Models.AirlineModels
         public void addCash(double amount)
         {
             CashBalance += amount;
+            OnPropertyChanged(nameof(CashBalance));
         }
 
         /// <summary>
@@ -65,6 +66,7 @@ namespace AeroDynasty.Core.Models.AirlineModels
         public void addCash(Price amount)
         {
             CashBalance += amount.Amount;
+            OnPropertyChanged(nameof(CashBalance));
         }
 
         /// <summary>
@@ -111,6 +113,7 @@ namespace AeroDynasty.Core.Models.AirlineModels
             if (SufficientCash(amount))
             {
                 CashBalance.Amount -= amount;
+                OnPropertyChanged(nameof(CashBalance));
             }
             else
             {

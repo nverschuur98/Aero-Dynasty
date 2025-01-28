@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using AeroDynasty.Core.Models.AirlineModels;
 using AeroDynasty.Core.Models.Core;
 using AeroDynasty.Core.Utilities;
 
@@ -50,6 +51,12 @@ namespace AeroDynasty.ViewModels
 
             // Subscribe to PropertyChanged event of GameData
             GameState.Instance.PropertyChanged += GameState_PropertyChanged;
+
+            // Subscribe to CashBalance changes
+            if (UserData?.Airline?.CashBalance != null)
+            {
+                UserData.Airline.CashBalance.PropertyChanged += CashBalance_PropertyChanged;
+            }
 
             //Bind commands to actions
             NavigateHomeCommand = new RelayCommand(NavigateHome);
@@ -106,6 +113,15 @@ namespace AeroDynasty.ViewModels
             if (e.PropertyName == nameof(GameData.UserData))
             {
                 OnPropertyChanged(nameof(UserData)); // Notify that FormattedCurrentDate has changed
+                OnPropertyChanged(nameof(UserData.Airline.CashBalance)); // Notify that FormattedCurrentDate has changed
+            }
+        }
+
+        private void CashBalance_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Price.Amount))
+            {
+                OnPropertyChanged(nameof(UserData.Airline.CashBalance));
             }
         }
 
