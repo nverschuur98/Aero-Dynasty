@@ -1,11 +1,14 @@
 ﻿using AeroDynasty.Core.Enums;
 using AeroDynasty.Core.Models.Core;
+using AeroDynasty.Core.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace AeroDynasty.Core.Models.AirportModels
 {
@@ -15,12 +18,12 @@ namespace AeroDynasty.Core.Models.AirportModels
         public string IATA { get; set; }
         public string ICAO { get; set; }
         public AirportType Type { get; set; }
-        public AirportSeason Season { get; set; }
+        public FocusSeason Season { get; set; }
         public Country Country { get; set; }
         public Coordinates Coordinates { get; set; }
         public double DemandFactor { get; set; }
 
-        public Airport(string name, string iata, string icao, AirportType type, AirportSeason season , Country country, Coordinates coordinates, double demandfactor)
+        public Airport(string name, string iata, string icao, AirportType type, FocusSeason season , Country country, Coordinates coordinates, double demandfactor)
         {
             Name = name;
             IATA = iata;
@@ -64,5 +67,30 @@ namespace AeroDynasty.Core.Models.AirportModels
                 return "(" + ICAO + ") " + Name;
             }
         }
+
+        /// <summary>
+        /// Return all active airports in the game as an ICollectionView
+        /// </summary>
+        /// <returns></returns>
+        public static ICollectionView GetAirports()
+        {
+            return GetAirports(_ => true); // Calls the overloaded method with no extra filter
+        }
+
+        /// <summary>
+        /// Return all active airports in the game as an ICollectionView
+        /// </summary>
+        /// <param name="additionalFilter">Selecting criteria</param>
+        /// <returns></returns>
+        public static ICollectionView GetAirports(Func<Airport, bool> additionalFilter)
+        {
+            var filteredAirports = GameData.Instance.Airports.Where(a => a.IsActive).Where(additionalFilter);
+            var airportsView = CollectionViewSource.GetDefaultView(filteredAirports);
+            airportsView.SortDescriptions.Add(new SortDescription(nameof(Airport.Name), ListSortDirection.Ascending));
+
+            return airportsView;
+        }
+
     }
+
 }

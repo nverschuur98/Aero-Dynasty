@@ -10,12 +10,18 @@ namespace AeroDynasty.Core.Models.Core
     {
         public double Latitude;
         public double Longitude;
+        public string String { get => this.ToString(); }
 
         public Coordinates(double latitude, double longitude)
         {
             Latitude = latitude;
             Longitude = longitude;
         }
+        public override string ToString()
+        {
+            return $"{Latitude} / {Longitude}";
+        }
+
     }
 
     public static class GeoUtilities

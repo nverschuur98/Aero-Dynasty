@@ -4,6 +4,8 @@
                     xmlns:v="clr-namespace:AeroDynasty.Views"
                     xmlns:vmRoutes="clr-namespace:AeroDynasty.ViewModels.Routes"
                     xmlns:vRoutes="clr-namespace:AeroDynasty.Views.Routes"
+                    xmlns:vmAirports="clr-namespace:AeroDynasty.ViewModels.Airports"
+                    xmlns:vAirports="clr-namespace:AeroDynasty.Views.Airports"
                     xmlns:vmRoutesPopup="clr-namespace:AeroDynasty.ViewModels.Routes.Popup"
                     xmlns:vRoutesPopup="clr-namespace:AeroDynasty.Views.Routes.Popup"
                     xmlns:vmAirliners="clr-namespace:AeroDynasty.ViewModels.Airliners"
@@ -46,6 +48,14 @@
     <!--#region AIRPORTS-->
     <DataTemplate DataType="{x:Type vm:AirportsViewModel}">
         <v:AirportsView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vmAirports:AirportsViewModel}">
+        <vAirports:AirportsView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vmAirports:AirportViewModel}">
+        <vAirports:AirportView/>
     </DataTemplate>
     <!--#endregion-->
     

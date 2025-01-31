@@ -83,10 +83,9 @@
   </ItemGroup>
   <!-- Compile Files -->
   <ItemGroup>
-    <Compile Include="Enums\AircraftType.cs" />
+    <Compile Include="Enums\AircraftEnums.cs" />
     <Compile Include="Enums\AirportEnums.cs" />
-    <Compile Include="Enums\Continents.cs" />
-    <Compile Include="Enums\EngineType.cs" />
+    <Compile Include="Enums\CoreEnums.cs" />
     <Compile Include="Models\AircraftModels\AircraftCartItem.cs" />
     <Compile Include="Models\AircraftModels\AircraftModel.cs" />
     <Compile Include="Models\AircraftModels\Manufacturer.cs" />

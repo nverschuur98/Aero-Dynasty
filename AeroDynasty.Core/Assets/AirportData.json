@@ -241,8 +241,8 @@
   },
   {
     "Name": "Beek Airport",
-    "IATA": "EHBK",
-    "ICAO": "MST",
+    "IATA": "MST",
+    "ICAO": "EHBK",
     "CountryCode": "NL",
     "DemandFactor": 3,
     "Period": {

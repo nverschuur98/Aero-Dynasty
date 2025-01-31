@@ -5,11 +5,4 @@
         Domestic,
         International
     }
-
-    public enum AirportSeason
-    {
-        AllYear,
-        Summer,
-        Winter
-    }
 }

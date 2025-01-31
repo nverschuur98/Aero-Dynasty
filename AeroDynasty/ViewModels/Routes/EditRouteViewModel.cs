@@ -125,9 +125,7 @@ namespace AeroDynasty.ViewModels.Routes
         /// </summary>
         private void loadData()
         {
-            _airports = CollectionViewSource.GetDefaultView(GameData.Instance.Airports);
-            _airports.SortDescriptions.Add(new SortDescription(nameof(Airport.Name), ListSortDirection.Ascending));
-
+            _airports = Airport.GetAirports();
             OriginAirports = _airports;
             DestinationAirports = _airports;
 

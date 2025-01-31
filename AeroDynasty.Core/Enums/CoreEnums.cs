@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AeroDynasty.Core.Enums
+﻿namespace AeroDynasty.Core.Enums
 {
     public enum Continent
     {
@@ -15,5 +9,12 @@ namespace AeroDynasty.Core.Enums
         NorthAmerica,
         SouthAmerica,
         Oceania
+    }
+
+    public enum FocusSeason
+    {
+        AllYear,
+        Summer,
+        Winter
     }
 }

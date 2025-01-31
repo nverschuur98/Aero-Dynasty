@@ -178,7 +178,7 @@ namespace AeroDynasty.Core.Utilities
                     string iata = airportData.GetProperty("IATA").ToString();
                     string icao = airportData.GetProperty("ICAO").ToString();
                     AirportType airportType = (AirportType)Enum.Parse(typeof(AirportType), airportData.GetProperty("Type").ToString());
-                    AirportSeason airportSeason = (AirportSeason)Enum.Parse(typeof(AirportSeason), airportData.GetProperty("Season").ToString());
+                    FocusSeason airportSeason = (FocusSeason)Enum.Parse(typeof(FocusSeason), airportData.GetProperty("Season").ToString());
                     double demandFactor = Convert.ToDouble(airportData.GetProperty("DemandFactor").ToString());
 
                     DateTime startDate;

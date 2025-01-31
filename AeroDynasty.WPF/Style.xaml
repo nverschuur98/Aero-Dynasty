@@ -10,6 +10,23 @@
         </Style.Triggers>
     </Style>
     
+    <!-- Style for information textblock -->
+    <Style x:Key="TextBlockInformation" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="{StaticResource LightAccentBrush}" />
+        <Setter Property="FontSize" Value="12" />
+    </Style>
+
+    <!-- Style for information header textblock -->
+    <Style x:Key="TextBlockInformationHeader" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Montserrat"/>
+        <Setter Property="Foreground" Value="{StaticResource LightAccentBrush}" />
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Margin" Value="0,5,0,0"/>
+        <Setter Property="Padding" Value="0,3"/>
+    </Style>
+
     <!-- Style for GridViewColumnHeader -->
     <Style x:Key="GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
         <Setter Property="Background" Value="{StaticResource DarkTransparentBackgroundBrush}" />
