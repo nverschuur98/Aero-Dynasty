@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AeroDynasty.Views"
+             xmlns:Map="clr-namespace:AeroDynasty.Core.Views.Map;assembly=AeroDynasty.Core"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Margin="5">
@@ -12,17 +13,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="This is the Home View" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-        <ListView ItemsSource="{Binding AircraftModels}" Grid.Row="1" Background="{StaticResource DarkTransparentBackgroundBrush}" Foreground="{StaticResource LightAccentBrush}" BorderThickness="0" FontFamily="Montserrat" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding Name}" Margin="5,0,10,0" />
-                        <TextBlock Text="{Binding Manufacturer.Name}" Margin="5,0,10,0" />
-                        <TextBlock Text="{Binding Type}" Margin="5,0,10,0" />
-                        <TextBlock Text="{Binding FormattedIntroductionDate}"  Margin="5,0,10,0" />
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Grid Grid.Row="1" >
+            <Map:MapView IsControllable="true" Airports="{Binding Airports}" ClipToBounds="True"/>
+        </Grid>
     </Grid>
 </UserControl>

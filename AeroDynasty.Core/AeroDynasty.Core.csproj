@@ -110,6 +110,9 @@
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\SaveGameManager.cs" />
     <Compile Include="Utilities\_BaseViewModel.cs" />
+    <Compile Include="Views\Map\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RouteViews\RouteSchedule.xaml.cs">
       <DependentUpon>RouteSchedule.xaml</DependentUpon>
     </Compile>
@@ -155,6 +158,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\Map\MapView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\RouteViews\RouteSchedule.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
