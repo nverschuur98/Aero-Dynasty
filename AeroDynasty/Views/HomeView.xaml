@@ -14,7 +14,6 @@
         </Grid.RowDefinitions>
         <TextBlock Text="This is the Home View" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
         <Grid Grid.Row="1" >
-            <Map:MapView IsControllable="true" Airports="{Binding Airports}" ClipToBounds="True"/>
         </Grid>
     </Grid>
 </UserControl>

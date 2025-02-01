@@ -19,7 +19,7 @@ namespace AeroDynasty.Core.Models.Core
         }
         public override string ToString()
         {
-            return $"{Latitude} / {Longitude}";
+            return $"{Latitude:F4} / {Longitude:F4}";
         }
 
     }
