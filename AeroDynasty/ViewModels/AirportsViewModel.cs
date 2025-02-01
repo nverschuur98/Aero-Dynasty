@@ -51,6 +51,7 @@ namespace AeroDynasty.ViewModels
         private void NavigateAirport(Airport airport)
         {
             var content = new Airports.AirportViewModel(airport);
+            content.OpenAirportRequest += NavigateAirport;
             CurrentDetailContent = content;
         }
     }
