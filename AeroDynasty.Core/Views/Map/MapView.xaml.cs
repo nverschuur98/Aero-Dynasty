@@ -22,8 +22,18 @@ namespace AeroDynasty.Core.Views.Map
     /// <summary>
     /// Interaction logic for MapView.xaml
     /// </summary>
-    public partial class MapView : UserControl
+    public partial class MapView : UserControl, INotifyPropertyChanged
     {
+        // Private vars
+        private bool isPanning = false;
+        private Point panStart;
+        private const double MapHeight = 398.9;
+        private const double MapWidth = 798;
+        private const double ZoomFactor = 1.1;
+        private const double MinZoom = 1;
+        private const double MaxZoom = 10.0;
+
+        // Public vars
         public static readonly DependencyProperty IsControllableProperty =
             DependencyProperty.Register(
                 "IsControllable",
@@ -36,14 +46,14 @@ namespace AeroDynasty.Core.Views.Map
                 "Airport",
                 typeof(Airport),
                 typeof(MapView),
-                new PropertyMetadata(null));
+                new PropertyMetadata(null, OnDataChanged));
 
         public static readonly DependencyProperty AirportsProperty =
             DependencyProperty.Register(
                 "Airports",
                 typeof(ICollectionView),
                 typeof(MapView),
-                new PropertyMetadata(null));
+                new PropertyMetadata(null, OnDataChanged));
 
         public bool IsControllable
         {
@@ -63,14 +73,7 @@ namespace AeroDynasty.Core.Views.Map
             set { SetValue(AirportsProperty, value); }
         }
 
-        private bool isPanning = false;
-        private Point panStart;
-        private const double MapHeight = 398.9;
-        private const double MapWidth = 798;
-        private const double ZoomFactor = 1.1;
-        private const double MinZoom = 1;
-        private const double MaxZoom = 10.0;
-
+        // Constructor
         public MapView()
         {
             InitializeComponent();
@@ -81,35 +84,37 @@ namespace AeroDynasty.Core.Views.Map
 
         }
 
+        // Private funcs
         private void MapViewLoaded(object sender, RoutedEventArgs e)
+        {
+            LoadData();
+        }
+
+        private void LoadData()
         {
             //Auto zoom in to the max height
             if (MapCanvas.ActualHeight == 0)
                 return;
 
-            Coordinates FocusCoordinates = new Coordinates(0,0);
-            double FocusZoomLevel = ActualHeight / MapHeight;
+            ClearChildren();
 
             // If an airport is provided, add a marker and focus
             if (Airport != null)
             {
                 AddPoint(Airport.Coordinates);
-                FocusCoordinates = Airport.Coordinates;
-                FocusZoomLevel = 7;
             }
 
             // If multiple airports are provided, add them
-            if(Airports != null)
+            if (Airports != null)
             {
-                foreach(Airport airport in Airports)
+                foreach (Airport airport in Airports)
                 {
                     AddPoint(airport.Coordinates);
                 }
             }
-
-            FocusOnCoordinate(FocusCoordinates, FocusZoomLevel);
         }
 
+        #region MouseTracking
         private void MapCanvas_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             // Check if user is allowed to control the map
@@ -125,25 +130,7 @@ namespace AeroDynasty.Core.Views.Map
             MapScaleTransform.ScaleX = newScaleX;
             MapScaleTransform.ScaleY = newScaleY;
 
-            // Normalize ellipse sizes to avoid extreme scaling
-            double markerSize = 2; // Keep size consistent in screen space
-
-            foreach (UIElement child in MapCanvas.Children)
-            {
-                if (child is Ellipse ellipse)
-                {
-                    ellipse.Width = markerSize;
-                    ellipse.Height = markerSize;
-
-                    // Keep markers centered after resizing
-                    Tuple<double, double> coords = (Tuple<double, double>)ellipse.Tag;
-                    double x = (coords.Item2 + 180) * (MapWidth / 360);
-                    double y = (90 - coords.Item1) * (MapHeight / 180);
-
-                    Canvas.SetLeft(ellipse, x - markerSize / 2);
-                    Canvas.SetTop(ellipse, y - markerSize / 2);
-                }
-            }
+            UpdatePointSizes();
         }
 
         private void MapCanvas_MouseDown(object sender, MouseButtonEventArgs e)
@@ -211,6 +198,43 @@ namespace AeroDynasty.Core.Views.Map
                 MapCanvas.ReleaseMouseCapture();
             }
         }
+        #endregion
+
+        private static void OnDataChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MapView control)
+            {
+                control.LoadData();
+
+                if(control.Airport != null)
+                {
+                    control.FocusOnCoordinate(control.Airport.Coordinates, 7);
+                }
+            }
+        }
+
+        private void UpdatePointSizes()
+        {
+            // Normalize ellipse sizes to avoid extreme scaling
+            double markerSize = 2; // Keep size consistent in screen space
+
+            foreach (UIElement child in MapCanvas.Children)
+            {
+                if (child is Ellipse ellipse)
+                {
+                    ellipse.Width = markerSize;
+                    ellipse.Height = markerSize;
+
+                    // Keep markers centered after resizing
+                    Tuple<double, double> coords = (Tuple<double, double>)ellipse.Tag;
+                    double x = (coords.Item2 + 180) * (MapWidth / 360);
+                    double y = (90 - coords.Item1) * (MapHeight / 180);
+
+                    Canvas.SetLeft(ellipse, x - markerSize / 2);
+                    Canvas.SetTop(ellipse, y - markerSize / 2);
+                }
+            }
+        }
 
         private static double CalculateAngle(Coordinates start, Coordinates end)
         {
@@ -238,6 +262,18 @@ namespace AeroDynasty.Core.Views.Map
             return targetLatitude;
         }
 
+        // Public funcs
+        public void ClearChildren()
+        {
+            // Remove all Ellipse elements from the MapCanvas children
+            var ellipses = MapCanvas.Children.OfType<Ellipse>().ToList();
+
+            foreach (var ellipse in ellipses)
+            {
+                MapCanvas.Children.Remove(ellipse);
+            }
+        }
+
         public void AddPoint(Coordinates coordinates)
         {
             if (MapCanvas.ActualWidth == 0 || MapCanvas.ActualHeight == 0)
@@ -257,8 +293,8 @@ namespace AeroDynasty.Core.Views.Map
             double baseSize = 2;  // Base size of the ellipse
             Ellipse point = new Ellipse
             {
-                Width = baseSize * MapScaleTransform.ScaleX,  // Adjust size based on zoom
-                Height = baseSize * MapScaleTransform.ScaleY,
+                Width = baseSize,  // Adjust size based on zoom
+                Height = baseSize,
                 Fill = (Brush)FindResource("AccentBrush"),
                 Stroke = (Brush)FindResource("RedTransparentBackgroundBrush"),
                 StrokeThickness = 1
@@ -380,6 +416,23 @@ namespace AeroDynasty.Core.Views.Map
             MapTranslateTransform.Y = (viewHeight / 2) - (y * zoomlevel);
             //MapTranslateTransform.X = -(viewWidth - MapWidth) / 2;// - (x * zoomlevel);
             //MapTranslateTransform.Y = -(viewHeight - MapHeight) / 2;// - (y * zoomlevel);
+
+            // Make sure to update the marker sizes
+            UpdatePointSizes();
+        }
+
+        /// <summary>
+        /// Raised when a property changes to notify bindings.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Triggers the <see cref="PropertyChanged"/> event.
+        /// </summary>
+        /// <param name="propertyName">The name of the property that changed.</param>
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }
