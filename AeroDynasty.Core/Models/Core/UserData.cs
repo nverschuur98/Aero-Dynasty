@@ -26,10 +26,8 @@ namespace AeroDynasty.Core.Models.Core
         /// <summary>
         /// Constructs a new user data class
         /// </summary>
-        /// <param name="airline">The user airline</param>
-        public UserData(Airline airline)
+        public UserData()
         {
-            Airline = airline;
         }
     }
 }

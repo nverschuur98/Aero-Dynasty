@@ -12,6 +12,8 @@
                     xmlns:vAirliners="clr-namespace:AeroDynasty.Views.Airliners"
                     xmlns:vmAirlinersPopup="clr-namespace:AeroDynasty.ViewModels.Airliners.Popup"
                     xmlns:vAirlinersPopup="clr-namespace:AeroDynasty.Views.Airliners.Popup"
+                    xmlns:vmSettings="clr-namespace:AeroDynasty.ViewModels.Settings"
+                    xmlns:vSettings="clr-namespace:AeroDynasty.Views.Settings"
                     xmlns:local="clr-namespace:AeroDynasty">
     <DataTemplate DataType="{x:Type vm:MainWindowViewModel}">
         <local:MainWindow/>
@@ -95,6 +97,10 @@
     <!--#region SETTINGS-->
     <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
         <v:SettingsView/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vmSettings:NewGameViewModel}">
+        <vSettings:NewGameView/>
     </DataTemplate>
     <!--#endregion-->
 </ResourceDictionary>

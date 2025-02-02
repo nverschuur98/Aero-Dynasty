@@ -30,12 +30,12 @@
                 <menu:PlayButton Label="Play" Command="{Binding PlayCommand}"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
-                <menu:MenuButton Label="Home" Command="{Binding NavigateHomeCommand}"/>
-                <menu:MenuButton Label="Routes" Command="{Binding NavigateRoutesCommand}"/>
-                <menu:MenuButton Label="Airports" Command="{Binding NavigateAirportsCommand}"/>
-                <menu:MenuButton Label="Airliners" Command="{Binding NavigateAirlinersCommand}"/>
-                <menu:MenuButton Label="Airlines" Command="{Binding NavigateAirlinesCommand}"/>
-                <menu:MenuButton Label="Finances" Command="" IsEnabled="False"/>
+                <menu:MenuButton Label="Home" Command="{Binding NavigateHomeCommand}" IsEnabled="{Binding GameIsLoaded}"/>
+                <menu:MenuButton Label="Routes" Command="{Binding NavigateRoutesCommand}" IsEnabled="{Binding GameIsLoaded}"/>
+                <menu:MenuButton Label="Airports" Command="{Binding NavigateAirportsCommand}" IsEnabled="{Binding GameIsLoaded}"/>
+                <menu:MenuButton Label="Airliners" Command="{Binding NavigateAirlinersCommand}" IsEnabled="{Binding GameIsLoaded}"/>
+                <menu:MenuButton Label="Airlines" Command="{Binding NavigateAirlinesCommand}" IsEnabled="{Binding GameIsLoaded}"/>
+                <menu:MenuButton Label="Finances" Command="" IsEnabled="false"/>
                 <menu:MenuButton Label="Settings" Command="{Binding NavigateSettingsCommand}"/>
             </StackPanel>
         </Grid>

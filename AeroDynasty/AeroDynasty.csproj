@@ -145,6 +145,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Settings\NewGameView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ViewModelBindings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +174,7 @@
     <Compile Include="ViewModels\Routes\RoutesViewModel.cs" />
     <Compile Include="ViewModels\Routes\RouteViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Settings\NewGameViewModel.cs" />
     <Compile Include="Views\AirlinersView.xaml.cs">
       <DependentUpon>AirlinersView.xaml</DependentUpon>
     </Compile>
@@ -228,6 +233,9 @@
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\NewGameView.xaml.cs">
+      <DependentUpon>NewGameView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <!-- Properties and Resources -->

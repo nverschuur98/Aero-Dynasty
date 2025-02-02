@@ -15,6 +15,7 @@ namespace AeroDynasty.ViewModels
     {
         //Private Vars
         private _BaseViewModel _currentContent;
+        private UserData _userData;
 
         //Public Vars
         public _BaseViewModel CurrentContent
@@ -30,7 +31,42 @@ namespace AeroDynasty.ViewModels
         public string FormattedCurrentDate{ get => GameState.Instance.FormattedCurrentDate; }
         public string CurrentDayOfWeek { get => GameState.Instance.CurrentDate.DayOfWeek.ToString(); }
         public Price CurrentFuelPrice { get => GameData.Instance.GlobalModifiers.CurrentFuelPrice; }
-        public UserData UserData { get; set; }
+        public UserData UserData
+        {
+            get => _userData;
+            set
+            {
+                if (_userData != value)
+                {
+                    if (_userData != null)
+                    {
+                        _userData.PropertyChanged -= UserData_PropertyChanged; // Unsubscribe from old instance
+                        if (_userData.Airline != null)
+                        {
+                            _userData.Airline.CashBalance.PropertyChanged -= CashBalance_PropertyChanged;
+                        }
+                    }
+
+                    _userData = value;
+                    OnPropertyChanged(nameof(UserData));
+                    OnPropertyChanged(nameof(GameIsLoaded));
+
+                    if (_userData != null)
+                    {
+                        _userData.PropertyChanged += UserData_PropertyChanged; // Subscribe to new instance
+                        if(_userData.Airline != null)
+                        {
+                            _userData.Airline.CashBalance.PropertyChanged += CashBalance_PropertyChanged;
+                        }
+                    }
+                }
+            }
+        }
+        public bool GameIsLoaded { get
+            {
+                return UserData.Airline == null ? false : true;
+            } 
+        }
 
         //Commands
         public ICommand NavigateHomeCommand { get; }
@@ -44,19 +80,13 @@ namespace AeroDynasty.ViewModels
 
         public MainWindowViewModel()
         {
-            UserData = GameData.Instance.UserData;
+            UserData = GameData.Instance.UserData; // This will trigger the setter logic
 
             // Subscribe to PropertyChanged event of GameData
-            GameData.Instance.PropertyChanged += GameData_PropertyChanged;
+            //GameData.Instance.PropertyChanged += GameData_PropertyChanged;
 
             // Subscribe to PropertyChanged event of GameData
             GameState.Instance.PropertyChanged += GameState_PropertyChanged;
-
-            // Subscribe to CashBalance changes
-            if (UserData?.Airline?.CashBalance != null)
-            {
-                UserData.Airline.CashBalance.PropertyChanged += CashBalance_PropertyChanged;
-            }
 
             //Bind commands to actions
             NavigateHomeCommand = new RelayCommand(NavigateHome);
@@ -108,20 +138,29 @@ namespace AeroDynasty.ViewModels
         }
 
         // Event handler for when properties change in GameData
-        private void GameData_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        /*private void GameData_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(GameData.UserData))
             {
                 OnPropertyChanged(nameof(UserData)); // Notify that FormattedCurrentDate has changed
                 OnPropertyChanged(nameof(UserData.Airline.CashBalance)); // Notify that FormattedCurrentDate has changed
+                OnPropertyChanged(nameof(GameIsLoaded));
             }
-        }
+        }*/
 
         private void CashBalance_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Price.Amount))
             {
                 OnPropertyChanged(nameof(UserData.Airline.CashBalance));
+            }
+        }
+
+        private void UserData_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(UserData.Airline))
+            {
+                OnPropertyChanged(nameof(GameIsLoaded)); // Refresh UI when Airline changes
             }
         }
 

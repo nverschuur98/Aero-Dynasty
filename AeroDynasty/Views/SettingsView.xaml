@@ -31,5 +31,7 @@
                 </StackPanel>
             </Grid>
         </Page:Wrapper>
+
+        <ContentControl Grid.Column="1" Content="{Binding CurrentDetailContent}" />
     </Grid>
 </UserControl>

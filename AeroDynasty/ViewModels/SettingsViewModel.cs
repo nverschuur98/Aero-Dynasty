@@ -5,14 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using AeroDynasty.Core.Utilities;
+using AeroDynasty.ViewModels.Settings;
 
 namespace AeroDynasty.ViewModels
 {
     public class SettingsViewModel : _BaseViewModel
     {
         // Private vars
+        private _BaseViewModel _currentDetailContent;
 
         // Public vars
+        public _BaseViewModel CurrentDetailContent
+        {
+            get => _currentDetailContent;
+            set
+            {
+                _currentDetailContent = value;
+                OnPropertyChanged(nameof(CurrentDetailContent));
+            }
+        }
 
         // Commands
         public ICommand NewCommand { get; }
@@ -34,7 +45,10 @@ namespace AeroDynasty.ViewModels
         // Command and event handling
         private void New()
         {
-            SaveGameManager.NewGame();
+            //SaveGameManager.NewGame();
+            var content = new NewGameViewModel();
+
+            CurrentDetailContent = content;
         }
         private void Save()
         {

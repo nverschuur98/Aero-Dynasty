@@ -67,8 +67,8 @@ namespace AeroDynasty.Core.Utilities
             SetupGameData();
             
             // Init airline
-            Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
-            UserData = new UserData(arl);
+            //Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
+            UserData = new UserData();
 
             // Check all the objects with an assigned period on their status
             FirstTimeIsActiveCheck();
