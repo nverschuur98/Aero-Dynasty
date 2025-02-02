@@ -78,9 +78,11 @@
 
                         <!-- Row 6 HEADER-->
                         <TextBlock Grid.Row="6" Grid.Column="0" Text="Target Season" Style="{StaticResource TextBlockInformationHeader}"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Text="Passenger Size" Style="{StaticResource TextBlockInformationHeader}"/>
 
                         <!-- Row 7 DATA-->
                         <TextBlock Grid.Row="7" Grid.Column="0" Text="{Binding Airport.Season}" Style="{StaticResource TextBlockInformation}"/>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Airport.PassengerSize}" Style="{StaticResource TextBlockInformation}"/>
 
                         <!-- Row 8 HEADER-->
                         <TextBlock Grid.Row="8" Grid.Column="0" Text="Opening Date" Style="{StaticResource TextBlockInformationHeader}"/>
@@ -111,7 +113,6 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -121,7 +122,7 @@
                     <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding DestinationAirports}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                         <ListView.View>
                             <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
-                                <GridViewColumn Header="Airport Name">
+                                <GridViewColumn Header="Airport Name" Width="200">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock Text="{Binding Name}" Style="{StaticResource TextBlockButton}">

@@ -17,9 +17,11 @@ namespace AeroDynasty.Core.Utilities
 
         //Private vars
         private DateTime _currentDate;
+        private int _currentMonth;
         private bool _isPaused;
         private CancellationTokenSource _pauseTokenSource;
         private List<Func<Task>> _dailyTasks;
+        private List<Func<Task>> _monthlyTasks;
 
         //Public vars
         public DateTime CurrentDate
@@ -51,6 +53,7 @@ namespace AeroDynasty.Core.Utilities
         {
             //Init lists
             _dailyTasks = new List<Func<Task>>();
+            _monthlyTasks = new List<Func<Task>>();
 
             SetupGameState();
 
@@ -64,6 +67,7 @@ namespace AeroDynasty.Core.Utilities
         {
             //Set startdate
             CurrentDate = new DateTime(1946, 1, 1);
+            _currentMonth = CurrentDate.Month;
             IsPaused = true;
         }
 
@@ -84,7 +88,13 @@ namespace AeroDynasty.Core.Utilities
 
                     // Advance the game date after waiting for all tasks
                     CurrentDate = CurrentDate.AddDays(1);
-                    Console.WriteLine(DateTime.Now + ": " + CurrentDate);
+
+                    // Check if a new month has started
+                    if (CurrentDate.Month != _currentMonth)
+                    {
+                        _currentMonth = CurrentDate.Month;
+                        await ExecuteMonthlyTasks();
+                    }
                 }
                 catch (TaskCanceledException)
                 {
@@ -94,10 +104,21 @@ namespace AeroDynasty.Core.Utilities
             }
         }
 
+        private async Task ExecuteMonthlyTasks()
+        {
+            var tasks = _monthlyTasks.Select(task => task());
+            await Task.WhenAll(tasks);
+        }
+
         //Public funcs
         public void RegisterDailyTask(Func<Task> task)
         {
             _dailyTasks.Add(task);
+        }
+
+        public void RegisterMonthlyTask(Func<Task> task)
+        {
+            _monthlyTasks.Add(task);
         }
 
         //Command handling

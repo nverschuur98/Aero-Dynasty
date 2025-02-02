@@ -33,6 +33,15 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugExtended|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugExtended\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <!-- References -->
   <ItemGroup>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces">
@@ -95,6 +104,7 @@
     <Compile Include="Models\Core\Coordinates.cs" />
     <Compile Include="Models\Core\Country.cs" />
     <Compile Include="Models\Core\GlobalModifiers.cs" />
+    <Compile Include="Models\RouteModels\RouteDemand.cs" />
     <Compile Include="Models\RouteModels\RouteLeg.cs" />
     <Compile Include="Models\RouteModels\RouteSchedule.cs" />
     <Compile Include="Models\_PeriodModel.cs" />
@@ -146,7 +156,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\ManufacturerData.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <!-- Other Files -->

@@ -1,8 +1,12 @@
 ﻿using AeroDynasty.Core.Models;
+using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
 using AeroDynasty.Core.Models.RouteModels;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,78 +22,94 @@ namespace AeroDynasty.Core.Utilities
             Console.WriteLine("Finished Test Task");
         }
 
+        /// <summary>
+        /// Task to calculate all executed/scheduled routes in the game
+        /// </summary>
+        /// <returns></returns>
         internal static async Task CalculateRouteExecutions()
         {
-            // Get the current fuel price and day of the week
+#if DEBUG
+            // Start the stopwatch to time the tasks
+            var stopwatch = Stopwatch.StartNew();
+#endif
+
+            // Get the current fuel price and current day
             double currentFuelPrice = GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount;
             DayOfWeek currentDay = GameState.Instance.CurrentDate.DayOfWeek;
+            List<RouteDemand> routeDemands = GameData.Instance.RouteDemands;
 
-            // Loop through all routes in the game
-            foreach (Route route in GameData.Instance.Routes)
+            // Check if routeDemands is not empty or null
+            if (routeDemands.Count <= 0 || routeDemands == null)
+                return;
+
+            // Collect all RouteLegs that have flights today, with their parent Route
+            var allRouteLegs = GameData.Instance.Routes
+                .SelectMany(route => route.ScheduledFlights, (route, schedule) => new { Route = route, Schedule = schedule })
+                .SelectMany(rs => new List<(Route Route, RouteLeg Leg)>
+                {
+            (rs.Route, rs.Schedule.Outbound),
+            (rs.Route, rs.Schedule.Inbound)
+                })
+                .Where(rl => rl.Leg.ArrivalDay == currentDay)
+                .ToList();
+
+            // Group all RouteLegs by (Origin, Destination)
+            var groupedLegs = allRouteLegs.GroupBy(rl => (rl.Leg.Origin, rl.Leg.Destination));
+
+            // Process each group concurrently using Task.WhenAll()
+            await Task.WhenAll(groupedLegs.Select(group => Task.Run(() =>
             {
-                // Check if there are any assigned airliners and schedules flights
-                if(route.ScheduledFlights.Count <= 0 || route.AssignedAirliners.Count <= 0)
+                int localDemand = 0;
+
+                // Get the corresponding RouteDemand object, or null if not found
+                RouteDemand routeDemand = routeDemands
+                    .FirstOrDefault(rd => rd.Origin == group.Key.Origin && rd.Destination == group.Key.Destination);
+
+                // If routeDemand is found, get the demand for the current day; otherwise, localDemand remains 0
+                if (routeDemand != null)
+                    localDemand = routeDemand.DailyDemand[currentDay]; // Local copy of available demand
+
+#if DEBUG
+                //Console.WriteLine($"{currentDay} - {group.Key.Origin.ICAO}-{group.Key.Destination.ICAO} - Total Demand: {localDemand}");
+#endif
+
+                // Sort RouteLegs by some priority (e.g., largest airline reputation first)
+                var sortedLegs = group.OrderByDescending(r => r.Route.Owner.Reputation);
+
+                foreach (var (route, leg) in sortedLegs)
                 {
-                    // No scheduled flights or assigned airliners, so no need to calculate
-                    continue;
+                    // Determine seat availability
+                    int legSeatAvailability = leg.AssignedAirliner.Model.maxPax;
+                    // Determine how many passengers can be filled on this flight
+                    int filledPassengers = Math.Min(localDemand, legSeatAvailability);
+                    // Subtract from the local available demand
+                    localDemand -= filledPassengers;
+
+                    // Calculate revenue and cost
+                    Price revenue = filledPassengers * route.TicketPrice;
+                    Price cost = new Price(1000 + (route.Distance * leg.AssignedAirliner.Model.FuelConsumptionRate * currentFuelPrice));
+
+                    // Update airline balance
+                    route.Owner.addCash(revenue - cost);
+#if DEBUG
+                    //Console.WriteLine($"{currentDay} - {leg.Origin.ICAO}-{leg.Destination.ICAO} - Departure:{leg.DepartureTime}, Pax:{filledPassengers}, Profit: {revenue - cost}, Demand left: {localDemand}");
+#endif
                 }
+            })));
 
-                // Create a dictionary to hold demand for each day of the week
-                // Fixed values; awaiting implementation of demands
-                Dictionary<DayOfWeek, int> dailyDemand = new Dictionary<DayOfWeek, int>()
-                {
-                    { DayOfWeek.Sunday, 100 },
-                    { DayOfWeek.Monday, 150 },
-                    { DayOfWeek.Tuesday, 120 },
-                    { DayOfWeek.Wednesday, 130 },
-                    { DayOfWeek.Thursday, 140 },
-                    { DayOfWeek.Friday, 160 },
-                    { DayOfWeek.Saturday, 180 }
-                };
-                Price totalDailyRevenue = new Price(0);
-                Price totalDailyCost = new Price(0);
+#if DEBUG
+            // Stop the stopwatch after all tasks are completed
+            stopwatch.Stop();
 
-                // Loop through all the schedules 
-                foreach(RouteSchedule schedule in route.ScheduledFlights)
-                {
-                    // Local function to calculate the flight
-                    void calculateFlight(RouteLeg leg)
-                    {
-                        if(dailyDemand[currentDay] > 0)
-                        {
-                            // Check how many seats are available, and in demand.
-                            int legSeatAvailability = leg.AssignedAirliner.Model.maxPax;
-                            int legPassengers = Math.Min(dailyDemand[currentDay], legSeatAvailability);
-
-                            // Lower daily demand, based on availability 
-                            dailyDemand[currentDay] -= legPassengers;
-
-                            // Add ticket sales to daily revenue
-                            totalDailyRevenue += legPassengers * route.TicketPrice;
-                        }
-
-                        // Add airliner costs to daily costs
-                        // Fixed value; awaiting implementation of costs
-                        totalDailyCost += 1000 + (route.Distance * leg.AssignedAirliner.Model.FuelConsumptionRate * currentFuelPrice);
-                    }
-
-                    // Check if outbound flight is today
-                    if (schedule.Outbound.ArrivalDay == currentDay)
-                        calculateFlight(schedule.Outbound);
-
-                    // Check if inbound flight is today
-                    if (schedule.Inbound.ArrivalDay == currentDay)
-                        calculateFlight(schedule.Inbound);
-                }
-
-                // Calculate daily profit
-                Price totalDailyProfit = totalDailyRevenue - totalDailyCost;
-
-                // Set new balance of route owner
-                route.Owner.addCash(totalDailyProfit);
-            }
+            // Log or display the time it took to complete the tasks
+            Console.WriteLine($"CalculateRouteExecutions completed in {stopwatch.ElapsedMilliseconds} ms");
+#endif
         }
 
+        /// <summary>
+        /// Task to calculate the daily fuel price
+        /// </summary>
+        /// <returns></returns>
         internal static async Task CalculateFuelPrice()
         {
             // Cache year and price map to avoid repeated lookups
@@ -127,9 +147,91 @@ namespace AeroDynasty.Core.Utilities
             GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount = Math.Round(newFuelPrice, 4);
         }
 
+        /// <summary>
+        /// Task to check on newly available aircraftmodels
+        /// </summary>
+        /// <returns></returns>
         internal static async Task CheckIsActive()
         {
-            await GameData.Instance.Airports.CheckIsActiveForAllAsync(GameState.Instance.CurrentDate);
+            //Get the current Date
+            DateTime currentDate = GameState.Instance.CurrentDate;
+
+            await GameData.Instance.Airports.CheckIsActiveForAllAsync(currentDate);
+            await GameData.Instance.AircraftModels.CheckIsActiveForAllAsync(currentDate);
+        }
+
+        /// <summary>
+        /// Task to calculate the route demand per month
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task CalculateRouteDemand()
+        {
+#if DEBUG
+            // Start the stopwatch to time the tasks
+            var stopwatch = Stopwatch.StartNew();
+#endif
+
+            // Get all active airports
+            ICollectionView AirportsView = Airport.GetAirports();
+            List<Airport> Airports = AirportsView.Cast<Airport>().ToList();
+
+            // Use a concurrent collection for thread safety
+            ConcurrentBag<RouteDemand> RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands);
+
+            // Dictionary for fast lookup of existing demands
+            var routeLookup = new ConcurrentDictionary<(Airport, Airport), RouteDemand>(
+                GameData.Instance.RouteDemands.ToDictionary(rd => (rd.Origin, rd.Destination))
+            );
+
+            // Create a list of tasks for parallel execution
+            var tasks = new List<Task>();
+
+            foreach (var origin in Airports)
+            {
+                tasks.Add(Task.Run(async () =>
+                {
+                    var subTasks = new List<Task>();
+
+                    foreach (var destination in Airports.Where(a => a != origin))
+                    {
+                        subTasks.Add(Task.Run(async () =>
+                        {
+                            // Check if the route demand already exists
+                            if (routeLookup.TryGetValue((origin, destination), out RouteDemand existingRouteDemand))
+                            {
+                                // Do demand calculations for this route
+                                existingRouteDemand.BaseDemand = 100;
+                                await Task.Run(() => existingRouteDemand.CalculateDailyDemand()); // Run demand calculations asynchronously
+                            }
+                            else
+                            {
+                                // If RouteDemand item does not exist, create it
+                                RouteDemand newRouteDemand = new RouteDemand(origin, destination, 100);
+                                await Task.Run(() => newRouteDemand.CalculateDailyDemand()); // Run demand calculations asynchronously
+
+                                // Add new RouteDemand safely
+                                RouteDemands.Add(newRouteDemand);
+                                routeLookup.TryAdd((origin, destination), newRouteDemand);
+                            }
+                        }));
+                    }
+
+                    await Task.WhenAll(subTasks);
+                }));
+            }
+
+            await Task.WhenAll(tasks);
+
+            // Update GameData after calculations
+            GameData.Instance.RouteDemands = RouteDemands.ToList();
+
+#if DEBUG
+            // Stop the stopwatch after all tasks are completed
+            stopwatch.Stop();
+
+            // [DEBUG] Log or display the time it took to complete the tasks
+            Console.WriteLine($"CalculateRouteBaseDemand completed in {stopwatch.ElapsedMilliseconds} ms");
+#endif
         }
 
         // Shared static Random instance

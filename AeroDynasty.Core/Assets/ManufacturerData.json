@@ -5,151 +5,97 @@
     "FoundingDate": "1916-07-15",
     "Description": "Boeing is a leading aerospace company that designs, manufactures, and sells airplanes, rotorcraft, rockets, satellites, and telecommunications equipment worldwide.",
     "Aircrafts": [
-      {
-        "Name": "Boeing 377 Stratocruiser",
-        "Family": "377",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "523",
-        "maxPax": "100",
-        "maxCargo": "15200",
-        "maxRange": "6437",
-        "IntroductionDate": "1947-07-08",
-        "RetirementDate": "1963-01-01",
-        "minRunwayLength": "2300",
-        "Price": "1200000",
-        "FuelConsumptionRate": 2.77,
-        "OperatingCostRate": 0
+    {
+      "Name": "Boeing 377 Stratocruiser",
+      "Family": "377",
+      "AircraftType": "Passenger",
+      "EngineType": "Prop",
+      "CruisingSpeed": "523",
+      "maxPax": "100",
+      "maxCargo": "15200",
+      "maxRange": "6437",
+      "Period": {
+        "From": "08-07-1947",
+        "To": "01-01-1963"
       },
-      {
-        "Name": "Boeing 377-10",
-        "Family": "377",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "523",
-        "maxPax": "104",
-        "maxCargo": "16000",
-        "maxRange": "6400",
-        "IntroductionDate": "1949-01-01",
-        "RetirementDate": "1965-01-01",
-        "minRunwayLength": "2300",
-        "Price": "1200000",
-        "FuelConsumptionRate": 2.77,
-        "OperatingCostRate": 0
+      "minRunwayLength": "2300",
+      "Price": "1200000",
+      "FuelConsumptionRate": 2.77,
+      "OperatingCostRate": 0
+    },
+    {
+      "Name": "Boeing 377-10",
+      "Family": "377",
+      "AircraftType": "Passenger",
+      "EngineType": "Prop",
+      "CruisingSpeed": "523",
+      "maxPax": "104",
+      "maxCargo": "16000",
+      "maxRange": "6400",
+      "Period": {
+        "From": "01-01-1949",
+        "To": "01-01-1965"
       },
-      {
-        "Name": "Boeing 377-18",
-        "Family": "377",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "523",
-        "maxPax": "96",
-        "maxCargo": "15500",
-        "maxRange": "6200",
-        "IntroductionDate": "1950-01-01",
-        "RetirementDate": "1966-01-01",
-        "minRunwayLength": "2300",
-        "Price": "1200000",
-        "FuelConsumptionRate": 2.77,
-        "OperatingCostRate": 0
+      "minRunwayLength": "2300",
+      "Price": "1200000",
+      "FuelConsumptionRate": 2.77,
+      "OperatingCostRate": 0
+    },
+    {
+      "Name": "Boeing 314 Clipper",
+      "Family": "314",
+      "AircraftType": "Passenger",
+      "EngineType": "Prop",
+      "CruisingSpeed": "300",
+      "maxPax": "74",
+      "maxCargo": "0",
+      "maxRange": "5800",
+      "Period": {
+        "From": "20-03-1939",
+        "To": "01-01-1951"
       },
-      {
-        "Name": "Boeing 314 Clipper",
-        "Family": "314",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "300",
-        "maxPax": "74",
-        "maxCargo": "0",
-        "maxRange": "5800",
-        "IntroductionDate": "1939-03-20",
-        "RetirementDate": "1951-01-01",
-        "minRunwayLength": "2000",
-        "Price": "500000",
-        "FuelConsumptionRate": 1.26,
-        "OperatingCostRate": 0
+      "minRunwayLength": "2000",
+      "Price": "500000",
+      "FuelConsumptionRate": 1.26,
+      "OperatingCostRate": 0
+    },
+    {
+      "Name": "Boeing 307 Stratoliner",
+      "Family": "307",
+      "AircraftType": "Passenger",
+      "EngineType": "Prop",
+      "CruisingSpeed": "346",
+      "maxPax": "33",
+      "maxCargo": "2000",
+      "maxRange": "3780",
+      "Period": {
+        "From": "31-12-1938",
+        "To": "01-01-1975"
       },
-      {
-        "Name": "Boeing 314A Clipper",
-        "Family": "314",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "310",
-        "maxPax": "77",
-        "maxCargo": "0",
-        "maxRange": "6100",
-        "IntroductionDate": "1941-01-01",
-        "RetirementDate": "1950-01-01",
-        "minRunwayLength": "2000",
-        "Price": "500000",
-        "FuelConsumptionRate": 1.26,
-        "OperatingCostRate": 0
+      "minRunwayLength": "1800",
+      "Price": "315000",
+      "FuelConsumptionRate": 2.13,
+      "OperatingCostRate": 0
+    },
+    {
+      "Name": "Boeing 247",
+      "Family": "247",
+      "AircraftType": "Passenger",
+      "EngineType": "Prop",
+      "CruisingSpeed": "306",
+      "maxPax": "10",
+      "maxCargo": "800",
+      "maxRange": "1200",
+      "Period": {
+        "From": "08-02-1933",
+        "To": "01-01-1952"
       },
-      {
-        "Name": "Boeing 307 Stratoliner",
-        "Family": "307",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "346",
-        "maxPax": "33",
-        "maxCargo": "2000",
-        "maxRange": "3780",
-        "IntroductionDate": "1938-12-31",
-        "RetirementDate": "1975-01-01",
-        "minRunwayLength": "1800",
-        "Price": "315000",
-        "FuelConsumptionRate": 2.13,
-        "OperatingCostRate": 0
-      },
-      {
-        "Name": "Boeing 307B Stratoliner",
-        "Family": "307",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "350",
-        "maxPax": "40",
-        "maxCargo": "1500",
-        "maxRange": "4000",
-        "IntroductionDate": "1945-01-01",
-        "RetirementDate": "1960-01-01",
-        "minRunwayLength": "1800",
-        "Price": "315000",
-        "FuelConsumptionRate": 2.13,
-        "OperatingCostRate": 0
-      },
-      {
-        "Name": "Boeing 247",
-        "Family": "247",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "306",
-        "maxPax": "10",
-        "maxCargo": "800",
-        "maxRange": "1200",
-        "IntroductionDate": "1933-02-08",
-        "RetirementDate": "1952-01-01",
-        "minRunwayLength": "1500",
-        "Price": "62500",
-        "FuelConsumptionRate": 0.72,
-        "OperatingCostRate": 0
-      },
-      {
-        "Name": "Boeing 247D",
-        "Family": "247",
-        "AircraftType": "Passenger",
-        "EngineType": "Prop",
-        "CruisingSpeed": "300",
-        "maxPax": "12",
-        "maxCargo": "1000",
-        "maxRange": "1200",
-        "IntroductionDate": "1934-01-01",
-        "RetirementDate": "1950-01-01",
-        "minRunwayLength": "1500",
-        "Price": "62500",
-        "FuelConsumptionRate": 0.72,
-        "OperatingCostRate": 0
-      }
-    ]
+      "minRunwayLength": "1500",
+      "Price": "62500",
+      "FuelConsumptionRate": 0.72,
+      "OperatingCostRate": 0
+    }
+  ]
   },
   {
     "Name": "Douglas Aircraft Company",
@@ -166,8 +112,10 @@
         "maxPax": "32",
         "maxCargo": "0",
         "maxRange": "3421",
-        "IntroductionDate": "1936-06-17",
-        "RetirementDate": "1960-01-01",
+        "Period": {
+          "From": "17-06-1936",
+          "To": "01-01-1960"
+        },
         "minRunwayLength": "1500",
         "Price": "100000",
         "FuelConsumptionRate": 1.07,
@@ -182,8 +130,10 @@
         "maxPax": "32",
         "maxCargo": "0",
         "maxRange": "2000",
-        "IntroductionDate": "1941-01-01",
-        "RetirementDate": "1965-01-01",
+        "Period": {
+          "From": "01-01-1941",
+          "To": "01-01-1965"
+        },
         "minRunwayLength": "1500",
         "Price": "100000",
         "FuelConsumptionRate": 1.07,
@@ -198,8 +148,10 @@
         "maxPax": "0",
         "maxCargo": "4536",
         "maxRange": "3421",
-        "IntroductionDate": "1945-01-01",
-        "RetirementDate": "1975-01-01",
+        "Period": {
+          "From": "01-01-1945",
+          "To": "01-01-1975"
+        },
         "minRunwayLength": "1500",
         "Price": "100000",
         "FuelConsumptionRate": 1.07,
@@ -214,8 +166,10 @@
         "maxPax": "50",
         "maxCargo": "0",
         "maxRange": "3500",
-        "IntroductionDate": "1942-01-01",
-        "RetirementDate": "1958-01-01",
+        "Period": {
+          "From": "01-01-1942",
+          "To": "01-01-1958"
+        },
         "minRunwayLength": "1800",
         "Price": "1000000",
         "FuelConsumptionRate": 1.68,
@@ -230,8 +184,10 @@
         "maxPax": "42",
         "maxCargo": "0",
         "maxRange": "3500",
-        "IntroductionDate": "1939-01-01",
-        "RetirementDate": "1955-01-01",
+        "Period": {
+          "From": "01-01-1939",
+          "To": "01-01-1955"
+        },
         "minRunwayLength": "1800",
         "Price": "1000000",
         "FuelConsumptionRate": 1.68,
@@ -246,8 +202,10 @@
         "maxPax": "50",
         "maxCargo": "0",
         "maxRange": "3500",
-        "IntroductionDate": "1946-01-03",
-        "RetirementDate": "1958-01-01",
+        "Period": {
+          "From": "03-01-1946",
+          "To": "01-01-1958"
+        },
         "minRunwayLength": "1800",
         "Price": "1000000",
         "FuelConsumptionRate": 1.68,
@@ -262,8 +220,10 @@
         "maxPax": "80",
         "maxCargo": "8500",
         "maxRange": "4815",
-        "IntroductionDate": "1947-01-01",
-        "RetirementDate": "1970-01-01",
+        "Period": {
+          "From": "01-01-1947",
+          "To": "01-01-1970"
+        },
         "minRunwayLength": "1800",
         "Price": "1200000",
         "FuelConsumptionRate": 1.49,
@@ -278,8 +238,10 @@
         "maxPax": "102",
         "maxCargo": "0",
         "maxRange": "4815",
-        "IntroductionDate": "1947-01-01",
-        "RetirementDate": "1970-01-01",
+        "Period": {
+          "From": "01-01-1947",
+          "To": "01-01-1970"
+        },
         "minRunwayLength": "1800",
         "Price": "1200000",
         "FuelConsumptionRate": 1.49,
@@ -294,8 +256,10 @@
         "maxPax": "102",
         "maxCargo": "15000",
         "maxRange": "4815",
-        "IntroductionDate": "1951-01-01",
-        "RetirementDate": "1980-01-01",
+        "Period": {
+          "From": "01-01-1951",
+          "To": "01-01-1980"
+        },
         "minRunwayLength": "1800",
         "Price": "1200000",
         "FuelConsumptionRate": 1.49,
@@ -318,8 +282,10 @@
         "maxPax": "10",
         "maxCargo": "0",
         "maxRange": "1300",
-        "IntroductionDate": "1934-01-01",
-        "RetirementDate": "1947-01-01",
+        "Period": {
+          "From": "01-01-1934",
+          "To": "01-01-1947"
+        },
         "minRunwayLength": "1500",
         "Price": "150000",
         "FuelConsumptionRate": 0.72,
@@ -334,8 +300,10 @@
         "maxPax": "5",
         "maxCargo": "0",
         "maxRange": "1000",
-        "IntroductionDate": "1936-01-01",
-        "RetirementDate": "1950-01-01",
+        "Period": {
+          "From": "01-01-1936",
+          "To": "01-01-1950"
+        },
         "minRunwayLength": "1500",
         "Price": "150000",
         "FuelConsumptionRate": 0.72,
@@ -350,8 +318,10 @@
         "maxPax": "69",
         "maxCargo": "0",
         "maxRange": "5000",
-        "IntroductionDate": "1943-01-01",
-        "RetirementDate": "1961-01-01",
+        "Period": {
+          "From": "01-01-1943",
+          "To": "01-01-1961"
+        },
         "minRunwayLength": "2500",
         "Price": "750000",
         "FuelConsumptionRate": 0.72,
@@ -440,8 +410,10 @@
         "maxPax": "12",
         "maxCargo": "544",
         "maxRange": "1110",
-        "IntroductionDate": "1931-01-01",
-        "RetirementDate": "1947-01-01",
+        "Period": {
+          "From": "01-01-1931",
+          "To": "01-01-1947"
+        },
         "minRunwayLength": "457",
         "Price": "40000",
         "FuelConsumptionRate": 0.72,

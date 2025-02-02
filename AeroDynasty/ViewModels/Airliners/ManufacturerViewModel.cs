@@ -93,7 +93,7 @@ namespace AeroDynasty.ViewModels.Airliners
         public ManufacturerViewModel(Manufacturer manufacturer)
         {
             Manufacturer = manufacturer;
-            AircraftModels = CollectionViewSource.GetDefaultView(GameData.Instance.AircraftModels.Where(m => m.Manufacturer == manufacturer));
+            AircraftModels = AircraftModel.GetAircraftModels(m => m.Manufacturer == manufacturer);
 
             // Set sorting to aircraft models
             AircraftModels.SortDescriptions.Add(new SortDescription(nameof(AircraftModel.Name), ListSortDirection.Ascending));

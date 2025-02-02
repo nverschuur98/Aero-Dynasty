@@ -4,10 +4,13 @@
     "IATA": "ATL",
     "ICAO": "KATL",
     "CountryCode": "US",
+    "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "15-09-1926"
     },
-    "DemandFactor": 9,
     "Type": "International",
     "Season": "AllYear",
     "Coordinates": {
@@ -20,10 +23,13 @@
     "IATA": "PEK",
     "ICAO": "ZBAA",
     "CountryCode": "CN",
+    "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "01-03-1958"
     },
-    "DemandFactor": 9,
     "Type": "International",
     "Season": "AllYear",
     "Coordinates": {
@@ -37,6 +43,9 @@
     "ICAO": "KLAX",
     "CountryCode": "US",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "02-10-1928"
     },
@@ -52,10 +61,13 @@
     "IATA": "DXB",
     "ICAO": "OMDB",
     "CountryCode": "AE",
+    "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "30-09-1960"
     },
-    "DemandFactor": 9,
     "Type": "International",
     "Season": "AllYear",
     "Coordinates": {
@@ -68,10 +80,13 @@
     "IATA": "HND",
     "ICAO": "RJTT",
     "CountryCode": "JP",
+    "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "15-08-1931"
     },
-    "DemandFactor": 9,
     "Type": "International",
     "Season": "AllYear",
     "Coordinates": {
@@ -85,6 +100,9 @@
     "ICAO": "KORD",
     "CountryCode": "US",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "01-02-1944"
     },
@@ -101,6 +119,9 @@
     "ICAO": "EGLL",
     "CountryCode": "GB",
     "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "25-03-1946"
     },
@@ -117,6 +138,9 @@
     "ICAO": "VHHH",
     "CountryCode": "HK",
     "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "06-07-1998"
     },
@@ -133,6 +157,9 @@
     "ICAO": "ZSPD",
     "CountryCode": "CN",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "01-10-1999"
     },
@@ -149,6 +176,9 @@
     "ICAO": "LFPG",
     "CountryCode": "FR",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "08-03-1974"
     },
@@ -165,6 +195,9 @@
     "ICAO": "KDFW",
     "CountryCode": "US",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "23-09-1973"
     },
@@ -181,6 +214,9 @@
     "ICAO": "ZGGG",
     "CountryCode": "CN",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "05-08-2004"
     },
@@ -197,6 +233,9 @@
     "ICAO": "EDDF",
     "CountryCode": "DE",
     "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "08-07-1936"
     },
@@ -213,6 +252,9 @@
     "ICAO": "LTFM",
     "CountryCode": "TR",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "29-10-2018"
     },
@@ -229,6 +271,9 @@
     "ICAO": "EHAM",
     "CountryCode": "NL",
     "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "16-09-1916"
     },
@@ -245,6 +290,9 @@
     "ICAO": "EHBK",
     "CountryCode": "NL",
     "DemandFactor": 3,
+    "Size": {
+      "PassengerSize": "VerySmall"
+    },
     "Period": {
       "From": "08-01-1945"
     },
@@ -261,6 +309,9 @@
     "ICAO": "WSSS",
     "CountryCode": "SG",
     "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "01-07-1981"
     },
@@ -277,6 +328,9 @@
     "ICAO": "RKSI",
     "CountryCode": "KR",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "29-03-2001"
     },
@@ -293,6 +347,9 @@
     "ICAO": "KDEN",
     "CountryCode": "US",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "VeryLarge"
+    },
     "Period": {
       "From": "28-02-1995"
     },
@@ -309,6 +366,9 @@
     "ICAO": "WIII",
     "CountryCode": "ID",
     "DemandFactor": 7,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "01-03-1985"
     },
@@ -325,6 +385,9 @@
     "ICAO": "VTBS",
     "CountryCode": "TH",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "28-09-2006"
     },
@@ -341,6 +404,9 @@
     "ICAO": "LEMD",
     "CountryCode": "ES",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "22-05-1928"
     },
@@ -357,6 +423,9 @@
     "ICAO": "ZUUU",
     "CountryCode": "CN",
     "DemandFactor": 7,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "01-10-1956"
     },
@@ -373,6 +442,9 @@
     "ICAO": "VIDP",
     "CountryCode": "IN",
     "DemandFactor": 9,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "21-05-1962"
     },
@@ -389,6 +461,9 @@
     "ICAO": "WMKK",
     "CountryCode": "MY",
     "DemandFactor": 7,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "27-06-1998"
     },
@@ -405,6 +480,9 @@
     "ICAO": "KSFO",
     "CountryCode": "US",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "07-05-1927"
     },
@@ -421,6 +499,9 @@
     "ICAO": "MMMX",
     "CountryCode": "MX",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "VeryLarge"
+    },
     "Period": {
       "From": "01-11-1952"
     },
@@ -437,6 +518,9 @@
     "ICAO": "YSSY",
     "CountryCode": "AU",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "01-01-1929"
     },
@@ -453,6 +537,9 @@
     "ICAO": "LEBL",
     "CountryCode": "ES",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "22-02-1918"
     },
@@ -469,6 +556,9 @@
     "ICAO": "CYYZ",
     "CountryCode": "CA",
     "DemandFactor": 8,
+    "Size": {
+      "PassengerSize": "Largest"
+    },
     "Period": {
       "From": "29-06-1939"
     },
@@ -477,6 +567,25 @@
     "Coordinates": {
       "Latitude": 43.6777,
       "Longitude": -79.6248
+    }
+  },
+  {
+    "Name": "Brussels Airport",
+    "IATA": "BRU",
+    "ICAO": "EBBR",
+    "CountryCode": "BE",
+    "DemandFactor": 6,
+    "Size": {
+      "PassengerSize": "VeryLarge"
+    },
+    "Period": {
+      "From": "01-01-1940"
+    },
+    "Type": "International",
+    "Season": "AllYear",
+    "Coordinates": {
+      "Latitude": 50.5450,
+      "Longitude": 4.2940
     }
   }
 ]

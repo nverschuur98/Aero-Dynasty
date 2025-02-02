@@ -34,6 +34,7 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<Airport> Airports { get; private set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
         public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
+        public List<RouteDemand> RouteDemands { get; set; }
         
         //Observable change Data
         public ObservableCollection<Route> Routes { get; set; }
@@ -74,6 +75,9 @@ namespace AeroDynasty.Core.Utilities
 
             // Register all game tasks
             RegisterGameTasks();
+
+            // First time route demand calculations
+            //GameTasks.CalculateRouteBaseDemand();
         }
 
         //Private funcs
@@ -98,6 +102,7 @@ namespace AeroDynasty.Core.Utilities
             LoadAirports();
             LoadManufacturers();
             LoadAircrafts();
+            RouteDemands = new List<RouteDemand>();
         }
 
         /// <summary>
@@ -181,6 +186,10 @@ namespace AeroDynasty.Core.Utilities
                     FocusSeason airportSeason = (FocusSeason)Enum.Parse(typeof(FocusSeason), airportData.GetProperty("Season").ToString());
                     double demandFactor = Convert.ToDouble(airportData.GetProperty("DemandFactor").ToString());
 
+                    // Get size property
+                    JsonElement size = airportData.GetProperty("Size");
+                    AirportSize passengerSize = (AirportSize)Enum.Parse(typeof(AirportSize), size.GetProperty("PassengerSize").ToString());
+
                     DateTime startDate;
                     DateTime endDate;
 
@@ -203,7 +212,6 @@ namespace AeroDynasty.Core.Utilities
                         endDate = new DateTime(2199, 12, 31);
                     }
 
-
                     // Extract the coordinates
                     JsonElement _coordinates = airportData.GetProperty("Coordinates");
                     double latitude = _coordinates.GetProperty("Latitude").GetDouble();  // Correctly get double value
@@ -215,7 +223,7 @@ namespace AeroDynasty.Core.Utilities
                     if (CountryMap.TryGetValue(countryCode, out var country))
                     {
                         // Create the Airport instance with the Country reference
-                        var airport = new Airport(airportName, iata, icao, airportType, airportSeason, country, coordinates, demandFactor);
+                        var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, demandFactor);
 
                         // Set the period for the airport
                         airport.SetPeriod(startDate, endDate);
@@ -375,9 +383,32 @@ namespace AeroDynasty.Core.Utilities
                 Convert.ToInt32(aircraft.GetProperty("minRunwayLength").ToString()),
                 aircraft.GetProperty("FuelConsumptionRate").GetDouble(),
                 aircraft.GetProperty("OperatingCostRate").GetDouble(),
-                manufacturer,
-                Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()),
-                Convert.ToDateTime(aircraft.GetProperty("RetirementDate").ToString()));
+                manufacturer);
+
+            DateTime startDate;
+            DateTime endDate;
+
+            // Extract the period if it exists
+            if (aircraft.TryGetProperty("Period", out JsonElement period))
+            {
+                // Parse the "From" and "To" dates
+                startDate = period.TryGetProperty("From", out var fromProperty) && DateTime.TryParseExact(fromProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var sdate)
+                    ? sdate
+                    : new DateTime(1900, 01, 01);
+
+                endDate = period.TryGetProperty("To", out var toProperty) && DateTime.TryParseExact(toProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var edate)
+                    ? edate
+                    : new DateTime(2199, 12, 31);
+            }
+            else
+            {
+                // If "Period" does not exist, use default dates
+                startDate = new DateTime(1900, 01, 01);
+                endDate = new DateTime(2199, 12, 31);
+            }
+
+            //Set the period in which the aircraft is active.
+            aircraftModel.SetPeriod(startDate, endDate);
 
             return aircraftModel;
         }
@@ -406,13 +437,10 @@ namespace AeroDynasty.Core.Utilities
                     foreach (JsonElement aircraft in aircraftsElement.EnumerateArray())
                     {
 
-                        if (Convert.ToDateTime(aircraft.GetProperty("IntroductionDate").ToString()) <= GameState.Instance.CurrentDate)
-                        {
-                            AircraftModel aircraftModel = LoadAircraftFromJson(aircraft, Manufacturer);
+                        AircraftModel aircraftModel = LoadAircraftFromJson(aircraft, Manufacturer);
 
-                            //Add the model to the aircrafts list
-                            aircrafts.Add(aircraftModel);
-                        }
+                        //Add the model to the aircrafts list
+                        aircrafts.Add(aircraftModel);
                     }
                 }
 
@@ -449,18 +477,20 @@ namespace AeroDynasty.Core.Utilities
             GameState.Instance.RegisterDailyTask(GameTasks.CalculateRouteExecutions);
             GameState.Instance.RegisterDailyTask(GameTasks.CalculateFuelPrice);
             GameState.Instance.RegisterDailyTask(GameTasks.CheckIsActive);
+
+            GameState.Instance.RegisterMonthlyTask(GameTasks.CalculateRouteDemand);
         }
 
         // Public funcs
         public void SetupGameData()
         {
-            //Load Core first
+            // Load Core first
             LoadCoreData();
 
-            //Load non-change data
+            // Load non-change data
             LoadNonChangeData();
 
-            //Load change data
+            // Load change data
             LoadChangedata();
         }
 
@@ -470,6 +500,11 @@ namespace AeroDynasty.Core.Utilities
             foreach(Airport airport in Airports)
             {
                 airport.CheckIsActive(GameState.Instance.CurrentDate);
+            }
+
+            foreach (AircraftModel aircraftModel in AircraftModels)
+            {
+                aircraftModel.CheckIsActive(GameState.Instance.CurrentDate);
             }
         }
     }

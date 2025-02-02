@@ -18,17 +18,19 @@ namespace AeroDynasty.Core.Models.AirportModels
         public string IATA { get; set; }
         public string ICAO { get; set; }
         public AirportType Type { get; set; }
+        public AirportSize PassengerSize { get; set; }
         public FocusSeason Season { get; set; }
         public Country Country { get; set; }
         public Coordinates Coordinates { get; set; }
         public double DemandFactor { get; set; }
 
-        public Airport(string name, string iata, string icao, AirportType type, FocusSeason season , Country country, Coordinates coordinates, double demandfactor)
+        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Country country, Coordinates coordinates, double demandfactor)
         {
             Name = name;
             IATA = iata;
             ICAO = icao;
             Type = type;
+            PassengerSize = passengerSize;
             Season = season;
             Country = country;
             Coordinates = coordinates;

@@ -2,7 +2,19 @@
 {
     public enum AirportType
     {
-        Domestic,
-        International
+        International,
+        Regional,
+        Domestic
+    }
+
+    public enum AirportSize
+    {
+        Largest,
+        VeryLarge,
+        Large,
+        Medium,
+        Small,
+        VerySmall,
+        Smallest
     }
 }

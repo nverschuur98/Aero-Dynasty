@@ -10,8 +10,17 @@ namespace AeroDynasty.Core.Models
     public abstract class _PeriodModel
     {
         private bool _isActive;
+        /// <summary>
+        /// Object is within its active time period
+        /// </summary>
         public bool IsActive { get => _isActive; }
+        /// <summary>
+        /// Start date of the active period
+        /// </summary>
         public DateTime StartDate { get; set; }
+        /// <summary>
+        /// End date of the active period
+        /// </summary>
         public DateTime EndDate { get; set; }
 
         public void SetPeriod(DateTime start, DateTime end)

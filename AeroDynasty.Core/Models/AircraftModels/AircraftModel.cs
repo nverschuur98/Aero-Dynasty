@@ -1,18 +1,17 @@
 ﻿using AeroDynasty.Core.Enums;
 using AeroDynasty.Core.Models.Core;
+using AeroDynasty.Core.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace AeroDynasty.Core.Models.AircraftModels
 {
-    
-        /*"FuelConsumptionPerKm": "21.80",
-        "OperatingCostPerKm": "1.90"*/
-
-    public class AircraftModel
+    public class AircraftModel : _PeriodModel
     {
         public string Name { get; private set; }
         public string Family { get; private set; }
@@ -27,10 +26,8 @@ namespace AeroDynasty.Core.Models.AircraftModels
         public double FuelConsumptionRate { get; private set; } // in L/km
         public double OperatingCostRate { get; private set; } // in dollar/km
         public Manufacturer Manufacturer { get; private set; }
-        public DateTime IntroductionDate { get; private set; }
-        public string FormattedIntroductionDate => IntroductionDate.ToString("dd-MMM-yyyy");
-        public DateTime RetirementDate { get; private set; }
-        public string FormattedRetirementDate => RetirementDate.ToString("dd-MMM-yyyy");
+        public string FormattedIntroductionDate => StartDate.ToString("dd-MMM-yyyy");
+        public string FormattedRetirementDate => EndDate.ToString("dd-MMM-yyyy");
 
         public AircraftModel(
             string name,
@@ -45,9 +42,7 @@ namespace AeroDynasty.Core.Models.AircraftModels
             int minRunwayLength,
             double fuelConsumptionRate,
             double operatingCostRate,
-            Manufacturer manufacturer,
-            DateTime introductionDate,
-            DateTime retirementDate)
+            Manufacturer manufacturer)
         {
             Name = name;
             Family = family;
@@ -62,8 +57,29 @@ namespace AeroDynasty.Core.Models.AircraftModels
             FuelConsumptionRate = fuelConsumptionRate;
             OperatingCostRate = operatingCostRate;
             Manufacturer = manufacturer;
-            IntroductionDate = introductionDate;
-            RetirementDate = retirementDate;
+        }
+
+        /// <summary>
+        /// Return all active aircraftmodels in the game as an ICollectionView
+        /// </summary>
+        /// <returns></returns>
+        public static ICollectionView GetAircraftModels()
+        {
+            return GetAircraftModels(_ => true); // Calls the overloaded method with no extra filter
+        }
+
+        /// <summary>
+        /// Return all active aircraftmodels in the game as an ICollectionView
+        /// </summary>
+        /// <param name="additionalFilter">Selecting criteria</param>
+        /// <returns></returns>
+        public static ICollectionView GetAircraftModels(Func<AircraftModel, bool> additionalFilter)
+        {
+            var filteredAircraftModels = GameData.Instance.AircraftModels.Where(a => a.IsActive).Where(additionalFilter);
+            var aircraftModelsView = CollectionViewSource.GetDefaultView(filteredAircraftModels);
+            aircraftModelsView.SortDescriptions.Add(new SortDescription(nameof(AircraftModel.Name), ListSortDirection.Ascending));
+
+            return aircraftModelsView;
         }
     }
 }
