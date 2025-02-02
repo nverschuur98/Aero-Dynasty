@@ -70,8 +70,8 @@ namespace AeroDynasty.Core.Utilities
             //Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             UserData = new UserData();
 
-            // Check all the objects with an assigned period on their status
-            FirstTimeIsActiveCheck();
+            // Execute tasks for starting values
+            //GameLoadedTasks();
 
             // Register all game tasks
             RegisterGameTasks();
@@ -494,18 +494,11 @@ namespace AeroDynasty.Core.Utilities
             LoadChangedata();
         }
 
-
-        public void FirstTimeIsActiveCheck()
+        public void GameLoadedTasks()
         {
-            foreach(Airport airport in Airports)
-            {
-                airport.CheckIsActive(GameState.Instance.CurrentDate);
-            }
-
-            foreach (AircraftModel aircraftModel in AircraftModels)
-            {
-                aircraftModel.CheckIsActive(GameState.Instance.CurrentDate);
-            }
+            GameTasks.CalculateFuelPrice();
+            GameTasks.CheckIsActive();
+            GameTasks.CalculateRouteDemand();
         }
     }
 }

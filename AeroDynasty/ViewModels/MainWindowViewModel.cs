@@ -36,29 +36,25 @@ namespace AeroDynasty.ViewModels
             get => _userData;
             set
             {
-                if (_userData != value)
+                if (_userData == value)
+                    return;
+
+                if (_userData != null)
                 {
-                    if (_userData != null)
-                    {
-                        _userData.PropertyChanged -= UserData_PropertyChanged; // Unsubscribe from old instance
-                        if (_userData.Airline != null)
-                        {
-                            _userData.Airline.CashBalance.PropertyChanged -= CashBalance_PropertyChanged;
-                        }
-                    }
+                    _userData.PropertyChanged -= UserData_PropertyChanged; // Unsubscribe from old instance
+                    if (_userData.Airline != null)
+                        _userData.Airline.CashBalance.PropertyChanged -= CashBalance_PropertyChanged;
+                }
 
-                    _userData = value;
-                    OnPropertyChanged(nameof(UserData));
-                    OnPropertyChanged(nameof(GameIsLoaded));
+                _userData = value;
+                OnPropertyChanged(nameof(UserData));
+                OnPropertyChanged(nameof(GameIsLoaded));
 
-                    if (_userData != null)
-                    {
-                        _userData.PropertyChanged += UserData_PropertyChanged; // Subscribe to new instance
-                        if(_userData.Airline != null)
-                        {
-                            _userData.Airline.CashBalance.PropertyChanged += CashBalance_PropertyChanged;
-                        }
-                    }
+                if (_userData != null)
+                {
+                    _userData.PropertyChanged += UserData_PropertyChanged; // Subscribe to new instance
+                    if(_userData.Airline != null)
+                        _userData.Airline.CashBalance.PropertyChanged += CashBalance_PropertyChanged;
                 }
             }
         }
@@ -81,9 +77,6 @@ namespace AeroDynasty.ViewModels
         public MainWindowViewModel()
         {
             UserData = GameData.Instance.UserData; // This will trigger the setter logic
-
-            // Subscribe to PropertyChanged event of GameData
-            //GameData.Instance.PropertyChanged += GameData_PropertyChanged;
 
             // Subscribe to PropertyChanged event of GameData
             GameState.Instance.PropertyChanged += GameState_PropertyChanged;
@@ -136,17 +129,6 @@ namespace AeroDynasty.ViewModels
         {
             GameState.Instance.PauseCommand.Execute(null);
         }
-
-        // Event handler for when properties change in GameData
-        /*private void GameData_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(GameData.UserData))
-            {
-                OnPropertyChanged(nameof(UserData)); // Notify that FormattedCurrentDate has changed
-                OnPropertyChanged(nameof(UserData.Airline.CashBalance)); // Notify that FormattedCurrentDate has changed
-                OnPropertyChanged(nameof(GameIsLoaded));
-            }
-        }*/
 
         private void CashBalance_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {

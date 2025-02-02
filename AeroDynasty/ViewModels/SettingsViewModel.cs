@@ -47,7 +47,7 @@ namespace AeroDynasty.ViewModels
         {
             //SaveGameManager.NewGame();
             var content = new NewGameViewModel();
-
+            content.CloseRequest += closeCurrentDetailContent;
             CurrentDetailContent = content;
         }
         private void Save()
@@ -58,6 +58,11 @@ namespace AeroDynasty.ViewModels
         private void Load()
         {
             SaveGameManager.LoadGame("Save/savegame.json");
+        }
+
+        private void closeCurrentDetailContent()
+        {
+            CurrentDetailContent = null;
         }
     }
 }

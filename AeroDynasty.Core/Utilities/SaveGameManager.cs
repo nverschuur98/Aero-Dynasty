@@ -52,13 +52,17 @@ namespace AeroDynasty.Core.Utilities
 
         }
 
-        public static void NewGame()
+        public static void NewGame(Airline userAirline, int startYear)
         {
             GameData.Instance.SetupGameData();
-            GameData.Instance.UserData.Airline = GameData.Instance.Airlines.First(air => air.Name.Contains("KLM"));
+            GameData.Instance.UserData.Airline = GameData.Instance.Airlines.First(a => a.Name == userAirline.Name);
 
             GameState.Instance.SetupGameState();
+            GameState.Instance.CurrentDate = new DateTime(startYear, 1, 1);
             GameState.Instance.PauseCommand.Execute(null);
+
+            // Check all the objects with an assigned period on their status
+            GameData.Instance.GameLoadedTasks();
         }
 
         /// <summary>
@@ -201,7 +205,7 @@ namespace AeroDynasty.Core.Utilities
                 // As the data is directly injected in the GameDataInstance, no loading is needed
 
                 // Check all the objects with an assigned period on their status
-                GameData.Instance.FirstTimeIsActiveCheck();
+                GameData.Instance.GameLoadedTasks();
             }
             catch (Exception ex)
             {

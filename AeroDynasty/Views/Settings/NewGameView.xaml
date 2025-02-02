@@ -29,7 +29,7 @@
                 </StackPanel>
 
                 <StackPanel Grid.Row="4" Orientation="Horizontal" FlowDirection="RightToLeft">
-                    <Menu:MenuButton Label="Create New Game" Command="{Binding CreateNewGameCommand}" />
+                    <Menu:MenuButton Label="Create New Game" Command="{Binding CreateNewGameCommand}" IsEnabled="{Binding CanCreateNewGame}"/>
                 </StackPanel>
             </Grid>
         </Page:Wrapper>

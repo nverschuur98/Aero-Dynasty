@@ -2,6 +2,7 @@
 using AeroDynasty.Core.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,16 +13,46 @@ namespace AeroDynasty.ViewModels.Settings
     public class NewGameViewModel : _BaseViewModel
     {
         // Private vars
+        private int _selectedStartingYear;
+        private Airline _selectedAirline;
+        private bool _canCreateNewGame;
 
         // Public vars
         public List<int> AvailableStartingYears { get; set; }
-        public int SelectedStartingYear { get; set; }
-        public List<Airline> AvailableAirlines { get; set; }
-        public Airline SelectedAirline { get; set; }
+        public int SelectedStartingYear
+        {
+            get => _selectedStartingYear;
+            set
+            {
+                _selectedStartingYear = value;
+                OnPropertyChanged(nameof(SelectedStartingYear));
+                CanCreateNewGame = canCreateNewGame();
+            }
+        }
+        public ObservableCollection<Airline> AvailableAirlines { get; set; }
+        public Airline SelectedAirline
+        {
+            get => _selectedAirline;
+            set
+            {
+                _selectedAirline = value;
+                OnPropertyChanged(nameof(SelectedAirline));
+                CanCreateNewGame = canCreateNewGame();
+            }
+        }
+        public bool CanCreateNewGame
+        {
+            get => _canCreateNewGame;
+            set
+            {
+                _canCreateNewGame = value;
+                OnPropertyChanged(nameof(CanCreateNewGame));
+            }
+        }
 
-        // Commands
-        public ICommand CreateNewGameCommand
-        { get; }
+        // Commands and events
+        public ICommand CreateNewGameCommand { get; }
+        public event Action CloseRequest;
 
         // Constructor
         public NewGameViewModel()
@@ -31,23 +62,32 @@ namespace AeroDynasty.ViewModels.Settings
             AvailableStartingYears.Add(1946);
             AvailableStartingYears.Add(1947);
             AvailableStartingYears.Add(1948);
+            AvailableStartingYears.Add(2025);
 
             // Static list for airlines
-            AvailableAirlines = new List<Airline>();
-            AvailableAirlines.Add(GameData.Instance.Airlines.Where(a => a.Name.Contains("KLM")).First());
+            AvailableAirlines = GameData.Instance.Airlines;
 
             // Bind commands
             CreateNewGameCommand = new RelayCommand(CreateNewGame);
         }
 
-        // Private vars
+        // Private funcs
+        private bool canCreateNewGame()
+        {
+            bool can = SelectedAirline != null && SelectedStartingYear != 0;
+            return can;
+        }
 
-        // Public vars
+        // Public funcs
 
         // Command and event handling
         private void CreateNewGame()
         {
-            //SaveGameManager.NewGame();
+            if (!_canCreateNewGame)
+                return;
+
+            SaveGameManager.NewGame(SelectedAirline, SelectedStartingYear);
+            CloseRequest?.Invoke();
         }
     }
 }
