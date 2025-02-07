@@ -172,6 +172,33 @@
                     </ListView>
                 </Grid>
             </Page:Wrapper>
+
+            <Page:Wrapper Grid.Column="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Runways" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                    <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+
+                    <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Airport.Runways}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Runway Name" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Length">
+                                    <GridViewColumn.DisplayMemberBinding>
+                                        <Binding Path="Length" StringFormat="0 m"/>
+                                    </GridViewColumn.DisplayMemberBinding>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Surface" DisplayMemberBinding="{Binding Surface}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Page:Wrapper>
         </Grid>
     </Grid>
 </UserControl>

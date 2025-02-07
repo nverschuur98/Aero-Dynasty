@@ -218,11 +218,25 @@ namespace AeroDynasty.Core.Utilities
 
                     Coordinates coordinates = new Coordinates(latitude, longitude);
 
+                    // Get runways property
+                    List<Runway> runways = new List<Runway>();
+                    if(airportData.TryGetProperty("Runways", out JsonElement _runways))
+                    {
+                        foreach(JsonElement runway in _runways.EnumerateArray())
+                        {
+                            string name = runway.GetProperty("Name").GetString();
+                            int length = runway.GetProperty("Length").GetInt32();
+                            RunwaySurface surface = (RunwaySurface)Enum.Parse(typeof(RunwaySurface), runway.GetProperty("Surface").ToString());
+
+                            runways.Add(new Runway(name, surface, length));
+                        }
+                    }
+
                     // Check if the country exists in the map
                     if (CountryMap.TryGetValue(countryCode, out var country))
                     {
                         // Create the Airport instance with the Country reference
-                        var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, demandFactor);
+                        var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, demandFactor, runways);
 
                         // Set the period for the airport
                         airport.SetPeriod(startDate, endDate);

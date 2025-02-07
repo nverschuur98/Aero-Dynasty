@@ -75,16 +75,28 @@
                             <GridViewColumn Header="Price" DisplayMemberBinding="{Binding Price}" />
                             <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}" />
                             <GridViewColumn Header="Engine Type" DisplayMemberBinding="{Binding EngineType}" />
-                            <GridViewColumn Header="Cruise Speed" DisplayMemberBinding="{Binding CruisingSpeed}" />
+                            <GridViewColumn Header="Cruise Speed">
+                                <GridViewColumn.DisplayMemberBinding>
+                                    <Binding Path="CruisingSpeed" StringFormat="0 km/h" />
+                                </GridViewColumn.DisplayMemberBinding>
+                            </GridViewColumn>
                             <GridViewColumn Header="Max Pax" DisplayMemberBinding="{Binding maxPax}" />
                             <GridViewColumn Header="Max Cargo" DisplayMemberBinding="{Binding maxCargo}" />
-                            <GridViewColumn Header="Max Range" DisplayMemberBinding="{Binding maxRange}" />
+                            <GridViewColumn Header="Max Range">
+                                <GridViewColumn.DisplayMemberBinding>
+                                    <Binding Path="maxRange" StringFormat="0 km" />
+                                </GridViewColumn.DisplayMemberBinding>
+                            </GridViewColumn>
                             <GridViewColumn Header="Fuel Consumption">
                                 <GridViewColumn.DisplayMemberBinding>
                                     <Binding Path="FuelConsumptionRate" StringFormat="{}{0:F1} L/km" />
                                 </GridViewColumn.DisplayMemberBinding>
                             </GridViewColumn>
-                            <GridViewColumn Header="Min Runway" DisplayMemberBinding="{Binding minRunwayLength}" />
+                            <GridViewColumn Header="Min Runway">
+                                <GridViewColumn.DisplayMemberBinding>
+                                    <Binding Path="minRunwayLength" StringFormat="0 m" />
+                                </GridViewColumn.DisplayMemberBinding>
+                            </GridViewColumn>
                             <GridViewColumn Header="Introduced" DisplayMemberBinding="{Binding FormattedIntroductionDate}" />
                         </GridView>
                     </ListView.View>

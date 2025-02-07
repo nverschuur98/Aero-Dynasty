@@ -282,7 +282,19 @@
     "Coordinates": {
       "Latitude": 52.3086,
       "Longitude": 4.7681
-    }
+    },
+    "Runways" : [
+      {
+        "Name": "04/22",
+        "Length": 700,
+        "Surface": "Concrete"
+      },
+      {
+        "Name": "13/31",
+        "Length": 1400,
+        "Surface": "Concrete"
+      }
+    ]
   },
   {
     "Name": "Beek Airport",

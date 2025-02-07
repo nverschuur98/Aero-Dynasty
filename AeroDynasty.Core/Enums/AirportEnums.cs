@@ -17,4 +17,12 @@
         VerySmall,
         Smallest
     }
+
+    public enum RunwaySurface
+    {
+        Grass,
+        Gravel,
+        Concrete,
+        Asphalt
+    }
 }

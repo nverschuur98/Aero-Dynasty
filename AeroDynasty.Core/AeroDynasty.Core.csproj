@@ -101,6 +101,7 @@
     <Compile Include="Models\AirlineModels\Airline.cs" />
     <Compile Include="Models\AirlinerModels\Airliner.cs" />
     <Compile Include="Models\AirportModels\Airport.cs" />
+    <Compile Include="Models\AirportModels\Runway.cs" />
     <Compile Include="Models\Core\Coordinates.cs" />
     <Compile Include="Models\Core\Country.cs" />
     <Compile Include="Models\Core\GlobalModifiers.cs" />

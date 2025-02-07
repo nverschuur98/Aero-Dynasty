@@ -116,7 +116,7 @@
           "From": "17-06-1936",
           "To": "01-01-1960"
         },
-        "minRunwayLength": "1500",
+        "minRunwayLength": "610",
         "Price": "100000",
         "FuelConsumptionRate": 1.07,
         "OperatingCostRate": 0
@@ -134,7 +134,7 @@
           "From": "01-01-1941",
           "To": "01-01-1965"
         },
-        "minRunwayLength": "1500",
+        "minRunwayLength": "610",
         "Price": "100000",
         "FuelConsumptionRate": 1.07,
         "OperatingCostRate": 0
@@ -152,7 +152,7 @@
           "From": "01-01-1945",
           "To": "01-01-1975"
         },
-        "minRunwayLength": "1500",
+        "minRunwayLength": "610",
         "Price": "100000",
         "FuelConsumptionRate": 1.07,
         "OperatingCostRate": 0
