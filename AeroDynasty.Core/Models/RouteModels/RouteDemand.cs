@@ -3,7 +3,9 @@ using AeroDynasty.Core.Models.Core;
 using AeroDynasty.Core.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Windows.Data;
 
 namespace AeroDynasty.Core.Models.RouteModels
 {
@@ -51,6 +53,29 @@ namespace AeroDynasty.Core.Models.RouteModels
             DailyDemand = Enum.GetValues(typeof(DayOfWeek))
                 .Cast<DayOfWeek>()
                 .ToDictionary(day => day, _ => 0);
+        }
+
+        /// <summary>
+        /// Return all active airports in the game as an ICollectionView
+        /// </summary>
+        /// <returns></returns>
+        public static ICollectionView GetRouteDemands(Airport airport)
+        {
+            return GetRouteDemands(airport, _ => true); // Calls the overloaded method with no extra filter
+        }
+
+        /// <summary>
+        /// Return all active airports in the game as an ICollectionView
+        /// </summary>
+        /// <param name="additionalFilter">Selecting criteria</param>
+        /// <returns></returns>
+        public static ICollectionView GetRouteDemands(Airport airport, Func<RouteDemand, bool> additionalFilter)
+        {
+            var filteredRouteDemands = GameData.Instance.RouteDemands.Where(r => r.Origin == airport).Where(additionalFilter);
+            var routeDemandsView = CollectionViewSource.GetDefaultView(filteredRouteDemands);
+            routeDemandsView.SortDescriptions.Add(new SortDescription(nameof(RouteDemand.BaseFactor), ListSortDirection.Descending));
+
+            return routeDemandsView;
         }
 
         /// <summary>
@@ -107,22 +132,25 @@ namespace AeroDynasty.Core.Models.RouteModels
 
             // Compute individual weights.
             double destinationWeight = Math.Min(_sizeWeights[Destination.PassengerSize], _sizeWeights[Origin.PassengerSize]) * _typeWeights[Destination.Type];
-            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Destination Weight =; {destinationWeight};");
 
             // Use the average weight to represent the route's attractiveness.
             double averageWeight = destinationWeight;
-            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Average Weight =; {averageWeight};");
 
             // Calculate a normalized distance factor:
             // 1 when distance = 0, and decreases linearly to 0 when distance >= _maxDistanceForScaling.
             double distanceFactor = Math.Max(0.125, 1 - (distance / _maxDistanceForScaling));
-            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Distance Factor =; {distanceFactor};");
 
             // Now combine the factors:
             // Multiply the scaled global passenger count, the average airport weight, and the distance factor.
             double baseFactor = _globalPassengerFactor * averageWeight * distanceFactor;
-            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Base Factor =; {baseFactor} = {_globalPassengerFactor} * {averageWeight} * {distanceFactor};");
 
+#if DEBUG
+            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Destination Weight =; {destinationWeight};");
+            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Average Weight =; {averageWeight};");
+            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Distance Factor =; {distanceFactor};");
+            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Base Factor =; {baseFactor} = {_globalPassengerFactor} * {averageWeight} * {distanceFactor};");
+
+#endif
             return baseFactor;
         }
 

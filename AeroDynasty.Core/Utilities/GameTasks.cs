@@ -5,6 +5,7 @@ using AeroDynasty.Core.Models.RouteModels;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace AeroDynasty.Core.Utilities
             // Get the current fuel price and current day
             double currentFuelPrice = GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount;
             DayOfWeek currentDay = GameState.Instance.CurrentDate.DayOfWeek;
-            List<RouteDemand> routeDemands = GameData.Instance.RouteDemands;
+            ObservableCollection<RouteDemand> routeDemands = GameData.Instance.RouteDemands;
 
             // Check if routeDemands is not empty or null
             if (routeDemands.Count <= 0 || routeDemands == null)
@@ -255,7 +256,7 @@ namespace AeroDynasty.Core.Utilities
             await Task.WhenAll(tasks);
 
             // Update GameData after calculations
-            GameData.Instance.RouteDemands = RouteDemands.ToList();
+            GameData.Instance.RouteDemands = new ObservableCollection<RouteDemand>(RouteDemands.ToList());
 
 #if DEBUG
             // Stop the stopwatch after all tasks are completed

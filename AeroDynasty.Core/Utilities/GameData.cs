@@ -34,7 +34,7 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<Airport> Airports { get; private set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
         public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
-        public List<RouteDemand> RouteDemands { get; set; }
+        public ObservableCollection<RouteDemand> RouteDemands { get; set; }
         
         //Observable change Data
         public ObservableCollection<Route> Routes { get; set; }
@@ -101,7 +101,7 @@ namespace AeroDynasty.Core.Utilities
             LoadAirports();
             LoadManufacturers();
             LoadAircrafts();
-            RouteDemands = new List<RouteDemand>();
+            RouteDemands = new ObservableCollection<RouteDemand>();
         }
 
         /// <summary>
@@ -370,10 +370,10 @@ namespace AeroDynasty.Core.Utilities
             JsonElement globalPassengers = root.GetProperty("GlobalPassengers");
             readYearValue(globalPassengers, GlobalModifiers.GlobalPassengersMap);
 
-            // Get the current year, and set the correct modifiers
-            int y = GameState.Instance.CurrentDate.Year;
-            GlobalModifiers.CurrentFuelPrice = new Price(GlobalModifiers.FuelPriceMap[y]);
-            GlobalModifiers.CurrentGlobalPassengers = GlobalModifiers.GlobalPassengersMap[y];
+            GlobalModifiers.CurrentFuelPrice = new Price(0);
+            GlobalModifiers.CurrentGlobalPassengers = 0;
+            //GlobalModifiers.CurrentFuelPrice = new Price(GlobalModifiers.FuelPriceMap[y]);
+            //GlobalModifiers.CurrentGlobalPassengers = GlobalModifiers.GlobalPassengersMap[y];
         }
 
         private AircraftModel LoadAircraftFromJson(JsonElement aircraft, Manufacturer manufacturer)
@@ -505,6 +505,12 @@ namespace AeroDynasty.Core.Utilities
 
         public void GameLoadedTasks()
         {
+            // Get game data 
+            int y = GameState.Instance.CurrentDate.Year;
+            GlobalModifiers.CurrentFuelPrice = new Price(GlobalModifiers.FuelPriceMap[y]);
+            GlobalModifiers.CurrentGlobalPassengers = GlobalModifiers.GlobalPassengersMap[y];
+
+            // Do one of calculations
             GameTasks.CalculateFuelPrice();
             GameTasks.CheckIsActive();
             GameTasks.CalculateRouteDemand(true);

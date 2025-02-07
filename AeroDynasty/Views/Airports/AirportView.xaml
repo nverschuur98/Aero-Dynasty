@@ -139,6 +139,39 @@
                     </ListView>
                 </Grid>
             </Page:Wrapper>
+
+            <Page:Wrapper Grid.Column="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Expected Daily Demand" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                    <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+
+                    <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding DailyDemandAirports}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                        <ListView.View>
+                            <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
+                                <GridViewColumn Header="Airport Name" Width="200">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Destination.Name}" Style="{StaticResource TextBlockButton}">
+                                                <TextBlock.InputBindings>
+                                                    <MouseBinding Gesture="LeftClick" Command="{Binding DataContext.OpenAirportCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}"/>
+                                                </TextBlock.InputBindings>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Demand" DisplayMemberBinding="{Binding BaseDemand}"/>
+                                <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Destination.Country.Name}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Page:Wrapper>
         </Grid>
     </Grid>
 </UserControl>

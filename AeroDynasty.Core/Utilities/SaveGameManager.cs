@@ -54,11 +54,13 @@ namespace AeroDynasty.Core.Utilities
 
         public static void NewGame(Airline userAirline, int startYear)
         {
-            GameData.Instance.SetupGameData();
-            GameData.Instance.UserData.Airline = GameData.Instance.Airlines.First(a => a.Name == userAirline.Name);
 
             GameState.Instance.SetupGameState();
             GameState.Instance.CurrentDate = new DateTime(startYear, 1, 1);
+
+            GameData.Instance.SetupGameData();
+            GameData.Instance.UserData.Airline = GameData.Instance.Airlines.First(a => a.Name == userAirline.Name);
+
             GameState.Instance.PauseCommand.Execute(null);
 
             // Check all the objects with an assigned period on their status
