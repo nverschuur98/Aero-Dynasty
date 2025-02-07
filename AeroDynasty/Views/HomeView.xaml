@@ -14,6 +14,13 @@
         </Grid.RowDefinitions>
         <TextBlock Text="This is the Home View" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
         <Grid Grid.Row="1" >
+            <DataGrid ItemsSource="{Binding RouteDemands}" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Origin ICAO" Binding="{Binding Origin.ICAO}" />
+                    <DataGridTextColumn Header="Origin ICAO" Binding="{Binding Destination.ICAO}" />
+                    <DataGridTextColumn Header="Origin ICAO" Binding="{Binding BaseDemand}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </Grid>
     </Grid>
 </UserControl>

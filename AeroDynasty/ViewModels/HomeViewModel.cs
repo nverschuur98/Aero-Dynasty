@@ -9,6 +9,7 @@ using AeroDynasty.Core.Models.AircraftModels;
 using AeroDynasty.Core.Models.AirlineModels;
 using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
+using AeroDynasty.Core.Models.RouteModels;
 using AeroDynasty.Core.Utilities;
 
 namespace AeroDynasty.ViewModels
@@ -21,6 +22,7 @@ namespace AeroDynasty.ViewModels
         public ICollectionView Airports { get; set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; set; }
         public ObservableCollection<AircraftModel> AircraftModels { get; set; }
+        public List<RouteDemand> RouteDemands { get; set; }
 
         public HomeViewModel()
         {
@@ -36,6 +38,7 @@ namespace AeroDynasty.ViewModels
             Airports = Airport.GetAirports();
             Manufacturers = GameData.Instance.Manufacturers;
             AircraftModels = GameData.Instance.AircraftModels;
+            RouteDemands = GameData.Instance.RouteDemands;
         }
     }
 }

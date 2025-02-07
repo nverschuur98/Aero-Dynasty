@@ -70,7 +70,7 @@ namespace AeroDynasty.Core.Utilities
                     localDemand = routeDemand.DailyDemand[currentDay]; // Local copy of available demand
 
 #if DEBUG
-                //Console.WriteLine($"{currentDay} - {group.Key.Origin.ICAO}-{group.Key.Destination.ICAO} - Total Demand: {localDemand}");
+                Console.WriteLine($"{currentDay} - {group.Key.Origin.ICAO}-{group.Key.Destination.ICAO} - Total Demand: {localDemand}");
 #endif
 
                 // Sort RouteLegs by some priority (e.g., largest airline reputation first)
@@ -92,7 +92,7 @@ namespace AeroDynasty.Core.Utilities
                     // Update airline balance
                     route.Owner.addCash(revenue - cost);
 #if DEBUG
-                    //Console.WriteLine($"{currentDay} - {leg.Origin.ICAO}-{leg.Destination.ICAO} - Departure:{leg.DepartureTime}, Pax:{filledPassengers}, Profit: {revenue - cost}, Demand left: {localDemand}");
+                    Console.WriteLine($"{currentDay} - {leg.Origin.ICAO}-{leg.Destination.ICAO} - Departure:{leg.DepartureTime}, Pax:{filledPassengers}, Profit: {revenue - cost}, Demand left: {localDemand}");
 #endif
                 }
             })));
@@ -114,7 +114,7 @@ namespace AeroDynasty.Core.Utilities
         {
             // Cache year and price map to avoid repeated lookups
             int year = GameState.Instance.CurrentDate.Year;
-            var fuelPriceMap = GameData.Instance.FuelPriceMap;
+            var fuelPriceMap = GameData.Instance.GlobalModifiers.FuelPriceMap;
 
             // Cache current price
             double currentFuelPrice = GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount;
@@ -166,6 +166,16 @@ namespace AeroDynasty.Core.Utilities
         /// <returns></returns>
         internal static async Task CalculateRouteDemand()
         {
+            await CalculateRouteDemand(false);
+        }
+
+        /// <summary>
+        /// Task to calculate the route demand per month
+        /// </summary>
+        /// <param name="forceCalculation">Force the calculation</param>
+        /// <returns></returns>
+        internal static async Task CalculateRouteDemand(bool forceCalculation)
+        {
 #if DEBUG
             // Start the stopwatch to time the tasks
             var stopwatch = Stopwatch.StartNew();
@@ -176,7 +186,32 @@ namespace AeroDynasty.Core.Utilities
             List<Airport> Airports = AirportsView.Cast<Airport>().ToList();
 
             // Use a concurrent collection for thread safety
-            ConcurrentBag<RouteDemand> RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands);
+            double GlobalPassengers = GameData.Instance.GlobalModifiers.CurrentGlobalPassengers;
+            DateTime CurrentDate = GameState.Instance.CurrentDate;
+            ConcurrentBag<RouteDemand> RouteDemands = null;
+
+            if (forceCalculation)
+            {
+                // new year, so calculate all route demands
+                RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands);
+            }
+            else if (CurrentDate.Month == 1)
+            {
+                // new year, so calculate all route demands
+                RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands);
+            }
+            else if (CurrentDate.Month == 4 || CurrentDate.Month == 11)
+            {
+                // not a new year, so no need to calculate all demands
+                // however check the season influenced routes (Summer start is April, Winter start is November)
+                RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands.Where(d => d.IsSeasonInfluenced));
+            }
+
+            // If RouteDemands is still null, then no need to calculate anything
+            if(RouteDemands == null)
+            {
+                return;
+            }
 
             // Dictionary for fast lookup of existing demands
             var routeLookup = new ConcurrentDictionary<(Airport, Airport), RouteDemand>(
@@ -188,35 +223,32 @@ namespace AeroDynasty.Core.Utilities
 
             foreach (var origin in Airports)
             {
-                tasks.Add(Task.Run(async () =>
+                tasks.Add(Task.Run(() =>
                 {
                     var subTasks = new List<Task>();
 
                     foreach (var destination in Airports.Where(a => a != origin))
                     {
-                        subTasks.Add(Task.Run(async () =>
+                        subTasks.Add(Task.Run(() =>
                         {
-                            // Check if the route demand already exists
-                            if (routeLookup.TryGetValue((origin, destination), out RouteDemand existingRouteDemand))
+                            if (!routeLookup.TryGetValue((origin, destination), out RouteDemand routeDemand))
                             {
-                                // Do demand calculations for this route
-                                existingRouteDemand.BaseDemand = 100;
-                                await Task.Run(() => existingRouteDemand.CalculateDailyDemand()); // Run demand calculations asynchronously
-                            }
-                            else
-                            {
-                                // If RouteDemand item does not exist, create it
-                                RouteDemand newRouteDemand = new RouteDemand(origin, destination, 100);
-                                await Task.Run(() => newRouteDemand.CalculateDailyDemand()); // Run demand calculations asynchronously
+                                // Create a new RouteDemand if it doesn't exist
+                                routeDemand = new RouteDemand(origin, destination);
 
                                 // Add new RouteDemand safely
-                                RouteDemands.Add(newRouteDemand);
-                                routeLookup.TryAdd((origin, destination), newRouteDemand);
+                                RouteDemands.Add(routeDemand);
+                                routeLookup.TryAdd((origin, destination), routeDemand);
                             }
+
+                            // Run demand calculations in serie (first the base should be calculated)
+                            routeDemand.CalculateBaseDemand(GlobalPassengers);
+                            routeDemand.CalculateDailyDemand();
                         }));
+
                     }
 
-                    await Task.WhenAll(subTasks);
+                    Task.WaitAll(subTasks.ToArray());
                 }));
             }
 

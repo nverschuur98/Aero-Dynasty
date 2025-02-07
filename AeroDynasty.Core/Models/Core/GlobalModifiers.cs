@@ -11,6 +11,7 @@ namespace AeroDynasty.Core.Models.Core
     {
         // Private vars
         private Price _currentFuelPrice;
+        private double _currentGlobalPassengers;
 
         // Public vars
         public Price CurrentFuelPrice
@@ -22,6 +23,19 @@ namespace AeroDynasty.Core.Models.Core
                 OnPropertyChanged(nameof(CurrentFuelPrice));
             }
         }
+        public double CurrentGlobalPassengers
+        {
+            get => _currentGlobalPassengers;
+            set
+            {
+                _currentGlobalPassengers = value;
+                OnPropertyChanged(nameof(CurrentGlobalPassengers));
+            }
+        }
+
+        // Maps
+        public Dictionary<int, double> FuelPriceMap { get; set; }
+        public Dictionary<int, double> GlobalPassengersMap { get; set; }
 
         // Constructor
         public GlobalModifiers()

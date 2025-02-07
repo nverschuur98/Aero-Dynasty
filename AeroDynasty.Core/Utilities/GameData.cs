@@ -43,7 +43,6 @@ namespace AeroDynasty.Core.Utilities
         //Maps
         public Dictionary<string, Country> CountryMap { get; private set; }
         public Dictionary<Country, RegistrationTemplate> RegistrationTemplateMap { get; set; }
-        public Dictionary<int, double> FuelPriceMap { get; set; }
         //public Dictionary<int, double> Inflations { get; private set; }
         
         // Userdata
@@ -345,26 +344,36 @@ namespace AeroDynasty.Core.Utilities
             JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
             JsonElement root = JSONDoc.RootElement;
 
-            // Access the "FuelPrices" object
-            FuelPriceMap = new Dictionary<int, double>();
-            JsonElement fuelPrices = root.GetProperty("FuelPrices");
-
-            // Iterate through the properties of the "FuelPrices" object
-            foreach (JsonProperty yearPrice in fuelPrices.EnumerateObject())
+            // Private function for reading all year values to a dictionary
+            void readYearValue(JsonElement element, Dictionary<int, double> dictionary)
             {
-                // Convert the property name to an integer (year)
-                int year = int.Parse(yearPrice.Name);
+                foreach (JsonProperty yearElement in element.EnumerateObject())
+                {
+                    // Convert the property name to an integer (year)
+                    int year = int.Parse(yearElement.Name);
 
-                // Get the value as a double (price)
-                double price = yearPrice.Value.GetDouble();
+                    // Get the value as a double
+                    double value = yearElement.Value.GetDouble();
 
-                // Example: Do something with the year and price
-                FuelPriceMap.Add(year, price);
+                    // Example: Do something with the year and price
+                    dictionary.Add(year, value);
+                }
             }
 
-            // Get the current year, and set the correct fuel price 
+            // Access the "FuelPrices" object
+            GlobalModifiers.FuelPriceMap = new Dictionary<int, double>();
+            JsonElement fuelPrices = root.GetProperty("FuelPrices");
+            readYearValue(fuelPrices, GlobalModifiers.FuelPriceMap);
+
+            // Access the "GlobalPassengers" object
+            GlobalModifiers.GlobalPassengersMap = new Dictionary<int, double>();
+            JsonElement globalPassengers = root.GetProperty("GlobalPassengers");
+            readYearValue(globalPassengers, GlobalModifiers.GlobalPassengersMap);
+
+            // Get the current year, and set the correct modifiers
             int y = GameState.Instance.CurrentDate.Year;
-            GlobalModifiers.CurrentFuelPrice = new Price(FuelPriceMap[y]);
+            GlobalModifiers.CurrentFuelPrice = new Price(GlobalModifiers.FuelPriceMap[y]);
+            GlobalModifiers.CurrentGlobalPassengers = GlobalModifiers.GlobalPassengersMap[y];
         }
 
         private AircraftModel LoadAircraftFromJson(JsonElement aircraft, Manufacturer manufacturer)
@@ -498,7 +507,7 @@ namespace AeroDynasty.Core.Utilities
         {
             GameTasks.CalculateFuelPrice();
             GameTasks.CheckIsActive();
-            GameTasks.CalculateRouteDemand();
+            GameTasks.CalculateRouteDemand(true);
         }
     }
 }
