@@ -86,6 +86,17 @@ namespace AeroDynasty.Core.Views.RouteViews
             }
         }
 
+        private double _cooldownWidth;
+        public double CooldownWidth
+        {
+            get => _cooldownWidth;
+            private set
+            {
+                _cooldownWidth = value;
+                OnPropertyChanged(nameof(CooldownWidth));
+            }
+        }
+
         private double _leadTimeWidth;
         public double LeadTimeWidth
         {
@@ -170,6 +181,7 @@ namespace AeroDynasty.Core.Views.RouteViews
             OutboundGridWidth = Math.Floor(RouteScheduleItem.Outbound.FlightDuration.TotalMinutes * minuteToPixelRatio);
             InboundGridWidth = Math.Floor(RouteScheduleItem.Inbound.FlightDuration.TotalMinutes * minuteToPixelRatio);
             TurnAroundWidth = Math.Floor(RouteScheduleItem.TurnaroundTime.TotalMinutes * minuteToPixelRatio);
+            CooldownWidth = Math.Floor(RouteScheduleItem.TurnaroundTime.TotalMinutes * minuteToPixelRatio);
 
             LeadTimeWidth = Math.Floor(RouteScheduleItem.Outbound.DepartureTime.TotalMinutes * minuteToPixelRatio);
             
@@ -179,21 +191,26 @@ namespace AeroDynasty.Core.Views.RouteViews
                 if(LeadTimeWidth > ListViewWidth)
                 {
                     LeadTimeWidth = ListViewWidth;
-                    OutboundGridWidth = TurnAroundWidth = InboundGridWidth = 0;
+                    OutboundGridWidth = TurnAroundWidth = InboundGridWidth = CooldownWidth = 0;
                 }
                 else if (LeadTimeWidth + OutboundGridWidth > ListViewWidth)
                 {
                     OutboundGridWidth = (ListViewWidth - LeadTimeWidth);
-                    TurnAroundWidth = InboundGridWidth = 0;
+                    TurnAroundWidth = InboundGridWidth = CooldownWidth = 0;
                 }
                 else if (LeadTimeWidth + OutboundGridWidth + TurnAroundWidth > ListViewWidth)
                 {
                     TurnAroundWidth = (ListViewWidth - LeadTimeWidth - OutboundGridWidth);
-                    InboundGridWidth = 0;
+                    InboundGridWidth = CooldownWidth = 0;
                 }
                 else if (LeadTimeWidth + OutboundGridWidth + TurnAroundWidth + InboundGridWidth > ListViewWidth)
                 {
                     InboundGridWidth = (ListViewWidth - LeadTimeWidth - OutboundGridWidth - TurnAroundWidth);
+                    CooldownWidth = 0;
+                }
+                else if (LeadTimeWidth + OutboundGridWidth + TurnAroundWidth + InboundGridWidth + CooldownWidth > ListViewWidth)
+                {
+                    CooldownWidth = (ListViewWidth - LeadTimeWidth - OutboundGridWidth - TurnAroundWidth - InboundGridWidth);
                 }
 
             }

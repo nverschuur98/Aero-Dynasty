@@ -113,37 +113,41 @@ namespace AeroDynasty.Core.Models.RouteModels
         /// <returns></returns>
         private bool SchedulesOverlap(RouteSchedule existingSchedule, RouteSchedule newSchedule)
         {
-            // Check same day of week
+            // Turnaround time (assuming 30 minutes)
+            TimeSpan turnaroundTime = TimeSpan.FromMinutes(30);
+
+            // Extract schedule details
+            TimeSpan existingStart = existingSchedule.Outbound.DepartureTime;
+            TimeSpan existingEnd = existingSchedule.Inbound.ArrivalTime + turnaroundTime; // Added turnaround time
+
+            TimeSpan newStart = newSchedule.Outbound.DepartureTime;
+            TimeSpan newEnd = newSchedule.Inbound.ArrivalTime + turnaroundTime; // Added turnaround time
+
+            // Check if schedules overlap on the same day
             if (existingSchedule.Outbound.DepartureDay == newSchedule.Outbound.DepartureDay)
             {
-                TimeSpan existingStart = existingSchedule.Outbound.DepartureTime;
-                TimeSpan existingEnd = existingSchedule.Inbound.ArrivalTime;
-
-                TimeSpan newStart = newSchedule.Outbound.DepartureTime;
-                TimeSpan newEnd = newSchedule.Inbound.ArrivalTime;
-
-                // Check if the times overlap
                 if (newStart < existingEnd && newEnd > existingStart)
                 {
                     return true; // Conflict found
                 }
             }
 
-            // If arrival is next day, check next day's schedule too
+            // If arrival extends past midnight, check the next day's availability
             if (existingSchedule.NextDayArrival || newSchedule.NextDayArrival)
             {
                 DayOfWeek nextDay = (DayOfWeek)(((int)existingSchedule.Outbound.DepartureDay + 1) % 7);
 
                 if (newSchedule.Outbound.DepartureDay == nextDay)
                 {
-                    TimeSpan newStart = newSchedule.Outbound.DepartureTime;
-                    TimeSpan newEnd = newSchedule.Inbound.ArrivalTime;
+                    TimeSpan existingNextDayAvailableFrom = existingSchedule.Inbound.ArrivalTime + turnaroundTime;
 
-                    TimeSpan existingStart = existingSchedule.Outbound.DepartureTime;
-                    TimeSpan existingEnd = existingSchedule.Inbound.ArrivalTime;
+                    // If existing flight arrives just before midnight and needs turnaround time, adjust the start of availability
+                    if (existingNextDayAvailableFrom.TotalHours >= 24)
+                    {
+                        existingNextDayAvailableFrom = existingNextDayAvailableFrom.Subtract(TimeSpan.FromHours(24));
+                    }
 
-                    // Check overlap for next day
-                    if (newStart < existingEnd && newEnd > existingStart)
+                    if (newStart < existingNextDayAvailableFrom && newEnd > existingStart)
                     {
                         return true; // Conflict found
                     }
@@ -152,6 +156,7 @@ namespace AeroDynasty.Core.Models.RouteModels
 
             return false; // No conflict
         }
+
 
         // Public funcs
         public void AssignAirliner(Airliner airliner)

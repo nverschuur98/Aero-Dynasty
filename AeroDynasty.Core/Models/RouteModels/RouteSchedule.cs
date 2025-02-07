@@ -25,7 +25,18 @@ namespace AeroDynasty.Core.Models.RouteModels
             AssignedAirliner = assignedAirliner;
 
             RouteLeg _out = new RouteLeg(DepartureTime, DayOfWeek, AssignedAirliner, Origin, Destination);
-            RouteLeg _in = new RouteLeg(_out.ArrivalTime + TurnaroundTime, _out.ArrivalDay, AssignedAirliner, Destination, Origin);
+
+            DayOfWeek _inDepartureDay = _out.ArrivalDay;
+            TimeSpan _inDepartureTime = _out.ArrivalTime + TurnaroundTime;
+
+
+            // Check if departure day is next day
+            if ((_inDepartureTime) < _out.ArrivalTime)
+            {
+                _inDepartureDay = (DayOfWeek)(((int)_out.DepartureDay + 1) % 7);
+            }
+
+            RouteLeg _in = new RouteLeg(_inDepartureTime, _inDepartureDay, AssignedAirliner, Destination, Origin);
 
             Outbound = _out;
             Inbound = _in;
