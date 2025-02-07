@@ -149,7 +149,14 @@ namespace AeroDynasty.ViewModels.Routes
 
         private void AddRouteSchedule()
         {
-            Route.AddSchedule(SelectedDepartureDay, SelectedDepartureTime, SelectedAirliner);
+            try
+            {
+                Route.AddSchedule(SelectedDepartureDay, SelectedDepartureTime, SelectedAirliner);
+            }
+            catch (ApplicationException ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+            }
         }
 
         private void ClearSchedule()

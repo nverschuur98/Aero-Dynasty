@@ -84,6 +84,74 @@ namespace AeroDynasty.Core.Models.RouteModels
         }
 
         // Private funcs
+        /// <summary>
+        /// Check if the airliner is available
+        /// </summary>
+        /// <param name="newSchedule"></param>
+        /// <returns></returns>
+        private bool IsAirlinerAvailable(RouteSchedule newSchedule)
+        {
+            foreach (var existingSchedule in ScheduledFlights)
+            {
+                if (existingSchedule.AssignedAirliner == newSchedule.AssignedAirliner)
+                {
+                    // Check for time overlap
+                    if (SchedulesOverlap(existingSchedule, newSchedule))
+                    {
+                        return false; // Conflict found, airliner is not available
+                    }
+                }
+            }
+            return true; // No conflict found, airliner is available
+        }
+
+        /// <summary>
+        /// Check if two RouteSchedules overlap
+        /// </summary>
+        /// <param name="existingSchedule"></param>
+        /// <param name="newSchedule"></param>
+        /// <returns></returns>
+        private bool SchedulesOverlap(RouteSchedule existingSchedule, RouteSchedule newSchedule)
+        {
+            // Check same day of week
+            if (existingSchedule.Outbound.DepartureDay == newSchedule.Outbound.DepartureDay)
+            {
+                TimeSpan existingStart = existingSchedule.Outbound.DepartureTime;
+                TimeSpan existingEnd = existingSchedule.Inbound.ArrivalTime;
+
+                TimeSpan newStart = newSchedule.Outbound.DepartureTime;
+                TimeSpan newEnd = newSchedule.Inbound.ArrivalTime;
+
+                // Check if the times overlap
+                if (newStart < existingEnd && newEnd > existingStart)
+                {
+                    return true; // Conflict found
+                }
+            }
+
+            // If arrival is next day, check next day's schedule too
+            if (existingSchedule.NextDayArrival || newSchedule.NextDayArrival)
+            {
+                DayOfWeek nextDay = (DayOfWeek)(((int)existingSchedule.Outbound.DepartureDay + 1) % 7);
+
+                if (newSchedule.Outbound.DepartureDay == nextDay)
+                {
+                    TimeSpan newStart = newSchedule.Outbound.DepartureTime;
+                    TimeSpan newEnd = newSchedule.Inbound.ArrivalTime;
+
+                    TimeSpan existingStart = existingSchedule.Outbound.DepartureTime;
+                    TimeSpan existingEnd = existingSchedule.Inbound.ArrivalTime;
+
+                    // Check overlap for next day
+                    if (newStart < existingEnd && newEnd > existingStart)
+                    {
+                        return true; // Conflict found
+                    }
+                }
+            }
+
+            return false; // No conflict
+        }
 
         // Public funcs
         public void AssignAirliner(Airliner airliner)
@@ -92,12 +160,20 @@ namespace AeroDynasty.Core.Models.RouteModels
         }
 
         /// <summary>
-        /// RESERVED for savegame loading
+        /// Add a new scheduled flight 
         /// </summary>
         /// <param name="newSchedule"></param>
         public void AddSchedule(RouteSchedule newSchedule)
         {
-            ScheduledFlights.Add(newSchedule);
+            // Check if the airliner is available during the new schedule
+            if (IsAirlinerAvailable(newSchedule))
+            {
+                ScheduledFlights.Add(newSchedule);
+            }
+            else
+            {
+                throw new ApplicationException("The airliner is already assigned to another flight at this time.");
+            }
         }
 
         /// <summary>
@@ -109,7 +185,7 @@ namespace AeroDynasty.Core.Models.RouteModels
         public void AddSchedule(DayOfWeek departureDay, TimeSpan departureTime, Airliner airliner)
         {
             RouteSchedule newSchedule = new RouteSchedule(Origin, Destination, departureDay, departureTime, airliner);
-            ScheduledFlights.Add(newSchedule);
+            AddSchedule(newSchedule);
         }
 
         public void RemoveAirliner(Airliner airliner)
