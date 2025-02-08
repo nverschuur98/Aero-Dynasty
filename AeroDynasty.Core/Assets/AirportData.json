@@ -130,7 +130,24 @@
     "Coordinates": {
       "Latitude": 51.4700,
       "Longitude": -0.4543
-    }
+    },
+    "Runways": [
+      {
+        "Name": "05/23",
+        "Length": 2000,
+        "Surface": "Concrete"
+      },
+      {
+        "Name": "10/28",
+        "Length": 2800,
+        "Surface": "Concrete"
+      },
+      {
+        "Name": "16/34",
+        "Length": 1900,
+        "Surface": "Concrete"
+      }
+    ]
   },
   {
     "Name": "Hong Kong International Airport",
@@ -598,6 +615,23 @@
     "Coordinates": {
       "Latitude": 50.5450,
       "Longitude": 4.2940
-    }
+    },
+    "Runways": [
+      {
+        "Name": "02/20",
+        "Length": 2984,
+        "Surface": "Asphalt"
+      },
+      {
+        "Name": "07/25",
+        "Length": 2900,
+        "Surface": "Asphalt"
+      },
+      {
+        "Name": "12/30",
+        "Length": 2800,
+        "Surface": "Grass"
+      }
+    ]
   }
 ]

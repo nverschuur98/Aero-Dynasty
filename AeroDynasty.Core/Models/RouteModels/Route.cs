@@ -84,6 +84,40 @@ namespace AeroDynasty.Core.Models.RouteModels
         }
 
         // Private funcs
+
+        /// <summary>
+        /// Check if all the airliner requirements are met
+        /// </summary>
+        /// <param name="newSchedule"></param>
+        /// <returns></returns>
+        private bool IsAirlinerRequirementsMet(RouteSchedule newSchedule)
+        {
+            // Select minimum runway length
+            int requiredRunwayLength = newSchedule.AssignedAirliner.Model.minRunwayLength;
+
+            // Select longest runway at origin and destination
+            int originMaxRunwayLength = Origin.Runways.Select(r => r.Length).DefaultIfEmpty(0).Max();
+            int destinationMaxRunwayLength = Destination.Runways.Select(r => r.Length).DefaultIfEmpty(0).Max();
+
+            if (requiredRunwayLength > originMaxRunwayLength || requiredRunwayLength > destinationMaxRunwayLength)
+            {
+                // The runway(s) are not long enough
+                return false;
+            }
+
+            // Select max range
+            double maxRange = newSchedule.AssignedAirliner.Model.maxRange;
+
+            if(maxRange < Distance)
+            {
+                // The distance is to great for this airliner
+                return false;
+            }
+
+            // All requirements are met
+            return true;
+        }
+
         /// <summary>
         /// Check if the airliner is available
         /// </summary>
@@ -171,14 +205,19 @@ namespace AeroDynasty.Core.Models.RouteModels
         public void AddSchedule(RouteSchedule newSchedule)
         {
             // Check if the airliner is available during the new schedule
-            if (IsAirlinerAvailable(newSchedule))
-            {
-                ScheduledFlights.Add(newSchedule);
-            }
-            else
+            if (!IsAirlinerAvailable(newSchedule))
             {
                 throw new ApplicationException("The airliner is already assigned to another flight at this time.");
             }
+
+            // Check if airport requirements are met
+            if (!IsAirlinerRequirementsMet(newSchedule))
+            {
+                throw new ApplicationException("The airliner requirements are not met.");
+            }
+
+            ScheduledFlights.Add(newSchedule);
+            
         }
 
         /// <summary>

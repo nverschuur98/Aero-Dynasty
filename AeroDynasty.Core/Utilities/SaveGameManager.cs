@@ -422,7 +422,13 @@ namespace AeroDynasty.Core.Utilities
                 // Add schedules to route
                 foreach(RouteSchedule flight in flights)
                 {
-                    route.AddSchedule(flight);
+                    try
+                    {
+                        route.AddSchedule(flight);
+                    }catch (ApplicationException ex)
+                    {
+                        Console.Error.WriteLine(ex.Message);
+                    }
                 }
 
                 // Add the route to the GameData singleton
