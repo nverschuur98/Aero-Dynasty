@@ -20,9 +20,14 @@
 
     public enum RunwaySurface
     {
-        Grass,
+        Asphalt,
         Gravel,
+        Water,
+        Grass,
         Concrete,
-        Asphalt
+        Sand,
+        Bitumen,
+        Dirt,
+        Turf
     }
 }
