@@ -22,7 +22,7 @@ namespace AeroDynasty.ViewModels
         public ICollectionView Airports { get; set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; set; }
         public ObservableCollection<AircraftModel> AircraftModels { get; set; }
-        public ObservableCollection<RouteDemand> RouteDemands { get; set; }
+        public List<RouteDemand> RouteDemands { get; set; }
 
         public HomeViewModel()
         {

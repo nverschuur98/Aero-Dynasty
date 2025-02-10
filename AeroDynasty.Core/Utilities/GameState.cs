@@ -93,7 +93,9 @@ namespace AeroDynasty.Core.Utilities
                     if (CurrentDate.Month != _currentMonth)
                     {
                         _currentMonth = CurrentDate.Month;
-                        await ExecuteMonthlyTasks();
+
+                        // Run the monthly tasks in the background without blocking the game loop
+                        Task.Run(() => ExecuteMonthlyTasks()); ;
                     }
                 }
                 catch (TaskCanceledException)

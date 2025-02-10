@@ -11,21 +11,29 @@ namespace AeroDynasty.Core.Models.RouteModels
 {
     public class RouteDemand
     {
+        private readonly UInt16[] _dailyDemand = new UInt16[7];
         public bool IsSeasonInfluenced { get; private set; }
         public Airport Origin { get; private set; }
         public Airport Destination { get; private set; }
         public double BaseFactor { get; private set; }
-        public int BaseDemand { get; private set; }
-        public Dictionary<DayOfWeek, int> DailyDemand { get; private set; }
+        public UInt16 BaseDemand { get; private set; }
+
+        // Provides array-like access using DayOfWeek as index
+        public UInt16 this[DayOfWeek day]
+        {
+            get => _dailyDemand[(int)day];
+            set => _dailyDemand[(int)day] = value;
+        }
 
         // Tweakable constants:
-        private readonly double _globalPassengerFactor = 0.2;   // scales global passenger count into our demand units
-        private readonly int _minDemand = 0;                       // minimum demand threshold
-        private readonly double _maxDistanceForScaling = 11250;   // km at which the distance factor becomes 0 (or nearly 0)
+        private static readonly double _globalPassengerFactor = 0.2;   // scales global passenger count into our demand units
+        private static readonly UInt16 _minDemand = 0;                       // minimum demand threshold
+        private static readonly double _maxDistanceForScaling = 11250;   // km at which the distance factor becomes 0 (or nearly 0)
 
         // Cached size and type weights for performance
-        private readonly Dictionary<Enums.AirportSize, double> _sizeWeights = new Dictionary<Enums.AirportSize, double>
+        private static readonly Dictionary<Enums.AirportSize, double> _sizeWeights = new Dictionary<Enums.AirportSize, double>
         {
+            { Enums.AirportSize.Smallest, 0.15 },
             { Enums.AirportSize.VerySmall, 0.3 },
             { Enums.AirportSize.Small, 0.5 },
             { Enums.AirportSize.Medium, 1.0 },
@@ -34,7 +42,7 @@ namespace AeroDynasty.Core.Models.RouteModels
             { Enums.AirportSize.Largest, 1.8 }
         };
 
-        private readonly Dictionary<Enums.AirportType, double> _typeWeights = new Dictionary<Enums.AirportType, double>
+        private static readonly Dictionary<Enums.AirportType, double> _typeWeights = new Dictionary<Enums.AirportType, double>
         {
             { Enums.AirportType.Domestic, 0.45 },
             { Enums.AirportType.Regional, 0.8 },
@@ -48,11 +56,6 @@ namespace AeroDynasty.Core.Models.RouteModels
             IsSeasonInfluenced = (Origin.Season != Enums.FocusSeason.AllYear || Destination.Season != Enums.FocusSeason.AllYear) ? true : false;
 
             BaseFactor = CalculateBaseFactor();
-
-            // Initialize DailyDemand for every day of the week.
-            DailyDemand = Enum.GetValues(typeof(DayOfWeek))
-                .Cast<DayOfWeek>()
-                .ToDictionary(day => day, _ => 0);
         }
 
         /// <summary>
@@ -88,7 +91,7 @@ namespace AeroDynasty.Core.Models.RouteModels
             // Multiply the scaled global passenger count, the average airport weight, and the distance factor.
             double rawDemand = (globalPassengers) * BaseFactor;
 
-            BaseDemand = Math.Max((int)rawDemand, _minDemand);
+            BaseDemand = Math.Max((UInt16)rawDemand, _minDemand);
             //Console.WriteLine($"BaseDemand; {Origin.Name}; {Destination.Name}; {BaseDemand}");
         }
 
@@ -99,16 +102,20 @@ namespace AeroDynasty.Core.Models.RouteModels
         {
             double[] demandDistribution = GetDemandDistribution();
 
-            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)))
+            for (int i = 0; i < 7; i++)
             {
-                // Calculate daily demand proportional to the daily multiplier.
-                DailyDemand[day] = (int)(BaseDemand * demandDistribution[(int)day]);
+                _dailyDemand[i] = (UInt16)(BaseDemand * demandDistribution[i]);
             }
         }
 
         private double CalculateBaseFactor()
         {
             double distance = GeoUtilities.CalculateDistance(Origin.Coordinates, Destination.Coordinates);
+
+            if(Origin.ICAO == "EHAM" && Destination.IATA == "SUG")
+            {
+
+            }
 
             // Skip routes that don't make sense:
             // 1. Domestic/Regional routes that are more than 2500 km apart.
@@ -117,7 +124,7 @@ namespace AeroDynasty.Core.Models.RouteModels
                 distance > 2500)
             {
                 BaseDemand = 0;
-                Console.WriteLine($"Skipping demand calculation for {Origin.ICAO} to {Destination.ICAO}: Too far for domestic/regional routes.");
+                //Console.WriteLine($"Skipping demand calculation for {Origin.ICAO} to {Destination.ICAO}: Too far for domestic/regional routes.");
                 return 0;
             }
 
@@ -126,7 +133,27 @@ namespace AeroDynasty.Core.Models.RouteModels
                 Origin.Country != Destination.Country && distance > 300)
             {
                 BaseDemand = 0;
-                Console.WriteLine($"Skipping demand calculation for {Origin.ICAO} to {Destination.ICAO}: Different countries and too far.");
+                //Console.WriteLine($"Skipping demand calculation for {Origin.ICAO} to {Destination.ICAO}: Different countries and too far.");
+                return 0;
+            }
+
+            // 3. Small airports that are to far away
+            if ((Origin.PassengerSize == Enums.AirportSize.Smallest || Origin.PassengerSize == Enums.AirportSize.VerySmall || Origin.PassengerSize == Enums.AirportSize.Small) &&
+                (Destination.PassengerSize == Enums.AirportSize.Smallest || Destination.PassengerSize == Enums.AirportSize.VerySmall || Destination.PassengerSize == Enums.AirportSize.Small) &&
+                distance > 3500)
+            {
+                BaseDemand = 0;
+                //Console.WriteLine($"Skipping demand calculation for {Origin.ICAO} to {Destination.ICAO}: Too far for airport size.");
+                return 0;
+            }
+
+            // 4. Small airports that are to far away
+            if (((Origin.PassengerSize == Enums.AirportSize.Smallest || Origin.PassengerSize == Enums.AirportSize.VerySmall || Origin.PassengerSize == Enums.AirportSize.Small) && (Destination.PassengerSize == Enums.AirportSize.Large || Destination.PassengerSize == Enums.AirportSize.VeryLarge || Destination.PassengerSize == Enums.AirportSize.Largest) ||
+                (Destination.PassengerSize == Enums.AirportSize.Smallest || Destination.PassengerSize == Enums.AirportSize.VerySmall || Destination.PassengerSize == Enums.AirportSize.Small) && (Origin.PassengerSize == Enums.AirportSize.Large || Origin.PassengerSize == Enums.AirportSize.VeryLarge || Origin.PassengerSize == Enums.AirportSize.Largest)) &&
+                distance > 2500)
+            {
+                BaseDemand = 0;
+                //Console.WriteLine($"Skipping demand calculation for {Origin.ICAO} to {Destination.ICAO}: Too far for airport size.");
                 return 0;
             }
 
@@ -145,10 +172,10 @@ namespace AeroDynasty.Core.Models.RouteModels
             double baseFactor = _globalPassengerFactor * averageWeight * distanceFactor;
 
 #if DEBUG
-            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Destination Weight =; {destinationWeight};");
-            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Average Weight =; {averageWeight};");
-            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Distance Factor =; {distanceFactor};");
-            Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Base Factor =; {baseFactor} = {_globalPassengerFactor} * {averageWeight} * {distanceFactor};");
+            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Destination Weight =; {destinationWeight};");
+            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Average Weight =; {averageWeight};");
+            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Distance Factor =; {distanceFactor};");
+            //Console.WriteLine($"{Origin.ICAO} - {Destination.ICAO}; Base Factor =; {baseFactor} = {_globalPassengerFactor} * {averageWeight} * {distanceFactor};");
 
 #endif
             return baseFactor;

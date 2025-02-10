@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -25,6 +26,7 @@ namespace AeroDynasty.Core.Utilities
         public static GameData Instance => _instance ?? (_instance = new GameData());
 
         //Observable Core Data
+        public ObservableCollection<Area> Areas { get; private set; }
         public ObservableCollection<Country> Countries { get; private set; }
         public ObservableCollection<RegistrationTemplate> RegistrationTemplates { get; set; }
 
@@ -34,13 +36,14 @@ namespace AeroDynasty.Core.Utilities
         public ObservableCollection<Airport> Airports { get; private set; }
         public ObservableCollection<Manufacturer> Manufacturers { get; private set; }
         public ObservableCollection<AircraftModel> AircraftModels { get; private set; }
-        public ObservableCollection<RouteDemand> RouteDemands { get; set; }
+        public List<RouteDemand> RouteDemands { get; set; }
         
         //Observable change Data
         public ObservableCollection<Route> Routes { get; set; }
         public ObservableCollection<Airliner> Airliners { get; set; }
         
         //Maps
+        public Dictionary<Area, Country> AreaCountryMap { get; private set; }
         public Dictionary<string, Country> CountryMap { get; private set; }
         public Dictionary<Country, RegistrationTemplate> RegistrationTemplateMap { get; set; }
         //public Dictionary<int, double> Inflations { get; private set; }
@@ -87,7 +90,9 @@ namespace AeroDynasty.Core.Utilities
         /// </summary>
         private void LoadCoreData()
         {
+            LoadAreas();
             LoadCountries();
+            SetAreaCountryMap();
             LoadGlobalModifiers();
         }
 
@@ -101,7 +106,7 @@ namespace AeroDynasty.Core.Utilities
             LoadAirports();
             LoadManufacturers();
             LoadAircrafts();
-            RouteDemands = new ObservableCollection<RouteDemand>();
+            RouteDemands = new List<RouteDemand>();
         }
 
         /// <summary>
@@ -165,98 +170,102 @@ namespace AeroDynasty.Core.Utilities
         /// <exception cref="Exception"></exception>
         private void LoadAirports()
         {
-            try
+#if DEBUG
+            // Start the stopwatch to time the tasks
+            var stopwatch = Stopwatch.StartNew();
+#endif
+
+            string JSONString = File.ReadAllText("Assets/AirportData.json");
+            JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
+            JsonElement JSONRoot = JSONDoc.RootElement;
+
+            // Create a list to hold the airports
+            var airports = new List<Airport>();
+
+            foreach (JsonElement airportData in JSONRoot.EnumerateArray())
             {
-                string JSONString = File.ReadAllText("Assets/AirportData.json");
-                JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
-                JsonElement JSONRoot = JSONDoc.RootElement;
+                // Extract the data
+                string airportName = airportData.GetProperty("Name").ToString();
+                int area = airportData.GetProperty("Area").GetInt32();
+                string iata = airportData.GetProperty("IATA").ToString();
+                string icao = airportData.GetProperty("ICAO").ToString();
+                AirportType airportType = (AirportType)Enum.Parse(typeof(AirportType), airportData.GetProperty("Type").ToString());
+                FocusSeason airportSeason = (FocusSeason)Enum.Parse(typeof(FocusSeason), airportData.GetProperty("Season").ToString());
 
-                // Create a list to hold the airports
-                var airports = new List<Airport>();
+                // Get size property
+                JsonElement size = airportData.GetProperty("Size");
+                AirportSize passengerSize = (AirportSize)Enum.Parse(typeof(AirportSize), size.GetProperty("PassengerSize").ToString());
 
-                foreach (JsonElement airportData in JSONRoot.EnumerateArray())
+                DateTime startDate;
+                DateTime endDate;
+
+                // Extract the period if it exists
+                if (airportData.TryGetProperty("Period", out JsonElement period))
                 {
-                    // Extract the data
-                    string airportName = airportData.GetProperty("Name").ToString();
-                    string countryCode = airportData.GetProperty("CountryCode").ToString();
-                    string iata = airportData.GetProperty("IATA").ToString();
-                    string icao = airportData.GetProperty("ICAO").ToString();
-                    AirportType airportType = (AirportType)Enum.Parse(typeof(AirportType), airportData.GetProperty("Type").ToString());
-                    FocusSeason airportSeason = (FocusSeason)Enum.Parse(typeof(FocusSeason), airportData.GetProperty("Season").ToString());
-                    double demandFactor = Convert.ToDouble(airportData.GetProperty("DemandFactor").ToString());
+                    // Parse the "From" and "To" dates
+                    startDate = period.TryGetProperty("From", out var fromProperty) && DateTime.TryParseExact(fromProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var sdate)
+                        ? sdate
+                        : new DateTime(1900, 01, 01);
 
-                    // Get size property
-                    JsonElement size = airportData.GetProperty("Size");
-                    AirportSize passengerSize = (AirportSize)Enum.Parse(typeof(AirportSize), size.GetProperty("PassengerSize").ToString());
+                    endDate = period.TryGetProperty("To", out var toProperty) && DateTime.TryParseExact(toProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var edate)
+                        ? edate
+                        : new DateTime(2199, 12, 31);
+                }
+                else
+                {
+                    // If "Period" does not exist, use default dates
+                    startDate = new DateTime(1900, 01, 01);
+                    endDate = new DateTime(2199, 12, 31);
+                }
 
-                    DateTime startDate;
-                    DateTime endDate;
+                // Extract the coordinates
+                JsonElement _coordinates = airportData.GetProperty("Coordinates");
+                double latitude = _coordinates.GetProperty("Latitude").GetDouble();  // Correctly get double value
+                double longitude = _coordinates.GetProperty("Longitude").GetDouble();  // Correctly get double value
 
-                    // Extract the period if it exists
-                    if (airportData.TryGetProperty("Period", out JsonElement period))
+                Coordinates coordinates = new Coordinates(latitude, longitude);
+
+                // Get runways property
+                List<Runway> runways = new List<Runway>();
+                if(airportData.TryGetProperty("Runways", out JsonElement _runways))
+                {
+                    foreach(JsonElement runway in _runways.EnumerateArray())
                     {
-                        // Parse the "From" and "To" dates
-                        startDate = period.TryGetProperty("From", out var fromProperty) && DateTime.TryParseExact(fromProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var sdate)
-                            ? sdate
-                            : new DateTime(1900, 01, 01);
+                        string name = runway.GetProperty("Name").GetString();
+                        int length = runway.GetProperty("Length").GetInt32();
+                        RunwaySurface surface = (RunwaySurface)Enum.Parse(typeof(RunwaySurface), runway.GetProperty("Surface").ToString());
 
-                        endDate = period.TryGetProperty("To", out var toProperty) && DateTime.TryParseExact(toProperty.GetString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out var edate)
-                            ? edate
-                            : new DateTime(2199, 12, 31);
-                    }
-                    else
-                    {
-                        // If "Period" does not exist, use default dates
-                        startDate = new DateTime(1900, 01, 01);
-                        endDate = new DateTime(2199, 12, 31);
-                    }
-
-                    // Extract the coordinates
-                    JsonElement _coordinates = airportData.GetProperty("Coordinates");
-                    double latitude = _coordinates.GetProperty("Latitude").GetDouble();  // Correctly get double value
-                    double longitude = _coordinates.GetProperty("Longitude").GetDouble();  // Correctly get double value
-
-                    Coordinates coordinates = new Coordinates(latitude, longitude);
-
-                    // Get runways property
-                    List<Runway> runways = new List<Runway>();
-                    if(airportData.TryGetProperty("Runways", out JsonElement _runways))
-                    {
-                        foreach(JsonElement runway in _runways.EnumerateArray())
-                        {
-                            string name = runway.GetProperty("Name").GetString();
-                            int length = runway.GetProperty("Length").GetInt32();
-                            RunwaySurface surface = (RunwaySurface)Enum.Parse(typeof(RunwaySurface), runway.GetProperty("Surface").ToString());
-
-                            runways.Add(new Runway(name, surface, length));
-                        }
-                    }
-
-                    // Check if the country exists in the map
-                    if (CountryMap.TryGetValue(countryCode, out var country))
-                    {
-                        // Create the Airport instance with the Country reference
-                        var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, demandFactor, runways);
-
-                        // Set the period for the airport
-                        airport.SetPeriod(startDate, endDate);
-
-                        airports.Add(airport);
-                    }
-                    else
-                    {
-                        // Handle cases where the country is not found if necessary
-                        // For example, you can log a warning or create a default Country instance
-                        throw new Exception($"No such country found while creating airport: {airportName}.");
+                        runways.Add(new Runway(name, surface, length));
                     }
                 }
-                // Assign the populated list to the ObservableCollection
-                Airports = new ObservableCollection<Airport>(airports);
+
+                // Check if the country exists in the map
+                if (AreaCountryMap.TryGetValue(Areas.First(a => a.ID == area), out var country))
+                {
+                    // Create the Airport instance with the Country reference
+                    var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, runways);
+
+                    // Set the period for the airport
+                    airport.SetPeriod(startDate, endDate);
+
+                    airports.Add(airport);
+                }
+                else
+                {
+                    // Handle cases where the country is not found if necessary
+                    // For example, you can log a warning or create a default Country instance
+                    throw new Exception($"No such country found while creating airport: {airportName}.");
+                }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            // Assign the populated list to the ObservableCollection
+            Airports = new ObservableCollection<Airport>(airports);
+#if DEBUG
+            // Stop the stopwatch after all tasks are completed
+            stopwatch.Stop();
+
+            // Log or display the time it took to complete the tasks
+            Console.WriteLine($"Loading Airports completed in {stopwatch.ElapsedMilliseconds} ms");
+#endif
         }
 
         /// <summary>
@@ -298,6 +307,26 @@ namespace AeroDynasty.Core.Utilities
 
             //Create the observable collection
             Manufacturers = new ObservableCollection<Manufacturer>(manufacturers);
+        }
+
+        /// <summary>
+        /// Loading the area data from the data files
+        /// </summary>
+        private void LoadAreas()
+        {
+            string JSONString = File.ReadAllText("Assets/AreaData.json");
+            JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
+            JsonElement JSONRoot = JSONDoc.RootElement;
+
+            Areas = new ObservableCollection<Area>();
+
+            foreach (JsonElement area in JSONRoot.EnumerateArray())
+            {
+                int id = area.GetProperty("Id").GetInt32();
+                string name = area.GetProperty("Name").GetString();
+
+                Areas.Add(new Area(id, name));
+            }
         }
 
         /// <summary>
@@ -343,6 +372,29 @@ namespace AeroDynasty.Core.Utilities
 
             //Create a mapping of Country to Template
             RegistrationTemplateMap = RegistrationTemplates.ToDictionary(t => t.Country, t => t);
+        }
+
+        /// <summary>
+        /// Set the AreaCountry mapping based on initial setting
+        /// </summary>
+        private void SetAreaCountryMap()
+        {
+            SetAreaCountryMap(new DateTime(1900, 1, 1));
+        }
+
+        /// <summary>
+        /// Set the AreaCountry mapping based on date
+        /// </summary>
+        private void SetAreaCountryMap(DateTime date)
+        {
+            // Set dictionary
+            AreaCountryMap = new Dictionary<Area, Country>();
+
+            foreach (Area area in Areas)
+            {
+                Country country = Countries.First();
+                AreaCountryMap.Add(area, country);
+            }
         }
 
         /// <summary>

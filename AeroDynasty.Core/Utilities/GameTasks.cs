@@ -37,7 +37,7 @@ namespace AeroDynasty.Core.Utilities
             // Get the current fuel price and current day
             double currentFuelPrice = GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount;
             DayOfWeek currentDay = GameState.Instance.CurrentDate.DayOfWeek;
-            ObservableCollection<RouteDemand> routeDemands = GameData.Instance.RouteDemands;
+            List<RouteDemand> routeDemands = GameData.Instance.RouteDemands;
 
             // Check if routeDemands is not empty or null
             if (routeDemands.Count <= 0 || routeDemands == null)
@@ -68,7 +68,7 @@ namespace AeroDynasty.Core.Utilities
 
                 // If routeDemand is found, get the demand for the current day; otherwise, localDemand remains 0
                 if (routeDemand != null)
-                    localDemand = routeDemand.DailyDemand[currentDay]; // Local copy of available demand
+                    localDemand = routeDemand[currentDay]; // Local copy of available demand
 
 #if DEBUG
                 Console.WriteLine($"{currentDay} - {group.Key.Origin.ICAO}-{group.Key.Destination.ICAO} - Total Demand: {localDemand}");
@@ -189,74 +189,100 @@ namespace AeroDynasty.Core.Utilities
             // Use a concurrent collection for thread safety
             double GlobalPassengers = GameData.Instance.GlobalModifiers.CurrentGlobalPassengers;
             DateTime CurrentDate = GameState.Instance.CurrentDate;
-            ConcurrentBag<RouteDemand> RouteDemands = null;
+            List<RouteDemand> RouteDemands = null;
 
-            if (forceCalculation)
+            forceCalculation = true;
+
+            if (forceCalculation || CurrentDate.Month == 1)
             {
                 // new year, so calculate all route demands
-                RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands);
-            }
-            else if (CurrentDate.Month == 1)
-            {
-                // new year, so calculate all route demands
-                RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands);
+                RouteDemands = GameData.Instance.RouteDemands;
             }
             else if (CurrentDate.Month == 4 || CurrentDate.Month == 11)
             {
-                // not a new year, so no need to calculate all demands
-                // however check the season influenced routes (Summer start is April, Winter start is November)
-                RouteDemands = new ConcurrentBag<RouteDemand>(GameData.Instance.RouteDemands.Where(d => d.IsSeasonInfluenced));
+                // not a new year, but check season-influenced routes
+                RouteDemands = GameData.Instance.RouteDemands.Where(d => d.IsSeasonInfluenced).ToList();
             }
 
-            // If RouteDemands is still null, then no need to calculate anything
-            if(RouteDemands == null)
-            {
-                return;
-            }
+            // If RouteDemands is still null, no need to calculate anything
+            if (RouteDemands == null) return;
 
             // Dictionary for fast lookup of existing demands
+            //var routeLookup = new ConcurrentDictionary<(Airport, Airport), RouteDemand>(GameData.Instance.RouteDemands.ToDictionary(rd => (rd.Origin, rd.Destination)));
             var routeLookup = new ConcurrentDictionary<(Airport, Airport), RouteDemand>(
-                GameData.Instance.RouteDemands.ToDictionary(rd => (rd.Origin, rd.Destination))
+                GameData.Instance.RouteDemands
+                    .Where(rd => rd != null && rd.Origin != null && rd.Destination != null) // Ensure RouteDemand and its properties are not null
+                    .ToDictionary(rd => (rd.Origin, rd.Destination))
             );
 
-            // Create a list of tasks for parallel execution
+            // Get the number of logical processors (cores + virtual cores)
+            int logicalCores = Environment.ProcessorCount;
+
+            // Define batch size (dividing airports over logical cores)
+            int batchSize = Airports.Count / logicalCores;
+
+            // Create tasks for each batch
             var tasks = new List<Task>();
 
-            foreach (var origin in Airports)
+            // Split airports into batches and process each batch in parallel
+            for (int i = 0; i < Airports.Count; i += batchSize)
             {
+                var batch = Airports.Skip(i).Take(batchSize).ToList();
                 tasks.Add(Task.Run(() =>
                 {
-                    var subTasks = new List<Task>();
-
-                    foreach (var destination in Airports.Where(a => a != origin))
+                    foreach (var origin in batch)
                     {
-                        subTasks.Add(Task.Run(() =>
+                        foreach (var destination in Airports)
                         {
+                            if (destination == origin) continue; // Skip same airport
+
+                            // Check if RouteDemand exists, otherwise create it
                             if (!routeLookup.TryGetValue((origin, destination), out RouteDemand routeDemand))
                             {
-                                // Create a new RouteDemand if it doesn't exist
                                 routeDemand = new RouteDemand(origin, destination);
+                                routeDemand.CalculateBaseDemand(GlobalPassengers);
 
-                                // Add new RouteDemand safely
+                                if (routeDemand.BaseDemand <= GlobalPassengers / 100) continue; // Skip adding unnecessary routes
+
+                                // Add only if it passes the demand check
                                 RouteDemands.Add(routeDemand);
-                                routeLookup.TryAdd((origin, destination), routeDemand);
+                                routeLookup[(origin, destination)] = routeDemand;
+                            }
+                            else
+                            {
+                                // Only update demand calculations if RouteDemand already exists
+                                routeDemand.CalculateBaseDemand(GlobalPassengers);
+
+                                if (routeDemand.BaseDemand <= GlobalPassengers / 100)
+                                {
+                                    // Skip routeDemand with zero base demand (no need to store empty ones)
+                                    RouteDemands.Remove(routeDemand);
+                                    continue;
+                                }
                             }
 
-                            // Run demand calculations in serie (first the base should be calculated)
-                            routeDemand.CalculateBaseDemand(GlobalPassengers);
+                            // Now safe to calculate daily demand
                             routeDemand.CalculateDailyDemand();
-                        }));
 
+                            if(routeDemand.Origin == null || routeDemand.Destination == null || routeDemand.BaseDemand == 0)
+                            {
+                                throw new Exception($"Error at {routeDemand.Origin} - {routeDemand.Destination}");
+                            }
+                        }
                     }
-
-                    Task.WaitAll(subTasks.ToArray());
                 }));
             }
 
+            // Wait for all tasks to complete
             await Task.WhenAll(tasks);
 
-            // Update GameData after calculations
-            GameData.Instance.RouteDemands = new ObservableCollection<RouteDemand>(RouteDemands.ToList());
+            // After all calculations are complete, filter out RouteDemands with zero base demand
+            GameData.Instance.RouteDemands.RemoveAll(r => r == null || r.Origin == null || r.Destination == null);
+
+
+            // Update GameData after calculations (only valid demands will be added)
+            //GameData.Instance.RouteDemands = new List<RouteDemand>(validRouteDemands);
+
 
 #if DEBUG
             // Stop the stopwatch after all tasks are completed

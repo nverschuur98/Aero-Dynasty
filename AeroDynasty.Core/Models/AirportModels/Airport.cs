@@ -22,10 +22,9 @@ namespace AeroDynasty.Core.Models.AirportModels
         public FocusSeason Season { get; set; }
         public Country Country { get; set; }
         public Coordinates Coordinates { get; set; }
-        public double DemandFactor { get; set; }
         public List<Runway> Runways { get; set; }
 
-        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Country country, Coordinates coordinates, double demandfactor, List<Runway> runways)
+        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Country country, Coordinates coordinates, List<Runway> runways)
         {
             Name = name;
             IATA = iata;
@@ -35,7 +34,6 @@ namespace AeroDynasty.Core.Models.AirportModels
             Season = season;
             Country = country;
             Coordinates = coordinates;
-            DemandFactor = demandfactor;
             Runways = runways;
         }
 

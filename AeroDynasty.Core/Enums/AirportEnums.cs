@@ -28,6 +28,11 @@
         Sand,
         Bitumen,
         Dirt,
-        Turf
+        Turf,
+        PSP,
+        Soil,
+        Clay,
+        Coral,
+        Wood
     }
 }
