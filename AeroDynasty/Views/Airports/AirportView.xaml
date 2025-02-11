@@ -70,11 +70,13 @@
 
                         <!-- Row 4 HEADER-->
                         <TextBlock Grid.Row="4" Grid.Column="0" Text="Country" Style="{StaticResource TextBlockInformationHeader}"/>
-                        <TextBlock Grid.Row="4" Grid.Column="1" Text="Coordinates" Style="{StaticResource TextBlockInformationHeader}"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="Town" Style="{StaticResource TextBlockInformationHeader}"/>
+                        <TextBlock Grid.Row="4" Grid.Column="2" Text="Coordinates" Style="{StaticResource TextBlockInformationHeader}"/>
 
                         <!-- Row 5 DATA-->
                         <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding Airport.Country.Name}" Style="{StaticResource TextBlockInformation}"/>
-                        <TextBlock Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Airport.Coordinates.String}" Style="{StaticResource TextBlockInformation}" />
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Airport.Town}" Style="{StaticResource TextBlockInformation}" />
+                        <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding Airport.Coordinates.String}" Style="{StaticResource TextBlockInformation}" />
 
                         <!-- Row 6 HEADER-->
                         <TextBlock Grid.Row="6" Grid.Column="0" Text="Target Season" Style="{StaticResource TextBlockInformationHeader}"/>

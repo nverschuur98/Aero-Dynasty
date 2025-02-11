@@ -118,6 +118,13 @@ namespace AeroDynasty.Core.Models.RouteModels
             }
 
             // Skip routes that don't make sense:
+            // 0. Same city flights
+            if(Origin.Town == Destination.Town)
+            {
+                BaseDemand = 0;
+                return 0;
+            }
+
             // 1. Domestic/Regional routes that are more than 2500 km apart.
             if ((Origin.Type == Enums.AirportType.Domestic || Origin.Type == Enums.AirportType.Regional) &&
                 (Destination.Type == Enums.AirportType.Domestic || Destination.Type == Enums.AirportType.Regional) &&

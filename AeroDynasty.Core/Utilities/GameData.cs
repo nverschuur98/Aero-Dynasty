@@ -189,6 +189,7 @@ namespace AeroDynasty.Core.Utilities
                 int area = airportData.GetProperty("Area").GetInt32();
                 string iata = airportData.GetProperty("IATA").ToString();
                 string icao = airportData.GetProperty("ICAO").ToString();
+                string town = airportData.GetProperty("Town").ToString();
                 AirportType airportType = (AirportType)Enum.Parse(typeof(AirportType), airportData.GetProperty("Type").ToString());
                 FocusSeason airportSeason = (FocusSeason)Enum.Parse(typeof(FocusSeason), airportData.GetProperty("Season").ToString());
 
@@ -243,7 +244,7 @@ namespace AeroDynasty.Core.Utilities
                 if (AreaCountryMap.TryGetValue(Areas.First(a => a.ID == area), out var country))
                 {
                     // Create the Airport instance with the Country reference
-                    var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, runways);
+                    var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, town, runways);
 
                     // Set the period for the airport
                     airport.SetPeriod(startDate, endDate);
