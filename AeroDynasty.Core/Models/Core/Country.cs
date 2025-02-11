@@ -12,7 +12,6 @@ namespace AeroDynasty.Core.Models.Core
     {
         public string Name { get; set; }
         public string ISOCode { get; set; }
-        public Continent Continent { get; set; }
         public string FlagPath
         {
             get

@@ -347,12 +347,10 @@ namespace AeroDynasty.Core.Utilities
                 //Create the country
                 string name = country.GetProperty("Name").ToString();
                 string code = country.GetProperty("ISOCode").ToString();
-                Continent continent = (Continent)Enum.Parse(typeof(Continent), country.GetProperty("Continent").ToString());
 
                 Country _country = new Country();
                 _country.Name = name;
                 _country.ISOCode = code;
-                _country.Continent = continent;
 
                 Countries.Add(_country);
                 _country = Countries.Last();
