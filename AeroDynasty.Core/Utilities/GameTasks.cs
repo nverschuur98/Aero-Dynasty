@@ -302,10 +302,13 @@ namespace AeroDynasty.Core.Utilities
 
                                 if (routeDemand.BaseDemand <= GlobalPassengers / 100)
                                 {
-                                    // Skip routeDemand with zero base demand (no need to store empty ones)
-                                    RouteDemands.Remove(routeDemand);
+                                    lock (RouteDemands)
+                                    {
+                                        RouteDemands.Remove(routeDemand);
+                                    }
                                     continue;
                                 }
+
                             }
 
                             // Now safe to calculate daily demand
