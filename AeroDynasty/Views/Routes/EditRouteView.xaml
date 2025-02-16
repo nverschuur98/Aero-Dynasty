@@ -8,7 +8,7 @@
              xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
              xmlns:Menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="350" d:DesignWidth="400">
     <Grid>
         <Page:Wrapper>
             <Grid>
@@ -27,15 +27,18 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <Form:ComboInput Grid.Row="0" Label="Origin Airport" ItemSource="{Binding OriginAirports}" SelectedItem="{Binding SelectedOrigin}" DisplayMemberPath="ICAO_Name" IsEnabled="{Binding enableAirportSelection}" />
+                    <Form:ComboInput Grid.Row="0" Label="Origin Country" ItemSource="{Binding Countries}" SelectedItem="{Binding SelectedOriginCountry}" DisplayMemberPath="Name" IsEnabled="{Binding enableAirportSelection}" />
+                    <Form:ComboInput Grid.Row="1" Label="Origin Airport" ItemSource="{Binding OriginAirports}" SelectedItem="{Binding SelectedOrigin}" DisplayMemberPath="ICAO_Name" Margin="0,5,0,0" IsEnabled="{Binding enableAirportSelection}" />
 
-                    <Form:ComboInput Grid.Row="1" Label="Destination Airport" ItemSource="{Binding DestinationAirports}" SelectedItem="{Binding SelectedDestination}" DisplayMemberPath="ICAO_Name" Margin="0,5,0,0" IsEnabled="{Binding enableAirportSelection}" />
-                    
-                    <Form:PriceInput Grid.Row="2" Label="Ticket Price" Value="{Binding TicketPrice.Amount}" Margin="0,5,0,0" />
+                    <Form:ComboInput Grid.Row="2" Label="Destination Country" ItemSource="{Binding Countries}" SelectedItem="{Binding SelectedDestinationCountry}" DisplayMemberPath="Name" Margin="0,5,0,0" IsEnabled="{Binding enableAirportSelection}" />
+                    <Form:ComboInput Grid.Row="3" Label="Destination Airport" ItemSource="{Binding DestinationAirports}" SelectedItem="{Binding SelectedDestination}" DisplayMemberPath="ICAO_Name" Margin="0,5,0,0" IsEnabled="{Binding enableAirportSelection}" />
+                    <Form:PriceInput Grid.Row="4" Label="Ticket Price" Value="{Binding TicketPrice.Amount}" Margin="0,5,0,0" />
 
-                    <Grid Grid.Row="4" Margin="0,5,0,0">
+                    <Grid Grid.Row="5" Margin="0,5,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="auto"/>

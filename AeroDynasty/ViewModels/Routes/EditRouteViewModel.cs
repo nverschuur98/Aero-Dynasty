@@ -20,15 +20,30 @@ namespace AeroDynasty.ViewModels.Routes
         private ICollectionView _airports;
         private string _routeName;
         private Route _route;
+        private Country _selectedOriginCountry;
         private Airport _selectedOrigin;
+        private Country _selectedDestinationCountry;
         private Airport _selectedDestination;
         private Price _ticketPrice;
 
         // Public vars
+        public ICollectionView Countries { get; set; }
         public ICollectionView OriginAirports { get; set; }
         public ICollectionView DestinationAirports { get; set; }
         public bool enableAirportSelection { get => _isNewRoute; }
 
+        public Country SelectedOriginCountry
+        {
+            get => _selectedOriginCountry;
+            set
+            {
+                _selectedOriginCountry = value;
+                OnPropertyChanged(nameof(SelectedOriginCountry));
+
+                // Filter Origin Airports based on the selected Country
+                FilterOriginAirports();
+            }
+        }
         public Airport SelectedOrigin
         {
             get => _selectedOrigin;
@@ -39,6 +54,18 @@ namespace AeroDynasty.ViewModels.Routes
                 OnPropertyChanged(nameof(RouteDistance));
 
                 // Filter DestinationAirports to exclude the selected origin
+                FilterDestinationAirports();
+            }
+        }
+        public Country SelectedDestinationCountry
+        {
+            get => _selectedDestinationCountry;
+            set
+            {
+                _selectedDestinationCountry = value;
+                OnPropertyChanged(nameof(SelectedDestinationCountry));
+
+                // Filter Origin Airports based on the selected Country
                 FilterDestinationAirports();
             }
         }
@@ -126,6 +153,8 @@ namespace AeroDynasty.ViewModels.Routes
         private void loadData()
         {
             _airports = Airport.GetAirports();
+            Countries = Country.GetCountries();
+
             OriginAirports = _airports;
             DestinationAirports = _airports;
 
@@ -140,10 +169,29 @@ namespace AeroDynasty.ViewModels.Routes
             SaveRouteCommand = new RelayCommand(SaveRoute);
         }
 
+        private void FilterOriginAirports()
+        {
+            if(SelectedOriginCountry != null && _isNewRoute)
+            {
+                // Get all airports in the selected country
+                var filteredAirports = _airports.Cast<Airport>()
+                    .Where(a => a.Country == SelectedOriginCountry)
+                    .ToList();
+
+                // Convert filtered list back to an ICollectionView
+                OriginAirports = CollectionViewSource.GetDefaultView(filteredAirports);
+
+                // Refresh the collection view
+                OriginAirports.Refresh();
+            }
+
+            OnPropertyChanged(nameof(OriginAirports));
+        }
+
         private void FilterDestinationAirports()
         {
             // If SelectedOrigin is null, reset DestinationAirports to all airports
-            if (SelectedOrigin != null && _isNewRoute)
+            if (SelectedOrigin != null && SelectedDestinationCountry != null && _isNewRoute)
             {
                 // Get all destination airports the route owner already flies to (in both directions)
                 var existingDestinations = GameData.Instance.Routes
@@ -154,7 +202,7 @@ namespace AeroDynasty.ViewModels.Routes
 
                 // Create a filtered list by excluding the selected origin and existing destinations (both directions)
                 var filteredAirports = _airports.Cast<Airport>()
-                    .Where(a => a != SelectedOrigin && !existingDestinations.Contains(a)) // Exclude both directions
+                    .Where(a => a != SelectedOrigin && a.Country == SelectedDestinationCountry && !existingDestinations.Contains(a)) // Exclude both directions
                     .ToList();
 
                 // Convert filtered list back to an ICollectionView
@@ -163,7 +211,7 @@ namespace AeroDynasty.ViewModels.Routes
                 // Refresh the collection view
                 DestinationAirports.Refresh();
             }
-            else
+            else if (SelectedDestinationCountry != null && _isNewRoute)
             {
                 // Reset DestinationAirports if no origin is selected
                 DestinationAirports = _airports;
