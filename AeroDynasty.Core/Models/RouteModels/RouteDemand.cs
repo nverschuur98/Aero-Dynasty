@@ -74,7 +74,7 @@ namespace AeroDynasty.Core.Models.RouteModels
         /// <returns></returns>
         public static ICollectionView GetRouteDemands(Airport airport, Func<RouteDemand, bool> additionalFilter)
         {
-            var filteredRouteDemands = GameData.Instance.RouteDemands.Where(r => r.Origin == airport).Where(additionalFilter);
+            var filteredRouteDemands = GameData.Instance.RouteDemands.Where(r => r != null && r.Origin == airport).Where(additionalFilter);
             var routeDemandsView = CollectionViewSource.GetDefaultView(filteredRouteDemands);
             routeDemandsView.SortDescriptions.Add(new SortDescription(nameof(RouteDemand.BaseFactor), ListSortDirection.Descending));
 

@@ -286,8 +286,14 @@ namespace AeroDynasty.Core.Utilities
                                 if (routeDemand.BaseDemand <= GlobalPassengers / 100) continue; // Skip adding unnecessary routes
 
                                 // Add only if it passes the demand check
-                                RouteDemands.Add(routeDemand);
-                                routeLookup[(origin, destination)] = routeDemand;
+                                if (routeDemand.Origin != null && routeDemand.Destination != null)
+                                {
+                                    lock (RouteDemands)
+                                    {
+                                        RouteDemands.Add(routeDemand);
+                                        routeLookup[(origin, destination)] = routeDemand;
+                                    }
+                                }
                             }
                             else
                             {

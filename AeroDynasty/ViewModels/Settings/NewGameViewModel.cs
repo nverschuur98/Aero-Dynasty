@@ -59,10 +59,11 @@ namespace AeroDynasty.ViewModels.Settings
         {
             // Static list for starting years
             AvailableStartingYears = new List<int>();
-            AvailableStartingYears.Add(1946);
-            AvailableStartingYears.Add(1947);
-            AvailableStartingYears.Add(1948);
-            AvailableStartingYears.Add(2025);
+
+            for(int y = 1946; y <= DateTime.Now.Year; y++)
+            {
+                AvailableStartingYears.Add(y);
+            }
 
             // Static list for airlines
             AvailableAirlines = GameData.Instance.Airlines;
