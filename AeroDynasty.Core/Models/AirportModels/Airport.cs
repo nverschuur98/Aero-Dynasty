@@ -20,12 +20,13 @@ namespace AeroDynasty.Core.Models.AirportModels
         public AirportType Type { get; set; }
         public AirportSize PassengerSize { get; set; }
         public FocusSeason Season { get; set; }
-        public Country Country { get; set; }
+        public Area Area { get; set; }
+        public Country Country { get => Area.GetCountry(); }
         public Coordinates Coordinates { get; set; }
         public string Town { get; set; }
         public List<Runway> Runways { get; set; }
 
-        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Country country, Coordinates coordinates, string town,List<Runway> runways)
+        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Area area, Coordinates coordinates, string town,List<Runway> runways)
         {
             Name = name;
             IATA = iata;
@@ -33,7 +34,7 @@ namespace AeroDynasty.Core.Models.AirportModels
             Type = type;
             PassengerSize = passengerSize;
             Season = season;
-            Country = country;
+            Area = area;
             Coordinates = coordinates;
             Town = town;
             Runways = runways;
@@ -44,7 +45,7 @@ namespace AeroDynasty.Core.Models.AirportModels
         {
             get
             {
-                string path = $"Assets/Flags/{Country.ISOCode.ToLower()}.png"; // Adjust the extension as necessary
+                string path = $"Assets/Flags/{Country.ISO2Code.ToLower()}.png"; // Adjust the extension as necessary
                 if (!File.Exists(path))
                 {
                     System.Diagnostics.Debug.WriteLine($"File not found: {path}");

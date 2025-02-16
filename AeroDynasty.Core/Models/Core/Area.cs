@@ -17,32 +17,12 @@ namespace AeroDynasty.Core.Models.Core
             ID = id;
             Name = name;
         }
-    }
 
-    public class AreaCountryManager
-    {
-
-        // Adds an area to the dictionary with a country if it's not already in the dictionary
-        public void AssignAreaToCountry(Area area, Country country)
+        public Country GetCountry()
         {
-            if (!GameData.Instance.AreaCountryMap.ContainsKey(area))
+            if (GameData.Instance.AreaCountryMap.ContainsKey(this))
             {
-                // If the area is not already in the dictionary, add it.
-                GameData.Instance.AreaCountryMap.Add(area, country);
-            }
-            else
-            {
-                // If the area is already in the dictionary, simply update the country.
-                GameData.Instance.AreaCountryMap[area] = country;
-            }
-        }
-
-        // Returns the country an area is currently assigned to
-        public Country GetCountryByArea(Area area)
-        {
-            if (GameData.Instance.AreaCountryMap.ContainsKey(area))
-            {
-                return GameData.Instance.AreaCountryMap[area];
+                return GameData.Instance.AreaCountryMap[this];
             }
             return null; // Or return a default country if preferred
         }

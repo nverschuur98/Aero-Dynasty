@@ -198,8 +198,6 @@ namespace AeroDynasty.Core.Utilities
                 // Deserialize each JSON element separately using the corresponding converter
                 var gameState = JsonSerializer.Deserialize<GameState>(state.GetProperty("State").GetRawText(), options);
                 var airlines = JsonSerializer.Deserialize<List<Airline>>(data.GetProperty("Airlines").GetRawText(), options);
-                var airliners = JsonSerializer.Deserialize<List<Airliner>>(data.GetProperty("Airliners").GetRawText(), options);
-                var routes = JsonSerializer.Deserialize<List<Route>>(data.GetProperty("Routes").GetRawText(), options);
                 var userData = JsonSerializer.Deserialize<UserData>(data.GetProperty("UserData").GetRawText(), options);
                 var globalModifiers = JsonSerializer.Deserialize<GlobalModifiers>(data.GetProperty("GlobalModifiers").GetRawText(), options);
 
@@ -208,6 +206,10 @@ namespace AeroDynasty.Core.Utilities
 
                 // Check all the objects with an assigned period on their status
                 GameData.Instance.GameLoadedTasks();
+
+                // After the data is set and checked with GameLoadedTasks, load the remaining change data
+                var airliners = JsonSerializer.Deserialize<List<Airliner>>(data.GetProperty("Airliners").GetRawText(), options);
+                var routes = JsonSerializer.Deserialize<List<Route>>(data.GetProperty("Routes").GetRawText(), options);
             }
             catch (Exception ex)
             {
@@ -352,7 +354,7 @@ namespace AeroDynasty.Core.Utilities
         public override void Write(Utf8JsonWriter writer, Country value, JsonSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WriteString("ISOCode", value.ISOCode.ToString());
+            writer.WriteString("ISOCode", value.ISO2Code.ToString());
             writer.WriteEndObject();
         }
     }
@@ -395,8 +397,8 @@ namespace AeroDynasty.Core.Utilities
                 var scheduledFlights = root.GetProperty("ScheduledFlights");
 
                 // Ensure the referenced objects exist in GameData
-                Airport origin = GameData.Instance.Airports.FirstOrDefault(a => a.ICAO == originICAO);
-                Airport destination = GameData.Instance.Airports.FirstOrDefault(a => a.ICAO == destinationICAO);
+                Airport origin = GameData.Instance.Airports.FirstOrDefault(a => a.ICAO == originICAO && a.IsActive);
+                Airport destination = GameData.Instance.Airports.FirstOrDefault(a => a.ICAO == destinationICAO && a.IsActive);
                 Airline owner = GameData.Instance.Airlines.FirstOrDefault(a => a.Name == ownerName);
 
                 if (origin == null || destination == null || owner == null)

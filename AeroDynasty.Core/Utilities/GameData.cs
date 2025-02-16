@@ -27,6 +27,7 @@ namespace AeroDynasty.Core.Utilities
 
         //Observable Core Data
         public ObservableCollection<Area> Areas { get; private set; }
+        public List<AreaChange> AreaChanges { get; private set; }
         public ObservableCollection<Country> Countries { get; private set; }
         public ObservableCollection<RegistrationTemplate> RegistrationTemplates { get; set; }
 
@@ -44,7 +45,7 @@ namespace AeroDynasty.Core.Utilities
         
         //Maps
         public Dictionary<Area, Country> AreaCountryMap { get; private set; }
-        public Dictionary<string, Country> CountryMap { get; private set; }
+        public Dictionary<int, Country> CountryMap { get; private set; }
         public Dictionary<Country, RegistrationTemplate> RegistrationTemplateMap { get; set; }
         //public Dictionary<int, double> Inflations { get; private set; }
         
@@ -69,17 +70,10 @@ namespace AeroDynasty.Core.Utilities
             SetupGameData();
             
             // Init airline
-            //Airline arl = Airlines.Where(al => al.Name.Contains("KLM")).FirstOrDefault();
             UserData = new UserData();
-
-            // Execute tasks for starting values
-            //GameLoadedTasks();
 
             // Register all game tasks
             RegisterGameTasks();
-
-            // First time route demand calculations
-            //GameTasks.CalculateRouteBaseDemand();
         }
 
         //Private funcs
@@ -92,6 +86,7 @@ namespace AeroDynasty.Core.Utilities
         {
             LoadAreas();
             LoadCountries();
+            LoadAreaChanges();
             SetAreaCountryMap();
             LoadGlobalModifiers();
         }
@@ -142,10 +137,10 @@ namespace AeroDynasty.Core.Utilities
                     double reputation = Convert.ToDouble(airlineData.GetProperty("Reputation").ToString());
                     string countrycode = airlineData.GetProperty("CountryCode").ToString();
 
-                    // Check if the country exists
-                    if (CountryMap.TryGetValue(countrycode, out var country))
+                    // TODO: Replace countryCode with area id
+                    var country = Countries.FirstOrDefault(c => c.ISO2Code == countrycode);
+                    if (country != null)
                     {
-                        // Create the airline instance
                         Airline airline = new Airline(name, country, new Price(cashbalance), reputation);
                         airlines.Add(airline);
                     }
@@ -186,7 +181,11 @@ namespace AeroDynasty.Core.Utilities
             {
                 // Extract the data
                 string airportName = airportData.GetProperty("Name").ToString();
-                int area = airportData.GetProperty("Area").GetInt32();
+                
+                // Get Area
+                int areaID = airportData.GetProperty("Area").GetInt32();
+                Area area = Areas.FirstOrDefault(a => a.ID == areaID);
+
                 string iata = airportData.GetProperty("IATA").ToString();
                 string icao = airportData.GetProperty("ICAO").ToString();
                 string town = airportData.GetProperty("Town").ToString();
@@ -240,23 +239,14 @@ namespace AeroDynasty.Core.Utilities
                     }
                 }
 
-                // Check if the country exists in the map
-                if (AreaCountryMap.TryGetValue(Areas.First(a => a.ID == area), out var country))
-                {
-                    // Create the Airport instance with the Country reference
-                    var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, country, coordinates, town, runways);
+                // Create the Airport instance with the Country reference
+                var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, area, coordinates, town, runways);
 
-                    // Set the period for the airport
-                    airport.SetPeriod(startDate, endDate);
+                // Set the period for the airport
+                airport.SetPeriod(startDate, endDate);
 
-                    airports.Add(airport);
-                }
-                else
-                {
-                    // Handle cases where the country is not found if necessary
-                    // For example, you can log a warning or create a default Country instance
-                    throw new Exception($"No such country found while creating airport: {airportName}.");
-                }
+                airports.Add(airport);
+
             }
             // Assign the populated list to the ObservableCollection
             Airports = new ObservableCollection<Airport>(airports);
@@ -296,7 +286,9 @@ namespace AeroDynasty.Core.Utilities
                     throw new Exception($"Failed to convert {manufacturer.GetProperty("FoundingDate").ToString()} into DateTime");
                 }
 
-                if (!CountryMap.TryGetValue(CountryCode, out Country))
+                // TODO: Replace countrycode with area id
+                Country = Countries.FirstOrDefault(c => c.ISO2Code == CountryCode);
+                if (Country == null)
                 {
                     throw new Exception($"Failed to convert {CountryCode} into a country");
                 }
@@ -346,11 +338,15 @@ namespace AeroDynasty.Core.Utilities
             {
                 //Create the country
                 string name = country.GetProperty("Name").ToString();
-                string code = country.GetProperty("ISOCode").ToString();
+                int ID = country.GetProperty("ID").GetInt32();
+                string ISO2Code = country.GetProperty("ISO2Code").ToString();
+                string ISO3Code = country.GetProperty("ISO3Code").ToString();
 
                 Country _country = new Country();
                 _country.Name = name;
-                _country.ISOCode = code;
+                _country.ID = ID;
+                _country.ISO2Code = ISO2Code;
+                _country.ISO3Code = ISO3Code;
 
                 Countries.Add(_country);
                 _country = Countries.Last();
@@ -358,19 +354,68 @@ namespace AeroDynasty.Core.Utilities
                 //Create the registration template
                 if (country.TryGetProperty("Registration", out JsonElement registration))
                 {
-                    string countryID = registration.GetProperty("CountryIdentifier").ToString();
-                    bool separator = Convert.ToBoolean(registration.GetProperty("Separator").ToString());
-                    string format = registration.GetProperty("Format").ToString();
-                
-                    RegistrationTemplates.Add(new RegistrationTemplate(countryID, separator, format, _country));
+                    try
+                    {
+                        string countryID = registration.GetProperty("CountryIdentifier").ToString();
+                        bool separator = Convert.ToBoolean(registration.GetProperty("Separator").ToString());
+                        string format = registration.GetProperty("Format").ToString();
+
+                        RegistrationTemplates.Add(new RegistrationTemplate(countryID, separator, format, _country));
+                    }catch
+                    {
+                        Console.WriteLine($"error while reading {_country.Name} - {registration.ToString()}");
+                    }
+                    
                 }
             }
 
             // Create a mapping of CountryCode to Country instance
-            CountryMap = Countries.ToDictionary(c => c.ISOCode, c => c);
+            try
+            {
+                CountryMap = Countries.ToDictionary(c => c.ID, c => c);
+            }
+            catch (ArgumentException ex)
+            {
+                // Find the duplicate ID by grouping
+                var duplicateIds = Countries.GroupBy(c => c.ID)
+                                            .Where(g => g.Count() > 1)
+                                            .Select(g => g.Key);
+
+                Console.WriteLine($"Error: Duplicate ID(s) found - {string.Join(", ", duplicateIds)}");
+            }
 
             //Create a mapping of Country to Template
             RegistrationTemplateMap = RegistrationTemplates.ToDictionary(t => t.Country, t => t);
+        }
+
+        /// <summary>
+        /// Loading the area change data from the data files
+        /// </summary>
+        private void LoadAreaChanges()
+        {
+            string JSONString = File.ReadAllText("Assets/AreaChangeData.json");
+            JsonDocument JSONDoc = JsonDocument.Parse(JSONString);
+            JsonElement JSONRoot = JSONDoc.RootElement;
+
+            // Setup the empty list
+            AreaChanges = new List<AreaChange>();
+
+            foreach (JsonElement change in JSONRoot.EnumerateArray())
+            {
+                int areaID = change.GetProperty("AreaId").GetInt32();
+                int countryID = change.GetProperty("CountryId").GetInt32();
+                DateTime date = DateTime.ParseExact(change.GetProperty("FromDate").GetString(), "dd-MM-yyyy", null);
+                bool ignoreWar = change.GetProperty("IgnoreWar").GetBoolean();
+
+
+                Area area = Areas.First(ar => ar.ID == areaID);
+                Country country = Countries.First(co => co.ID == countryID);
+
+                AreaChanges.Add(new AreaChange(area, country, date, ignoreWar));
+            }
+
+            // Order the change list
+            AreaChanges.OrderBy(ac => ac.ChangeDate);
         }
 
         /// <summary>
@@ -389,6 +434,7 @@ namespace AeroDynasty.Core.Utilities
             // Set dictionary
             AreaCountryMap = new Dictionary<Area, Country>();
 
+            // Set each area at least to a country
             foreach (Area area in Areas)
             {
                 Country country = Countries.First();
@@ -551,6 +597,7 @@ namespace AeroDynasty.Core.Utilities
             GameState.Instance.RegisterDailyTask(GameTasks.CalculateRouteExecutions);
             GameState.Instance.RegisterDailyTask(GameTasks.CalculateFuelPrice);
             GameState.Instance.RegisterDailyTask(GameTasks.CheckIsActive);
+            GameState.Instance.RegisterDailyTask(GameTasks.CheckAreaChanges);
 
             GameState.Instance.RegisterMonthlyTask(GameTasks.CalculateRouteDemand);
         }
@@ -568,17 +615,18 @@ namespace AeroDynasty.Core.Utilities
             LoadChangedata();
         }
 
-        public void GameLoadedTasks()
+        public async Task GameLoadedTasks()
         {
             // Get game data 
             int y = GameState.Instance.CurrentDate.Year;
             GlobalModifiers.CurrentFuelPrice = new Price(GlobalModifiers.FuelPriceMap[y]);
             GlobalModifiers.CurrentGlobalPassengers = GlobalModifiers.GlobalPassengersMap[y];
 
-            // Do one of calculations
-            GameTasks.CalculateFuelPrice();
-            GameTasks.CheckIsActive();
-            GameTasks.CalculateRouteDemand(true);
+            // Execute tasks in series
+            await GameTasks.CheckIsActive();
+            await GameTasks.CheckAreaChanges();
+            await GameTasks.CalculateFuelPrice();
+            await GameTasks.CalculateRouteDemand(true);
         }
     }
 }

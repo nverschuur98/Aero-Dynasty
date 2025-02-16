@@ -62,9 +62,14 @@ namespace AeroDynasty.Core.Utilities
             {
                 int localDemand = 0;
 
+                // Ensure routeDemands is not null
+                if (routeDemands == null)
+                {
+                    throw new InvalidOperationException("routeDemands is not set.");
+                }
+
                 // Get the corresponding RouteDemand object, or null if not found
-                RouteDemand routeDemand = routeDemands
-                    .FirstOrDefault(rd => rd.Origin == group.Key.Origin && rd.Destination == group.Key.Destination);
+                RouteDemand routeDemand = routeDemands.FirstOrDefault(rd => rd.Origin == group.Key.Origin && rd.Destination == group.Key.Destination);
 
                 // If routeDemand is found, get the demand for the current day; otherwise, localDemand remains 0
                 if (routeDemand != null)
@@ -149,7 +154,8 @@ namespace AeroDynasty.Core.Utilities
         }
 
         /// <summary>
-        /// Task to check on newly available aircraftmodels
+        /// Task to check on newly available aircraftmodels and airports
+        /// Based on the _PeriodModel class
         /// </summary>
         /// <returns></returns>
         internal static async Task CheckIsActive()
@@ -159,6 +165,41 @@ namespace AeroDynasty.Core.Utilities
 
             await GameData.Instance.Airports.CheckIsActiveForAllAsync(currentDate);
             await GameData.Instance.AircraftModels.CheckIsActiveForAllAsync(currentDate);
+        }
+
+        /// <summary>
+        /// Task to check if there is an area that needs changing to an other country
+        /// </summary>
+        /// <returns></returns>
+        internal static async Task CheckAreaChanges()
+        {
+            DateTime currentDate = GameState.Instance.CurrentDate;
+            List<AreaChange> changesToExecute = GameData.Instance.AreaChanges.Where(c => c.ChangeDate <= currentDate).ToList();
+
+            // If nothing to change, exit
+            if (changesToExecute.Count() <= 0)
+            {
+                return;
+            }
+
+            // Execute changes
+            await Task.Run(() =>
+            {
+                List<AreaChange> changesToRemove = new List<AreaChange>();
+
+                // Execute the change in area
+                foreach (AreaChange change in changesToExecute)
+                {
+                    AreaChangeManager.AssignAreaToCountry(change.Area, change.Country);
+                    changesToRemove.Add(change);
+                }
+
+                // Remove the change from the change list
+                foreach (AreaChange change in changesToRemove)
+                {
+                    GameData.Instance.AreaChanges.Remove(change);
+                }
+            });
         }
 
         /// <summary>

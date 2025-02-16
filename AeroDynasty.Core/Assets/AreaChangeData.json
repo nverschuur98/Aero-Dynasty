@@ -1,0 +1,4796 @@
+[
+  {
+    "AreaId": 100,
+    "CountryId": 121,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 101,
+    "CountryId": 130,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 101,
+    "CountryId": 137,
+    "IgnoreWar": false,
+    "FromDate": "06-12-1922"
+  },
+  {
+    "AreaId": 102,
+    "CountryId": 130,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 103,
+    "CountryId": 110,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 104,
+    "CountryId": 139,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 104,
+    "CountryId": 1033,
+    "IgnoreWar": true,
+    "FromDate": "10-06-1940"
+  },
+  {
+    "AreaId": 104,
+    "CountryId": 139,
+    "IgnoreWar": false,
+    "FromDate": "09-05-1945"
+  },
+  {
+    "AreaId": 105,
+    "CountryId": 168,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 106,
+    "CountryId": 167,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 107,
+    "CountryId": 110,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 107,
+    "CountryId": 1032,
+    "IgnoreWar": true,
+    "FromDate": "09-04-1940"
+  },
+  {
+    "AreaId": 107,
+    "CountryId": 110,
+    "IgnoreWar": false,
+    "FromDate": "05-05-1945"
+  },
+  {
+    "AreaId": 108,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 108,
+    "CountryId": 1013,
+    "IgnoreWar": false,
+    "FromDate": "30-01-1933"
+  },
+  {
+    "AreaId": 108,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 108,
+    "CountryId": 1002,
+    "IgnoreWar": false,
+    "FromDate": "23-05-1949"
+  },
+  {
+    "AreaId": 108,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "02-10-1990"
+  },
+  {
+    "AreaId": 109,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 109,
+    "CountryId": 1013,
+    "IgnoreWar": false,
+    "FromDate": "30-01-1933"
+  },
+  {
+    "AreaId": 109,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 109,
+    "CountryId": 1001,
+    "IgnoreWar": false,
+    "FromDate": "23-05-1949"
+  },
+  {
+    "AreaId": 109,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "02-10-1990"
+  },
+  {
+    "AreaId": 110,
+    "CountryId": 119,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 110,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "29-07-1940"
+  },
+  {
+    "AreaId": 110,
+    "CountryId": 119,
+    "IgnoreWar": false,
+    "FromDate": "10-09-1944"
+  },
+  {
+    "AreaId": 111,
+    "CountryId": 179,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 111,
+    "CountryId": 1030,
+    "IgnoreWar": true,
+    "FromDate": "15-05-1940"
+  },
+  {
+    "AreaId": 111,
+    "CountryId": 179,
+    "IgnoreWar": false,
+    "FromDate": "05-05-1945"
+  },
+  {
+    "AreaId": 112,
+    "CountryId": 107,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 112,
+    "CountryId": 1031,
+    "IgnoreWar": true,
+    "FromDate": "28-05-1940"
+  },
+  {
+    "AreaId": 112,
+    "CountryId": 107,
+    "IgnoreWar": false,
+    "FromDate": "05-02-1945"
+  },
+  {
+    "AreaId": 113,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 113,
+    "CountryId": 1034,
+    "IgnoreWar": true,
+    "FromDate": "22-06-1940"
+  },
+  {
+    "AreaId": 113,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "26-08-1944"
+  },
+  {
+    "AreaId": 114,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 114,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "22-06-1940"
+  },
+  {
+    "AreaId": 114,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "21-11-1944"
+  },
+  {
+    "AreaId": 115,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 115,
+    "CountryId": 1014,
+    "IgnoreWar": true,
+    "FromDate": "22-06-1940"
+  },
+  {
+    "AreaId": 115,
+    "CountryId": 1034,
+    "IgnoreWar": true,
+    "FromDate": "12-11-1942"
+  },
+  {
+    "AreaId": 115,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "26-08-1944"
+  },
+  {
+    "AreaId": 116,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 116,
+    "CountryId": 1014,
+    "IgnoreWar": true,
+    "FromDate": "22-06-1940"
+  },
+  {
+    "AreaId": 116,
+    "CountryId": 141,
+    "IgnoreWar": true,
+    "FromDate": "12-11-1942"
+  },
+  {
+    "AreaId": 116,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "08-09-1943"
+  },
+  {
+    "AreaId": 117,
+    "CountryId": 123,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 118,
+    "CountryId": 150,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 119,
+    "CountryId": 164,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 120,
+    "CountryId": 169,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 120,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "13-03-1938"
+  },
+  {
+    "AreaId": 120,
+    "CountryId": 169,
+    "IgnoreWar": false,
+    "FromDate": "01-05-1945"
+  },
+  {
+    "AreaId": 121,
+    "CountryId": 141,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 121,
+    "CountryId": 1035,
+    "IgnoreWar": true,
+    "FromDate": "08-09-1943"
+  },
+  {
+    "AreaId": 121,
+    "CountryId": 141,
+    "IgnoreWar": false,
+    "FromDate": "01-05-1945"
+  },
+  {
+    "AreaId": 122,
+    "CountryId": 141,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 122,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "08-09-1943"
+  },
+  {
+    "AreaId": 122,
+    "CountryId": 141,
+    "IgnoreWar": false,
+    "FromDate": "01-05-1945"
+  },
+  {
+    "AreaId": 123,
+    "CountryId": 141,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 123,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "08-09-1943"
+  },
+  {
+    "AreaId": 123,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-05-1945"
+  },
+  {
+    "AreaId": 123,
+    "CountryId": 105,
+    "IgnoreWar": false,
+    "FromDate": "25-06-1991"
+  },
+  {
+    "AreaId": 124,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 124,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 124,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-05-1945"
+  },
+  {
+    "AreaId": 124,
+    "CountryId": 105,
+    "IgnoreWar": false,
+    "FromDate": "25-06-1991"
+  },
+  {
+    "AreaId": 125,
+    "CountryId": 141,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 125,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "08-09-1943"
+  },
+  {
+    "AreaId": 125,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 125,
+    "CountryId": 120,
+    "IgnoreWar": false,
+    "FromDate": "08-10-1991"
+  },
+  {
+    "AreaId": 126,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 126,
+    "CountryId": 1015,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 126,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 126,
+    "CountryId": 120,
+    "IgnoreWar": false,
+    "FromDate": "08-10-1991"
+  },
+  {
+    "AreaId": 127,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 127,
+    "CountryId": 159,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 127,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 127,
+    "CountryId": 120,
+    "IgnoreWar": false,
+    "FromDate": "08-10-1991"
+  },
+  {
+    "AreaId": 128,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 128,
+    "CountryId": 141,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 128,
+    "CountryId": 1016,
+    "IgnoreWar": true,
+    "FromDate": "20-10-1944"
+  },
+  {
+    "AreaId": 128,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 128,
+    "CountryId": 120,
+    "IgnoreWar": false,
+    "FromDate": "08-10-1991"
+  },
+  {
+    "AreaId": 128,
+    "CountryId": 1035,
+    "IgnoreWar": true,
+    "FromDate": "08-09-1943"
+  },
+  {
+    "AreaId": 129,
+    "CountryId": 159,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 130,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 130,
+    "CountryId": 1015,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 130,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 130,
+    "CountryId": 248,
+    "IgnoreWar": false,
+    "FromDate": "01-03-1992"
+  },
+  {
+    "AreaId": 131,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 131,
+    "CountryId": 159,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 131,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 131,
+    "CountryId": 1006,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1992"
+  },
+  {
+    "AreaId": 131,
+    "CountryId": 104,
+    "IgnoreWar": false,
+    "FromDate": "05-06-2006"
+  },
+  {
+    "AreaId": 132,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 132,
+    "CountryId": 1015,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 132,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 132,
+    "CountryId": 1006,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1992"
+  },
+  {
+    "AreaId": 132,
+    "CountryId": 104,
+    "IgnoreWar": false,
+    "FromDate": "05-06-2006"
+  },
+  {
+    "AreaId": 133,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 133,
+    "CountryId": 1016,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 133,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 133,
+    "CountryId": 1006,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1992"
+  },
+  {
+    "AreaId": 133,
+    "CountryId": 104,
+    "IgnoreWar": false,
+    "FromDate": "05-06-2006"
+  },
+  {
+    "AreaId": 133,
+    "CountryId": 1036,
+    "IgnoreWar": true,
+    "FromDate": "20-10-1944"
+  },
+  {
+    "AreaId": 134,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 134,
+    "CountryId": 242,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 134,
+    "CountryId": 1036,
+    "IgnoreWar": true,
+    "FromDate": "20-10-1944"
+  },
+  {
+    "AreaId": 134,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 134,
+    "CountryId": 1006,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1992"
+  },
+  {
+    "AreaId": 134,
+    "CountryId": 104,
+    "IgnoreWar": false,
+    "FromDate": "05-06-2006"
+  },
+  {
+    "AreaId": 134,
+    "CountryId": 313,
+    "IgnoreWar": false,
+    "FromDate": "17-02-2008"
+  },
+  {
+    "AreaId": 135,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 135,
+    "CountryId": 1017,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 135,
+    "CountryId": 1036,
+    "IgnoreWar": true,
+    "FromDate": "20-10-1944"
+  },
+  {
+    "AreaId": 135,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 135,
+    "CountryId": 1006,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1992"
+  },
+  {
+    "AreaId": 135,
+    "CountryId": 249,
+    "IgnoreWar": false,
+    "FromDate": "05-06-2006"
+  },
+  {
+    "AreaId": 136,
+    "CountryId": 242,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 137,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 137,
+    "CountryId": 185,
+    "IgnoreWar": true,
+    "FromDate": "18-04-1941"
+  },
+  {
+    "AreaId": 137,
+    "CountryId": 1005,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 137,
+    "CountryId": 284,
+    "IgnoreWar": false,
+    "FromDate": "08-09-1991"
+  },
+  {
+    "AreaId": 137,
+    "CountryId": 1169,
+    "IgnoreWar": false,
+    "FromDate": "02-02-2019"
+  },
+  {
+    "AreaId": 138,
+    "CountryId": 130,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 138,
+    "CountryId": 132,
+    "IgnoreWar": false,
+    "FromDate": "21-09-1964"
+  },
+  {
+    "AreaId": 139,
+    "CountryId": 118,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 139,
+    "CountryId": 1037,
+    "IgnoreWar": true,
+    "FromDate": "11-12-1941"
+  },
+  {
+    "AreaId": 139,
+    "CountryId": 1038,
+    "IgnoreWar": true,
+    "FromDate": "08-09-1943"
+  },
+  {
+    "AreaId": 139,
+    "CountryId": 118,
+    "IgnoreWar": false,
+    "FromDate": "14-10-1944"
+  },
+  {
+    "AreaId": 140,
+    "CountryId": 141,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 140,
+    "CountryId": 118,
+    "IgnoreWar": false,
+    "FromDate": "15-09-1947"
+  },
+  {
+    "AreaId": 141,
+    "CountryId": 118,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 141,
+    "CountryId": 185,
+    "IgnoreWar": true,
+    "FromDate": "11-12-1941"
+  },
+  {
+    "AreaId": 141,
+    "CountryId": 118,
+    "IgnoreWar": false,
+    "FromDate": "14-10-1944"
+  },
+  {
+    "AreaId": 142,
+    "CountryId": 118,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 142,
+    "CountryId": 1018,
+    "IgnoreWar": false,
+    "FromDate": "18-09-1922"
+  },
+  {
+    "AreaId": 142,
+    "CountryId": 161,
+    "IgnoreWar": false,
+    "FromDate": "29-10-1923"
+  },
+  {
+    "AreaId": 143,
+    "CountryId": 1018,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 143,
+    "CountryId": 161,
+    "IgnoreWar": false,
+    "FromDate": "29-10-1923"
+  },
+  {
+    "AreaId": 144,
+    "CountryId": 1068,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 144,
+    "CountryId": 161,
+    "IgnoreWar": false,
+    "FromDate": "29-06-1939"
+  },
+  {
+    "AreaId": 145,
+    "CountryId": 1019,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 145,
+    "CountryId": 161,
+    "IgnoreWar": false,
+    "FromDate": "04-12-1920"
+  },
+  {
+    "AreaId": 146,
+    "CountryId": 1044,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 146,
+    "CountryId": 154,
+    "IgnoreWar": false,
+    "FromDate": "16-08-1960"
+  },
+  {
+    "AreaId": 147,
+    "CountryId": 185,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 148,
+    "CountryId": 147,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 149,
+    "CountryId": 147,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 149,
+    "CountryId": 159,
+    "IgnoreWar": true,
+    "FromDate": "30-08-1940"
+  },
+  {
+    "AreaId": 149,
+    "CountryId": 147,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 150,
+    "CountryId": 147,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 150,
+    "CountryId": 1004,
+    "IgnoreWar": true,
+    "FromDate": "29-06-1940"
+  },
+  {
+    "AreaId": 150,
+    "CountryId": 147,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 150,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "29-08-1944"
+  },
+  {
+    "AreaId": 150,
+    "CountryId": 232,
+    "IgnoreWar": false,
+    "FromDate": "27-09-1991"
+  },
+  {
+    "AreaId": 151,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 151,
+    "CountryId": 159,
+    "IgnoreWar": true,
+    "FromDate": "02-11-1938"
+  },
+  {
+    "AreaId": 151,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "09-05-1945"
+  },
+  {
+    "AreaId": 151,
+    "CountryId": 231,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1993"
+  },
+  {
+    "AreaId": 152,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 152,
+    "CountryId": 159,
+    "IgnoreWar": true,
+    "FromDate": "31-03-1939"
+  },
+  {
+    "AreaId": 152,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "09-05-1945"
+  },
+  {
+    "AreaId": 152,
+    "CountryId": 231,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1993"
+  },
+  {
+    "AreaId": 153,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 153,
+    "CountryId": 1020,
+    "IgnoreWar": true,
+    "FromDate": "14-03-1939"
+  },
+  {
+    "AreaId": 153,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "09-05-1945"
+  },
+  {
+    "AreaId": 153,
+    "CountryId": 231,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1993"
+  },
+  {
+    "AreaId": 154,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 154,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "21-10-1938"
+  },
+  {
+    "AreaId": 154,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "09-05-1945"
+  },
+  {
+    "AreaId": 154,
+    "CountryId": 166,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1993"
+  },
+  {
+    "AreaId": 155,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 155,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "16-03-1939"
+  },
+  {
+    "AreaId": 155,
+    "CountryId": 1003,
+    "IgnoreWar": false,
+    "FromDate": "09-05-1945"
+  },
+  {
+    "AreaId": 155,
+    "CountryId": 166,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1993"
+  },
+  {
+    "AreaId": 156,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 156,
+    "CountryId": 1013,
+    "IgnoreWar": false,
+    "FromDate": "30-01-1933"
+  },
+  {
+    "AreaId": 156,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 157,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 157,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 157,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 158,
+    "CountryId": 1022,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 158,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "18-03-1921"
+  },
+  {
+    "AreaId": 158,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 158,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 159,
+    "CountryId": 163,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 159,
+    "CountryId": 1013,
+    "IgnoreWar": false,
+    "FromDate": "30-01-1933"
+  },
+  {
+    "AreaId": 159,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 159,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 160,
+    "CountryId": 1022,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 160,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "18-03-1921"
+  },
+  {
+    "AreaId": 160,
+    "CountryId": 1004,
+    "IgnoreWar": true,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 160,
+    "CountryId": 1013,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 160,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "02-09-1945"
+  },
+  {
+    "AreaId": 160,
+    "CountryId": 134,
+    "IgnoreWar": false,
+    "FromDate": "24-08-1991"
+  },
+  {
+    "AreaId": 161,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 161,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 161,
+    "CountryId": 1023,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 161,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 161,
+    "CountryId": 134,
+    "IgnoreWar": false,
+    "FromDate": "24-08-1991"
+  },
+  {
+    "AreaId": 162,
+    "CountryId": 1022,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 162,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "18-03-1922"
+  },
+  {
+    "AreaId": 162,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 162,
+    "CountryId": 1023,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 162,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 162,
+    "CountryId": 134,
+    "IgnoreWar": false,
+    "FromDate": "24-08-1991"
+  },
+  {
+    "AreaId": 163,
+    "CountryId": 1022,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 163,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 163,
+    "CountryId": 147,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 163,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 163,
+    "CountryId": 134,
+    "IgnoreWar": false,
+    "FromDate": "24-08-1991"
+  },
+  {
+    "AreaId": 164,
+    "CountryId": 1022,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 164,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 164,
+    "CountryId": 1023,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 164,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 164,
+    "CountryId": 134,
+    "IgnoreWar": false,
+    "FromDate": "24-08-1991"
+  },
+  {
+    "AreaId": 165,
+    "CountryId": 1022,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 165,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 165,
+    "CountryId": 1023,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 165,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1944"
+  },
+  {
+    "AreaId": 165,
+    "CountryId": 134,
+    "IgnoreWar": false,
+    "FromDate": "24-08-1991"
+  },
+  {
+    "AreaId": 166,
+    "CountryId": 1022,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 166,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 166,
+    "CountryId": 1023,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 166,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 166,
+    "CountryId": 134,
+    "IgnoreWar": false,
+    "FromDate": "24-08-1991"
+  },
+  {
+    "AreaId": 166,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "19-03-2014"
+  },
+  {
+    "AreaId": 167,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 167,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 167,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 167,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 167,
+    "CountryId": 217,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 168,
+    "CountryId": 1025,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 168,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "24-03-1922"
+  },
+  {
+    "AreaId": 168,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 168,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 168,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 168,
+    "CountryId": 217,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 169,
+    "CountryId": 1021,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 169,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 169,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 169,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 169,
+    "CountryId": 217,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 170,
+    "CountryId": 1025,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 170,
+    "CountryId": 135,
+    "IgnoreWar": false,
+    "FromDate": "24-03-1922"
+  },
+  {
+    "AreaId": 170,
+    "CountryId": 1025,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1939"
+  },
+  {
+    "AreaId": 170,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "15-06-1940"
+  },
+  {
+    "AreaId": 170,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 170,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 170,
+    "CountryId": 103,
+    "IgnoreWar": false,
+    "FromDate": "11-03-1990"
+  },
+  {
+    "AreaId": 171,
+    "CountryId": 1025,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 171,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "15-06-1940"
+  },
+  {
+    "AreaId": 171,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 171,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 171,
+    "CountryId": 103,
+    "IgnoreWar": false,
+    "FromDate": "11-03-1990"
+  },
+  {
+    "AreaId": 172,
+    "CountryId": 1026,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 172,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "15-06-1940"
+  },
+  {
+    "AreaId": 172,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 172,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 172,
+    "CountryId": 102,
+    "IgnoreWar": false,
+    "FromDate": "21-08-1991"
+  },
+  {
+    "AreaId": 173,
+    "CountryId": 1027,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 173,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "15-06-1940"
+  },
+  {
+    "AreaId": 173,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 173,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 173,
+    "CountryId": 117,
+    "IgnoreWar": false,
+    "FromDate": "20-08-1991"
+  },
+  {
+    "AreaId": 174,
+    "CountryId": 1021,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 174,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 174,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 174,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-10-1944"
+  },
+  {
+    "AreaId": 174,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 175,
+    "CountryId": 1021,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 175,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 175,
+    "CountryId": 1024,
+    "IgnoreWar": true,
+    "FromDate": "30-06-1941"
+  },
+  {
+    "AreaId": 175,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1944"
+  },
+  {
+    "AreaId": 175,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 176,
+    "CountryId": 1021,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 176,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 176,
+    "CountryId": 1023,
+    "IgnoreWar": true,
+    "FromDate": "26-07-1942"
+  },
+  {
+    "AreaId": 176,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1944"
+  },
+  {
+    "AreaId": 176,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 177,
+    "CountryId": 1021,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 177,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 177,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 178,
+    "CountryId": 1028,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 178,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 178,
+    "CountryId": 233,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 179,
+    "CountryId": 1019,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 179,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "04-12-1920"
+  },
+  {
+    "AreaId": 179,
+    "CountryId": 234,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 180,
+    "CountryId": 1019,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 180,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "04-12-1920"
+  },
+  {
+    "AreaId": 180,
+    "CountryId": 235,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 181,
+    "CountryId": 1029,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 181,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "28-04-1920"
+  },
+  {
+    "AreaId": 181,
+    "CountryId": 235,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 182,
+    "CountryId": 1028,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 182,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "30-12-1922"
+  },
+  {
+    "AreaId": 182,
+    "CountryId": 235,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 183,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1920"
+  },
+  {
+    "AreaId": 183,
+    "CountryId": 1039,
+    "IgnoreWar": false,
+    "FromDate": "11-07-1921"
+  },
+  {
+    "AreaId": 183,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "15-03-1944"
+  },
+  {
+    "AreaId": 183,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 184,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1920"
+  },
+  {
+    "AreaId": 184,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "25-08-1945"
+  },
+  {
+    "AreaId": 184,
+    "CountryId": 149,
+    "IgnoreWar": false,
+    "FromDate": "25-12-1991"
+  },
+  {
+    "AreaId": 200,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 200,
+    "CountryId": 236,
+    "IgnoreWar": false,
+    "FromDate": "16-12-1991"
+  },
+  {
+    "AreaId": 201,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 201,
+    "CountryId": 237,
+    "IgnoreWar": false,
+    "FromDate": "01-09-1991"
+  },
+  {
+    "AreaId": 202,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 202,
+    "CountryId": 238,
+    "IgnoreWar": false,
+    "FromDate": "01-09-1991"
+  },
+  {
+    "AreaId": 203,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 203,
+    "CountryId": 239,
+    "IgnoreWar": false,
+    "FromDate": "01-09-1991"
+  },
+  {
+    "AreaId": 204,
+    "CountryId": 1004,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 204,
+    "CountryId": 240,
+    "IgnoreWar": false,
+    "FromDate": "01-09-1991"
+  },
+  {
+    "AreaId": 205,
+    "CountryId": 177,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 205,
+    "CountryId": 1040,
+    "IgnoreWar": true,
+    "FromDate": "16-09-1941"
+  },
+  {
+    "AreaId": 205,
+    "CountryId": 177,
+    "IgnoreWar": false,
+    "FromDate": "02-03-1946"
+  },
+  {
+    "AreaId": 206,
+    "CountryId": 177,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 206,
+    "CountryId": 1041,
+    "IgnoreWar": true,
+    "FromDate": "16-09-1941"
+  },
+  {
+    "AreaId": 206,
+    "CountryId": 177,
+    "IgnoreWar": false,
+    "FromDate": "02-03-1946"
+  },
+  {
+    "AreaId": 207,
+    "CountryId": 253,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 208,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 208,
+    "CountryId": 241,
+    "IgnoreWar": false,
+    "FromDate": "11-07-1921"
+  },
+  {
+    "AreaId": 209,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 210,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 210,
+    "CountryId": 1042,
+    "IgnoreWar": true,
+    "FromDate": "15-09-1932"
+  },
+  {
+    "AreaId": 210,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 211,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 211,
+    "CountryId": 171,
+    "IgnoreWar": true,
+    "FromDate": "08-08-1937"
+  },
+  {
+    "AreaId": 211,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 212,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 212,
+    "CountryId": 171,
+    "IgnoreWar": true,
+    "FromDate": "26-11-1937"
+  },
+  {
+    "AreaId": 212,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 213,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 213,
+    "CountryId": 171,
+    "IgnoreWar": true,
+    "FromDate": "27-10-1938"
+  },
+  {
+    "AreaId": 213,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 214,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 214,
+    "CountryId": 171,
+    "IgnoreWar": true,
+    "FromDate": "27-10-1938"
+  },
+  {
+    "AreaId": 214,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 215,
+    "CountryId": 1043,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 215,
+    "CountryId": 171,
+    "IgnoreWar": true,
+    "FromDate": "08-12-1941"
+  },
+  {
+    "AreaId": 215,
+    "CountryId": 1043,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 215,
+    "CountryId": 176,
+    "IgnoreWar": false,
+    "FromDate": "01-07-1997"
+  },
+  {
+    "AreaId": 216,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 216,
+    "CountryId": 171,
+    "IgnoreWar": true,
+    "FromDate": "08-08-1944"
+  },
+  {
+    "AreaId": 216,
+    "CountryId": 148,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 217,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 217,
+    "CountryId": 172,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 218,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 218,
+    "CountryId": 311,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 219,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 219,
+    "CountryId": 165,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 220,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 221,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 221,
+    "CountryId": 202,
+    "IgnoreWar": false,
+    "FromDate": "15-08-1947"
+  },
+  {
+    "AreaId": 222,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 222,
+    "CountryId": 202,
+    "IgnoreWar": false,
+    "FromDate": "17-11-1952"
+  },
+  {
+    "AreaId": 223,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 223,
+    "CountryId": 152,
+    "IgnoreWar": false,
+    "FromDate": "17-11-1952"
+  },
+  {
+    "AreaId": 224,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 224,
+    "CountryId": 152,
+    "IgnoreWar": false,
+    "FromDate": "15-08-1947"
+  },
+  {
+    "AreaId": 225,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 225,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "13-08-1942"
+  },
+  {
+    "AreaId": 225,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "11-03-1944"
+  },
+  {
+    "AreaId": 225,
+    "CountryId": 152,
+    "IgnoreWar": false,
+    "FromDate": "15-08-1947"
+  },
+  {
+    "AreaId": 226,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 226,
+    "CountryId": 202,
+    "IgnoreWar": false,
+    "FromDate": "15-08-1947"
+  },
+  {
+    "AreaId": 226,
+    "CountryId": 216,
+    "IgnoreWar": false,
+    "FromDate": "16-12-1971"
+  },
+  {
+    "AreaId": 227,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 227,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "13-08-1942"
+  },
+  {
+    "AreaId": 227,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "11-03-1944"
+  },
+  {
+    "AreaId": 227,
+    "CountryId": 202,
+    "IgnoreWar": false,
+    "FromDate": "15-08-1947"
+  },
+  {
+    "AreaId": 227,
+    "CountryId": 216,
+    "IgnoreWar": false,
+    "FromDate": "16-12-1971"
+  },
+  {
+    "AreaId": 228,
+    "CountryId": 251,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 229,
+    "CountryId": 252,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 230,
+    "CountryId": 1046,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 230,
+    "CountryId": 1047,
+    "IgnoreWar": false,
+    "FromDate": "04-02-1948"
+  },
+  {
+    "AreaId": 230,
+    "CountryId": 153,
+    "IgnoreWar": false,
+    "FromDate": "22-05-1972"
+  },
+  {
+    "AreaId": 231,
+    "CountryId": 1046,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 231,
+    "CountryId": 1048,
+    "IgnoreWar": false,
+    "FromDate": "04-02-1948"
+  },
+  {
+    "AreaId": 231,
+    "CountryId": 276,
+    "IgnoreWar": false,
+    "FromDate": "26-07-1965"
+  },
+  {
+    "AreaId": 232,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 232,
+    "CountryId": 1049,
+    "IgnoreWar": false,
+    "FromDate": "01-04-1937"
+  },
+  {
+    "AreaId": 232,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "27-05-1942"
+  },
+  {
+    "AreaId": 232,
+    "CountryId": 1049,
+    "IgnoreWar": false,
+    "FromDate": "11-03-1944"
+  },
+  {
+    "AreaId": 232,
+    "CountryId": 1050,
+    "IgnoreWar": false,
+    "FromDate": "04-01-1948"
+  },
+  {
+    "AreaId": 232,
+    "CountryId": 278,
+    "IgnoreWar": false,
+    "FromDate": "31-05-1989"
+  },
+  {
+    "AreaId": 233,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 233,
+    "CountryId": 1049,
+    "IgnoreWar": false,
+    "FromDate": "01-04-1937"
+  },
+  {
+    "AreaId": 233,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "27-05-1942"
+  },
+  {
+    "AreaId": 233,
+    "CountryId": 1049,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 233,
+    "CountryId": 1050,
+    "IgnoreWar": false,
+    "FromDate": "04-01-1948"
+  },
+  {
+    "AreaId": 233,
+    "CountryId": 278,
+    "IgnoreWar": false,
+    "FromDate": "31-05-1989"
+  },
+  {
+    "AreaId": 234,
+    "CountryId": 1051,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 234,
+    "CountryId": 175,
+    "IgnoreWar": false,
+    "FromDate": "20-06-1948"
+  },
+  {
+    "AreaId": 235,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 235,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "09-05-1941"
+  },
+  {
+    "AreaId": 235,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 235,
+    "CountryId": 279,
+    "IgnoreWar": false,
+    "FromDate": "22-10-1953"
+  },
+  {
+    "AreaId": 236,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 236,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "09-05-1941"
+  },
+  {
+    "AreaId": 236,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 236,
+    "CountryId": 294,
+    "IgnoreWar": false,
+    "FromDate": "09-11-1953"
+  },
+  {
+    "AreaId": 237,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 237,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "09-05-1941"
+  },
+  {
+    "AreaId": 237,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 237,
+    "CountryId": 1007,
+    "IgnoreWar": false,
+    "FromDate": "09-11-1953"
+  },
+  {
+    "AreaId": 237,
+    "CountryId": 170,
+    "IgnoreWar": false,
+    "FromDate": "02-07-1976"
+  },
+  {
+    "AreaId": 238,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 238,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "09-05-1941"
+  },
+  {
+    "AreaId": 238,
+    "CountryId": 1052,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 238,
+    "CountryId": 1008,
+    "IgnoreWar": false,
+    "FromDate": "09-11-1953"
+  },
+  {
+    "AreaId": 238,
+    "CountryId": 170,
+    "IgnoreWar": false,
+    "FromDate": "02-07-1976"
+  },
+  {
+    "AreaId": 239,
+    "CountryId": 1053,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 239,
+    "CountryId": 131,
+    "IgnoreWar": true,
+    "FromDate": "02-01-1942"
+  },
+  {
+    "AreaId": 239,
+    "CountryId": 1053,
+    "IgnoreWar": false,
+    "FromDate": "05-07-1945"
+  },
+  {
+    "AreaId": 239,
+    "CountryId": 131,
+    "IgnoreWar": false,
+    "FromDate": "04-07-1946"
+  },
+  {
+    "AreaId": 240,
+    "CountryId": 1053,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 240,
+    "CountryId": 131,
+    "IgnoreWar": true,
+    "FromDate": "08-05-1942"
+  },
+  {
+    "AreaId": 240,
+    "CountryId": 1053,
+    "IgnoreWar": false,
+    "FromDate": "05-07-1945"
+  },
+  {
+    "AreaId": 240,
+    "CountryId": 131,
+    "IgnoreWar": false,
+    "FromDate": "04-07-1946"
+  },
+  {
+    "AreaId": 241,
+    "CountryId": 1055,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 241,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "26-12-1941"
+  },
+  {
+    "AreaId": 241,
+    "CountryId": 1055,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 241,
+    "CountryId": 1056,
+    "IgnoreWar": false,
+    "FromDate": "31-08-1957"
+  },
+  {
+    "AreaId": 241,
+    "CountryId": 173,
+    "IgnoreWar": false,
+    "FromDate": "16-09-1963"
+  },
+  {
+    "AreaId": 242,
+    "CountryId": 1055,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 242,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "16-02-1942"
+  },
+  {
+    "AreaId": 242,
+    "CountryId": 1055,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 242,
+    "CountryId": 1056,
+    "IgnoreWar": false,
+    "FromDate": "31-08-1957"
+  },
+  {
+    "AreaId": 242,
+    "CountryId": 173,
+    "IgnoreWar": false,
+    "FromDate": "16-09-1963"
+  },
+  {
+    "AreaId": 243,
+    "CountryId": 1055,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 243,
+    "CountryId": 1051,
+    "IgnoreWar": true,
+    "FromDate": "16-02-1942"
+  },
+  {
+    "AreaId": 243,
+    "CountryId": 1055,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 243,
+    "CountryId": 1057,
+    "IgnoreWar": false,
+    "FromDate": "31-08-1957"
+  },
+  {
+    "AreaId": 243,
+    "CountryId": 173,
+    "IgnoreWar": false,
+    "FromDate": "16-09-1963"
+  },
+  {
+    "AreaId": 243,
+    "CountryId": 174,
+    "IgnoreWar": false,
+    "FromDate": "09-08-1965"
+  },
+  {
+    "AreaId": 244,
+    "CountryId": 1058,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 244,
+    "CountryId": 1059,
+    "IgnoreWar": true,
+    "FromDate": "08-03-1942"
+  },
+  {
+    "AreaId": 244,
+    "CountryId": 1058,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 244,
+    "CountryId": 173,
+    "IgnoreWar": false,
+    "FromDate": "16-09-1963"
+  },
+  {
+    "AreaId": 245,
+    "CountryId": 1058,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 245,
+    "CountryId": 1059,
+    "IgnoreWar": true,
+    "FromDate": "08-03-1942"
+  },
+  {
+    "AreaId": 245,
+    "CountryId": 1058,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 245,
+    "CountryId": 1060,
+    "IgnoreWar": false,
+    "FromDate": "21-02-1953"
+  },
+  {
+    "AreaId": 245,
+    "CountryId": 277,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1984"
+  },
+  {
+    "AreaId": 246,
+    "CountryId": 1061,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 246,
+    "CountryId": 1059,
+    "IgnoreWar": true,
+    "FromDate": "08-03-1942"
+  },
+  {
+    "AreaId": 246,
+    "CountryId": 1061,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 246,
+    "CountryId": 162,
+    "IgnoreWar": false,
+    "FromDate": "27-12-1949"
+  },
+  {
+    "AreaId": 247,
+    "CountryId": 1062,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 247,
+    "CountryId": 312,
+    "IgnoreWar": false,
+    "FromDate": "28-11-1975"
+  },
+  {
+    "AreaId": 247,
+    "CountryId": 162,
+    "IgnoreWar": false,
+    "FromDate": "07-12-1975"
+  },
+  {
+    "AreaId": 247,
+    "CountryId": 312,
+    "IgnoreWar": false,
+    "FromDate": "20-05-2002"
+  },
+  {
+    "AreaId": 248,
+    "CountryId": 1063,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 248,
+    "CountryId": 1059,
+    "IgnoreWar": true,
+    "FromDate": "08-03-1942"
+  },
+  {
+    "AreaId": 248,
+    "CountryId": 1063,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 248,
+    "CountryId": 280,
+    "IgnoreWar": false,
+    "FromDate": "16-09-1975"
+  },
+  {
+    "AreaId": 249,
+    "CountryId": 1064,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 249,
+    "CountryId": 280,
+    "IgnoreWar": false,
+    "FromDate": "16-09-1975"
+  },
+  {
+    "AreaId": 250,
+    "CountryId": 1065,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 250,
+    "CountryId": 289,
+    "IgnoreWar": false,
+    "FromDate": "07-07-1978"
+  },
+  {
+    "AreaId": 251,
+    "CountryId": 116,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 252,
+    "CountryId": 186,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 300,
+    "CountryId": 1066,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 300,
+    "CountryId": 128,
+    "IgnoreWar": false,
+    "FromDate": "14-05-1948"
+  },
+  {
+    "AreaId": 301,
+    "CountryId": 1067,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 301,
+    "CountryId": 274,
+    "IgnoreWar": false,
+    "FromDate": "25-05-1946"
+  },
+  {
+    "AreaId": 302,
+    "CountryId": 1068,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 302,
+    "CountryId": 129,
+    "IgnoreWar": false,
+    "FromDate": "17-04-1946"
+  },
+  {
+    "AreaId": 303,
+    "CountryId": 1068,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 303,
+    "CountryId": 281,
+    "IgnoreWar": false,
+    "FromDate": "17-04-1946"
+  },
+  {
+    "AreaId": 303,
+    "CountryId": 1086,
+    "IgnoreWar": false,
+    "FromDate": "01-02-1958"
+  },
+  {
+    "AreaId": 303,
+    "CountryId": 281,
+    "IgnoreWar": false,
+    "FromDate": "28-09-1961"
+  },
+  {
+    "AreaId": 304,
+    "CountryId": 1070,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 304,
+    "CountryId": 1071,
+    "IgnoreWar": false,
+    "FromDate": "03-10-1932"
+  },
+  {
+    "AreaId": 304,
+    "CountryId": 1070,
+    "IgnoreWar": true,
+    "FromDate": "31-05-1941"
+  },
+  {
+    "AreaId": 304,
+    "CountryId": 1071,
+    "IgnoreWar": false,
+    "FromDate": "26-10-1947"
+  },
+  {
+    "AreaId": 304,
+    "CountryId": 127,
+    "IgnoreWar": false,
+    "FromDate": "14-07-1958"
+  },
+  {
+    "AreaId": 305,
+    "CountryId": 1072,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 305,
+    "CountryId": 136,
+    "IgnoreWar": false,
+    "FromDate": "10-01-1926"
+  },
+  {
+    "AreaId": 306,
+    "CountryId": 1073,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 306,
+    "CountryId": 136,
+    "IgnoreWar": false,
+    "FromDate": "14-06-1934"
+  },
+  {
+    "AreaId": 307,
+    "CountryId": 1074,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 307,
+    "CountryId": 1075,
+    "IgnoreWar": false,
+    "FromDate": "02-11-1921"
+  },
+  {
+    "AreaId": 307,
+    "CountryId": 136,
+    "IgnoreWar": false,
+    "FromDate": "10-01-1926"
+  },
+  {
+    "AreaId": 308,
+    "CountryId": 1075,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 308,
+    "CountryId": 136,
+    "IgnoreWar": false,
+    "FromDate": "10-01-1926"
+  },
+  {
+    "AreaId": 309,
+    "CountryId": 1076,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 309,
+    "CountryId": 126,
+    "IgnoreWar": false,
+    "FromDate": "19-06-1961"
+  },
+  {
+    "AreaId": 310,
+    "CountryId": 1077,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 310,
+    "CountryId": 180,
+    "IgnoreWar": false,
+    "FromDate": "03-09-1971"
+  },
+  {
+    "AreaId": 311,
+    "CountryId": 1078,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 311,
+    "CountryId": 151,
+    "IgnoreWar": false,
+    "FromDate": "15-08-1971"
+  },
+  {
+    "AreaId": 312,
+    "CountryId": 1079,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 312,
+    "CountryId": 282,
+    "IgnoreWar": false,
+    "FromDate": "22-05-1990"
+  },
+  {
+    "AreaId": 313,
+    "CountryId": 1045,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 313,
+    "CountryId": 1080,
+    "IgnoreWar": false,
+    "FromDate": "01-04-1937"
+  },
+  {
+    "AreaId": 313,
+    "CountryId": 1081,
+    "IgnoreWar": false,
+    "FromDate": "30-11-1967"
+  },
+  {
+    "AreaId": 313,
+    "CountryId": 282,
+    "IgnoreWar": false,
+    "FromDate": "22-05-1990"
+  },
+  {
+    "AreaId": 314,
+    "CountryId": 178,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 315,
+    "CountryId": 1082,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 315,
+    "CountryId": 156,
+    "IgnoreWar": false,
+    "FromDate": "02-12-1971"
+  },
+  {
+    "AreaId": 316,
+    "CountryId": 123,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 316,
+    "CountryId": 133,
+    "IgnoreWar": false,
+    "FromDate": "16-04-1956"
+  },
+  {
+    "AreaId": 317,
+    "CountryId": 1083,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 317,
+    "CountryId": 133,
+    "IgnoreWar": false,
+    "FromDate": "08-03-1956"
+  },
+  {
+    "AreaId": 318,
+    "CountryId": 123,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 318,
+    "CountryId": 269,
+    "IgnoreWar": false,
+    "FromDate": "14-11-1975"
+  },
+  {
+    "AreaId": 318,
+    "CountryId": 133,
+    "IgnoreWar": false,
+    "FromDate": "16-06-1979"
+  },
+  {
+    "AreaId": 319,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 319,
+    "CountryId": 1014,
+    "IgnoreWar": true,
+    "FromDate": "22-06-1940"
+  },
+  {
+    "AreaId": 319,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "21-11-1944"
+  },
+  {
+    "AreaId": 319,
+    "CountryId": 142,
+    "IgnoreWar": false,
+    "FromDate": "03-07-1962"
+  },
+  {
+    "AreaId": 320,
+    "CountryId": 1085,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 320,
+    "CountryId": 144,
+    "IgnoreWar": false,
+    "FromDate": "20-03-1956"
+  },
+  {
+    "AreaId": 321,
+    "CountryId": 1087,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 321,
+    "CountryId": 1088,
+    "IgnoreWar": false,
+    "FromDate": "11-10-1934"
+  },
+  {
+    "AreaId": 321,
+    "CountryId": 1089,
+    "IgnoreWar": false,
+    "FromDate": "13-05-1943"
+  },
+  {
+    "AreaId": 321,
+    "CountryId": 1010,
+    "IgnoreWar": false,
+    "FromDate": "24-12-1951"
+  },
+  {
+    "AreaId": 321,
+    "CountryId": 125,
+    "IgnoreWar": false,
+    "FromDate": "28-02-2011"
+  },
+  {
+    "AreaId": 322,
+    "CountryId": 1087,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 322,
+    "CountryId": 1088,
+    "IgnoreWar": false,
+    "FromDate": "11-10-1934"
+  },
+  {
+    "AreaId": 322,
+    "CountryId": 1090,
+    "IgnoreWar": false,
+    "FromDate": "13-05-1943"
+  },
+  {
+    "AreaId": 322,
+    "CountryId": 1010,
+    "IgnoreWar": false,
+    "FromDate": "24-12-1951"
+  },
+  {
+    "AreaId": 322,
+    "CountryId": 125,
+    "IgnoreWar": false,
+    "FromDate": "28-02-2011"
+  },
+  {
+    "AreaId": 323,
+    "CountryId": 1091,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 323,
+    "CountryId": 155,
+    "IgnoreWar": false,
+    "FromDate": "22-02-1922"
+  },
+  {
+    "AreaId": 323,
+    "CountryId": 1086,
+    "IgnoreWar": false,
+    "FromDate": "01-02-1958"
+  },
+  {
+    "AreaId": 323,
+    "CountryId": 155,
+    "IgnoreWar": false,
+    "FromDate": "11-09-1971"
+  },
+  {
+    "AreaId": 324,
+    "CountryId": 1091,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 324,
+    "CountryId": 155,
+    "IgnoreWar": false,
+    "FromDate": "22-02-1922"
+  },
+  {
+    "AreaId": 324,
+    "CountryId": 1086,
+    "IgnoreWar": false,
+    "FromDate": "01-02-1958"
+  },
+  {
+    "AreaId": 324,
+    "CountryId": 128,
+    "IgnoreWar": false,
+    "FromDate": "10-06-1967"
+  },
+  {
+    "AreaId": 324,
+    "CountryId": 155,
+    "IgnoreWar": false,
+    "FromDate": "25-10-1973"
+  },
+  {
+    "AreaId": 325,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 325,
+    "CountryId": 269,
+    "IgnoreWar": false,
+    "FromDate": "28-11-1960"
+  },
+  {
+    "AreaId": 326,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 326,
+    "CountryId": 268,
+    "IgnoreWar": false,
+    "FromDate": "20-06-1960"
+  },
+  {
+    "AreaId": 327,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 327,
+    "CountryId": 267,
+    "IgnoreWar": false,
+    "FromDate": "03-08-1960"
+  },
+  {
+    "AreaId": 328,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 328,
+    "CountryId": 101,
+    "IgnoreWar": false,
+    "FromDate": "20-06-1960"
+  },
+  {
+    "AreaId": 329,
+    "CountryId": 1093,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 329,
+    "CountryId": 301,
+    "IgnoreWar": false,
+    "FromDate": "18-02-1965"
+  },
+  {
+    "AreaId": 330,
+    "CountryId": 1094,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 330,
+    "CountryId": 305,
+    "IgnoreWar": false,
+    "FromDate": "10-09-1974"
+  },
+  {
+    "AreaId": 331,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 331,
+    "CountryId": 302,
+    "IgnoreWar": false,
+    "FromDate": "01-10-1958"
+  },
+  {
+    "AreaId": 332,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 332,
+    "CountryId": 270,
+    "IgnoreWar": false,
+    "FromDate": "27-04-1961"
+  },
+  {
+    "AreaId": 333,
+    "CountryId": 303,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 334,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 334,
+    "CountryId": 275,
+    "IgnoreWar": false,
+    "FromDate": "07-08-1960"
+  },
+  {
+    "AreaId": 335,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 335,
+    "CountryId": 190,
+    "IgnoreWar": false,
+    "FromDate": "05-08-1960"
+  },
+  {
+    "AreaId": 336,
+    "CountryId": 1096,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 336,
+    "CountryId": 189,
+    "IgnoreWar": false,
+    "FromDate": "06-03-1957"
+  },
+  {
+    "AreaId": 337,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 337,
+    "CountryId": 188,
+    "IgnoreWar": false,
+    "FromDate": "27-04-1960"
+  },
+  {
+    "AreaId": 338,
+    "CountryId": 1092,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 338,
+    "CountryId": 187,
+    "IgnoreWar": false,
+    "FromDate": "01-08-1960"
+  },
+  {
+    "AreaId": 339,
+    "CountryId": 1097,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 339,
+    "CountryId": 145,
+    "IgnoreWar": false,
+    "FromDate": "01-10-1960"
+  },
+  {
+    "AreaId": 340,
+    "CountryId": 1097,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 340,
+    "CountryId": 145,
+    "IgnoreWar": false,
+    "FromDate": "01-10-1960"
+  },
+  {
+    "AreaId": 340,
+    "CountryId": 1098,
+    "IgnoreWar": false,
+    "FromDate": "30-05-1967"
+  },
+  {
+    "AreaId": 340,
+    "CountryId": 145,
+    "IgnoreWar": false,
+    "FromDate": "15-01-1970"
+  },
+  {
+    "AreaId": 341,
+    "CountryId": 1099,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 341,
+    "CountryId": 296,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1960"
+  },
+  {
+    "AreaId": 342,
+    "CountryId": 1100,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 342,
+    "CountryId": 265,
+    "IgnoreWar": false,
+    "FromDate": "11-08-1960"
+  },
+  {
+    "AreaId": 343,
+    "CountryId": 1100,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 343,
+    "CountryId": 220,
+    "IgnoreWar": false,
+    "FromDate": "13-08-1960"
+  },
+  {
+    "AreaId": 344,
+    "CountryId": 1101,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 344,
+    "CountryId": 304,
+    "IgnoreWar": false,
+    "FromDate": "12-10-1968"
+  },
+  {
+    "AreaId": 345,
+    "CountryId": 1102,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 345,
+    "CountryId": 308,
+    "IgnoreWar": false,
+    "FromDate": "12-07-1975"
+  },
+  {
+    "AreaId": 346,
+    "CountryId": 1100,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 346,
+    "CountryId": 300,
+    "IgnoreWar": false,
+    "FromDate": "17-08-1960"
+  },
+  {
+    "AreaId": 347,
+    "CountryId": 1100,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 347,
+    "CountryId": 309,
+    "IgnoreWar": false,
+    "FromDate": "15-08-1960"
+  },
+  {
+    "AreaId": 348,
+    "CountryId": 1103,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 348,
+    "CountryId": 223,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1956"
+  },
+  {
+    "AreaId": 349,
+    "CountryId": 1103,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 349,
+    "CountryId": 223,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1956"
+  },
+  {
+    "AreaId": 349,
+    "CountryId": 263,
+    "IgnoreWar": false,
+    "FromDate": "09-07-2011"
+  },
+  {
+    "AreaId": 350,
+    "CountryId": 1104,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 350,
+    "CountryId": 1107,
+    "IgnoreWar": false,
+    "FromDate": "14-09-1936"
+  },
+  {
+    "AreaId": 350,
+    "CountryId": 1105,
+    "IgnoreWar": false,
+    "FromDate": "31-01-1941"
+  },
+  {
+    "AreaId": 350,
+    "CountryId": 124,
+    "IgnoreWar": false,
+    "FromDate": "01-12-1952"
+  },
+  {
+    "AreaId": 350,
+    "CountryId": 264,
+    "IgnoreWar": false,
+    "FromDate": "27-04-1993"
+  },
+  {
+    "AreaId": 351,
+    "CountryId": 1106,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 351,
+    "CountryId": 298,
+    "IgnoreWar": false,
+    "FromDate": "27-06-1977"
+  },
+  {
+    "AreaId": 352,
+    "CountryId": 124,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 352,
+    "CountryId": 1107,
+    "IgnoreWar": true,
+    "FromDate": "14-09-1936"
+  },
+  {
+    "AreaId": 352,
+    "CountryId": 124,
+    "IgnoreWar": false,
+    "FromDate": "31-01-1941"
+  },
+  {
+    "AreaId": 353,
+    "CountryId": 1108,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 353,
+    "CountryId": 1107,
+    "IgnoreWar": true,
+    "FromDate": "15-08-1940"
+  },
+  {
+    "AreaId": 353,
+    "CountryId": 1108,
+    "IgnoreWar": false,
+    "FromDate": "31-01-1941"
+  },
+  {
+    "AreaId": 353,
+    "CountryId": 262,
+    "IgnoreWar": false,
+    "FromDate": "01-07-1960"
+  },
+  {
+    "AreaId": 354,
+    "CountryId": 1109,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 354,
+    "CountryId": 1107,
+    "IgnoreWar": true,
+    "FromDate": "14-09-1936"
+  },
+  {
+    "AreaId": 354,
+    "CountryId": 1108,
+    "IgnoreWar": true,
+    "FromDate": "31-01-1941"
+  },
+  {
+    "AreaId": 354,
+    "CountryId": 1110,
+    "IgnoreWar": true,
+    "FromDate": "01-04-1950"
+  },
+  {
+    "AreaId": 354,
+    "CountryId": 262,
+    "IgnoreWar": false,
+    "FromDate": "01-07-1960"
+  },
+  {
+    "AreaId": 355,
+    "CountryId": 1111,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 355,
+    "CountryId": 1109,
+    "IgnoreWar": false,
+    "FromDate": "17-06-1925"
+  },
+  {
+    "AreaId": 355,
+    "CountryId": 1107,
+    "IgnoreWar": true,
+    "FromDate": "14-09-1936"
+  },
+  {
+    "AreaId": 355,
+    "CountryId": 1108,
+    "IgnoreWar": true,
+    "FromDate": "31-01-1941"
+  },
+  {
+    "AreaId": 355,
+    "CountryId": 1110,
+    "IgnoreWar": true,
+    "FromDate": "01-04-1950"
+  },
+  {
+    "AreaId": 355,
+    "CountryId": 262,
+    "IgnoreWar": false,
+    "FromDate": "01-07-1960"
+  },
+  {
+    "AreaId": 356,
+    "CountryId": 1111,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 356,
+    "CountryId": 146,
+    "IgnoreWar": false,
+    "FromDate": "12-12-1963"
+  },
+  {
+    "AreaId": 357,
+    "CountryId": 1111,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 357,
+    "CountryId": 261,
+    "IgnoreWar": false,
+    "FromDate": "09-10-1962"
+  },
+  {
+    "AreaId": 358,
+    "CountryId": 1112,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 358,
+    "CountryId": 221,
+    "IgnoreWar": false,
+    "FromDate": "30-06-1960"
+  },
+  {
+    "AreaId": 358,
+    "CountryId": 1113,
+    "IgnoreWar": false,
+    "FromDate": "27-10-1971"
+  },
+  {
+    "AreaId": 358,
+    "CountryId": 221,
+    "IgnoreWar": false,
+    "FromDate": "07-09-1997"
+  },
+  {
+    "AreaId": 359,
+    "CountryId": 1112,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 359,
+    "CountryId": 1114,
+    "IgnoreWar": false,
+    "FromDate": "30-06-1960"
+  },
+  {
+    "AreaId": 359,
+    "CountryId": 221,
+    "IgnoreWar": false,
+    "FromDate": "21-01-1963"
+  },
+  {
+    "AreaId": 359,
+    "CountryId": 1113,
+    "IgnoreWar": false,
+    "FromDate": "27-10-1971"
+  },
+  {
+    "AreaId": 359,
+    "CountryId": 221,
+    "IgnoreWar": false,
+    "FromDate": "07-09-1997"
+  },
+  {
+    "AreaId": 360,
+    "CountryId": 1112,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 360,
+    "CountryId": 1115,
+    "IgnoreWar": false,
+    "FromDate": "30-06-1960"
+  },
+  {
+    "AreaId": 360,
+    "CountryId": 293,
+    "IgnoreWar": false,
+    "FromDate": "01-07-1962"
+  },
+  {
+    "AreaId": 361,
+    "CountryId": 1112,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 361,
+    "CountryId": 1115,
+    "IgnoreWar": false,
+    "FromDate": "30-06-1960"
+  },
+  {
+    "AreaId": 361,
+    "CountryId": 295,
+    "IgnoreWar": false,
+    "FromDate": "01-07-1962"
+  },
+  {
+    "AreaId": 362,
+    "CountryId": 1116,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 362,
+    "CountryId": 1117,
+    "IgnoreWar": false,
+    "FromDate": "09-12-1961"
+  },
+  {
+    "AreaId": 362,
+    "CountryId": 222,
+    "IgnoreWar": false,
+    "FromDate": "26-04-1964"
+  },
+  {
+    "AreaId": 363,
+    "CountryId": 1116,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 363,
+    "CountryId": 1118,
+    "IgnoreWar": false,
+    "FromDate": "09-12-1961"
+  },
+  {
+    "AreaId": 363,
+    "CountryId": 222,
+    "IgnoreWar": false,
+    "FromDate": "26-04-1964"
+  },
+  {
+    "AreaId": 364,
+    "CountryId": 1119,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 364,
+    "CountryId": 224,
+    "IgnoreWar": false,
+    "FromDate": "11-11-1975"
+  },
+  {
+    "AreaId": 365,
+    "CountryId": 1120,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 365,
+    "CountryId": 225,
+    "IgnoreWar": false,
+    "FromDate": "24-10-1964"
+  },
+  {
+    "AreaId": 366,
+    "CountryId": 1120,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 366,
+    "CountryId": 1121,
+    "IgnoreWar": false,
+    "FromDate": "24-10-1964"
+  },
+  {
+    "AreaId": 366,
+    "CountryId": 258,
+    "IgnoreWar": false,
+    "FromDate": "30-09-1966"
+  },
+  {
+    "AreaId": 367,
+    "CountryId": 1120,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 367,
+    "CountryId": 1121,
+    "IgnoreWar": false,
+    "FromDate": "24-10-1964"
+  },
+  {
+    "AreaId": 367,
+    "CountryId": 1012,
+    "IgnoreWar": false,
+    "FromDate": "11-11-1965"
+  },
+  {
+    "AreaId": 367,
+    "CountryId": 255,
+    "IgnoreWar": false,
+    "FromDate": "01-06-1979"
+  },
+  {
+    "AreaId": 368,
+    "CountryId": 1120,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 368,
+    "CountryId": 286,
+    "IgnoreWar": false,
+    "FromDate": "06-07-1964"
+  },
+  {
+    "AreaId": 369,
+    "CountryId": 1122,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 369,
+    "CountryId": 283,
+    "IgnoreWar": false,
+    "FromDate": "25-06-1975"
+  },
+  {
+    "AreaId": 370,
+    "CountryId": 1167,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 370,
+    "CountryId": 1168,
+    "IgnoreWar": false,
+    "FromDate": "11-12-1931"
+  },
+  {
+    "AreaId": 370,
+    "CountryId": 259,
+    "IgnoreWar": false,
+    "FromDate": "21-03-1990"
+  },
+  {
+    "AreaId": 371,
+    "CountryId": 1167,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 371,
+    "CountryId": 1168,
+    "IgnoreWar": false,
+    "FromDate": "11-12-1931"
+  },
+  {
+    "AreaId": 371,
+    "CountryId": 158,
+    "IgnoreWar": false,
+    "FromDate": "27-04-1994"
+  },
+  {
+    "AreaId": 372,
+    "CountryId": 1123,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 372,
+    "CountryId": 257,
+    "IgnoreWar": false,
+    "FromDate": "04-10-1966"
+  },
+  {
+    "AreaId": 373,
+    "CountryId": 1124,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 373,
+    "CountryId": 256,
+    "IgnoreWar": false,
+    "FromDate": "06-09-1968"
+  },
+  {
+    "AreaId": 374,
+    "CountryId": 1125,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 374,
+    "CountryId": 260,
+    "IgnoreWar": false,
+    "FromDate": "26-06-1960"
+  },
+  {
+    "AreaId": 375,
+    "CountryId": 1126,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 375,
+    "CountryId": 206,
+    "IgnoreWar": false,
+    "FromDate": "12-03-1968"
+  },
+  {
+    "AreaId": 376,
+    "CountryId": 1125,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 376,
+    "CountryId": 1127,
+    "IgnoreWar": false,
+    "FromDate": "27-10-1946"
+  },
+  {
+    "AreaId": 376,
+    "CountryId": 271,
+    "IgnoreWar": false,
+    "FromDate": "06-07-1975"
+  },
+  {
+    "AreaId": 377,
+    "CountryId": 1128,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 377,
+    "CountryId": 306,
+    "IgnoreWar": false,
+    "FromDate": "29-06-1976"
+  },
+  {
+    "AreaId": 378,
+    "CountryId": 1129,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 378,
+    "CountryId": 285,
+    "IgnoreWar": false,
+    "FromDate": "05-07-1975"
+  },
+  {
+    "AreaId": 400,
+    "CountryId": 113,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 401,
+    "CountryId": 1130,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 401,
+    "CountryId": 113,
+    "IgnoreWar": false,
+    "FromDate": "31-03-1949"
+  },
+  {
+    "AreaId": 402,
+    "CountryId": 122,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 403,
+    "CountryId": 157,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 404,
+    "CountryId": 194,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 405,
+    "CountryId": 1131,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 405,
+    "CountryId": 1132,
+    "IgnoreWar": false,
+    "FromDate": "01-06-1973"
+  },
+  {
+    "AreaId": 405,
+    "CountryId": 197,
+    "IgnoreWar": false,
+    "FromDate": "21-09-1981"
+  },
+  {
+    "AreaId": 406,
+    "CountryId": 196,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 407,
+    "CountryId": 193,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 408,
+    "CountryId": 195,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 409,
+    "CountryId": 192,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 410,
+    "CountryId": 191,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 411,
+    "CountryId": 198,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 412,
+    "CountryId": 1133,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 412,
+    "CountryId": 203,
+    "IgnoreWar": false,
+    "FromDate": "10-07-1973"
+  },
+  {
+    "AreaId": 413,
+    "CountryId": 1134,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 413,
+    "CountryId": 199,
+    "IgnoreWar": false,
+    "FromDate": "06-08-1962"
+  },
+  {
+    "AreaId": 414,
+    "CountryId": 111,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 415,
+    "CountryId": 207,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 416,
+    "CountryId": 1135,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 416,
+    "CountryId": 243,
+    "IgnoreWar": false,
+    "FromDate": "01-11-1981"
+  },
+  {
+    "AreaId": 417,
+    "CountryId": 1136,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 417,
+    "CountryId": 228,
+    "IgnoreWar": false,
+    "FromDate": "03-11-1978"
+  },
+  {
+    "AreaId": 418,
+    "CountryId": 1137,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 418,
+    "CountryId": 108,
+    "IgnoreWar": false,
+    "FromDate": "22-02-1979"
+  },
+  {
+    "AreaId": 419,
+    "CountryId": 1138,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 419,
+    "CountryId": 310,
+    "IgnoreWar": false,
+    "FromDate": "27-10-1979"
+  },
+  {
+    "AreaId": 420,
+    "CountryId": 1139,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 420,
+    "CountryId": 229,
+    "IgnoreWar": false,
+    "FromDate": "07-02-1974"
+  },
+  {
+    "AreaId": 421,
+    "CountryId": 1140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 421,
+    "CountryId": 227,
+    "IgnoreWar": false,
+    "FromDate": "30-11-1966"
+  },
+  {
+    "AreaId": 422,
+    "CountryId": 246,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 422,
+    "CountryId": 1009,
+    "IgnoreWar": false,
+    "FromDate": "15-12-1954"
+  },
+  {
+    "AreaId": 422,
+    "CountryId": 244,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1986"
+  },
+  {
+    "AreaId": 423,
+    "CountryId": 246,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 423,
+    "CountryId": 1009,
+    "IgnoreWar": false,
+    "FromDate": "15-12-1954"
+  },
+  {
+    "AreaId": 423,
+    "CountryId": 246,
+    "IgnoreWar": false,
+    "FromDate": "10-10-2010"
+  },
+  {
+    "AreaId": 424,
+    "CountryId": 1141,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 424,
+    "CountryId": 205,
+    "IgnoreWar": false,
+    "FromDate": "31-08-1962"
+  },
+  {
+    "AreaId": 425,
+    "CountryId": 183,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 426,
+    "CountryId": 184,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 427,
+    "CountryId": 1142,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 427,
+    "CountryId": 215,
+    "IgnoreWar": false,
+    "FromDate": "26-05-1966"
+  },
+  {
+    "AreaId": 428,
+    "CountryId": 1143,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 428,
+    "CountryId": 214,
+    "IgnoreWar": false,
+    "FromDate": "25-11-1975"
+  },
+  {
+    "AreaId": 429,
+    "CountryId": 210,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 430,
+    "CountryId": 182,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 431,
+    "CountryId": 138,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 432,
+    "CountryId": 211,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 433,
+    "CountryId": 211,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 433,
+    "CountryId": 213,
+    "IgnoreWar": false,
+    "FromDate": "12-06-1935"
+  },
+  {
+    "AreaId": 434,
+    "CountryId": 213,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 435,
+    "CountryId": 160,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 436,
+    "CountryId": 106,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 437,
+    "CountryId": 212,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 438,
+    "CountryId": 1144,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 438,
+    "CountryId": 114,
+    "IgnoreWar": false,
+    "FromDate": "10-10-1970"
+  },
+  {
+    "AreaId": 439,
+    "CountryId": 1145,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 439,
+    "CountryId": 115,
+    "IgnoreWar": false,
+    "FromDate": "12-07-1979"
+  },
+  {
+    "AreaId": 440,
+    "CountryId": 1146,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 440,
+    "CountryId": 208,
+    "IgnoreWar": false,
+    "FromDate": "04-06-1970"
+  },
+  {
+    "AreaId": 441,
+    "CountryId": 1147,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 441,
+    "CountryId": 230,
+    "IgnoreWar": false,
+    "FromDate": "19-09-1983"
+  },
+  {
+    "AreaId": 442,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 442,
+    "CountryId": 1148,
+    "IgnoreWar": false,
+    "FromDate": "03-02-1944"
+  },
+  {
+    "AreaId": 442,
+    "CountryId": 287,
+    "IgnoreWar": false,
+    "FromDate": "21-10-1986"
+  },
+  {
+    "AreaId": 443,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 443,
+    "CountryId": 1149,
+    "IgnoreWar": false,
+    "FromDate": "27-11-1944"
+  },
+  {
+    "AreaId": 443,
+    "CountryId": 288,
+    "IgnoreWar": false,
+    "FromDate": "01-10-1994"
+  },
+  {
+    "AreaId": 444,
+    "CountryId": 171,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 444,
+    "CountryId": 1150,
+    "IgnoreWar": false,
+    "FromDate": "08-08-1945"
+  },
+  {
+    "AreaId": 444,
+    "CountryId": 290,
+    "IgnoreWar": false,
+    "FromDate": "03-11-1986"
+  },
+  {
+    "AreaId": 445,
+    "CountryId": 1151,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 445,
+    "CountryId": 171,
+    "IgnoreWar": true,
+    "FromDate": "25-08-1942"
+  },
+  {
+    "AreaId": 445,
+    "CountryId": 1151,
+    "IgnoreWar": false,
+    "FromDate": "13-09-1945"
+  },
+  {
+    "AreaId": 445,
+    "CountryId": 291,
+    "IgnoreWar": false,
+    "FromDate": "31-01-1968"
+  },
+  {
+    "AreaId": 446,
+    "CountryId": 1152,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 446,
+    "CountryId": 292,
+    "IgnoreWar": false,
+    "FromDate": "30-07-1980"
+  },
+  {
+    "AreaId": 447,
+    "CountryId": 297,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 448,
+    "CountryId": 1145,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 448,
+    "CountryId": 299,
+    "IgnoreWar": false,
+    "FromDate": "01-10-1978"
+  },
+  {
+    "AreaId": 449,
+    "CountryId": 1153,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 449,
+    "CountryId": 1154,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1962"
+  },
+  {
+    "AreaId": 449,
+    "CountryId": 307,
+    "IgnoreWar": false,
+    "FromDate": "04-07-1997"
+  },
+  {
+    "AreaId": 450,
+    "CountryId": 246,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 450,
+    "CountryId": 1009,
+    "IgnoreWar": false,
+    "FromDate": "14-12-1954"
+  },
+  {
+    "AreaId": 450,
+    "CountryId": 109,
+    "IgnoreWar": false,
+    "FromDate": "10-10-2010"
+  },
+  {
+    "AreaId": 451,
+    "CountryId": 246,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 451,
+    "CountryId": 1009,
+    "IgnoreWar": false,
+    "FromDate": "15-12-1954"
+  },
+  {
+    "AreaId": 451,
+    "CountryId": 245,
+    "IgnoreWar": false,
+    "FromDate": "10-10-2010"
+  },
+  {
+    "AreaId": 452,
+    "CountryId": 320,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 454,
+    "CountryId": 314,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 455,
+    "CountryId": 318,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 456,
+    "CountryId": 1156,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 456,
+    "CountryId": 1157,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1946"
+  },
+  {
+    "AreaId": 456,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "28-03-2003"
+  },
+  {
+    "AreaId": 457,
+    "CountryId": 1158,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 457,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1974"
+  },
+  {
+    "AreaId": 458,
+    "CountryId": 1159,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 459,
+    "CountryId": 1159,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 459,
+    "CountryId": 1160,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1961"
+  },
+  {
+    "AreaId": 459,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "28-03-2003"
+  },
+  {
+    "AreaId": 460,
+    "CountryId": 1161,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 460,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "28-03-2003"
+  },
+  {
+    "AreaId": 461,
+    "CountryId": 1162,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 462,
+    "CountryId": 1163,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 462,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1946"
+  },
+  {
+    "AreaId": 463,
+    "CountryId": 1162,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 463,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "16-07-2007"
+  },
+  {
+    "AreaId": 464,
+    "CountryId": 1164,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 464,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "29-03-2011"
+  },
+  {
+    "AreaId": 465,
+    "CountryId": 1165,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 465,
+    "CountryId": 140,
+    "IgnoreWar": false,
+    "FromDate": "19-03-1946"
+  },
+  {
+    "AreaId": 466,
+    "CountryId": 1134,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 466,
+    "CountryId": 1166,
+    "IgnoreWar": false,
+    "FromDate": "04-07-1959"
+  },
+  {
+    "AreaId": 466,
+    "CountryId": 1133,
+    "IgnoreWar": false,
+    "FromDate": "07-08-1965"
+  },
+  {
+    "AreaId": 466,
+    "CountryId": 130,
+    "IgnoreWar": false,
+    "FromDate": "10-07-1973"
+  },
+  {
+    "AreaId": 467,
+    "CountryId": 1134,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 467,
+    "CountryId": 130,
+    "IgnoreWar": false,
+    "FromDate": "06-08-1962"
+  },
+  {
+    "AreaId": 468,
+    "CountryId": 1147,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  },
+  {
+    "AreaId": 468,
+    "CountryId": 130,
+    "IgnoreWar": false,
+    "FromDate": "07-06-1960"
+  },
+  {
+    "AreaId": 469,
+    "CountryId": 130,
+    "IgnoreWar": false,
+    "FromDate": "01-01-1900"
+  }
+]
