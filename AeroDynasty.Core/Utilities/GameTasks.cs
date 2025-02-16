@@ -165,6 +165,9 @@ namespace AeroDynasty.Core.Utilities
 
             await GameData.Instance.Airports.CheckIsActiveForAllAsync(currentDate);
             await GameData.Instance.AircraftModels.CheckIsActiveForAllAsync(currentDate);
+
+            // Execute airport expansions that match the current date
+            await GameData.Instance.Airports.CheckExpansionsForAllAsync(currentDate);
         }
 
         /// <summary>

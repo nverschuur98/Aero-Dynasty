@@ -25,8 +25,9 @@ namespace AeroDynasty.Core.Models.AirportModels
         public Coordinates Coordinates { get; set; }
         public string Town { get; set; }
         public List<Runway> Runways { get; set; }
+        public List<AirportExpansion> Expansions { get; set; }
 
-        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Area area, Coordinates coordinates, string town,List<Runway> runways)
+        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Area area, Coordinates coordinates, string town, List<Runway> runways)
         {
             Name = name;
             IATA = iata;
@@ -38,6 +39,8 @@ namespace AeroDynasty.Core.Models.AirportModels
             Coordinates = coordinates;
             Town = town;
             Runways = runways;
+            Expansions = new List<AirportExpansion>();
+            Expansions.Add(new NewRunwayExpansion("Test/Test", 2000, RunwaySurface.Asphalt, new DateTime(1946, 01, 02)));
         }
 
         // Assuming images are stored in the Assets folder
@@ -71,6 +74,23 @@ namespace AeroDynasty.Core.Models.AirportModels
             {
                 return "(" + ICAO + ") " + Name;
             }
+        }
+
+        /// <summary>
+        /// Executes expansions scheduled for the given date.
+        /// </summary>
+        public async Task ExecuteExpansionsAsync(DateTime currentDate)
+        {
+            var expansionsToExecute = Expansions.Where(expansion => expansion.Date == currentDate).ToList();
+
+            foreach (var expansion in expansionsToExecute)
+            {
+                expansion.Execute(this); // Executes the expansion on this airport
+                await Task.CompletedTask; // Placeholder for async logic if needed
+            }
+
+            // Optionally remove executed expansions if needed (game logic)
+            Expansions.RemoveAll(expansion => expansion.Date == currentDate);
         }
 
         /// <summary>

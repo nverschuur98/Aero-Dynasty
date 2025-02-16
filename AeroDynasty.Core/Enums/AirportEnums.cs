@@ -18,6 +18,16 @@
         Smallest
     }
 
+    public enum AirportExpansionType
+    {
+        NewRunway,
+        ChangeRunwayLength,
+        ChangeRunwaySurface,
+        ChangeRunwayName,
+        CloseRunway,
+        NewTerminal,
+    }
+
     public enum RunwaySurface
     {
         Asphalt,
