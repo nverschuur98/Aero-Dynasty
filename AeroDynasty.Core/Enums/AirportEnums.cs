@@ -20,9 +20,11 @@
 
     public enum AirportExpansionType
     {
+        ChangeAirportName,
+        ChangeAirportType,
+        ChangeAirportTown,
         NewRunway,
-        ChangeRunwayLength,
-        ChangeRunwaySurface,
+        ChangeRunway,
         ChangeRunwayName,
         CloseRunway,
         NewTerminal,

@@ -235,8 +235,6 @@ namespace AeroDynasty.Core.Utilities
             DateTime CurrentDate = GameState.Instance.CurrentDate;
             List<RouteDemand> RouteDemands = null;
 
-            forceCalculation = true;
-
             if (forceCalculation || CurrentDate.Month == 1)
             {
                 // new year, so calculate all route demands

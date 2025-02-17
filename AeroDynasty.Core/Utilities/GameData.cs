@@ -239,8 +239,22 @@ namespace AeroDynasty.Core.Utilities
                     }
                 }
 
+                // Get expansions property
+                List<AirportExpansion> expansions = null;
+                if(airportData.TryGetProperty("Expansions", out JsonElement _expansions))
+                {
+                    expansions = new List<AirportExpansion>();
+
+                    foreach (JsonElement expansion in _expansions.EnumerateArray())
+                    {
+                        string type = expansion.GetProperty("Type").GetString();
+
+
+                    }
+                }
+
                 // Create the Airport instance with the Country reference
-                var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, area, coordinates, town, runways);
+                var airport = new Airport(airportName, iata, icao, airportType, passengerSize, airportSeason, area, coordinates, town, runways, expansions);
 
                 // Set the period for the airport
                 airport.SetPeriod(startDate, endDate);

@@ -27,7 +27,7 @@ namespace AeroDynasty.Core.Models.AirportModels
         public List<Runway> Runways { get; set; }
         public List<AirportExpansion> Expansions { get; set; }
 
-        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Area area, Coordinates coordinates, string town, List<Runway> runways)
+        public Airport(string name, string iata, string icao, AirportType type, AirportSize passengerSize , FocusSeason season , Area area, Coordinates coordinates, string town, List<Runway> runways, List<AirportExpansion> expansions)
         {
             Name = name;
             IATA = iata;
@@ -39,8 +39,7 @@ namespace AeroDynasty.Core.Models.AirportModels
             Coordinates = coordinates;
             Town = town;
             Runways = runways;
-            Expansions = new List<AirportExpansion>();
-            Expansions.Add(new NewRunwayExpansion("Test/Test", 2000, RunwaySurface.Asphalt, new DateTime(1946, 01, 02)));
+            Expansions = expansions;
         }
 
         // Assuming images are stored in the Assets folder
@@ -81,7 +80,10 @@ namespace AeroDynasty.Core.Models.AirportModels
         /// </summary>
         public async Task ExecuteExpansionsAsync(DateTime currentDate)
         {
-            var expansionsToExecute = Expansions.Where(expansion => expansion.Date == currentDate).ToList();
+            var expansionsToExecute = Expansions.Where(expansion => expansion.Date <= currentDate).ToList();
+
+            if (expansionsToExecute.Count <= 0)
+                return;
 
             foreach (var expansion in expansionsToExecute)
             {
@@ -90,7 +92,7 @@ namespace AeroDynasty.Core.Models.AirportModels
             }
 
             // Optionally remove executed expansions if needed (game logic)
-            Expansions.RemoveAll(expansion => expansion.Date == currentDate);
+            Expansions.RemoveAll(expansion => expansion.Date <= currentDate);
         }
 
         /// <summary>
