@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AeroDynasty.Core.Models.AirportModels
@@ -23,7 +24,6 @@ namespace AeroDynasty.Core.Models.AirportModels
         }
 
         public abstract void Execute(Airport airport);
-
     }
 
     /// <summary>
@@ -37,8 +37,9 @@ namespace AeroDynasty.Core.Models.AirportModels
             await Task.WhenAll(airports.Select(async airport =>
             {
                 // Check if expansions list is set
-                if(airport.Expansions != null)
+                if (airport.Expansions != null)
                     await airport.ExecuteExpansionsAsync(currentDate);
+
             }));
         }
     }
@@ -60,6 +61,23 @@ namespace AeroDynasty.Core.Models.AirportModels
             // Change the airport name
             airport.Name = NewName;
         }
+
+        public static ChangeAirportNameExpansion TryReadJson(JsonElement expansion)
+        {
+            string newName = expansion.GetProperty("Name").ToString();
+            DateTime date = new DateTime();
+
+            try
+            {
+                date = DateTime.ParseExact(expansion.GetProperty("Date").ToString(), "dd-MM-yyyy", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {expansion.GetProperty("Date").ToString()}");
+            }
+
+            return new ChangeAirportNameExpansion(newName, date);
+        }
     }
 
     /// <summary>
@@ -78,6 +96,22 @@ namespace AeroDynasty.Core.Models.AirportModels
         {
             // Change the airport type
             airport.Type = Type;
+        }
+
+        public static ChangeAirportTypeExpansion TryReadJson(JsonElement expansion)
+        {
+            AirportType type = (AirportType)Enum.Parse(typeof(AirportType), expansion.GetProperty("AirportType").GetString());
+            DateTime date = new DateTime();
+
+            try
+            {
+                date = DateTime.ParseExact(expansion.GetProperty("Date").ToString(), "dd-MM-yyyy", null);
+            }catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {expansion.GetProperty("Date").ToString()}");
+            }
+
+            return new ChangeAirportTypeExpansion(type, date);
         }
     }
 
@@ -98,6 +132,23 @@ namespace AeroDynasty.Core.Models.AirportModels
             // Change the airport town
             airport.Town = Town;
         }
+
+        public static ChangeAirportTownExpansion TryReadJson(JsonElement expansion)
+        {
+            string town = expansion.GetProperty("Name").ToString();
+            DateTime date = new DateTime();
+
+            try
+            {
+                date = DateTime.ParseExact(expansion.GetProperty("Date").ToString(), "dd-MM-yyyy", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {expansion.GetProperty("Date").ToString()}");
+            }
+
+            return new ChangeAirportTownExpansion(town, date);
+        }
     }
 
     /// <summary>
@@ -116,6 +167,25 @@ namespace AeroDynasty.Core.Models.AirportModels
         {
             // Create and add the new runway
             airport.Runways.Add(Runway);
+        }
+
+        public static NewRunwayExpansion TryReadJson(JsonElement expansion)
+        {
+            string name = expansion.GetProperty("Name").ToString();
+            int length = expansion.GetProperty("Length").GetInt32();
+            RunwaySurface surface = (RunwaySurface)Enum.Parse(typeof(RunwaySurface), expansion.GetProperty("Surface").ToString());
+            DateTime date = new DateTime();
+
+            try
+            {
+                date = DateTime.ParseExact(expansion.GetProperty("Date").ToString(), "dd-MM-yyyy", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {expansion.GetProperty("Date").ToString()}");
+            }
+
+            return new NewRunwayExpansion(name, length, surface, date);
         }
     }
 
@@ -141,11 +211,35 @@ namespace AeroDynasty.Core.Models.AirportModels
 
             // Check if runway exists
             if (runway == null)
-                throw new ApplicationException($"Expansion Failed: Runway {Name} not found on airport {airport.ICAO_Name}");
+            {
+                airport.Runways.Add(new Runway(Name, Surface, Length));
+            }
+            else
+            {
+                // Modify runway
+                runway.Length = Length;
+                runway.Surface = Surface;
+            }
 
-            // Modify runway
-            runway.Length = Length;
-            runway.Surface = Surface;
+        }
+
+        public static ChangeRunwayExpansion TryReadJson(JsonElement expansion)
+        {
+            string name = expansion.GetProperty("Name").ToString();
+            int length = expansion.GetProperty("Length").GetInt32();
+            RunwaySurface surface = (RunwaySurface)Enum.Parse(typeof(RunwaySurface), expansion.GetProperty("Surface").ToString());
+            DateTime date = new DateTime();
+
+            try
+            {
+                date = DateTime.ParseExact(expansion.GetProperty("Date").ToString(), "dd-MM-yyyy", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {expansion.GetProperty("Date").ToString()}");
+            }
+
+            return new ChangeRunwayExpansion(name, length, surface, date);
         }
     }
 
@@ -174,6 +268,24 @@ namespace AeroDynasty.Core.Models.AirportModels
             // Modify runway
             runway.Name = NewName;
         }
+
+        public static ChangeRunwayNameExpansion TryReadJson(JsonElement expansion)
+        {
+            string name = expansion.GetProperty("Name").ToString();
+            string newName = expansion.GetProperty("NewName").ToString();
+            DateTime date = new DateTime();
+
+            try
+            {
+                date = DateTime.ParseExact(expansion.GetProperty("Date").ToString(), "dd-MM-yyyy", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {expansion.GetProperty("Date").ToString()}");
+            }
+
+            return new ChangeRunwayNameExpansion(name, newName, date);
+        }
     }
 
     /// <summary>
@@ -197,6 +309,23 @@ namespace AeroDynasty.Core.Models.AirportModels
                 throw new ApplicationException($"Expansion Failed: Runway {Name} not found on airport {airport.ICAO_Name}");
 
             airport.Runways.Remove(runway);
+        }
+
+        public static CloseRunwayExpansion TryReadJson(JsonElement expansion)
+        {
+            string name = expansion.GetProperty("Name").ToString();
+            DateTime date = new DateTime();
+
+            try
+            {
+                date = DateTime.ParseExact(expansion.GetProperty("Date").ToString(), "dd-MM-yyyy", null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error on {expansion.GetProperty("Date").ToString()}");
+            }
+
+            return new CloseRunwayExpansion(name, date);
         }
     }
 }

@@ -87,8 +87,15 @@ namespace AeroDynasty.Core.Models.AirportModels
 
             foreach (var expansion in expansionsToExecute)
             {
-                expansion.Execute(this); // Executes the expansion on this airport
-                await Task.CompletedTask; // Placeholder for async logic if needed
+                try
+                {
+                    expansion.Execute(this); // Executes the expansion on this airport
+                    await Task.CompletedTask; // Placeholder for async logic if needed
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine($"Error while executing expansion for {this.Name}, {expansion.Type.ToString()} - {ex.Message}");
+                }
             }
 
             // Optionally remove executed expansions if needed (game logic)

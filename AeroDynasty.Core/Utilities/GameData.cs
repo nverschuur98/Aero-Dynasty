@@ -162,7 +162,6 @@ namespace AeroDynasty.Core.Utilities
         /// <summary>
         /// Loading the airport data from the data files
         /// </summary>
-        /// <exception cref="Exception"></exception>
         private void LoadAirports()
         {
 #if DEBUG
@@ -247,9 +246,41 @@ namespace AeroDynasty.Core.Utilities
 
                     foreach (JsonElement expansion in _expansions.EnumerateArray())
                     {
-                        string type = expansion.GetProperty("Type").GetString();
+                        // Get the type of expansion
+                        AirportExpansionType type = (AirportExpansionType)Enum.Parse(typeof(AirportExpansionType), expansion.GetProperty("Type").GetString());
 
+                        AirportExpansion _expansion;
 
+                        switch (type)
+                        {
+                            case AirportExpansionType.ChangeAirportName:
+                                _expansion = ChangeAirportNameExpansion.TryReadJson(expansion);
+                                break;
+                            case AirportExpansionType.ChangeAirportType:
+                                _expansion = ChangeAirportTypeExpansion.TryReadJson(expansion);
+                                break;
+                            case AirportExpansionType.ChangeAirportTown:
+                                _expansion = ChangeAirportTownExpansion.TryReadJson(expansion);
+                                break;
+                            case AirportExpansionType.NewRunway:
+                                _expansion = NewRunwayExpansion.TryReadJson(expansion);
+                                break;
+                            case AirportExpansionType.ChangeRunway:
+                                _expansion = ChangeRunwayExpansion.TryReadJson(expansion);
+                                break;
+                            case AirportExpansionType.ChangeRunwayName:
+                                _expansion = ChangeRunwayNameExpansion.TryReadJson(expansion);
+                                break;
+                            case AirportExpansionType.CloseRunway:
+                                _expansion = CloseRunwayExpansion.TryReadJson(expansion);
+                                break;
+                            default:
+                                Console.WriteLine("No such expansion implemented");
+                                continue;
+                                break;
+                        }
+
+                        expansions.Add(_expansion);
                     }
                 }
 
@@ -637,8 +668,8 @@ namespace AeroDynasty.Core.Utilities
             GlobalModifiers.CurrentGlobalPassengers = GlobalModifiers.GlobalPassengersMap[y];
 
             // Execute tasks in series
-            await GameTasks.CheckIsActive();
             await GameTasks.CheckAreaChanges();
+            await GameTasks.CheckIsActive();
             await GameTasks.CalculateFuelPrice();
             await GameTasks.CalculateRouteDemand(true);
         }
