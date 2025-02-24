@@ -25,17 +25,15 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="{Binding Route.Name}" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                <Page:WrapperTitle Title="{Binding Route.Name}" Grid.Row="0" />
 
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,2">
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,2">
                     <Menu:MenuButton Label="Edit Route" Command="{Binding EditRouteCommand}" Margin="-1,0,0,0"/>
                 </StackPanel>
                 
-                <Grid Grid.Row="3">
+                <Grid Grid.Row="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -113,17 +111,16 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Assigned Airliners" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
-                <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,2">
+                <Page:WrapperTitle Title="Assigned Airliners" Grid.Row="0"/>
+                
+                <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,2">
                     <Menu:MenuButton Label="Add Airliner" Command="{Binding OpenAddAirlinerCommand}" Margin="-1,0,0,0"/>
                     <Menu:MenuButton Label="Clear Schedule" Command="{Binding ClearScheduleCommand}" />
                 </StackPanel>
 
-                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Route.AssignedAirliners}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Route.AssignedAirliners}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Registration">
@@ -155,13 +152,11 @@
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Route Schedule" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
-                
-                <Grid Grid.Row="2" Margin="0,2">
+                <Page:WrapperTitle Title="Route Schedule" Grid.Row="0" />
+
+                <Grid Grid.Row="1" Margin="0,2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -181,7 +176,7 @@
 
                 </Grid>
 
-                <Route:RouteScheduleWeek Grid.Row="3" RouteSchedules="{Binding Route.ScheduledFlights}" Margin="0,5,0,0" />
+                <Route:RouteScheduleWeek Grid.Row="2" RouteSchedules="{Binding Route.ScheduledFlights}" Margin="0,5,0,0" />
             </Grid>
         </Page:Wrapper>
 

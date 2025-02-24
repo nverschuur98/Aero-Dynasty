@@ -17,12 +17,10 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Airports" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                <Page:WrapperTitle Title="Airports" Grid.Row="0"/>
                 <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0,3">
                     <Menu:MenuButton Label="Airports" Command="{Binding NavigateAirportsCommand}" Margin="0,1"/>
                 </StackPanel>

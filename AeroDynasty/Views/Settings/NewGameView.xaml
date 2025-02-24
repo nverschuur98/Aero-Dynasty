@@ -15,20 +15,18 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
                     <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="New Game" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                <Page:WrapperTitle Title="New Game" Grid.Row="0" />
 
-                <StackPanel Grid.Row="2">
+                <StackPanel Grid.Row="1">
                     <Form:ComboInput Label="Starting Year" ItemSource="{Binding AvailableStartingYears}" SelectedItem="{Binding SelectedStartingYear}" Margin="0,5,0,0"/>
                     <Form:ComboInput Label="User Airline" ItemSource="{Binding AvailableAirlines}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedAirline}" Margin="0,5,0,0"/>
                 </StackPanel>
 
-                <StackPanel Grid.Row="4" Orientation="Horizontal" FlowDirection="RightToLeft">
+                <StackPanel Grid.Row="3" Orientation="Horizontal" FlowDirection="RightToLeft">
                     <Menu:MenuButton Label="Create New Game" Command="{Binding CreateNewGameCommand}" IsEnabled="{Binding CanCreateNewGame}"/>
                 </StackPanel>
             </Grid>

@@ -14,15 +14,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Manufacturers" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                <Page:WrapperTitle Title="Manufacturers" Grid.Row="0" />
                 <Form:TextInput Grid.Row="1" Label="Search Manufacturer" Value="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
-                <Separator Grid.Row="2" Background="{StaticResource AccentBrush}"/>
 
-                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Manufacturers}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Manufacturers}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Name">

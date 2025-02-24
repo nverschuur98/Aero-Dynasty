@@ -18,14 +18,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Airport List" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
-                <Form:TextInput Grid.Row="2" Label="Search Airport" Value="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+                
+                <Page:WrapperTitle Title="Airport List" Grid.Row="0" />
+                <Form:TextInput Grid.Row="1" Label="Search Airport" Value="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
 
-                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding Airports}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Airports}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Airport Name">
@@ -52,14 +51,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Domestic Airport List" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
-                <Form:TextInput Grid.Row="2" Label="Search Airport" Value="{Binding SearchStringDomestic, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
+
+                <Page:WrapperTitle Title="Domestic Airport List" Grid.Row="0" />
+                <Form:TextInput Grid.Row="1" Label="Search Airport" Value="{Binding SearchStringDomestic, UpdateSourceTrigger=PropertyChanged}" Margin="0,5"/>
                 
-                <ListView Background="Transparent" Grid.Row="3" BorderThickness="0" ItemsSource="{Binding AirportsDomestic}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding AirportsDomestic}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Airport Name">

@@ -13,14 +13,12 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Fleet" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-                <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+                <Page:WrapperTitle Title="Fleet" Grid.Row="0"/>
 
-                <ListView Background="Transparent" Grid.Row="2" BorderThickness="0" ItemsSource="{Binding Fleet}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
+                <ListView Background="Transparent" Grid.Row="1" BorderThickness="0" ItemsSource="{Binding Fleet}" ItemContainerStyle="{StaticResource ListViewItemStyle}" Margin="0,5,0,0">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource GridViewColumnHeaderStyle}">
                             <GridViewColumn Header="Name">
