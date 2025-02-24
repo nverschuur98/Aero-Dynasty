@@ -152,7 +152,7 @@ namespace AeroDynasty.Core.Utilities
         /// <param name="gameData"></param>
         /// <param name="filePath"></param>
         /// <returns></returns>
-        public static void LoadGame(string filePath)
+        public static async void LoadGame(string filePath)
         {
             // First check if the game is running
             bool wasPaused = GameState.Instance.IsPaused;
@@ -205,7 +205,7 @@ namespace AeroDynasty.Core.Utilities
                 // As the data is directly injected in the GameDataInstance, no loading is needed
 
                 // Check all the objects with an assigned period on their status
-                GameData.Instance.GameLoadedTasks();
+                await GameData.Instance.GameLoadedTasks();
 
                 // After the data is set and checked with GameLoadedTasks, load the remaining change data
                 var airliners = JsonSerializer.Deserialize<List<Airliner>>(data.GetProperty("Airliners").GetRawText(), options);
@@ -403,7 +403,7 @@ namespace AeroDynasty.Core.Utilities
 
                 if (origin == null || destination == null || owner == null)
                 {
-                    throw new InvalidOperationException("Referenced objects not found in GameData.");
+                    throw new InvalidOperationException($"Referenced objects not found in GameData. Origin: {origin.Name}, Destination: {destination.Name}, Owner: {owner.Name}");
                 }
 
                 // Create a new JsonSerializerOptions with the RouteScheduleConverter that uses the context
