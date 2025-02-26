@@ -65,7 +65,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <Menu:MenuButton Grid.Column="1" Label="Save Route" Command="{Binding SaveRouteCommand}" />
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Menu:MenuButton Label="Save Route" Command="{Binding SaveRouteCommand}" />
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Page:Wrapper>

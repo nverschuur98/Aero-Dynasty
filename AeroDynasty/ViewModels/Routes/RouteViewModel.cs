@@ -109,10 +109,12 @@ namespace AeroDynasty.ViewModels.Routes
 
         // Command and event binding
         public ICommand EditRouteCommand { get; }
+        public ICommand DeleteRouteCommand { get; }
         public ICommand AddRouteScheduleCommand { get; }
         public ICommand OpenAddAirlinerCommand { get; }
         public ICommand ClearScheduleCommand { get; }
         public event Action<Route> EditRouteRequest;
+        public event Action CloseRequest;
 
         // Constructor
         public RouteViewModel(Route route)
@@ -121,6 +123,7 @@ namespace AeroDynasty.ViewModels.Routes
 
             // Bind commands
             EditRouteCommand = new RelayCommand(EditRoute);
+            DeleteRouteCommand = new RelayCommand(DeleteRoute);
             OpenAddAirlinerCommand = new RelayCommand(OpenAddAirliner);
             AddRouteScheduleCommand = new RelayCommand(AddRouteSchedule);
             ClearScheduleCommand = new RelayCommand(ClearSchedule);
@@ -136,6 +139,18 @@ namespace AeroDynasty.ViewModels.Routes
         {
             //Raise the event that this route must be edited
             EditRouteRequest?.Invoke(Route);
+        }
+
+        private void DeleteRoute()
+        {
+            // Clear the schedule
+            ClearSchedule();
+
+            // Remove the route
+            GameData.Instance.Routes.Remove(Route);
+
+            // Raise the event to delete the route
+            CloseRequest?.Invoke();
         }
 
         private void OpenAddAirliner()
@@ -161,9 +176,7 @@ namespace AeroDynasty.ViewModels.Routes
 
         private void ClearSchedule()
         {
-            var assignedAirlinersCopy = Route.AssignedAirliners.ToList();
-
-            foreach (Airliner airliner in assignedAirlinersCopy)
+            foreach (Airliner airliner in Route.AssignedAirliners.ToList())
             {
                 Route.RemoveAirliner(airliner);
             }
