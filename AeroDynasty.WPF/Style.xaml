@@ -93,4 +93,57 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- Global ScrollBar Style -->
+    <Style TargetType="ScrollBar">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid>
+                        <Rectangle Fill="{StaticResource DarkTransparentBackgroundBrush}"/>
+
+                        <Track Name="PART_Track" Orientation="{TemplateBinding Orientation}">
+                            <Track.Style>
+                                <Style TargetType="Track">
+                                    <Style.Triggers>
+                                        <!-- DataTrigger to set IsDirectionReversed based on Orientation -->
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Orientation}" Value="Vertical">
+                                            <Setter Property="IsDirectionReversed" Value="True"/>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Orientation}" Value="Horizontal">
+                                            <Setter Property="IsDirectionReversed" Value="False"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Track.Style>
+                            
+                            <Track.Thumb>
+                                <Thumb Background="{StaticResource LightTransparentBackgroundBrush}" Height="auto" Width="auto">
+                                    <Thumb.Style>
+                                        <Style TargetType="Thumb">
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="Margin" Value="1"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Thumb">
+                                                        <Border x:Name="ThumbBorder" Background="{TemplateBinding Background}"/>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter TargetName="ThumbBorder" Property="Background" Value="{StaticResource AccentBrush}"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Thumb.Style>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

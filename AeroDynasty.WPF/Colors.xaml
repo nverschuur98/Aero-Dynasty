@@ -37,6 +37,7 @@
     <Color x:Key="AccentColorD30">#A84C3F</Color>
     <Color x:Key="AccentColorD40">#924336</Color>
     <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+    <SolidColorBrush x:Key="ScrollBarThumbBrush" Color="{StaticResource AccentColorD10}" />
     <Color x:Key="RedTransparentBackground">#80924336</Color>
     <SolidColorBrush x:Key="RedTransparentBackgroundBrush" Color="{StaticResource RedTransparentBackground}" />
 
