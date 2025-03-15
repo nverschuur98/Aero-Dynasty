@@ -13,6 +13,24 @@ namespace AeroDynasty.Core.Models.RouteModels
     {
         public ObservableCollection<RouteStatisticsPeriod> Years { get; set; }
         public ObservableCollection<RouteStatisticsPeriod> Months { get; set; }
+        public double TotalPassengers
+        {
+            get
+            {
+                double lastYears = Years.Sum(y => y.Passengers);
+                double lastMonths = Months.Where(m => m.Date.Year == GameState.Instance.CurrentDate.Year).Sum(m => m.Passengers);
+                return lastYears + lastMonths;
+            }
+        }
+        public Price TotalBalance
+        {
+            get
+            {
+                double lastYears = Years.Sum(y => y.Balance.Amount);
+                double lastMonths = Months.Where(m => m.Date.Year == GameState.Instance.CurrentDate.Year).Sum(m => m.Balance.Amount);
+                return new Price (lastYears + lastMonths);
+            }
+        }
 
         public RouteStatistics()
         {

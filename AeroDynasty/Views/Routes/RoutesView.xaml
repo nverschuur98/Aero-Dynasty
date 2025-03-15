@@ -43,6 +43,8 @@
                                     <Binding Path="Distance" StringFormat="{}{0:N0} km" />
                                 </GridViewColumn.DisplayMemberBinding>
                             </GridViewColumn>
+                            <GridViewColumn Header="Lifetime Balance" DisplayMemberBinding="{Binding RouteStatistics.TotalBalance}" />
+                            <GridViewColumn Header="Lifetime Passengers" DisplayMemberBinding="{Binding RouteStatistics.TotalPassengers}" />
                         </GridView>
                     </ListView.View>
                 </ListView>
