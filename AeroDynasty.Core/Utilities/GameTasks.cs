@@ -30,17 +30,17 @@ namespace AeroDynasty.Core.Utilities
         internal static async Task CalculateRouteExecutions()
         {
 #if DEBUG
-            // Start the stopwatch to time the tasks
             var stopwatch = Stopwatch.StartNew();
 #endif
 
             // Get the current fuel price and current day
             double currentFuelPrice = GameData.Instance.GlobalModifiers.CurrentFuelPrice.Amount;
-            DayOfWeek currentDay = GameState.Instance.CurrentDate.DayOfWeek;
+            DateTime currentDate = GameState.Instance.CurrentDate;
+            DayOfWeek currentDay = currentDate.DayOfWeek;
             List<RouteDemand> routeDemands = GameData.Instance.RouteDemands;
 
             // Check if routeDemands is not empty or null
-            if (routeDemands.Count <= 0 || routeDemands == null)
+            if (routeDemands == null || routeDemands.Count == 0)
                 return;
 
             // Collect all RouteLegs that have flights today, with their parent Route
@@ -55,62 +55,87 @@ namespace AeroDynasty.Core.Utilities
                 .ToList();
 
             // Group all RouteLegs by (Origin, Destination)
-            var groupedLegs = allRouteLegs.GroupBy(rl => (rl.Leg.Origin, rl.Leg.Destination));
+            var groupedLegs = allRouteLegs
+                .GroupBy(rl => (rl.Leg.Origin, rl.Leg.Destination))
+                .ToList();
 
-            // Process each group concurrently using Task.WhenAll()
-            await Task.WhenAll(groupedLegs.Select(group => Task.Run(() =>
+            // Get the number of logical processors (cores + virtual cores)
+            int logicalCores = Environment.ProcessorCount;
+
+            // Define batch size (dividing RouteLegs over logical cores)
+            int batchSize = Math.Max(1, groupedLegs.Count / logicalCores);
+
+            // Create tasks for each batch
+            var tasks = new List<Task>();
+
+            // Split the grouped legs into batches and process each batch in parallel
+            for (int i = 0; i < groupedLegs.Count; i += batchSize)
             {
-                int localDemand = 0;
-
-                // Ensure routeDemands is not null
-                if (routeDemands == null)
+                var batch = groupedLegs.Skip(i).Take(batchSize).ToList(); // This is the subset of the grouped legs to process
+                tasks.Add(Task.Run(() =>
                 {
-                    throw new InvalidOperationException("routeDemands is not set.");
-                }
+                    foreach (var group in batch)
+                    {
+                        int localDemand = 0;
 
-                // Get the corresponding RouteDemand object, or null if not found
-                RouteDemand routeDemand = routeDemands.FirstOrDefault(rd => rd.Origin == group.Key.Origin && rd.Destination == group.Key.Destination);
+                        // Ensure routeDemands is not null
+                        if (routeDemands == null)
+                        {
+                            throw new InvalidOperationException("routeDemands is not set.");
+                        }
 
-                // If routeDemand is found, get the demand for the current day; otherwise, localDemand remains 0
-                if (routeDemand != null)
-                    localDemand = routeDemand[currentDay]; // Local copy of available demand
+                        // Get the corresponding RouteDemand object, or null if not found
+                        RouteDemand routeDemand = routeDemands.FirstOrDefault(rd =>
+                            rd.Origin == group.Key.Origin && rd.Destination == group.Key.Destination);
+
+                        // If routeDemand is found, get the demand for the current day; otherwise, localDemand remains 0
+                        if (routeDemand != null)
+                            localDemand = routeDemand[currentDay]; // Local copy of available demand
 
 #if DEBUG
-                Console.WriteLine($"{currentDay} - {group.Key.Origin.ICAO}-{group.Key.Destination.ICAO} - Total Demand: {localDemand}");
+                        Console.WriteLine($"{currentDay} - {group.Key.Origin.ICAO}-{group.Key.Destination.ICAO} - Total Demand: {localDemand}");
 #endif
 
-                // Sort RouteLegs by some priority (e.g., largest airline reputation first)
-                var sortedLegs = group.OrderByDescending(r => r.Route.Owner.Reputation);
+                        // Sort RouteLegs by some priority (e.g., largest airline reputation first)
+                        var sortedLegs = group.OrderByDescending(r => r.Route.Owner.Reputation);
 
-                foreach (var (route, leg) in sortedLegs)
-                {
-                    // Determine seat availability
-                    int legSeatAvailability = leg.AssignedAirliner.Model.maxPax;
-                    // Determine how many passengers can be filled on this flight
-                    int filledPassengers = Math.Min(localDemand, legSeatAvailability);
-                    // Subtract from the local available demand
-                    localDemand -= filledPassengers;
+                        foreach (var (route, leg) in sortedLegs)
+                        {
+                            // Determine seat availability
+                            int legSeatAvailability = leg.AssignedAirliner.Model.maxPax;
+                            // Determine how many passengers can be filled on this flight
+                            int filledPassengers = Math.Min(localDemand, legSeatAvailability);
+                            // Subtract from the local available demand
+                            localDemand -= filledPassengers;
 
-                    // Calculate revenue and cost
-                    Price revenue = filledPassengers * route.TicketPrice;
-                    Price cost = new Price(1000 + (route.Distance * leg.AssignedAirliner.Model.FuelConsumptionRate * currentFuelPrice));
+                            // Calculate revenue and cost
+                            Price revenue = filledPassengers * route.TicketPrice;
+                            Price cost = new Price(1000 + (route.Distance * leg.AssignedAirliner.Model.FuelConsumptionRate * currentFuelPrice));
+                            Price balance = revenue - cost;
 
-                    // Update airline balance
-                    route.Owner.addCash(revenue - cost);
+                            // Update route statistics
+                            route.RouteStatistics.UpdateCurrentMonth(currentDate, balance, filledPassengers);
+
+                            // Update airline balance
+                            route.Owner.addCash(balance);
+
 #if DEBUG
-                    Console.WriteLine($"{currentDay} - {leg.Origin.ICAO}-{leg.Destination.ICAO} - Departure:{leg.DepartureTime}, Pax:{filledPassengers}, Profit: {revenue - cost}, Demand left: {localDemand}");
+                            Console.WriteLine($"{currentDay} - {leg.Origin.ICAO}-{leg.Destination.ICAO} - Departure: {leg.DepartureTime}, Pax: {filledPassengers}, Profit: {revenue - cost}, Demand left: {localDemand}");
 #endif
-                }
-            })));
+                        }
+                    }
+                }));
+            }
+
+            // Wait for all tasks to complete
+            await Task.WhenAll(tasks);
 
 #if DEBUG
-            // Stop the stopwatch after all tasks are completed
             stopwatch.Stop();
-
-            // Log or display the time it took to complete the tasks
             Console.WriteLine($"CalculateRouteExecutions completed in {stopwatch.ElapsedMilliseconds} ms");
 #endif
         }
+
 
         /// <summary>
         /// Task to calculate the daily fuel price
@@ -261,7 +286,7 @@ namespace AeroDynasty.Core.Utilities
             int logicalCores = Environment.ProcessorCount;
 
             // Define batch size (dividing airports over logical cores)
-            int batchSize = Airports.Count / logicalCores;
+            int batchSize = Math.Max(1, Airports.Count / logicalCores);
 
             // Create tasks for each batch
             var tasks = new List<Task>();

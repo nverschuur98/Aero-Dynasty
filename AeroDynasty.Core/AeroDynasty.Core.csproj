@@ -120,6 +120,8 @@
     <Compile Include="Models\RouteModels\RouteDemand.cs" />
     <Compile Include="Models\RouteModels\RouteLeg.cs" />
     <Compile Include="Models\RouteModels\RouteSchedule.cs" />
+    <Compile Include="Models\RouteModels\RouteStatistics.cs" />
+    <Compile Include="Models\RouteModels\RouteStatisticsPeriod.cs" />
     <Compile Include="Models\_PeriodModel.cs" />
     <Compile Include="Utilities\GameState.cs" />
     <Compile Include="Models\Core\Price.cs" />

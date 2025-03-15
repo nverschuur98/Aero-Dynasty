@@ -21,6 +21,7 @@ namespace AeroDynasty.Core.Models.RouteModels
         private Price _ticketPrice;
         private ObservableCollection<RouteSchedule> _scheduledFlights;
         private ObservableCollection<Airliner> _assignedAirliners;
+        private RouteStatistics _routeStatistics;
 
         // Public vars
         public double Distance { get => GeoUtilities.CalculateDistance(Origin.Coordinates, Destination.Coordinates); }
@@ -71,6 +72,15 @@ namespace AeroDynasty.Core.Models.RouteModels
                 OnPropertyChanged(nameof(AssignedAirliners));
             }
         }
+        public RouteStatistics RouteStatistics
+        {
+            get => _routeStatistics;
+            set
+            {
+                _routeStatistics = value;
+                OnPropertyChanged(nameof(RouteStatistics));
+            }
+        }
 
         // Constructor
         public Route(Airport origin, Airport destination, Airline owner, Price ticketPrice)
@@ -81,6 +91,7 @@ namespace AeroDynasty.Core.Models.RouteModels
             TicketPrice = ticketPrice;
             ScheduledFlights = new ObservableCollection<RouteSchedule>();
             AssignedAirliners = new ObservableCollection<Airliner>();
+            RouteStatistics = new RouteStatistics();
         }
 
         // Private funcs
