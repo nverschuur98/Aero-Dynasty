@@ -46,6 +46,7 @@ namespace AeroDynasty.ViewModels.Airports
                 GameData.Instance.Routes
                     .Where(r => r.Origin == Airport || r.Destination == Airport)
                     .Select(r => r.Origin == Airport ? r.Destination : r.Origin)
+                    .Distinct()
                     .ToList()
             );
 

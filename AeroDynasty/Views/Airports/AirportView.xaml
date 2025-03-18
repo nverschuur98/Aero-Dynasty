@@ -93,7 +93,7 @@
                     </Grid>
 
 
-                    <Map:MapView Grid.Column="1" IsControllable="false" Airport="{Binding Airport}" Airports="{Binding DestinationAirports}" ClipToBounds="True"/>
+                    <Map:MapView Grid.Column="1" IsControllable="false" Airport="{Binding Airport}" Airports="{Binding DestinationAirports}" SetSecondaryAirports="True" ClipToBounds="True"/>
 
                 </Grid>
             </Grid>

@@ -41,6 +41,13 @@ namespace AeroDynasty.Core.Views.Map
                 typeof(MapView),
                 new PropertyMetadata(false));
 
+        public static readonly DependencyProperty SetSecondaryAirportsProperty =
+            DependencyProperty.Register(
+                "SetSecondaryAirports",
+                typeof(bool),
+                typeof(MapView),
+                new PropertyMetadata(false));
+
         public static readonly DependencyProperty AirportProperty =
             DependencyProperty.Register(
                 "Airport",
@@ -59,6 +66,12 @@ namespace AeroDynasty.Core.Views.Map
         {
             get { return (bool)GetValue(IsControllableProperty); }
             set { SetValue(IsControllableProperty, value); }
+        }
+
+        public bool SetSecondaryAirports
+        {
+            get { return (bool)GetValue(SetSecondaryAirportsProperty); }
+            set { SetValue(SetSecondaryAirportsProperty, value); }
         }
 
         public Airport Airport
@@ -109,7 +122,7 @@ namespace AeroDynasty.Core.Views.Map
             {
                 foreach (Airport airport in Airports)
                 {
-                    AddPoint(airport.Coordinates);
+                    AddPoint(airport.Coordinates, SetSecondaryAirports ? true : false);
                 }
             }
         }
@@ -183,7 +196,7 @@ namespace AeroDynasty.Core.Views.Map
                 panStart = current;
             }
 
-            Console.WriteLine($"{e.GetPosition(this).X},{e.GetPosition(this).Y}");
+            // Console.WriteLine($"{e.GetPosition(this).X},{e.GetPosition(this).Y}");
         }
 
         private void MapCanvas_MouseUp(object sender, MouseButtonEventArgs e)
@@ -276,10 +289,15 @@ namespace AeroDynasty.Core.Views.Map
 
         public void AddPoint(Coordinates coordinates)
         {
+            AddPoint(coordinates, false);
+        }
+
+        public void AddPoint(Coordinates coordinates, bool isSecondary)
+        {
             if (MapCanvas.ActualWidth == 0 || MapCanvas.ActualHeight == 0)
                 return;
 
-            Console.WriteLine($"{MapCanvas.ActualWidth}, {MapCanvas.ActualHeight}");
+            // Console.WriteLine($"{MapCanvas.ActualWidth}, {MapCanvas.ActualHeight}");
 
             // Scale factors based on the canvas size and map size
             double scaleX = MapWidth / 360;
@@ -291,12 +309,17 @@ namespace AeroDynasty.Core.Views.Map
 
             // Create a marker
             double baseSize = 2;  // Base size of the ellipse
+
+            // Check if IsSecondary to reflect color
+            Brush fill = isSecondary ? (Brush)FindResource("SecondaryBrush") : (Brush)FindResource("AccentBrush");
+            Brush stroke = isSecondary ? (Brush)FindResource("SecondaryTransparentBackgroundBrush") : (Brush)FindResource("RedTransparentBackgroundBrush");
+
             Ellipse point = new Ellipse
             {
                 Width = baseSize,  // Adjust size based on zoom
                 Height = baseSize,
-                Fill = (Brush)FindResource("AccentBrush"),
-                Stroke = (Brush)FindResource("RedTransparentBackgroundBrush"),
+                Fill = fill,
+                Stroke = stroke,
                 StrokeThickness = 1
             };
 
