@@ -148,6 +148,7 @@
   <!-- Folders -->
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="Views\Tables\" />
   </ItemGroup>
   <!-- Project Reference -->
   <ItemGroup>

@@ -312,7 +312,7 @@ namespace AeroDynasty.Core.Views.Map
 
             // Check if IsSecondary to reflect color
             Brush fill = isSecondary ? (Brush)FindResource("SecondaryBrush") : (Brush)FindResource("AccentBrush");
-            Brush stroke = isSecondary ? (Brush)FindResource("SecondaryTransparentBackgroundBrush") : (Brush)FindResource("RedTransparentBackgroundBrush");
+            Brush stroke = isSecondary ? (Brush)FindResource("BlueTransparentBackgroundBrush") : (Brush)FindResource("RedTransparentBackgroundBrush");
 
             Ellipse point = new Ellipse
             {
