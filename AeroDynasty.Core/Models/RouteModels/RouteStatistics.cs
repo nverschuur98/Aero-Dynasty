@@ -11,9 +11,21 @@ namespace AeroDynasty.Core.Models.RouteModels
 {
     public class RouteStatistics
     {
+        // Private vars
+        private readonly object _monthLock = new object(); // lock for adjusting months
+
+        // Public vars
         public ObservableCollection<RouteStatisticsPeriod> Years { get; set; }
         public ObservableCollection<RouteStatisticsPeriod> Months { get; set; }
-        public double TotalPassengers
+        public RouteStatisticsPeriod CurrentMonth
+        {
+            get => GetCurrentMonth();
+        }
+        public RouteStatisticsPeriod PreviousMonth
+        {
+            get => GetPreviousMonth();
+        }
+        public double LifetimePassengers
         {
             get
             {
@@ -22,7 +34,7 @@ namespace AeroDynasty.Core.Models.RouteModels
                 return lastYears + lastMonths;
             }
         }
-        public Price TotalBalance
+        public Price LifetimeBalance
         {
             get
             {
@@ -31,11 +43,43 @@ namespace AeroDynasty.Core.Models.RouteModels
                 return new Price (lastYears + lastMonths);
             }
         }
+        public double LifetimeFillingPercentage
+        {
+            get
+            {
+                try
+                {
+                    var validMonths = Months
+                        .Where(m => m.Date.Year == GameState.Instance.CurrentDate.Year && !double.IsNaN(m.FillingPercentage))
+                        .ToList();
+
+                    if (validMonths.Count == 0)
+                        return 0.0; // Return 0 if no valid months exist to avoid division by zero
+
+                    return validMonths.Sum(m => m.FillingPercentage) / validMonths.Count;
+                }
+                catch (Exception ex)
+                {
+                    throw; // Avoid rethrowing 'ex' directly (preserves stack trace)
+                }
+            }
+        }
+
 
         public RouteStatistics()
         {
             Years = new ObservableCollection<RouteStatisticsPeriod>();
             Months = new ObservableCollection<RouteStatisticsPeriod>();
+
+            // Initiate the Months
+            DateTime Date = GameState.Instance.CurrentDate.AddYears(-1);
+            Date = Date.AddDays(-1 * (Date.Day - 1));
+
+            for (int i = 0; i <= 12; i++)
+            {
+                RouteStatisticsPeriod period = new RouteStatisticsPeriod(Date.AddMonths(i));
+                Months.Add(period);
+            }
         }
 
         public RouteStatisticsPeriod GetCurrentMonth()
@@ -50,25 +94,48 @@ namespace AeroDynasty.Core.Models.RouteModels
 
         public void ChangeCurrentMonth(DateTime currentDate)
         {
-            // Check if new year
-            if(currentDate.Month == 1)
+            lock (_monthLock) // Ensure only one thread enters this block at a time
             {
-                // Sum up last year
-            }
+                // Check if the month already exists to avoid duplicates
+                if (Months.Any(m => m.Date.Year == currentDate.Year && m.Date.Month == currentDate.Month))
+                {
+                    return; // The month already exists, so exit
+                }
 
-            // Create the new month
-            RouteStatisticsPeriod newMonth = new RouteStatisticsPeriod(currentDate);
-            Months.Add(newMonth);
+                // Check if it's a new year
+                if (currentDate.Month == 1)
+                {
+                    // Sum up last year
+                    RouteStatisticsPeriod year = new RouteStatisticsPeriod(new DateTime(currentDate.AddYears(-1).Year, 1, 1));
 
-            // Check if total amount of months is exceeded, remove unnecessary data
-            if(Months.Count >= 12)
-            {
-                // Remove oldest entry
-                Months.RemoveAt(0);
+                    // Get data
+                    List<RouteStatisticsPeriod> yearData = Months.Where(m => m.Date.Year == year.Date.Year).ToList();
+
+                    // Sum financial data
+                    year.AirlinerCosts.Amount = yearData.Sum(m => m.AirlinerCosts.Amount);
+                    year.FuelCosts.Amount = yearData.Sum(m => m.FuelCosts.Amount);
+                    year.TicketIncome.Amount = yearData.Sum(m => m.TicketIncome.Amount);
+
+                    // Sum passenger data
+                    year.AvailableSeats = yearData.Sum(m => m.AvailableSeats);
+                    year.Passengers = yearData.Sum(m => m.Passengers);
+
+                    Years.Add(year);
+                }
+
+                // Create the new month
+                RouteStatisticsPeriod newMonth = new RouteStatisticsPeriod(currentDate);
+                Months.Add(newMonth);
+
+                // Check if total amount of months is exceeded, remove unnecessary data
+                if (Months.Count > 13) // Keep 13 months, so one year plus the same current month last year
+                {
+                    Months.RemoveAt(0); // Remove the oldest entry
+                }
             }
         }
 
-        public void UpdateCurrentMonth(DateTime currentDate, Price balanceDelta, double passengersDelta)
+        public void UpdateCurrentMonth(DateTime currentDate, Price ticketIncome, Price airlinerCosts, Price fuelCosts, int passengers, int availableSeats)
         {
             // Check if the month exists in the list
             if(Months.FirstOrDefault(m => m.Date.Year == currentDate.Year && m.Date.Month == currentDate.Month) == null)
@@ -77,8 +144,16 @@ namespace AeroDynasty.Core.Models.RouteModels
             }
 
             RouteStatisticsPeriod month = Months.FirstOrDefault(m => m.Date.Year == currentDate.Year && m.Date.Month == currentDate.Month);
-            month.Balance += balanceDelta;
-            month.Passengers += passengersDelta;
+
+            // Update financial properties
+            month.TicketIncome += ticketIncome;
+            month.AirlinerCosts += airlinerCosts;
+            month.FuelCosts += fuelCosts;
+
+            // Update passenger properties
+            month.Passengers += passengers;
+            month.AvailableSeats += availableSeats;
+
         }
     }
 }

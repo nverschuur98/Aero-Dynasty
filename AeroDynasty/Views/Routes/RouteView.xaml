@@ -17,6 +17,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -108,6 +109,71 @@
                 </Grid>
             </Page:Wrapper>
             <Page:Wrapper Grid.Row="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Page:WrapperTitle Title="Route Statistics" Grid.Row="0" />
+
+                    <Grid Background="Transparent" Grid.Row="1" Margin="0,5,0,0">
+
+                        <!-- Define Rows -->
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Define Columns -->
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150" />
+                            <!-- Finance Data -->
+                            <ColumnDefinition Width="120" />
+                            <!-- Previous Month -->
+                            <ColumnDefinition Width="120" />
+                            <!-- Current Month -->
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <!-- Header Row -->
+                        <Rectangle Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Fill="{StaticResource DarkTransparentBackgroundBrush}" />
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Finance Data" FontWeight="Bold" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="Previous Month" FontWeight="Bold" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="Current Month" FontWeight="Bold" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+
+                        <!-- Ticket Income -->
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ticket Income" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Route.RouteStatistics.PreviousMonth.TicketIncome}" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Route.RouteStatistics.CurrentMonth.TicketIncome}" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+
+                        <!-- Airliner Costs -->
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Airliner Costs" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Route.RouteStatistics.PreviousMonth.AirlinerCosts}" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding Route.RouteStatistics.CurrentMonth.AirlinerCosts}" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
+
+                        <!-- Fuel Costs -->
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Fuel Costs" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Route.RouteStatistics.PreviousMonth.FuelCosts}" />
+                        <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding Route.RouteStatistics.CurrentMonth.FuelCosts}" />
+
+                        <!-- Balance -->
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Balance" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Route.RouteStatistics.PreviousMonth.Balance}" />
+                        <TextBlock Grid.Row="4" Grid.Column="2" Text="{Binding Route.RouteStatistics.CurrentMonth.Balance}" />
+
+                    </Grid>
+
+
+
+                </Grid>
+            </Page:Wrapper>
+            
+            <Page:Wrapper Grid.Row="2">
                 <Grid Grid.Row="3" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
@@ -148,7 +214,7 @@
                     </ListView>
                 </Grid>
             </Page:Wrapper>
-            <Page:Wrapper Grid.Row="2">
+            <Page:Wrapper Grid.Row="3">
                 <Grid Grid.Row="3" Grid.Column="2">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />

@@ -43,8 +43,13 @@
                                     <Binding Path="Distance" StringFormat="{}{0:N0} km" />
                                 </GridViewColumn.DisplayMemberBinding>
                             </GridViewColumn>
-                            <GridViewColumn Header="Lifetime Balance" DisplayMemberBinding="{Binding RouteStatistics.TotalBalance}" />
-                            <GridViewColumn Header="Lifetime Passengers" DisplayMemberBinding="{Binding RouteStatistics.TotalPassengers}" />
+                            <GridViewColumn Header="Lifetime Balance" DisplayMemberBinding="{Binding RouteStatistics.LifetimeBalance}" />
+                            <GridViewColumn Header="Lifetime Passengers" DisplayMemberBinding="{Binding RouteStatistics.LifetimePassengers}" />
+                            <GridViewColumn Header="Lifetime Filling %">
+                                <GridViewColumn.DisplayMemberBinding>
+                                    <Binding Path="RouteStatistics.LifetimeFillingPercentage" StringFormat="{}{0:N1} %" />
+                                </GridViewColumn.DisplayMemberBinding>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>

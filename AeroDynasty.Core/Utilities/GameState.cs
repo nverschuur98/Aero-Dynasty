@@ -78,7 +78,7 @@ namespace AeroDynasty.Core.Utilities
                 try
                 {
                     // Create a new delay task for each iteration (1 second)
-                    var tasksToWait = new List<Task> { Task.Delay(1000, cancelToken) };
+                    var tasksToWait = new List<Task> { Task.Delay(250, cancelToken) };
 
                     // Add any additional tasks (daily calculations) to the list
                     tasksToWait.AddRange(_dailyTasks.Select(task => task())); // Tasks registered via RegisterDailyTask
