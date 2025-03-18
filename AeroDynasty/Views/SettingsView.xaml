@@ -21,7 +21,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Page:WrapperTitle Title="Settings" Grid.Row="0" />
+                <Page:WrapperTitle Title="Settings" Grid.Row="0"/>
                 <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,3">
                     <Menu:MenuButton Label="New Game" Command="{Binding NewCommand}" Margin="0,1"/>
                     <Menu:MenuButton Label="Save Game" Command="{Binding SaveCommand}" Margin="0,1"/>

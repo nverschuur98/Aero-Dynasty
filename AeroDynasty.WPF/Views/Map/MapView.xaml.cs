@@ -14,10 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using AeroDynasty.Core.Models.AirportModels;
 using AeroDynasty.Core.Models.Core;
 
-namespace AeroDynasty.Core.Views.Map
+namespace AeroDynasty.WPF.Views.Map
 {
     /// <summary>
     /// Interaction logic for MapView.xaml
@@ -51,7 +50,7 @@ namespace AeroDynasty.Core.Views.Map
         public static readonly DependencyProperty AirportProperty =
             DependencyProperty.Register(
                 "Airport",
-                typeof(Airport),
+                typeof(Core.Models.AirportModels.Airport),
                 typeof(MapView),
                 new PropertyMetadata(null, OnDataChanged));
 
@@ -74,9 +73,9 @@ namespace AeroDynasty.Core.Views.Map
             set { SetValue(SetSecondaryAirportsProperty, value); }
         }
 
-        public Airport Airport
+        public Core.Models.AirportModels.Airport Airport
         {
-            get { return (Airport)GetValue(AirportProperty); }
+            get { return (Core.Models.AirportModels.Airport)GetValue(AirportProperty); }
             set { SetValue(AirportProperty, value); }
         }
 
@@ -120,7 +119,7 @@ namespace AeroDynasty.Core.Views.Map
             // If multiple airports are provided, add them
             if (Airports != null)
             {
-                foreach (Airport airport in Airports)
+                foreach (Core.Models.AirportModels.Airport airport in Airports)
                 {
                     AddPoint(airport.Coordinates, SetSecondaryAirports ? true : false);
                 }

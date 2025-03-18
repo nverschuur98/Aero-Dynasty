@@ -7,7 +7,7 @@
              xmlns:Page="clr-namespace:AeroDynasty.WPF.Views.Page;assembly=AeroDynasty.WPF"
              xmlns:Form="clr-namespace:AeroDynasty.WPF.Views.Form;assembly=AeroDynasty.WPF"
              xmlns:Menu="clr-namespace:AeroDynasty.WPF.Views.Menu;assembly=AeroDynasty.WPF"
-             xmlns:Route="clr-namespace:AeroDynasty.Core.Views.RouteViews;assembly=AeroDynasty.Core"
+             xmlns:Route="clr-namespace:AeroDynasty.WPF.Views.RouteViews;assembly=AeroDynasty.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -29,7 +29,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <Page:WrapperTitle Title="{Binding Route.Name}" Grid.Row="0" />
+                    <Page:WrapperTitle Title="{Binding Route.Name}" Grid.Row="0" Icon="{StaticResource RouteIcon}" />
 
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,2">
                         <Menu:MenuButton Label="Edit" Command="{Binding EditRouteCommand}" Margin="-1,0,0,0"/>
@@ -116,7 +116,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <Page:WrapperTitle Title="Route Statistics" Grid.Row="0" />
+                    <Page:WrapperTitle Title="Route Statistics" Grid.Row="0" Icon="{StaticResource StatisticsIcons}" />
 
                     <Grid Background="Transparent" Grid.Row="1" Margin="0,5,0,0">
 
@@ -181,7 +181,7 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <Page:WrapperTitle Title="Assigned Airliners" Grid.Row="0"/>
+                    <Page:WrapperTitle Title="Assigned Airliners" Grid.Row="0" Icon="{StaticResource AirplaneIcon}"/>
                 
                     <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,2">
                         <Menu:MenuButton Label="Add Airliner" Command="{Binding OpenAddAirlinerCommand}" Margin="-1,0,0,0"/>

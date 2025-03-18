@@ -5,15 +5,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AeroDynasty.WPF.Views.Page"
              mc:Ignorable="d" 
-             d:DesignHeight="25" d:DesignWidth="250">
+             d:DesignHeight="40" d:DesignWidth="250">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="22"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}" Grid.Row="0" FontWeight="Bold" FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"/>
-        <Separator Grid.Row="1" Background="{StaticResource AccentBrush}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Canvas Width="18" Height="18" Grid.Row="0" Grid.Column="0" Margin="0,0,2,0" Visibility="{Binding IconVisibility, RelativeSource={RelativeSource AncestorType=UserControl}, Mode=OneWay}">
+            <!-- Apply scaling transformation to the Path -->
+            <Path Data="{Binding Icon, RelativeSource={RelativeSource AncestorType=UserControl}}" Fill="{StaticResource LightAccentBrush}" Stroke="Transparent" Width="24" Height="24">
+                <Path.RenderTransform>
+                    <!-- Scale the content based on the size of the canvas -->
+                    <ScaleTransform ScaleX=".65" ScaleY=".65" CenterX="0" CenterY="0" />
+                </Path.RenderTransform>
+            </Path>
+        </Canvas>
+
+        <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                   Grid.Row="0" 
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="2"
+                   FontWeight="Bold" FontSize="14"
+                   FontFamily="Montserrat" Foreground="{StaticResource LightAccentBrush}"
+                   VerticalAlignment="Center"/>
+
+        <Separator Grid.Row="1" 
+                   Grid.ColumnSpan="3" 
+                   Background="{StaticResource AccentBrush}"/>
     </Grid>
 </UserControl>

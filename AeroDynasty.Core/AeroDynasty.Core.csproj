@@ -135,28 +135,13 @@
     <Compile Include="Utilities\RelayCommand.cs" />
     <Compile Include="Utilities\SaveGameManager.cs" />
     <Compile Include="Utilities\_BaseViewModel.cs" />
-    <Compile Include="Views\Map\MapView.xaml.cs">
-      <DependentUpon>MapView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RouteViews\RouteSchedule.xaml.cs">
-      <DependentUpon>RouteSchedule.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\RouteViews\RouteScheduleWeek.xaml.cs">
-      <DependentUpon>RouteScheduleWeek.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <!-- Folders -->
   <ItemGroup>
     <Folder Include="ViewModels\" />
-    <Folder Include="Views\Tables\" />
+    <Folder Include="Views\" />
   </ItemGroup>
   <!-- Project Reference -->
-  <ItemGroup>
-    <ProjectReference Include="..\AeroDynasty.WPF\AeroDynasty.WPF.csproj">
-      <Project>{364b5e60-6231-4b63-83d9-063447292b25}</Project>
-      <Name>AeroDynasty.WPF</Name>
-    </ProjectReference>
-  </ItemGroup>
   <!-- Content Files -->
   <ItemGroup>
     <Content Include="Assets\AirlineData.json">
@@ -188,20 +173,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Views\Map\MapView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\RouteViews\RouteSchedule.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\RouteViews\RouteScheduleWeek.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <!-- Final Import -->
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

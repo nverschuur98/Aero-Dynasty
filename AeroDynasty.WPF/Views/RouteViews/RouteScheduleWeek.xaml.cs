@@ -6,7 +6,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace AeroDynasty.Core.Views.RouteViews
+namespace AeroDynasty.WPF.Views.RouteViews
 {
     /// <summary>
     /// Represents a control to display and manage route schedules grouped by days of the week.
@@ -17,7 +17,7 @@ namespace AeroDynasty.Core.Views.RouteViews
         public static readonly DependencyProperty RouteScheduleItemProperty =
             DependencyProperty.Register(
                 nameof(RouteSchedules),
-                typeof(ObservableCollection<Models.RouteModels.RouteSchedule>),
+                typeof(ObservableCollection<Core.Models.RouteModels.RouteSchedule>),
                 typeof(RouteScheduleWeek),
                 new PropertyMetadata(null, OnFlightScheduleChanged));
 
@@ -25,9 +25,9 @@ namespace AeroDynasty.Core.Views.RouteViews
         /// Gets or sets the collection of route schedules.
         /// Updates bindings and notifies when the collection changes.
         /// </summary>
-        public ObservableCollection<Models.RouteModels.RouteSchedule> RouteSchedules
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> RouteSchedules
         {
-            get => (ObservableCollection<Models.RouteModels.RouteSchedule>)GetValue(RouteScheduleItemProperty);
+            get => (ObservableCollection<Core.Models.RouteModels.RouteSchedule>)GetValue(RouteScheduleItemProperty);
             set
             {
                 SetValue(RouteScheduleItemProperty, value);
@@ -37,13 +37,13 @@ namespace AeroDynasty.Core.Views.RouteViews
         }
 
         // Properties for each day of the week that provide the filtered route schedules
-        public ObservableCollection<Models.RouteModels.RouteSchedule> MondaySchedule => GetFlightScheduleForDay(DayOfWeek.Monday);
-        public ObservableCollection<Models.RouteModels.RouteSchedule> TuesdaySchedule => GetFlightScheduleForDay(DayOfWeek.Tuesday);
-        public ObservableCollection<Models.RouteModels.RouteSchedule> WednesdaySchedule => GetFlightScheduleForDay(DayOfWeek.Wednesday);
-        public ObservableCollection<Models.RouteModels.RouteSchedule> ThursdaySchedule => GetFlightScheduleForDay(DayOfWeek.Thursday);
-        public ObservableCollection<Models.RouteModels.RouteSchedule> FridaySchedule => GetFlightScheduleForDay(DayOfWeek.Friday);
-        public ObservableCollection<Models.RouteModels.RouteSchedule> SaturdaySchedule => GetFlightScheduleForDay(DayOfWeek.Saturday);
-        public ObservableCollection<Models.RouteModels.RouteSchedule> SundaySchedule => GetFlightScheduleForDay(DayOfWeek.Sunday);
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> MondaySchedule => GetFlightScheduleForDay(DayOfWeek.Monday);
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> TuesdaySchedule => GetFlightScheduleForDay(DayOfWeek.Tuesday);
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> WednesdaySchedule => GetFlightScheduleForDay(DayOfWeek.Wednesday);
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> ThursdaySchedule => GetFlightScheduleForDay(DayOfWeek.Thursday);
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> FridaySchedule => GetFlightScheduleForDay(DayOfWeek.Friday);
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> SaturdaySchedule => GetFlightScheduleForDay(DayOfWeek.Saturday);
+        public ObservableCollection<Core.Models.RouteModels.RouteSchedule> SundaySchedule => GetFlightScheduleForDay(DayOfWeek.Sunday);
 
         public double ListActualWidth
         {
@@ -97,12 +97,12 @@ namespace AeroDynasty.Core.Views.RouteViews
         /// </summary>
         /// <param name="dayOfWeek">The day of the week to filter by.</param>
         /// <returns>An observable collection of route schedules for the specified day.</returns>
-        private ObservableCollection<Models.RouteModels.RouteSchedule> GetFlightScheduleForDay(DayOfWeek dayOfWeek)
+        private ObservableCollection<Core.Models.RouteModels.RouteSchedule> GetFlightScheduleForDay(DayOfWeek dayOfWeek)
         {
             // Filter schedules by day and return a new collection
             var filteredSchedules = RouteSchedules?.Where(schedule => schedule.Outbound?.DepartureDay == dayOfWeek).ToList();
 
-            return filteredSchedules != null ? new ObservableCollection<Models.RouteModels.RouteSchedule>(filteredSchedules) : new ObservableCollection<Models.RouteModels.RouteSchedule>();
+            return filteredSchedules != null ? new ObservableCollection<Core.Models.RouteModels.RouteSchedule>(filteredSchedules) : new ObservableCollection<Core.Models.RouteModels.RouteSchedule>();
         }
 
         /// <summary>

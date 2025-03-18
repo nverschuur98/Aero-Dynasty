@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace AeroDynasty.Core.Views.RouteViews
+namespace AeroDynasty.WPF.Views.RouteViews
 {
     /// <summary>
     /// Interaction logic for RouteSchedule.xaml
@@ -24,7 +24,7 @@ namespace AeroDynasty.Core.Views.RouteViews
         public static readonly DependencyProperty RouteScheduleItemProperty =
             DependencyProperty.Register(
                 "RouteScheduleItem",
-                typeof(Models.RouteModels.RouteSchedule),
+                typeof(Core.Models.RouteModels.RouteSchedule),
                 typeof(RouteSchedule),
                 new PropertyMetadata(null, OnFlightScheduleChanged));
 
@@ -35,9 +35,9 @@ namespace AeroDynasty.Core.Views.RouteViews
                 typeof(RouteSchedule),
                 new PropertyMetadata(0.0, OnFlightScheduleChanged));
 
-        public Models.RouteModels.RouteSchedule RouteScheduleItem
+        public Core.Models.RouteModels.RouteSchedule RouteScheduleItem
         {
-            get { return (Models.RouteModels.RouteSchedule)GetValue(RouteScheduleItemProperty); }
+            get { return (Core.Models.RouteModels.RouteSchedule)GetValue(RouteScheduleItemProperty); }
             set { SetValue(RouteScheduleItemProperty, value); }
         }
 
