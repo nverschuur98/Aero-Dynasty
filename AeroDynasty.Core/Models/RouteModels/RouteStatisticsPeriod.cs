@@ -16,7 +16,7 @@ namespace AeroDynasty.Core.Models.RouteModels
         {
             get
             {
-                return TicketIncome - (AirlinerCosts + FuelCosts);
+                return TicketIncome + (AirlinerCosts + FuelCosts);
             }
         }
         public Price TicketIncome { get; set; }

@@ -111,11 +111,11 @@ namespace AeroDynasty.Core.Utilities
                             // Calculate revenue and cost
                             Price ticketIncome = filledPassengers * route.TicketPrice;
 
-                            Price fuelCosts = new Price(route.Distance * leg.AssignedAirliner.Model.FuelConsumptionRate * currentFuelPrice);
-                            Price airlinerCosts = new Price(1000);
+                            Price fuelCosts = new Price(route.Distance * leg.AssignedAirliner.Model.FuelConsumptionRate * currentFuelPrice) * -1; // Costs
+                            Price airlinerCosts = new Price(1000) *-1; // Costs
 
                             Price cost = fuelCosts + airlinerCosts;
-                            Price balance = ticketIncome - cost;
+                            Price balance = ticketIncome + cost;
 
                             // Update route statistics
                             route.RouteStatistics.UpdateCurrentMonth(currentDate, ticketIncome, airlinerCosts, fuelCosts, filledPassengers, legSeatAvailability);
@@ -124,7 +124,7 @@ namespace AeroDynasty.Core.Utilities
                             route.Owner.addCash(balance);
 
 #if DEBUG
-                            Console.WriteLine($"{currentDay} - {leg.Origin.ICAO}-{leg.Destination.ICAO} - Departure: {leg.DepartureTime}, Pax: {filledPassengers}, Profit: {ticketIncome - cost}, Demand left: {localDemand}");
+                            Console.WriteLine($"{currentDay} - {leg.Origin.ICAO}-{leg.Destination.ICAO} - Departure: {leg.DepartureTime}, Pax: {filledPassengers}, Profit: {ticketIncome + cost}, Demand left: {localDemand}");
 #endif
                         }
                     }
